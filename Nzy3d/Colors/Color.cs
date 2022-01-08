@@ -2,7 +2,10 @@ using OpenTK.Mathematics;
 
 namespace Nzy3d.Colors
 {
-	public class Color
+	/// <summary>
+	/// 
+	/// </summary>
+	public struct Color
 	{
 		#region "Members"
 		/// <summary>
@@ -105,17 +108,13 @@ namespace Nzy3d.Colors
 		}
 
 		/// <summary>
-		/// Returns the hexadecimal representation of this color, without alpha channel value
+		/// Returns the hexadecimal representation of this color, without alpha channel value.
 		/// </summary>
 		public string HexString
 		{
 			get
 			{
-				string hexa = "#";
-				hexa += this.R.ToString("X2");
-				hexa += this.G.ToString("X2");
-				hexa += this.B.ToString("X2");
-				return hexa;
+				return $"#{R:X2}{G:X2}{B:X2}";
 			}
 		}
 
@@ -124,7 +123,7 @@ namespace Nzy3d.Colors
 		/// </summary>
 		public override string ToString()
 		{
-			return "(Color) r=" + R + " g=" + G + " b=" + B + " a=" + A;
+			return $"(Color) r={R} g={G} b={B} a={A}";
 		}
 
 		public double[] ToArray()
@@ -134,12 +133,7 @@ namespace Nzy3d.Colors
 
 		public double[] Negative()
 		{
-			return new double[] {
-				1 - R,
-				1 - G,
-				1 - B,
-				A
-			};
+			return new double[] { 1 - R, 1 - G, 1 - B, A };
 		}
 
 		public Color NegativeColor()

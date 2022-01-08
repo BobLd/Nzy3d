@@ -7,9 +7,9 @@ namespace Nzy3d.Colors
 {
     public class ColorMapper : IColorMappable
 	{
-        private readonly Color m_factor;
+        private readonly Color? m_factor;
 
-		public ColorMapper(IColorMap colormap, double zmin, double zmax, Color factor)
+		public ColorMapper(IColorMap colormap, double zmin, double zmax, Color? factor)
 		{
 			ColorMap = colormap;
 			ZMin = zmin;
@@ -30,9 +30,9 @@ namespace Nzy3d.Colors
         public Color Color(Coord3d coord)
 		{
 			Color @out = ColorMap.GetColor(this, coord.X, coord.Y, coord.Z);
-			if (m_factor != null)
+			if (m_factor.HasValue)
 			{
-				@out.Mul(m_factor);
+				@out.Mul(m_factor.Value);
 			}
 			return @out;
 		}
@@ -40,9 +40,9 @@ namespace Nzy3d.Colors
 		public Color Color(double v)
 		{
 			Color @out = ColorMap.GetColor(this, v);
-			if (m_factor != null)
+			if (m_factor.HasValue)
 			{
-				@out.Mul(m_factor);
+				@out.Mul(m_factor.Value);
 			}
 			return @out;
 		}

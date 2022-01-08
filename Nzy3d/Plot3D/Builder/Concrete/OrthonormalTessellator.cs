@@ -158,7 +158,7 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 			return GetSquarePolygonsOnCoordinates(null, null);
 		}
 
-		public List<Polygon> GetSquarePolygonsOnCoordinates(ColorMapper cmap, Color colorFactor)
+		public List<Polygon> GetSquarePolygonsOnCoordinates(ColorMapper cmap, Color? colorFactor)
 		{
 			List<Polygon> polygons = new List<Polygon>();
 			for (int xi = 0; xi <= X.Length - 2; xi++)
@@ -181,12 +181,12 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 						p[3].Color = cmap.Color(p[3].XYZ);
 					}
 
-					if (colorFactor != null)
+					if (colorFactor.HasValue)
 					{
-						p[0].Rgb.Mul(colorFactor);
-						p[1].Rgb.Mul(colorFactor);
-						p[2].Rgb.Mul(colorFactor);
-						p[3].Rgb.Mul(colorFactor);
+						p[0].Rgb.Mul(colorFactor.Value);
+						p[1].Rgb.Mul(colorFactor.Value);
+						p[2].Rgb.Mul(colorFactor.Value);
+						p[3].Rgb.Mul(colorFactor.Value);
 					}
 
 					// Store quad
@@ -206,7 +206,7 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 			return GetSquarePolygonsAroundCoordinates(null, null);
 		}
 
-		public object GetSquarePolygonsAroundCoordinates(ColorMapper cmap, Color colorFactor)
+		public object GetSquarePolygonsAroundCoordinates(ColorMapper cmap, Color? colorFactor)
 		{
 			var polygons = new List<Polygon>();
 
@@ -230,12 +230,12 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 						p[3].Color = cmap.Color(p[3].XYZ);
 					}
 
-                    if (colorFactor != null)
+					if (colorFactor.HasValue)
 					{
-						p[0].Rgb.Mul(colorFactor);
-						p[1].Rgb.Mul(colorFactor);
-						p[2].Rgb.Mul(colorFactor);
-						p[3].Rgb.Mul(colorFactor);
+						p[0].Rgb.Mul(colorFactor.Value);
+						p[1].Rgb.Mul(colorFactor.Value);
+						p[2].Rgb.Mul(colorFactor.Value);
+						p[3].Rgb.Mul(colorFactor.Value);
 					}
 					// Store quad
 					Polygon quad = new Polygon();
