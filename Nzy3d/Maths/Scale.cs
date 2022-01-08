@@ -23,7 +23,7 @@ namespace Nzy3d.Maths
 		/// <param name="value">Value to add</param>
 		/// <returns>New scale with added value to min &amp; max</returns>
 		/// <remarks>Current object is not modified</remarks>
-		public Scale @add(double value)
+		public Scale Add(double value)
 		{
 			return new Scale(Min + value, Max + value);
 		}
@@ -36,12 +36,12 @@ namespace Nzy3d.Maths
 			return Min <= value & value <= Max;
 		}
 
-		public bool isMaxNan()
+		public bool IsMaxNan()
 		{
 			return double.IsNaN(Max);
 		}
 
-		public bool isMinNan()
+		public bool IsMinNan()
 		{
 			return double.IsNaN(Min);
 		}
@@ -49,7 +49,7 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Returns True if Min &lt;= Max
 		/// </summary>
-		public bool valid()
+		public bool Valid()
 		{
 			return Min <= Max;
 		}
@@ -80,10 +80,3 @@ namespace Nzy3d.Maths
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

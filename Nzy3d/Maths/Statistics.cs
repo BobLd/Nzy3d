@@ -8,6 +8,7 @@ namespace Nzy3d.Maths
 			{
 				throw new ArgumentException("Input array must have a length greater than 0", "values");
 			}
+
 			double vsum = 0;
 			for (int i = 0; i <= values.Length - 1; i++)
 			{
@@ -25,6 +26,7 @@ namespace Nzy3d.Maths
 			{
 				throw new ArgumentException("Input array must have a length greater than 0", "values");
 			}
+
 			float vsum = 0;
 			for (int i = 0; i <= values.Length - 1; i++)
 			{

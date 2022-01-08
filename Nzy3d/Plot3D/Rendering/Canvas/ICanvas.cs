@@ -35,15 +35,15 @@ namespace Nzy3d.Plot3D.Rendering.Canvas
 		/// Performs all required cleanup when destroying a Canvas.
 		/// </summary>
 		void Dispose();
-		void addMouseListener(IBaseMouseListener listener);
-		void removeMouseListener(IBaseMouseListener listener);
-		void addMouseWheelListener(IBaseMouseWheelListener listener);
-		void removeMouseWheelListener(IBaseMouseWheelListener listener);
-		void addMouseMotionListener(IBaseMouseMotionListener listener);
-		void removeMouseMotionListener(IBaseMouseMotionListener listener);
-		void addKeyListener(IBaseKeyListener listener);
+		void AddMouseListener(IBaseMouseListener listener);
+		void RemoveMouseListener(IBaseMouseListener listener);
+		void AddMouseWheelListener(IBaseMouseWheelListener listener);
+		void RemoveMouseWheelListener(IBaseMouseWheelListener listener);
+		void AddMouseMotionListener(IBaseMouseMotionListener listener);
+		void RemoveMouseMotionListener(IBaseMouseMotionListener listener);
+		void AddKeyListener(IBaseKeyListener listener);
 
-		void removeKeyListener(IBaseKeyListener listener);
+		void RemoveKeyListener(IBaseKeyListener listener);
 	}
 }
 

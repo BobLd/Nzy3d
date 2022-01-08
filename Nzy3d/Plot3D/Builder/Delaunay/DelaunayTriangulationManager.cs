@@ -44,7 +44,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 			{
 				Triangle_dt triangle = trianglesIter.Current;
 				// isHalfplane means a degenerated triangle 
-				if (triangle.isHalfplane)
+				if (triangle.IsHalfplane)
 				{
 					continue;
 				}
@@ -57,9 +57,9 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 
 		private static Polygon BuildPolygonFrom(Triangle_dt triangle)
 		{
-			Coord3d c1 = triangle.p1.Coord3d;
-			Coord3d c2 = triangle.p2.Coord3d;
-			Coord3d c3 = triangle.p3.Coord3d;
+			Coord3d c1 = triangle.P1.Coord3d;
+			Coord3d c2 = triangle.P2.Coord3d;
+			Coord3d c3 = triangle.P3.Coord3d;
 			Polygon polygon = new Polygon();
 			polygon.Add(new Point(c1));
 			polygon.Add(new Point(c2));

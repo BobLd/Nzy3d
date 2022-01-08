@@ -13,7 +13,7 @@ namespace Nzy3d.WinformsDemo
         /// Build a nice surface to display with cool alpha colors
         /// (alpha 0.8 for surface color and 0.5 for wireframe).
         /// </summary>
-        public static Shape GetShapeGraph()
+        public static Shape GetSurfaceGraph()
         {
             // Create a range for the graph generation
             var range = new Maths.Range(-150, 150);

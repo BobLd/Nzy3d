@@ -16,26 +16,13 @@ namespace Nzy3d.Winforms
 	{
 		// TODO  : add trace add debug capabilities
 		internal BaseView _view;
-		internal int _width = 0;
-		internal int _height = 0;
+		internal int _width;
+		internal int _height;
 		internal bool _doScreenshotAtNextDisplay = false;
 		internal bool _traceGL;
 		internal bool _debugGL;
 
 		internal Bitmap _image;
-		//Public Sub New(view As View)
-		//  Me.New(view, False, False)
-		//End Sub
-
-		//Public Sub New(view As View, traceGL As Boolean, debugGL As Boolean)
-		//  _view = view
-		//  _traceGL = traceGL
-		//  _debugGL = debugGL
-		//End Sub
-
-		//Private Sub Renderer3D_Load(sender As Object, e As System.EventArgs) Handles Me.Load
-
-		//End Sub
 
 		private void Renderer3D_Paint(object sender, PaintEventArgs e)
 		{
@@ -100,7 +87,7 @@ namespace Nzy3d.Winforms
 			get { return _height; }
 		}
 
-		public void addKeyListener(IBaseKeyListener baseListener)
+		public void AddKeyListener(IBaseKeyListener baseListener)
 		{
 			if (baseListener is not IKeyListener listener)
 			{
@@ -109,12 +96,13 @@ namespace Nzy3d.Winforms
 
 			KeyUp += listener.KeyReleased;
 			KeyDown += listener.KeyPressed;
+
 			// be cautious with cross-terminology (key_down / key_pressed / key_typed)
 			KeyPress += listener.KeyTyped;
 			// be cautious with cross-terminology (key_down / key_pressed / key_typed)
 		}
 
-		public void addMouseListener(IBaseMouseListener baseListener)
+		public void AddMouseListener(IBaseMouseListener baseListener)
 		{
 			if (baseListener is not IMouseListener listener)
 			{
@@ -127,7 +115,7 @@ namespace Nzy3d.Winforms
 			MouseDoubleClick += listener.MouseDoubleClicked;
 		}
 
-		public void addMouseMotionListener(IBaseMouseMotionListener baseListener)
+		public void AddMouseMotionListener(IBaseMouseMotionListener baseListener)
 		{
 			if (baseListener is not IMouseMotionListener listener)
 			{
@@ -138,7 +126,7 @@ namespace Nzy3d.Winforms
 			// NOT AVAILABLE IN WinForms : AddHandler ???, AddressOf listener.MouseDragged
 		}
 
-		public void addMouseWheelListener(IBaseMouseWheelListener baseListener)
+		public void AddMouseWheelListener(IBaseMouseWheelListener baseListener)
 		{
 			if (baseListener is not IMouseWheelListener listener)
 			{
@@ -148,13 +136,9 @@ namespace Nzy3d.Winforms
 			MouseWheel += listener.MouseWheelMoved;
 		}
 
-		public void Dispose1()
+		public new void Dispose()
 		{
-		}
-
-		void ICanvas.Dispose()
-		{
-			Dispose1();
+			base.Dispose();
 		}
 
 		public void ForceRepaint()
@@ -162,7 +146,7 @@ namespace Nzy3d.Winforms
 			this.Invalidate();
 		}
 
-		public void removeKeyListener(IBaseKeyListener baseListener)
+		public void RemoveKeyListener(IBaseKeyListener baseListener)
 		{
 			if (baseListener is not IKeyListener listener)
 			{
@@ -171,12 +155,13 @@ namespace Nzy3d.Winforms
 
 			KeyUp -= listener.KeyReleased;
 			KeyDown -= listener.KeyPressed;
+
 			// be cautious with cross-terminology (key_down / key_pressed / key_typed)
 			KeyPress -= listener.KeyTyped;
 			// be cautious with cross-terminology (key_down / key_pressed / key_typed)
 		}
 
-		public void removeMouseListener(IBaseMouseListener baseListener)
+		public void RemoveMouseListener(IBaseMouseListener baseListener)
 		{
 			if (baseListener is not IMouseListener listener)
 			{
@@ -188,7 +173,7 @@ namespace Nzy3d.Winforms
 			MouseUp -= listener.MouseReleased;
 		}
 
-		public void removeMouseMotionListener(IBaseMouseMotionListener baseListener)
+		public void RemoveMouseMotionListener(IBaseMouseMotionListener baseListener)
 		{
 			if (baseListener is not IMouseMotionListener listener)
 			{
@@ -199,7 +184,7 @@ namespace Nzy3d.Winforms
 			// NOT AVAILABLE IN WinForms : RemoveHandler ???, AddressOf listener.MouseDragged
 		}
 
-		public void removeMouseWheelListener(IBaseMouseWheelListener baseListener)
+		public void RemoveMouseWheelListener(IBaseMouseWheelListener baseListener)
 		{
 			if (baseListener is not IMouseWheelListener listener)
 			{

@@ -45,23 +45,23 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		{
 			a = A;
 			b = B;
-			isHalfplane = true;
+			IsHalfplane = true;
 		}
 
         /// <summary>
         /// Returns true if this triangle is actually a half plane
         /// </summary>
-        public bool isHalfplane { get; set; }
+        public bool IsHalfplane { get; set; }
 
         /// <summary>
         /// tag - for bfs algorithms
         /// </summary>
-        public bool mark { get; set; } = false;
+        public bool Mark { get; set; } = false;
 
         /// <summary>
         /// Returns the first vertex of this triangle.
         /// </summary>
-        public Point_dt p1
+        public Point_dt P1
 		{
 			get { return a; }
 		}
@@ -69,7 +69,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <summary>
 		/// Returns the second vertex of this triangle.
 		/// </summary>
-		public Point_dt p2
+		public Point_dt P2
 		{
 			get { return b; }
 		}
@@ -77,7 +77,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <summary>
 		/// Returns the third vertex of this triangle.
 		/// </summary>
-		public Point_dt p3
+		public Point_dt P3
 		{
 			get { return c; }
 		}
@@ -85,7 +85,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <summary>
 		/// Returns the consecutive triangle which shares this triangle p1,p2 edge.
 		/// </summary>
-		public Triangle_dt next_12
+		public Triangle_dt Next_12
 		{
 			get { return abnext; }
 		}
@@ -93,7 +93,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <summary>
 		/// Returns the consecutive triangle which shares this triangle p2,p3 edge.
 		/// </summary>
-		public Triangle_dt next_23
+		public Triangle_dt Next_23
 		{
 			get { return bcnext; }
 		}
@@ -101,7 +101,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <summary>
 		/// Returns the consecutive triangle which shares this triangle p3,p1 edge.
 		/// </summary>
-		public Triangle_dt next_31
+		public Triangle_dt Next_31
 		{
 			get { return canext; }
 		}
@@ -113,15 +113,13 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		{
 			get
 			{
-				//dynamic lowerLeft = default(Point_dt);
-				//Point_dt upperRight = new Point_dt();
 				var lowerLeft = new Point_dt(Math.Min(a.x, Math.Min(b.x, c.x)), Math.Min(a.y, Math.Min(b.y, c.y)));
 				var upperRight = new Point_dt(Math.Max(a.x, Math.Max(b.x, c.x)), Math.Max(a.y, Math.Max(b.y, c.y)));
 				return new BoundingBox(lowerLeft, upperRight);
 			}
 		}
 
-		public void switchneighbors(Triangle_dt old_t, Triangle_dt new_t)
+		public void SwitchNeighbors(Triangle_dt old_t, Triangle_dt new_t)
 		{
 			if (abnext.Equals(old_t))
 			{
@@ -141,7 +139,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 			}
 		}
 
-		public Triangle_dt neighbor(Point_dt p)
+		public Triangle_dt Neighbor(Point_dt p)
 		{
 			if (a.Equals(p))
 			{
@@ -168,7 +166,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <param name="p">The given corner.</param>
 		/// <param name="prevTriangle">The previous triangle.</param>
 		/// <returns>The neighbors that shares the given corner and is not the previous triangle.</returns>
-		public object nextNeighbor(Point_dt p, Triangle_dt prevTriangle)
+		public object NextNeighbor(Point_dt p, Triangle_dt prevTriangle)
 		{
 			Triangle_dt neighbor = null;
 
@@ -185,7 +183,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 				neighbor = bcnext;
 			}
 
-			if (neighbor.Equals(prevTriangle) | neighbor.isHalfplane)
+			if (neighbor.Equals(prevTriangle) || neighbor.IsHalfplane)
 			{
 				if (a.Equals(p))
 				{
@@ -224,6 +222,13 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 
 		public bool circumcircle_contains(Point_dt p)
 		{
+			// Fix from https://github.com/rtrusso/nzy3d-api/commit/b39a673c522ac49a6727f9b7890a154824581d42
+			if (IsHalfplane)
+			{
+				return false;
+			}
+			// End
+
 			return _circum.Radius > _circum.Center.distance2(p);
 		}
 
@@ -231,7 +236,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		{
 			string res = "";
 			res += "A: " + a.ToString() + " B: " + b.ToString();
-			if ((!isHalfplane))
+			if ((!IsHalfplane))
 			{
 				res += " C: " + c.ToString();
 			}
@@ -246,7 +251,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <remarks>Note: on boundary is considered inside</remarks>
 		public bool contains(Point_dt p)
 		{
-			if (isHalfplane | p == null)
+			if (IsHalfplane | p == null)
 			{
 				return false;
 			}
@@ -270,7 +275,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <remarks>Note: on boundary is considered outside</remarks>
 		public bool contains_BoundaryIsOutside(Point_dt p)
 		{
-			if (isHalfplane | p == null)
+			if (IsHalfplane | p == null)
 			{
 				return false;
 			}
@@ -308,7 +313,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 			{
 				throw new ArgumentException("Input point cannot be Nothing", "q");
 			}
-			if (isHalfplane)
+			if (IsHalfplane)
 			{
 				throw new Exception("Cannot approximate the z value from a halfplane triangle");
 			}

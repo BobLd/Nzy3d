@@ -24,18 +24,18 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 		{
 			base.Register(chart);
 			_prevMouse = Coord2d.ORIGIN;
-			chart.Canvas.addMouseListener(this);
-			chart.Canvas.addMouseMotionListener(this);
-			chart.Canvas.addMouseWheelListener(this);
+			chart.Canvas.AddMouseListener(this);
+			chart.Canvas.AddMouseMotionListener(this);
+			chart.Canvas.AddMouseWheelListener(this);
 		}
 
 		public override void Dispose()
 		{
 			foreach (Chart c in _targets)
 			{
-				c.Canvas.removeMouseListener(this);
-				c.Canvas.removeMouseMotionListener(this);
-				c.Canvas.removeMouseWheelListener(this);
+				c.Canvas.RemoveMouseListener(this);
+				c.Canvas.RemoveMouseMotionListener(this);
+				c.Canvas.RemoveMouseWheelListener(this);
 			}
 
 			_threadController?.Dispose();

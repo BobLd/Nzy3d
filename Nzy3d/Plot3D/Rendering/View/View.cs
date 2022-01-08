@@ -124,7 +124,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 		public void Shift(float factor, bool updateView)
 		{
 			Scale current = this.Scale;
-			Scale newScale = current.@add(factor * current.Range);
+			Scale newScale = current.Add(factor * current.Range);
 			SetScale(newScale, updateView);
 			//fireControllerEvent(ControllerType.SHIFT, newScale);
 		}
