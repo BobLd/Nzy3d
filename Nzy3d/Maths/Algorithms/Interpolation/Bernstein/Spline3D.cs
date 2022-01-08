@@ -23,7 +23,7 @@ namespace Nzy3d.Maths.Algorithms.Interpolation.Bernstein
 	/// </remarks>
 	public class Spline3D
 	{
-		public static double DEFAULT_TIGHTNESS = 0.25;
+		public const double DEFAULT_TIGHTNESS = 0.25;
 		public List<Coord3d> MPointList;
 		public List<Coord3d> Vertices;
 		public BernsteinPolynomial Bernstein;

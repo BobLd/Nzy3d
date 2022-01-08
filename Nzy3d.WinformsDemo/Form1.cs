@@ -1,17 +1,7 @@
 using Nzy3d.Chart.Controllers.Mouse.Camera;
 using Nzy3d.Chart.Controllers.Thread.Camera;
-using Nzy3d.Colors;
-using Nzy3d.Colors.ColorMaps;
-using Nzy3d.Maths;
-using Nzy3d.Plot3D.Builder;
-using Nzy3d.Plot3D.Builder.Concrete;
-using Nzy3d.Plot3D.Primitives;
 using Nzy3d.Plot3D.Primitives.Axes.Layout;
 using Nzy3d.Plot3D.Rendering.Canvas;
-using OpenTK.Graphics.OpenGL;
-using OpenTK.Mathematics;
-using Color = Nzy3d.Colors.Color;
-using Range = Nzy3d.Maths.Range;
 
 namespace Nzy3d.WinformsDemo
 {
@@ -35,7 +25,7 @@ namespace Nzy3d.WinformsDemo
             // Create the chart and embed the surface within
             Chart.Chart chart = new Chart.Chart(myRenderer3D, Quality.Nicest);
 
-            chart.Scene.Graph.Add(Graphs.GetShapeGraph());
+            chart.Scene.Graph.Add(Graphs.GetScatterGraph());
             axeLayout = chart.AxeLayout;
 
             // All activated by default
