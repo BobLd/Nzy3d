@@ -14,7 +14,7 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 			this.coordinates = coordinates;
 		}
 
-		public override System.Collections.Generic.List<Maths.Coord3d> Apply(Mapper mapper)
+		public override List<Maths.Coord3d> Apply(Mapper mapper)
 		{
 			List<Coord3d> output = new List<Coord3d>();
 			for (int i = 0; i <= coordinates.Length - 1; i++)

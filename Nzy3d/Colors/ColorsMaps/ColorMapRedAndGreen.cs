@@ -1,28 +1,22 @@
 namespace Nzy3d.Colors.ColorMaps
 {
-    /// <summary>
-    /// <para>
-    /// Creates a new instance of ColorMapRedAndGreen.
-    /// </para>
-    /// <para>
-    /// A ColorMapRedAndGreen objects provides a color for points standing
-    /// between a Zmin and Zmax values.
-    /// </para>
-    /// <para>
-    /// The points standing outside these [Zmin;Zmax] boundaries are assigned
-    /// to the same color than the points standing on the boundaries.
-    /// </para>
-    /// <para>The red-green colormap is a progressive transition from red to green.</para>
-    /// </summary>
-    /// <remarks></remarks>
-    public class ColorMapRedAndGreen : IColorMap
+	/// <summary>
+	/// <para>
+	/// Creates a new instance of ColorMapRedAndGreen.
+	/// </para>
+	/// <para>
+	/// A ColorMapRedAndGreen objects provides a color for points standing
+	/// between a Zmin and Zmax values.
+	/// </para>
+	/// <para>
+	/// The points standing outside these [Zmin;Zmax] boundaries are assigned
+	/// to the same color than the points standing on the boundaries.
+	/// </para>
+	/// <para>The red-green colormap is a progressive transition from red to green.</para>
+	/// </summary>
+	public class ColorMapRedAndGreen : IColorMap
 	{
-		private bool m_direction;
-		public bool Direction
-		{
-			get { return m_direction; }
-			set { m_direction = value; }
-		}
+		public bool Direction { get; set; }
 
 		public Color GetColor(IColorMappable colorable, double v)
 		{
@@ -50,7 +44,7 @@ namespace Nzy3d.Colors.ColorMaps
 			}
 			else
 			{
-				if (m_direction)
+				if (Direction)
 				{
 					rel_value = (z - zMin) / (zMax - zMin);
 				}
@@ -101,8 +95,6 @@ namespace Nzy3d.Colors.ColorMaps
 		/// <summary>
 		/// Returns the string representation of this colormap
 		/// </summary>
-		/// <returns></returns>
-		/// <remarks></remarks>
 		public override string ToString()
 		{
 			return "ColorMapRedAndGreen";

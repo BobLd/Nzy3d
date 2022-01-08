@@ -17,26 +17,32 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 			{
 				throw new ArgumentException("Function call with illegal value 'Nothing' for parameter coords.", "coords");
 			}
+
 			if (coords.x == null)
 			{
 				throw new ArgumentException("Illegal result value 'Nothing' on x property of parameter coords.", "coords");
 			}
+
 			if (coords.y == null)
 			{
 				throw new ArgumentException("Illegal result value 'Nothing' on y property of parameter coords.", "coords");
 			}
+
 			if (coords.z == null)
 			{
 				throw new ArgumentException("Illegal result value 'Nothing' on z property of parameter coords.", "coords");
 			}
+
 			if (coords.x.Length != coords.y.Length)
 			{
 				throw new ArgumentException("Parameter coords has different x size (" + coords.x.Length + ") than y size (" + coords.y.Length + ")", "coords");
 			}
+
 			if (coords.x.Length != coords.z.Length)
 			{
 				throw new ArgumentException("Parameter coords has different x size (" + coords.x.Length + ") than z size (" + coords.z.Length + ")", "coords");
 			}
+
 			setData(coords);
 		}
 
@@ -52,10 +58,10 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 					_z_as_fxy[i, j] = float.NaN;
 				}
 			}
-			bool found = false;
+
 			for (int p = 0; p <= coords.z.Length - 1; p++)
 			{
-				found = Find(_x, _y, coords.x[p], coords.y[p]);
+				bool found = Find(_x, _y, coords.x[p], coords.y[p]);
 				if (!found)
 				{
 					throw new Exception("It seems (x[p],y[p]) has not been properly stored into (this.x,this.y)");
@@ -93,8 +99,8 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 			float[] copy = (float[])data.Clone();
 			System.Array.Sort(copy);
 			int nunique = 0;
-			float last = 0;
-			last = float.NaN;
+			float last = float.NaN;
+
 			for (int i = 0; i <= copy.Length - 1; i++)
 			{
 				if (float.IsNaN(copy[i]))
@@ -103,13 +109,15 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 				}
 				else if (copy[i] != last)
 				{
-					nunique += 1;
+					nunique++;
 					last = copy[i];
 				}
 			}
+
 			float[] result = new float[nunique];
 			int r = 0;
 			last = float.NaN;
+
 			for (int i = 0; i <= copy.Length - 1; i++)
 			{
 				if (double.IsNaN(copy[i]))
@@ -119,7 +127,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 				else if (copy[i] != last)
 				{
 					result[r] = copy[i];
-					r += 1;
+					r++;
 					last = copy[i];
 				}
 			}

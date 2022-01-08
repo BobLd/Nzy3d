@@ -1,14 +1,16 @@
 namespace Nzy3d.Maths.Graphs
 {
-    public class StringGraphGenerator
+	public class StringGraphGenerator
 	{
 		public static IGraph<string, string> getGraph(int nodes, int edges)
 		{
-			DefaultGraph<string, string> graph = new DefaultGraph<string, string>();
+			var graph = new DefaultGraph<string, string>();
+
 			for (int i = 0; i <= nodes - 1; i++)
 			{
 				graph.addVertex("vertex " + i);
 			}
+
 			for (int i = 0; i <= edges - 1; i++)
 			{
 				string v1 = graph.getRandomVertex();

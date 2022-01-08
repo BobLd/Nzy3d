@@ -16,6 +16,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 		internal BoundingBox3d _bbox;
 
 		internal IAxeLayout _layout;
+
 		/// <summary>
 		/// Create a simple axe centered on (0,0,0), with a dimension of 1.
 		/// </summary>

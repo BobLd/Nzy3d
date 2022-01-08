@@ -1,6 +1,6 @@
 namespace Nzy3d.Maths
 {
-    public class IntegerCoord2d
+	public class IntegerCoord2d
 	{
 		public int x;
 
@@ -19,7 +19,7 @@ namespace Nzy3d.Maths
 
 		public override string ToString()
 		{
-			return ("(IntegerCoord2d) x=" + x + " y=" + y);
+			return "(IntegerCoord2d) x=" + x + " y=" + y;
 		}
 	}
 }

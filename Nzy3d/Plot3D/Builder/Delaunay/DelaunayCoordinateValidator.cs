@@ -4,8 +4,8 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 {
 	public class DelaunayCoordinateValidator : ICoordinateValidator
 	{
-		private float[] _x;
-		private float[] _y;
+		private readonly float[] _x;
+		private readonly float[] _y;
 
 		private float[,] _z_as_fxy;
 		public DelaunayCoordinateValidator(Coordinates coords)
@@ -14,22 +14,27 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 			{
 				throw new ArgumentException("Function call with illegal value 'Nothing' for parameter coords.", "coords");
 			}
+
 			if (coords.x == null)
 			{
 				throw new ArgumentException("Illegal result value 'Nothing' on x property of parameter coords.", "coords");
 			}
+
 			if (coords.y == null)
 			{
 				throw new ArgumentException("Illegal result value 'Nothing' on y property of parameter coords.", "coords");
 			}
+
 			if (coords.z == null)
 			{
 				throw new ArgumentException("Illegal result value 'Nothing' on z property of parameter coords.", "coords");
 			}
+
 			if (coords.x.Length != coords.y.Length)
 			{
 				throw new ArgumentException("Parameter coords has different x size (" + coords.x.Length + ") than y size (" + coords.y.Length + ")", "coords");
 			}
+
 			if (coords.x.Length != coords.z.Length)
 			{
 				throw new ArgumentException("Parameter coords has different x size (" + coords.x.Length + ") than z size (" + coords.z.Length + ")", "coords");

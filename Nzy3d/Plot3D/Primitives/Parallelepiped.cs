@@ -1,6 +1,5 @@
 using Nzy3d.Colors;
 using Nzy3d.Maths;
-using Nzy3d.Plot3D.Transform;
 
 namespace Nzy3d.Plot3D.Primitives
 {
@@ -114,7 +113,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (Polygon s in _quads)
 					{
-						if ((s != null))
+						if (s != null)
 						{
 							s.WireframeWidth = value;
 						}
@@ -133,7 +132,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (Polygon s in _quads)
 					{
-						if ((s != null))
+						if (s != null)
 						{
 							s.FaceDisplayed = value;
 						}
@@ -188,7 +187,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (Polygon s in _quads)
 					{
-						if ((s != null))
+						if (s != null)
 						{
 							s.ColorMapper = value;
 						}
@@ -207,7 +206,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (Polygon s in _quads)
 					{
-						if ((s != null))
+						if (s != null)
 						{
 							s.Color = value;
 						}

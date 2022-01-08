@@ -98,12 +98,9 @@ namespace Nzy3d.Maths
 			float vmin = float.PositiveInfinity;
 			for (int i = 0; i <= values.Length - 1; i++)
 			{
-				if (!float.IsNaN(values[i]))
+				if (!float.IsNaN(values[i]) && values[i] < vmin)
 				{
-					if (values[i] < vmin)
-					{
-						vmin = values[i];
-					}
+					vmin = values[i];
 				}
 			}
 			return vmin;
@@ -120,12 +117,9 @@ namespace Nzy3d.Maths
 			{
 				for (int j = 0; j <= values.GetLength(1) - 1; j++)
 				{
-					if (!float.IsNaN(values[i, j]))
+					if (!float.IsNaN(values[i, j]) && values[i, j] < vmin)
 					{
-						if (values[i, j] < vmin)
-						{
-							vmin = values[i, j];
-						}
+						vmin = values[i, j];
 					}
 				}
 			}
@@ -165,13 +159,10 @@ namespace Nzy3d.Maths
 			int index = -1;
 			for (int i = 0; i <= values.Length - 1; i++)
 			{
-				if (!double.IsNaN(values[i]))
+				if (!double.IsNaN(values[i]) && values[i] < vmin)
 				{
-					if (values[i] < vmin)
-					{
-						vmin = values[i];
-						index = i;
-					}
+					vmin = values[i];
+					index = i;
 				}
 			}
 			return index;
@@ -190,13 +181,10 @@ namespace Nzy3d.Maths
 			int index = -1;
 			for (int i = 0; i <= values.Length - 1; i++)
 			{
-				if (!float.IsNaN(values[i]))
+				if (!float.IsNaN(values[i]) && values[i] < vmin)
 				{
-					if (values[i] < vmin)
-					{
-						vmin = values[i];
-						index = i;
-					}
+					vmin = values[i];
+					index = i;
 				}
 			}
 			return index;
@@ -233,12 +221,9 @@ namespace Nzy3d.Maths
 			double vmin = double.NegativeInfinity;
 			for (int i = 0; i <= values.Length - 1; i++)
 			{
-				if (!double.IsNaN(values[i]))
+				if (!double.IsNaN(values[i]) && values[i] > vmin)
 				{
-					if (values[i] > vmin)
-					{
-						vmin = values[i];
-					}
+					vmin = values[i];
 				}
 			}
 			return vmin;
@@ -255,12 +240,9 @@ namespace Nzy3d.Maths
 			{
 				for (int j = 0; j <= values.GetLength(1) - 1; j++)
 				{
-					if (!double.IsNaN(values[i, j]))
+					if (!double.IsNaN(values[i, j]) && values[i, j] > vmax)
 					{
-						if (values[i, j] > vmax)
-						{
-							vmax = values[i, j];
-						}
+						vmax = values[i, j];
 					}
 				}
 			}
@@ -276,12 +258,9 @@ namespace Nzy3d.Maths
 			float vmax = float.NegativeInfinity;
 			for (int i = 0; i <= values.Length - 1; i++)
 			{
-				if (!float.IsNaN(values[i]))
+				if (!float.IsNaN(values[i]) && values[i] > vmax)
 				{
-					if (values[i] > vmax)
-					{
-						vmax = values[i];
-					}
+					vmax = values[i];
 				}
 			}
 			return vmax;
@@ -298,12 +277,9 @@ namespace Nzy3d.Maths
 			{
 				for (int j = 0; j <= values.GetLength(1) - 1; j++)
 				{
-					if (!float.IsNaN(values[i, j]))
+					if (!float.IsNaN(values[i, j]) && values[i, j] > vmax)
 					{
-						if (values[i, j] > vmax)
-						{
-							vmax = values[i, j];
-						}
+						vmax = values[i, j];
 					}
 				}
 			}
@@ -366,14 +342,13 @@ namespace Nzy3d.Maths
 				return double.NaN;
 			}
 			double[] dists = new double[values.Length];
-			double median = Statistics.Median(values, true);
+			double median = Median(values, true);
 			for (int i = 0; i <= values.Length - 1; i++)
 			{
 				dists[i] = Math.Abs(values[i] - median);
 			}
-			return Statistics.Median(dists, true);
+			return Median(dists, true);
 		}
-
 
 		/// <summary>
 		/// Computes the standard deviation of an array of doubles.
@@ -386,7 +361,7 @@ namespace Nzy3d.Maths
 			{
 				return double.NaN;
 			}
-			return Math.Sqrt(Statistics.Variance(values));
+			return Math.Sqrt(Variance(values));
 		}
 
 		/// <summary>
@@ -402,7 +377,7 @@ namespace Nzy3d.Maths
 			{
 				return double.NaN;
 			}
-			double mean = Statistics.Mean(values);
+			double mean = Mean(values);
 			double sum = 0;
 			int count = 0;
 			for (int i = 0; i <= values.Length - 1; i++)
@@ -445,18 +420,17 @@ namespace Nzy3d.Maths
 			}
 			double[] quantiles = new double[levels.Length];
 			double[] sorted = new double[values.Length];
+
 			System.Array.Copy(values, sorted, values.Length);
 			System.Array.Sort(sorted);
-			double quantileIdx = 0;
-			double quantileIdxCeil = 0;
-			double quantileIdxFloor = 0;
+
 			for (int i = 0; i <= levels.Length - 1; i++)
 			{
 				if (levels[i] > 100 | levels[i] < 0)
 				{
 					throw new ArgumentException("Input level [" + i + "]=" + levels[i] + "is out of bounds [0;100]", "levels");
 				}
-				quantileIdx = (sorted.Length - 1) * levels[i] / 100;
+				double quantileIdx = (sorted.Length - 1) * levels[i] / 100;
 				if (quantileIdx == Convert.ToInt32(quantileIdx))
 				{
 					// quantile exactly fond
@@ -464,22 +438,19 @@ namespace Nzy3d.Maths
 				}
 				else
 				{
-					quantileIdxCeil = Math.Ceiling(quantileIdx);
-					quantileIdxFloor = Math.Floor(quantileIdx);
+					double quantileIdxCeil = Math.Ceiling(quantileIdx);
+					double quantileIdxFloor = Math.Floor(quantileIdx);
 					if (interpolated)
 					{
 						quantiles[i] = sorted[Convert.ToInt32(quantileIdxFloor)] * (quantileIdxCeil - quantileIdx) + sorted[Convert.ToInt32(quantileIdxCeil)] * (quantileIdx - quantileIdxFloor);
 					}
+					else if (quantileIdx - quantileIdxFloor < quantileIdxCeil - quantileIdx)
+					{
+						quantiles[i] = sorted[Convert.ToInt32(quantileIdxFloor)];
+					}
 					else
 					{
-						if ((quantileIdx - quantileIdxFloor < quantileIdxCeil - quantileIdx))
-						{
-							quantiles[i] = sorted[Convert.ToInt32(quantileIdxFloor)];
-						}
-						else
-						{
-							quantiles[i] = sorted[Convert.ToInt32(quantileIdxCeil)];
-						}
+						quantiles[i] = sorted[Convert.ToInt32(quantileIdxCeil)];
 					}
 				}
 			}

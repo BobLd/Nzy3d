@@ -25,20 +25,20 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 	public class GridIndex
 	{
 		/// <summary> The triangulation of the index </summary>
-
 		private Delaunay_Triangulation indexDelaunay;
+
 		/// <summary> Horizontal geographic size of a cell index </summary>
-
 		private double x_size;
+
 		/// <summary> Vertical  geographic size of a cell index </summary>
-
 		private double y_size;
+
 		/// <summary> The indexed geographic size </summary>
-
 		private BoundingBox indexRegion;
-		/// <summary> A division of indexRegion to a cell matrix, where each cell holds a triangle which lies in it </summary>
 
+		/// <summary> A division of indexRegion to a cell matrix, where each cell holds a triangle which lies in it </summary>
 		private Triangle_dt[,] grid;
+
 		/// <summary>
 		/// Constructs a grid index holding the triangles of a delaunay triangulation.
 		/// This version uses the bounding box of the triangulation as the region to index.
@@ -46,7 +46,6 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <param name="delaunay">delaunay triangulation to index</param>
 		/// <param name="xCellCount">number of grid cells in a row</param>
 		/// <param name="yCellCount">number of grid cells in a column</param>
-		/// <remarks></remarks>
 		public GridIndex(Delaunay_Triangulation delaunay, int xCellCount, int yCellCount) : this(delaunay, xCellCount, yCellCount, delaunay.BoundingBox)
 		{
 		}
@@ -64,7 +63,6 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <param name="xCellCount">number of grid cells in a row</param>
 		/// <param name="yCellCount">number of grid cells in a column</param>
 		/// <param name="region">geographic region to index</param>
-		/// <remarks></remarks>
 		public GridIndex(Delaunay_Triangulation delaunay, int xCellCount, int yCellCount, BoundingBox region)
 		{
 			init(delaunay, xCellCount, yCellCount, region);
@@ -102,24 +100,25 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// with the enlarged region
 		/// </summary>
 		/// <param name="updatedTriangles">Changed triangles of the triangulation. This may be added triangles,
-		///  removed triangles or both. All that matter is that they cover the
-		///  changed area.
+		/// removed triangles or both. All that matter is that they cover the
+		/// changed area.
 		/// </param>
 		public void updateIndex(IEnumerator<Triangle_dt> updatedTriangles)
 		{
 			// Gather the bounding box of the updated area
 			BoundingBox updatedRegion = new BoundingBox();
-			while (((updatedTriangles.Current != null)))
+			while (updatedTriangles.Current != null)
 			{
 				updatedRegion = updatedRegion.UnionWith(updatedTriangles.Current.BoundingBox);
 				updatedTriangles.MoveNext();
 			}
-			if ((updatedRegion.isNull))
-				return;
+
+			if (updatedRegion.isNull) return;
+
 			// No update...
 			// Bad news - the updated region lies outside the indexed region.
 			// The whole index must be recalculated
-			if ((!indexRegion.contains(updatedRegion)))
+			if (!indexRegion.contains(updatedRegion))
 			{
 				init(indexDelaunay, Convert.ToInt32(indexRegion.Width / x_size), Convert.ToInt32(indexRegion.Height / y_size), indexRegion.UnionWith(updatedRegion));
 			}
@@ -128,6 +127,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 				// Find the cell region to be updated
 				Point_dt minInvalidCell = getCellOf(updatedRegion.MinPoint);
 				Point_dt maxInvalidCell = getCellOf(updatedRegion.MaxPoint);
+
 				// And update it with fresh triangles
 				Triangle_dt adjacentValidTriangle = findValidTriangle(minInvalidCell);
 				updateCellValues((int)minInvalidCell.x, (int)minInvalidCell.y, (int)maxInvalidCell.x, (int)maxInvalidCell.y, adjacentValidTriangle);
@@ -145,7 +145,6 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <param name="lastXCell"></param>
 		/// <param name="lastYCell"></param>
 		/// <param name="startTriangle"></param>
-		/// <remarks></remarks>
 		private void updateCellValues(int startXCell, int startYCell, int lastXCell, int lastYCell, Triangle_dt startTriangle)
 		{
 			for (int i = startXCell; i <= lastXCell; i++)
@@ -154,6 +153,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 				startTriangle = indexDelaunay.Find(middleOfCell(i, startYCell), startTriangle);
 				grid[i, startYCell] = startTriangle;
 				Triangle_dt prevRowTriangle = startTriangle;
+
 				// Add triangles for the next row cells
 				for (int j = startYCell + 1; j <= lastYCell; j++)
 				{
@@ -172,7 +172,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		{
 			// If the invalid cell is the minimal one in the grid we are forced to search the
 			// triangulation for a trinagle at that location
-			if ((minInvalidCell.x == 0 & minInvalidCell.y == 0))
+			if (minInvalidCell.x == 0 & minInvalidCell.y == 0)
 			{
 				return indexDelaunay.Find(middleOfCell((int)minInvalidCell.x, (int)minInvalidCell.y), null);
 			}

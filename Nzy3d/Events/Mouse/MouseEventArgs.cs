@@ -2,28 +2,19 @@ namespace Nzy3d.Events.Mouse
 {
 	public class MouseEventArgs
 	{
-		private double _x;
-		private double _y;
-
-		private MouseButton _button;
+        private MouseButton _button;
 		public MouseEventArgs(double x, double y, MouseButton button)
 		{
-			_x = x;
-			_y = y;
+			X = x;
+			Y = y;
 			_button = button;
 		}
 
-		public double X
-		{
-			get { return _x; }
-		}
+        public double X { get; }
 
-		public double Y
-		{
-			get { return _y; }
-		}
+        public double Y { get; }
 
-		public MouseButton Button
+        public MouseButton Button
 		{
 			get { return _button; }
 		}

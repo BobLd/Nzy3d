@@ -1,14 +1,11 @@
 using Nzy3d.Maths;
 using Nzy3d.Plot3D.Rendering.Canvas;
 using Nzy3d.Plot3D.Rendering.View;
-using System;
 
 namespace Nzy3d.Chart
 {
-
     public class ChartScene : Scene
 	{
-
 		internal int _nview;
 
 		internal View _view;
@@ -24,7 +21,8 @@ namespace Nzy3d.Chart
 
 		public override View newView(ICanvas canvas, Quality quality)
 		{
-			if (_nview > 0) {
+			if (_nview > 0)
+			{
 				throw new Exception("A view has already been defined for this scene. Can not use several views.");
 			}
 			_nview += 1;
@@ -37,9 +35,7 @@ namespace Nzy3d.Chart
 			base.clearView(view);
 			_nview = 0;
 		}
-
 	}
-
 }
 
 //=======================================================

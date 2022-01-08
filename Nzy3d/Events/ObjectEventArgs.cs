@@ -2,17 +2,13 @@ namespace Nzy3d.Events
 {
 	public class ObjectEventArgs : EventArgs
 	{
-		private object _objectChanged;
-		public ObjectEventArgs(object objectChanged) : base()
+        public ObjectEventArgs(object objectChanged) : base()
 		{
-			_objectChanged = objectChanged;
+			ObjectChanged = objectChanged;
 		}
 
-		public object ObjectChanged
-		{
-			get { return _objectChanged; }
-		}
-	}
+        public object ObjectChanged { get; }
+    }
 }
 
 //=======================================================

@@ -1,10 +1,10 @@
 namespace Nzy3d.Maths
 {
-    /// <summary>
-    /// An Angle2d stores three 2d points, considering the angle is on the second one.
-    /// An instance may return angle(), cos() and sin()
-    /// </summary>
-    public class Angle2d
+	/// <summary>
+	/// An Angle2d stores three 2d points, considering the angle is on the second one.
+	/// An instance may return angle(), cos() and sin()
+	/// </summary>
+	public class Angle2d
 	{
 		#region "Members"
 		private double x1;
@@ -38,14 +38,16 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public double sin()
 		{
-			double x4 = 0;
+			const double x4 = 0;
 			//(y1-y2)*(z3-z2) - (z1-z2)*(y3-y2);
-			double y4 = 0;
+
+			const double y4 = 0;
 			//(z1-z2)*(x3-x2) - (x1-x2)*(z3-z2);
 			double z4 = (x1 - x2) * (y3 - y2) - (y1 - y2) * (x3 - x2);
-			Vector3d v1 = new Vector3d(x1, y1, 0, x2, y2, 0);
-			Vector3d v3 = new Vector3d(x3, y3, 0, x2, y2, 0);
-			Vector3d v4 = new Vector3d(x4, y4, z4, x2, y2, 0);
+
+			var v1 = new Vector3d(x1, y1, 0, x2, y2, 0);
+			var v3 = new Vector3d(x3, y3, 0, x2, y2, 0);
+			var v4 = new Vector3d(x4, y4, z4, x2, y2, 0);
 			return (z4 >= 0 ? 1 : -1) * v4.norm() / (v1.norm() * v3.norm());
 		}
 
@@ -54,8 +56,8 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public double cos()
 		{
-			Vector2d v1 = new Vector2d(x1, y1, x2, y2);
-			Vector2d v3 = new Vector2d(x3, y3, x2, y2);
+			var v1 = new Vector2d(x1, y1, x2, y2);
+			var v3 = new Vector2d(x3, y3, x2, y2);
 			return v1.dot(v3) / (v1.norm() * v3.norm());
 		}
 
@@ -64,8 +66,8 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public double angle()
 		{
-			Vector2d v1 = new Vector2d(x1, y1, x2, y2);
-			Vector2d v3 = new Vector2d(x3, y3, x2, y2);
+			var v1 = new Vector2d(x1, y1, x2, y2);
+			var v3 = new Vector2d(x3, y3, x2, y2);
 			return Math.Acos(v1.dot(v3));
 		}
 		#endregion

@@ -1,5 +1,4 @@
 using Nzy3d.Colors.ColorMaps;
-using Nzy3d.Colors;
 using Nzy3d.Maths;
 using Range = Nzy3d.Maths.Range;
 using Scale = Nzy3d.Maths.Scale;
@@ -8,16 +7,15 @@ namespace Nzy3d.Colors
 {
     public class ColorMapper : IColorMappable
 	{
-		private double m_zmin;
-		private double m_zmax;
-		private IColorMap m_colormap;
+        private IColorMap m_colormap;
 
 		private Color m_factor;
+
 		public ColorMapper(IColorMap colormap, double zmin, double zmax, Color factor)
 		{
 			m_colormap = colormap;
-			m_zmin = zmin;
-			m_zmax = zmax;
+			ZMin = zmin;
+			ZMax = zmax;
 			m_factor = factor;
 		}
 
@@ -37,7 +35,7 @@ namespace Nzy3d.Colors
 		public Color Color(Coord3d coord)
 		{
 			Color @out = m_colormap.GetColor(this, coord.x, coord.y, coord.z);
-			if ((m_factor != null))
+			if (m_factor != null)
 			{
 				@out.mul(m_factor);
 			}
@@ -47,32 +45,21 @@ namespace Nzy3d.Colors
 		public Color Color(double v)
 		{
 			Color @out = m_colormap.GetColor(this, v);
-			if ((m_factor != null))
+			if (m_factor != null)
 			{
 				@out.mul(m_factor);
 			}
 			return @out;
 		}
 
-		public double ZMax
-		{
-			get { return m_zmax; }
-			set { m_zmax = value; }
-		}
+        public double ZMax { get; set; }
 
-		public double ZMin
-		{
-			get { return m_zmin; }
-			set { m_zmin = value; }
-		}
+        public double ZMin { get; set; }
 
-		/// <summary>
-		/// Range representing zmin/zmax values (same as <see cref="Scale"/> with different object type)
-		/// </summary>
-		/// <value></value>
-		/// <returns></returns>
-		/// <remarks></remarks>
-		public Range Range
+        /// <summary>
+        /// Range representing zmin/zmax values (same as <see cref="Scale"/> with different object type)
+        /// </summary>
+        public Range Range
 		{
             get { return new Range(ZMin, ZMax); }
 			set
@@ -85,9 +72,6 @@ namespace Nzy3d.Colors
 		/// <summary>
 		/// Scale representing zmin/zmax values (same as <see cref="Range"/> with different object type)
 		/// </summary>
-		/// <value></value>
-		/// <returns></returns>
-		/// <remarks></remarks>
 		public Scale Scale
 		{
 			get { return new Scale(ZMin, ZMax); }
@@ -101,8 +85,6 @@ namespace Nzy3d.Colors
 		/// <summary>
 		/// Returns the string representation of this colormapper
 		/// </summary>
-		/// <returns></returns>
-		/// <remarks></remarks>
 		public override string ToString()
 		{
 			return "(ColorMapper) " + ColorMap.ToString() + " zmin=" + ZMin + " zmax=" + ZMax + " factor=" + m_factor.ToString();

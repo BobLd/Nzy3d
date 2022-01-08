@@ -7,9 +7,6 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 	/// </summary>
 	public class Point_dt
 	{
-		private double m_x;
-		private double m_y;
-		private double m_z;
 		public const int ONSEGMENT = 0;
 		public const int LEFT = 1;
 		public const int RIGHT = 2;
@@ -32,9 +29,9 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <param name="z">z coordinates</param>
 		public Point_dt(double x, double y, double z)
 		{
-			this.m_x = x;
-			this.m_y = y;
-			this.m_z = z;
+			this.x = x;
+			this.y = y;
+			this.z = z;
 		}
 
 		/// <summary>
@@ -54,23 +51,11 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		{
 		}
 
-		public double x
-		{
-			get { return m_x; }
-			set { m_x = value; }
-		}
+		public double x { get; set; }
 
-		public double y
-		{
-			get { return m_y; }
-			set { m_y = value; }
-		}
+		public double y { get; set; }
 
-		public double z
-		{
-			get { return m_z; }
-			set { m_z = value; }
-		}
+		public double z { get; set; }
 
 		public Coord3d Coord3d
 		{
@@ -120,62 +105,71 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <param name="a">The first point of the segment</param>
 		/// <param name="b">The second point of the segment</param>
 		/// <returns>The value (flag) of the relation between this point and the a,b line-segment.</returns>
-		/// <remarks></remarks>
 		public int pointLineTest(Point_dt a, Point_dt b)
 		{
 			double dx = b.x - a.x;
 			double dy = b.y - a.y;
 			double res = dy * (x - a.x) - dx * (y - a.y);
+
 			if (res < 0)
 			{
 				return LEFT;
 			}
+
 			if (res > 0)
 			{
 				return RIGHT;
 			}
+
 			if (dx > 0)
 			{
 				if (x < a.x)
 				{
 					return INFRONTOFA;
 				}
+
 				if (b.x < x)
 				{
 					return BEHINDB;
 				}
 				return ONSEGMENT;
 			}
+
 			if (dx < 0)
 			{
 				if (x > a.x)
 				{
 					return INFRONTOFA;
 				}
+
 				if (b.x > x)
 				{
 					return BEHINDB;
 				}
 				return ONSEGMENT;
 			}
+
 			if (dy > 0)
 			{
 				if (y < a.y)
 				{
 					return INFRONTOFA;
 				}
+
 				if (b.y < y)
 				{
 					return BEHINDB;
 				}
 				return ONSEGMENT;
 			}
+
 			if (dy < 0)
 			{
 				if (y > a.y)
 				{
 					return INFRONTOFA;
 				}
+
 				if (b.y > y)
 				{
 					return BEHINDB;
@@ -190,7 +184,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 			double u = ((a.x - b.x) * (a.x + b.x) + (a.y - b.y) * (a.y + b.y)) / 2.0;
 			double v = ((b.x - x) * (b.x + x) + (b.y - y) * (b.y + y)) / 2.0;
 			double den = (a.x - b.x) * (b.y - y) - (b.x - x) * (a.y - b.y);
-			if ((den == 0))
+			if (den == 0)
 			{
 				// oops
 				System.Diagnostics.Debug.WriteLine("circumcenter, degenerate case");
@@ -207,13 +201,10 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		{
 			return new Point_dt_Compare(0);
 		}
-
 	}
 
 	public class Point_dt_Compare
 	{
-
-
 		private int m_flag;
 		public Point_dt_Compare(int flag)
 		{
@@ -226,51 +217,95 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 			{
 				if ((m_flag == 0))
 				{
-					if ((o1.x > o2.x))
+					if (o1.x > o2.x)
+					{
 						return 1;
-					if ((o1.x < o2.x))
+					}
+
+					if (o1.x < o2.x)
+					{
 						return -1;
+					}
+
 					// x1 == x2
-					if ((o1.y > o2.y))
+					if (o1.y > o2.y)
+					{
 						return 1;
-					if ((o1.y < o2.y))
+					}
+
+					if (o1.y < o2.y)
+					{
 						return -1;
+					}
 				}
 				else if ((m_flag == 1))
 				{
-					if ((o1.x > o2.x))
+					if (o1.x > o2.x)
+					{
 						return -1;
-					if ((o1.x < o2.x))
+					}
+
+					if (o1.x < o2.x)
+					{
 						return 1;
+					}
+
 					// x1 == x2
-					if ((o1.y > o2.y))
+					if (o1.y > o2.y)
+					{
 						return -1;
-					if ((o1.y < o2.y))
+					}
+
+					if (o1.y < o2.y)
+					{
 						return 1;
+					}
 				}
-				else if ((m_flag == 2))
+				else if (m_flag == 2)
 				{
-					if ((o1.y > o2.y))
+					if (o1.y > o2.y)
+					{
 						return 1;
-					if ((o1.y < o2.y))
+					}
+
+					if (o1.y < o2.y)
+					{
 						return -1;
+					}
+
 					// y1 == y2
-					if ((o1.x > o2.x))
+					if (o1.x > o2.x)
+					{
 						return 1;
-					if ((o1.x < o2.x))
+					}
+
+					if (o1.x < o2.x)
+					{
 						return -1;
+					}
 				}
 				else if ((m_flag == 3))
 				{
-					if ((o1.y > o2.y))
+					if (o1.y > o2.y)
+					{
 						return -1;
-					if ((o1.y < o2.y))
+					}
+
+					if (o1.y < o2.y)
+					{
 						return 1;
+					}
+
 					// y1 == y2
-					if ((o1.x > o2.x))
+					if (o1.x > o2.x)
+					{
 						return -1;
-					if ((o1.x < o2.x))
+					}
+
+					if (o1.x < o2.x)
+					{
 						return 1;
+					}
 				}
 			}
 			else
@@ -279,11 +314,13 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 				{
 					return 0;
 				}
-				if (o1 == null & ((o2 != null)))
+
+				if (o1 == null & (o2 != null))
 				{
 					return 1;
 				}
-				if (((o1 != null)) & o2 == null)
+
+				if ((o1 != null) & o2 == null)
 				{
 					return -1;
 				}

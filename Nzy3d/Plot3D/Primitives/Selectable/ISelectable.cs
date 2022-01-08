@@ -3,7 +3,7 @@ using Nzy3d.Plot3D.Rendering.View;
 
 namespace Nzy3d.Plot3D.Primitives
 {
-	public interface ISelectable
+    public interface ISelectable
 	{
 		void Project(Camera cam);
 

@@ -1,39 +1,32 @@
 using Nzy3d.Chart.Controllers;
+
 namespace Nzy3d.Events
 {
 	public class ControllerEventArgs : ObjectEventArgs
 	{
-		private ControllerType _type;
+        public enum FieldChanged : byte
+        {
+            Data = 0,
+            Transform = 1,
+            Color = 2,
+            Metadata = 3,
+            Displayed = 4
+        }
 
-		private object _value;
-		public enum FieldChanged : int
+        public ControllerEventArgs(object objectChanged, ControllerType type, object value) : base(objectChanged)
 		{
-			Data = 0,
-			Transform = 1,
-			Color = 2,
-			Metadata = 3,
-			Displayed = 4
+			Type = type;
+			Value = value;
 		}
 
-		public ControllerEventArgs(object objectChanged, ControllerType type, object value) : base(objectChanged)
-		{
-			_type = type;
-			_value = value;
-		}
+        public ControllerType Type { get; }
 
-		public ControllerType Type
-		{
-			get { return _type; }
-		}
+        public object Value { get; }
 
-		public object Value
+        /// <inheritdoc/>
+        public override string ToString()
 		{
-			get { return _value; }
-		}
-
-		public override string ToString()
-		{
-			return ("ControllerEvent(type,value): " + Type + ", " + Value);
+			return "ControllerEvent(type,value): " + Type + ", " + Value;
 		}
 	}
 }

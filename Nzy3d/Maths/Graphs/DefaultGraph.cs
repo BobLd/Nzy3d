@@ -2,12 +2,12 @@ using System.Data;
 
 namespace Nzy3d.Maths.Graphs
 {
-    public class DefaultGraph<V, E> : IGraph<V, E> where E : class
+	public class DefaultGraph<V, E> : IGraph<V, E> where E : class
 	{
 		internal List<V> vertices = new List<V>();
 		internal List<E> edges = new List<E>();
-        internal List<Tuple<E, V>> edgeStart = new List<Tuple<E, V>>();
-        internal List<Tuple<E, V>> edgeStop = new List<Tuple<E, V>>();
+		internal List<Tuple<E, V>> edgeStart = new List<Tuple<E, V>>();
+		internal List<Tuple<E, V>> edgeStop = new List<Tuple<E, V>>();
 
 		internal Random r = new Random();
 		public void addEdge(E edge, V v1, V v2)
@@ -22,7 +22,7 @@ namespace Nzy3d.Maths.Graphs
 			vertices.Add(vertex);
 		}
 
-		public System.Collections.Generic.List<E> getEdges()
+		public List<E> getEdges()
 		{
 			return edges;
 		}
@@ -34,7 +34,7 @@ namespace Nzy3d.Maths.Graphs
 
 		public V getEdgeStopVertex(E e)
 		{
-            return edgeStop.Where(p => p.Item1 == e).Single().Item2;
+			return edgeStop.Where(p => p.Item1 == e).Single().Item2;
 		}
 
 		public V getRandomVertex()

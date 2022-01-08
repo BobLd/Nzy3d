@@ -4,30 +4,21 @@ namespace Nzy3d.Events
 {
 	public class ScaleChangedEventArgs : ObjectEventArgs
 	{
-		private Scale _scaling;
-
-		private int _scaleID;
-		public ScaleChangedEventArgs(object objectChanged, Scale scaling, int scaleID) : base(objectChanged)
+        public ScaleChangedEventArgs(object objectChanged, Scale scaling, int scaleID) : base(objectChanged)
 		{
-			_scaling = scaling;
-			_scaleID = scaleID;
+			Scaling = scaling;
+			ScaleId = scaleID;
 		}
 
 		public ScaleChangedEventArgs(object objectChanged, Scale scaling) : this(objectChanged, scaling, -1)
 		{
 		}
 
-		public Scale Scaling
-		{
-			get { return _scaling; }
-		}
+        public Scale Scaling { get; }
 
-		public int ScaleId
-		{
-			get { return _scaleID; }
-		}
+        public int ScaleId { get; }
 
-		public override string ToString()
+        public override string ToString()
 		{
 			return "ScaleChangeEventArgs:id" + ScaleId + ", scale=" + Scaling.ToString();
 		}

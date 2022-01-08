@@ -13,13 +13,15 @@ namespace Nzy3d.Maths
 		public double x;
 		public double y;
 		#endregion
+
 		public double z;
 
 		#region "Constants"
-		public static Coord3d ORIGIN = new Coord3d(0, 0, 0);
-		public static Coord3d INVALID = new Coord3d(double.NaN, double.NaN, double.NaN);
+		public readonly static Coord3d ORIGIN = new Coord3d(0, 0, 0);
+		public readonly static Coord3d INVALID = new Coord3d(double.NaN, double.NaN, double.NaN);
 		#endregion
-		public static Coord3d IDENTITY = new Coord3d(1, 1, 1);
+
+		public readonly static Coord3d IDENTITY = new Coord3d(1, 1, 1);
 
 		#region "Constructors"
 		public Coord3d() : this(0, 0, 0)
@@ -44,24 +46,21 @@ namespace Nzy3d.Maths
 				throw new Exception("When creating a Coord3d from an array of double, the array must contain 3 elements (" + values.Length + " elements found here)");
 			}
 		}
-
 		#endregion
 
 		#region "Functions"
-
 		/// <summary>
 		/// Returns a memberwise clone of current object.
 		/// </summary>
 		public Coord3d Clone()
 		{
-			return (Coord3d)this.MemberwiseClone();
+			return (Coord3d)MemberwiseClone();
 		}
 
 		/// <summary>
 		/// Set all values of Coord3d
 		/// </summary>
 		/// <returns>Self</returns>
-		/// <remarks></remarks>
 		public Coord3d setvalues(double xx, double yy, double zz)
 		{
 			x = xx;
@@ -74,7 +73,6 @@ namespace Nzy3d.Maths
 		/// Set all values of Coord3d
 		/// </summary>
 		/// <returns>Self</returns>
-		/// <remarks></remarks>
 		public Coord3d set(Coord3d another)
 		{
 			return setvalues(another.x, another.y, another.z);
@@ -83,8 +81,6 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Returns the x and y components as 2d coordinate
 		/// </summary>
-		/// <returns></returns>
-		/// <remarks></remarks>
 		public Coord2d getXY()
 		{
 			return new Coord2d(this.x, this.y);
@@ -116,7 +112,7 @@ namespace Nzy3d.Maths
 
 		/// <summary>
 		/// Add values of another <see cref="Coord3d"/> to all components of the current <see cref="Coord3d"/> and return the result
-		/// in a new <see cref="Coord3d"/>. 
+		/// in a new <see cref="Coord3d"/>.
 		/// </summary>
 		/// <param name="coord">Coordinate with values to add</param>
 		/// <remarks>Current object is not modified</remarks>
@@ -150,7 +146,7 @@ namespace Nzy3d.Maths
 		}
 
 		/// <summary>
-		/// Add values of another <see cref="Coord3d"/> to all components of the current <see cref="Coord3d"/>. 
+		/// Add values of another <see cref="Coord3d"/> to all components of the current <see cref="Coord3d"/>.
 		/// </summary>
 		/// <param name="coord">Coordinate with values to add</param>
 		public void addSelf(Coord3d coord)
@@ -162,7 +158,7 @@ namespace Nzy3d.Maths
 
 		/// <summary>
 		/// Substract a value to all components of the current <see cref="Coord3d"/> and return the result
-		/// in a new <see cref="Coord3d"/>. 
+		/// in a new <see cref="Coord3d"/>.
 		/// </summary>
 		/// <param name="value">Value to substract to both coordinates (x, y and z)</param>
 		/// <remarks>Current object is not modified</remarks>
@@ -196,7 +192,7 @@ namespace Nzy3d.Maths
 		}
 
 		/// <summary>
-		/// Substract a value to all components of the current <see cref="Coord3d"/>. 
+		/// Substract a value to all components of the current <see cref="Coord3d"/>.
 		/// </summary>
 		/// <param name="value">Value to substract to both coordinates (x, y and z)</param>
 		public void substractSelf(double value)
@@ -232,7 +228,7 @@ namespace Nzy3d.Maths
 
 		/// <summary>
 		/// Multiply all components of the current <see cref="Coord3d"/> by a given value and return the result
-		/// in a new <see cref="Coord3d"/>. 
+		/// in a new <see cref="Coord3d"/>.
 		/// </summary>
 		/// <param name="value">Value to multiply both coordinates with (x, y and z)</param>
 		/// <remarks>Current object is not modified</remarks>
@@ -256,7 +252,7 @@ namespace Nzy3d.Maths
 
 		/// <summary>
 		/// Multiply components of another <see cref="Coord3d"/> with components of the current <see cref="Coord3d"/> and return the result
-		/// in a new <see cref="Coord3d"/>. 
+		/// in a new <see cref="Coord3d"/>.
 		/// </summary>
 		/// <param name="coord">Coordinate with values to multiply with</param>
 		/// <remarks>Current object is not modified</remarks>
@@ -266,7 +262,7 @@ namespace Nzy3d.Maths
 		}
 
 		/// <summary>
-		/// Multiply components of the current <see cref="Coord3d"/> with a given value. 
+		/// Multiply components of the current <see cref="Coord3d"/> with a given value.
 		/// </summary>
 		/// <param name="value">Value to multiply both coordinates with (x, y and z)</param>
 		public void multiplySelf(double value)
@@ -277,7 +273,7 @@ namespace Nzy3d.Maths
 		}
 
 		/// <summary>
-		/// Multiply components of the current <see cref="Coord3d"/> with given values. 
+		/// Multiply components of the current <see cref="Coord3d"/> with given values.
 		/// </summary>
 		/// <param name="xi">x value to multiply with</param>
 		/// <param name="yi">y value to multiply with</param>
@@ -290,7 +286,7 @@ namespace Nzy3d.Maths
 		}
 
 		/// <summary>
-		/// Multiply components of the current <see cref="Coord3d"/> with values of another <see cref="Coord3d"/>. 
+		/// Multiply components of the current <see cref="Coord3d"/> with values of another <see cref="Coord3d"/>.
 		/// </summary>
 		/// <param name="coord">Coordinate with values to multiply with</param>
 		public void multiplySelf(Coord3d coord)
@@ -302,7 +298,7 @@ namespace Nzy3d.Maths
 
 		/// <summary>
 		/// Divide all components of the current <see cref="Coord3d"/> by a given value and return the result
-		/// in a new <see cref="Coord3d"/>. 
+		/// in a new <see cref="Coord3d"/>.
 		/// </summary>
 		/// <param name="value">Value to multiply both coordinates with (x, y and z)</param>
 		/// <remarks>Current object is not modified</remarks>
@@ -326,7 +322,7 @@ namespace Nzy3d.Maths
 
 		/// <summary>
 		/// Divide components of the current <see cref="Coord3d"/> by components of another <see cref="Coord3d"/> and return the result
-		/// in a new <see cref="Coord3d"/>. 
+		/// in a new <see cref="Coord3d"/>.
 		/// </summary>
 		/// <param name="coord">Coordinate with values to divide with</param>
 		/// <remarks>Current object is not modified</remarks>
@@ -336,7 +332,7 @@ namespace Nzy3d.Maths
 		}
 
 		/// <summary>
-		/// Divide components of the current <see cref="Coord3d"/> by a given value. 
+		/// Divide components of the current <see cref="Coord3d"/> by a given value.
 		/// </summary>
 		/// <param name="value">Value to divide both coordinates by (x, y and z)</param>
 		public void divideSelf(double value)
@@ -347,7 +343,7 @@ namespace Nzy3d.Maths
 		}
 
 		/// <summary>
-		/// Divide components of the current <see cref="Coord3d"/> by given values. 
+		/// Divide components of the current <see cref="Coord3d"/> by given values.
 		/// </summary>
 		/// <param name="xi">x value to divide by</param>
 		/// <param name="yi">y value to divide by</param>
@@ -360,7 +356,7 @@ namespace Nzy3d.Maths
 		}
 
 		/// <summary>
-		/// Divide components of the current <see cref="Coord3d"/> by values of another <see cref="Coord3d"/>. 
+		/// Divide components of the current <see cref="Coord3d"/> by values of another <see cref="Coord3d"/>.
 		/// </summary>
 		/// <param name="coord">Coordinate with values to divide by</param>
 		public void divideSelf(Coord3d coord)
@@ -394,12 +390,10 @@ namespace Nzy3d.Maths
 		/// <remarks>Current object is not modified</remarks>
 		public Coord3d polar()
 		{
-			double a = 0;
-			double e = 0;
-			double r = 0;
-			double d = 0;
-			r = Math.Sqrt(x * x + y * y + z * z);
-			d = Math.Sqrt(x * x + y * y);
+			double r = Math.Sqrt(x * x + y * y + z * z);
+			double d = Math.Sqrt(x * x + y * y);
+			double a, e;
+
 			if (d == 0 & z > 0)
 			{
 				return new Coord3d(0, Math.PI / 2, r);
@@ -439,11 +433,9 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Compute the distance between two coordinates.
 		/// </summary>
-		/// <returns></returns>
-		/// <remarks></remarks>
 		public double distance(Coord3d coord)
 		{
-			return Math.Sqrt(Math.Pow((this.x - coord.x), 2) + Math.Pow((this.y - coord.y), 2) + Math.Pow((this.z - coord.z), 2));
+			return Math.Sqrt(Math.Pow(this.x - coord.x, 2) + Math.Pow(this.y - coord.y, 2) + Math.Pow(this.z - coord.z, 2));
 		}
 
 		/// <summary>
@@ -537,7 +529,6 @@ namespace Nzy3d.Maths
 			}
 			return !(coord1 == coord2);
 		}
-
 		#endregion
 	}
 }

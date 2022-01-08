@@ -1,4 +1,3 @@
-using Nzy3d.Glut;
 using Nzy3d.Maths;
 using Nzy3d.Plot3D.Rendering.View.Modes;
 using OpenTK.Graphics.OpenGL;
@@ -7,9 +6,11 @@ using OpenTK.Mathematics;
 namespace Nzy3d.Plot3D.Rendering.View
 {
     /// <summary>
+    /// <para>
     /// A  <see cref="Camera"/> provides an easy control on the view and target points
     /// in a cartesian coordinate system.
-    ///
+    /// </para>
+    /// <para>
     /// The <see cref="Camera"/> handles the following services:
     /// <ul>
     /// <li>allows setting perspective/orthogonal rendering mode through <see cref="CameraMode"/>.</li>
@@ -17,11 +18,9 @@ namespace Nzy3d.Plot3D.Rendering.View
     /// <li>ensure the modelview matrix is always available for GL2 calls related to anything else than projection.</li>
     /// <li>methods to convert screen coordinates into 3d coordinates and vice-versa</li>
     /// </ul>
-    ///
-    /// @author Martin Pernollet
-    ///
+    /// </para>
+    /// <para>@author Martin Pernollet</para>
     /// </summary>
-    /// <remarks></remarks>
     public class Camera : AbstractViewport
 	{
 		internal Coord3d _eye;
@@ -35,7 +34,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 		static internal Coord3d DEFAULT_VIEW = new Coord3d(Math.PI / 3, Math.PI / 5, 500);
 
-		public Camera(Coord3d target)
+		public Camera(Coord3d target) : base()
 		{
 		}
 
@@ -135,10 +134,8 @@ namespace Nzy3d.Plot3D.Rendering.View
 		/// <returns>3D model coordinate</returns>
 		public Coord3d ScreenToModel(Coord3d screen)
 		{
-			Vector4d worldcoord = default(Vector4d);
-
-			bool s = Glut.Glut.UnProject(new Vector4d(screen.x, screen.y, screen.z, 0), getModelViewAsMatrix4d(), getProjectionAsMatrix4d(), getViewPortAsDouble(), ref worldcoord);
-			if (!s)
+			Vector4d worldcoord = default;
+			if (!Glut.Glut.UnProject(new Vector4d(screen.x, screen.y, screen.z, 0), getModelViewAsMatrix4d(), getProjectionAsMatrix4d(), getViewPortAsDouble(), ref worldcoord))
 			{
 				FailedProjection("Could not retrieve screen coordinates in model.");
 			}
@@ -152,7 +149,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 		/// <returns>2D screen coordinate</returns>
 		public Coord3d ModelToScreen(Coord3d point)
 		{
-			Vector4d screencoord = default(Vector4d);
+			Vector4d screencoord = default;
 			if (!Glut.Glut.Project(new Vector4d(point.x, point.y, point.z, 0), getModelViewAsMatrix4d(), getProjectionAsMatrix4d(), getViewPortAsDouble(), ref screencoord))
 			{
 				FailedProjection("Could not retrieve model coordinates in screen " + point.ToString() + ".");
@@ -171,7 +168,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			Matrix4d modelMatrix = getModelViewAsMatrix4d();
 			Matrix4d projectionMatrix = getProjectionAsMatrix4d();
 			double[] viewport = getViewPortAsDouble();
-			Vector4d screenCoord = default(Vector4d);
+			Vector4d screenCoord = default;
 			for (int i = 0; i <= points.Length - 1; i++)
 			{
 				if (!Glut.Glut.Project(new Vector4d(points[i].x, points[i].y, points[i].z, 0), modelMatrix, projectionMatrix, viewport, ref screenCoord))
@@ -194,7 +191,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			Matrix4d modelMatrix = getModelViewAsMatrix4d();
 			Matrix4d projectionMatrix = getProjectionAsMatrix4d();
 			double[] viewport = getViewPortAsDouble();
-			Vector4d screenCoord = default(Vector4d);
+			Vector4d screenCoord = default;
 			for (int i = 0; i <= points.GetLength(0) - 1; i++)
 			{
 				for (int j = 0; j <= points.GetLength(1) - 1; j++)
@@ -220,7 +217,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			Matrix4d modelMatrix = getModelViewAsMatrix4d();
 			Matrix4d projectionMatrix = getProjectionAsMatrix4d();
 			double[] viewport = getViewPortAsDouble();
-			Vector4d screenCoord = default(Vector4d);
+			Vector4d screenCoord = default;
 			foreach (Coord3d aPoint in points)
 			{
 				if (!Glut.Glut.Project(new Vector4d(aPoint.x, aPoint.y, aPoint.z, 0), modelMatrix, projectionMatrix, viewport, ref screenCoord))
@@ -247,13 +244,14 @@ namespace Nzy3d.Plot3D.Rendering.View
 			Matrix4d modelMatrix = getModelViewAsMatrix4d();
 			Matrix4d projectionMatrix = getProjectionAsMatrix4d();
 			double[] viewport = getViewPortAsDouble();
-			Vector4d screenCoord = default(Vector4d);
+			Vector4d screenCoord = default;
 			for (int i = 0; i <= len - 1; i++)
 			{
 				if (!Glut.Glut.Project(new Vector4d(polygon.X[i], polygon.Y[i], polygon.Z[i], 0), modelMatrix, projectionMatrix, viewport, ref screenCoord))
 				{
 					FailedProjection("Could not retrieve model coordinates in screen for point #" + i + ".");
 				}
+
 				x[i] = screenCoord.X;
 				y[i] = screenCoord.Y;
 				z[i] = screenCoord.Z;
@@ -277,7 +275,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			Matrix4d modelMatrix = getModelViewAsMatrix4d();
 			Matrix4d projectionMatrix = getProjectionAsMatrix4d();
 			double[] viewport = getViewPortAsDouble();
-			Vector4d screenCoord = default(Vector4d);
+			Vector4d screenCoord = default;
 			for (int i = 0; i <= xlen - 1; i++)
 			{
 				for (int j = 0; j <= ylen - 1; j++)
@@ -306,7 +304,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			Matrix4d modelMatrix = getModelViewAsMatrix4d();
 			Matrix4d projectionMatrix = getProjectionAsMatrix4d();
 			double[] viewport = getViewPortAsDouble();
-			Vector4d screenCoord = default(Vector4d);
+			Vector4d screenCoord = default;
 			for (int i = 0; i <= polygons.GetLength(0) - 1; i++)
 			{
 				for (int j = 0; j <= polygons.GetLength(1) - 1; j++)
@@ -354,14 +352,12 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 		internal Matrix4 getModelViewAsMatrix4()
 		{
-			//Matrix4 modelview = default(Matrix4);
 			GL.GetFloat(GetPName.ModelviewMatrix, out Matrix4 modelview);
 			return modelview;
 		}
 
 		internal Matrix4d getModelViewAsMatrix4d()
 		{
-			//Matrix4d modelview = Glut.IDENTITY; // default(Matrix4d);
 			GL.GetDouble(GetPName.ModelviewMatrix, out Matrix4d modelview);
 			return modelview;
 		}
@@ -375,14 +371,12 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 		internal Matrix4 getProjectionAsMatrix4()
 		{
-			//Matrix4 projection = default(Matrix4);
 			GL.GetFloat(GetPName.ProjectionMatrix, out Matrix4 projection);
 			return projection;
 		}
 
 		internal Matrix4d getProjectionAsMatrix4d()
 		{
-			//Matrix4d projection = Glut.IDENTITY; // default(Matrix4d);
 			GL.GetDouble(GetPName.ProjectionMatrix, out Matrix4d projection);
 			return projection;
 		}
@@ -395,7 +389,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			}
 			else
 			{
-                System.Diagnostics.Debug.WriteLine(message);
+				System.Diagnostics.Debug.WriteLine(message);
 			}
 		}
 
@@ -410,7 +404,6 @@ namespace Nzy3d.Plot3D.Rendering.View
 		/// at the end of a shoot().
 		/// </summary>
 		/// <param name="projection">Project mode</param>
-		/// <remarks></remarks>
 		public void shoot(CameraMode projection)
 		{
 			shoot(projection, false);
@@ -444,6 +437,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			{
 				throw new Exception("Camera.shoot() : unsupported projection mode '" + projection + "'");
 			}
+
 			// Set camera position
 			Glut.Glut.LookAt(Eye.x, Eye.y, Eye.z, Target.x, Target.y, Target.z, Up.x, Up.y, Up.z);
 		}

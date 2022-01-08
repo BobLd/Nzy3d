@@ -110,12 +110,15 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			// Set scaling
 			GL.LoadIdentity();
 			GL.Scale(_scale.x, _scale.y, _scale.z);
+
 			// Set culling
 			GL.Enable(EnableCap.CullFace);
 			GL.FrontFace(FrontFaceDirection.Ccw);
 			GL.CullFace(CullFaceMode.Front);
+
 			// Draw cube in feedback buffer for computing hidden quads
 			_quadIsHidden = getHiddenQuads(camera);
+
 			// Plain part of quad making the surrounding box
 			if (_layout.FaceDisplayed)
 			{
@@ -125,39 +128,45 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 				GL.LineWidth(1);
 				GL.Enable(EnableCap.PolygonOffsetFill);
 				GL.PolygonOffset(1, 1);
+
 				// handle stippling
 				drawCube(RenderingMode.Render);
 				GL.Disable(EnableCap.PolygonOffsetFill);
 			}
+
 			// Edge part of quads making the surrounding box
 			Color gridcolor = _layout.GridColor;
 			GL.PolygonMode(MaterialFace.Back, PolygonMode.Line);
 			GL.Color4(gridcolor.r, gridcolor.g, gridcolor.b, gridcolor.a);
 			GL.LineWidth(1);
 			drawCube(RenderingMode.Render);
+
 			// Draw grids on non hidden quads
 			GL.PolygonMode(MaterialFace.Back, PolygonMode.Line);
 			GL.Color4(gridcolor.r, gridcolor.g, gridcolor.b, gridcolor.a);
 			GL.LineWidth(1);
 			GL.LineStipple(1, 0xaaaa);
 			GL.Enable(EnableCap.LineStipple);
+
 			for (int quad = 0; quad <= 5; quad++)
 			{
-				if ((!_quadIsHidden[quad]))
+				if (!_quadIsHidden[quad])
 				{
 					drawGridOnQuad(quad);
 				}
 			}
 			GL.Disable(EnableCap.LineStipple);
+
 			// Draw ticks on the closest axes
 			_wholeBounds.reset();
 			_wholeBounds.Add(_boxBounds);
 			//gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_LINE);
+
 			// Display x axis ticks
-			if ((_xrange > 0 & _layout.XTickLabelDisplayed))
+			if (_xrange > 0 & _layout.XTickLabelDisplayed)
 			{
 				// If we are on top, we make direct axe placement
-				if ((((_view != null) && _view.ViewMode == ViewPositionMode.TOP)))
+				if ((_view != null) && _view.ViewMode == ViewPositionMode.TOP)
 				{
 					BoundingBox3d bbox = drawTicks(camera, 1, AxeDirection.AxeX, _layout.XTickColor, Halign.LEFT, Valign.TOP);
 					// setup tick labels for X on the bottom
@@ -167,7 +176,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 				{
 					// otherwise computed placement
 					int xselect = findClosestXaxe(camera);
-					if ((xselect >= 0))
+					if (xselect >= 0)
 					{
 						BoundingBox3d bbox = drawTicks(camera, xselect, AxeDirection.AxeX, _layout.XTickColor);
 						_wholeBounds.Add(bbox);
@@ -181,10 +190,11 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 					}
 				}
 			}
+
 			// Display y axis ticks
-			if ((_yrange > 0 & _layout.YTickLabelDisplayed))
+			if (_yrange > 0 & _layout.YTickLabelDisplayed)
 			{
-				if ((((_view != null)) && _view.ViewMode == ViewPositionMode.TOP))
+				if (_view?.ViewMode == ViewPositionMode.TOP)
 				{
 					BoundingBox3d bbox = drawTicks(camera, 2, AxeDirection.AxeY, _layout.YTickColor, Halign.LEFT, Valign.GROUND);
 					// setup tick labels for Y on the left
@@ -207,10 +217,11 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 					}
 				}
 			}
+
 			// Display z axis ticks
-			if ((_zrange > 0 & _layout.ZTickLabelDisplayed))
+			if (_zrange > 0 & _layout.ZTickLabelDisplayed)
 			{
-				if ((((_view != null)) && _view.ViewMode == ViewPositionMode.TOP))
+				if (_view?.ViewMode == ViewPositionMode.TOP)
 				{
 				}
 				else
@@ -223,6 +234,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 					}
 				}
 			}
+
 			// Unset culling
 			GL.Disable(EnableCap.CullFace);
 		}
@@ -234,10 +246,12 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			_xrange = xmax - xmin;
 			_yrange = ymax - ymin;
 			_zrange = zmax - zmin;
+
 			// Define configuration of 6 quads (faces of the box)
 			_quadx = new float[6, 4];
 			_quady = new float[6, 4];
 			_quadz = new float[6, 4];
+
 			// x near
 			_quadx[0, 0] = xmax;
 			_quady[0, 0] = ymin;
@@ -581,13 +595,12 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			//setXTickMode(TICK_REGULAR, 3);5
 			//setYTickMode(TICK_REGULAR, 3);5
 			//setZTickMode(TICK_REGULAR, 5);6
-
 		}
 
 		/// <summary>
 		/// Make all GL2 calls allowing to build a cube with 6 separate quads.
 		/// Each quad is indexed from 0.0f to 5.0f using glPassThrough,
-		/// and may be traced in feedback mode when mode=<see cref="OpenTK.Graphics.RenderingMode.Feedback"/>
+		/// and may be traced in feedback mode when mode=<see cref="RenderingMode.Feedback"/>
 		/// </summary>
 		public void drawCube(RenderingMode mode)
 		{
@@ -597,6 +610,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 				{
 					GL.PassThrough(q);
 				}
+
 				GL.Begin(PrimitiveType.Quads);
 				for (int v = 0; v <= 3; v++)
 				{
@@ -613,7 +627,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 		internal void drawGridOnQuad(int quad)
 		{
 			// Draw X grid along X axis
-			if (((quad != 0) & (quad != 1)))
+			if ((quad != 0) & (quad != 1))
 			{
 				float[] xticks = _layout.XTicks();
 				for (int t = 0; t <= xticks.Length - 1; t++)
@@ -626,7 +640,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			}
 
 			// Draw Y grid along Y axis
-			if (((quad != 2) & (quad != 3)))
+			if ((quad != 2) & (quad != 3))
 			{
 				float[] yticks = _layout.YTicks();
 				for (int t = 0; t <= yticks.Length - 1; t++)
@@ -639,10 +653,10 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			}
 
 			// Draw Z grid along Z axis
-			if (((quad != 4) & (quad != 5)))
+			if ((quad != 4) & (quad != 5))
 			{
 				float[] zticks = _layout.ZTicks();
-				if ((zticks != null))
+				if (zticks != null)
 				{
 					for (int t = 0; t <= zticks.Length - 1; t++)
 					{
@@ -662,12 +676,12 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 
 		internal BoundingBox3d drawTicks(Camera cam, int axis, AxeDirection direction, Color color, Halign hal, Valign val)
 		{
-			int quad_0 = 0;
-			int quad_1 = 0;
 			float tickLength = 20.0f; // with respect to range
 			float axeLabelDist = 2.5f;
 			BoundingBox3d ticksTxtBounds = new BoundingBox3d();
 
+			int quad_0;
+			int quad_1;
 			// Retrieve the quads that intersect and create the selected axe
 			switch (direction)
 			{
@@ -746,7 +760,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			 || (direction == AxeDirection.AxeY && _layout.YAxeLabelDisplayed)
 			 || (direction == AxeDirection.AxeZ && _layout.ZAxeLabelDisplayed))
 			{
-				Coord3d labelPosition = new Coord3d(xlab, ylab, zlab);
+				var labelPosition = new Coord3d(xlab, ylab, zlab);
 				BoundingBox3d labelBounds = _txt.drawText(cam, axeLabel, labelPosition, Halign.CENTER, Valign.CENTER, color);
 				if (labelBounds != null)
 					ticksTxtBounds.Add(labelBounds);
@@ -761,12 +775,15 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 				case AxeDirection.AxeX:
 					ticks = _layout.XTicks();
 					break;
+
 				case AxeDirection.AxeY:
 					ticks = _layout.YTicks();
 					break;
+
 				case AxeDirection.AxeZ:
 					ticks = _layout.ZTicks();
 					break;
+
 				default:
 					throw new Exception("Unsupported axe direction");
 			}
@@ -779,10 +796,9 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			double xlab;
 			double ylab;
 			double zlab;
-			String tickLabel = "";
-
 			for (int t = 0; t < ticks.Length; t++)
 			{
+				string tickLabel;
 				// Shift the tick vector along the selected axis
 				// and set the tick length
 				switch (direction)
@@ -811,7 +827,8 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 					default:
 						throw new Exception("Unsupported axe direction");
 				}
-				Coord3d tickPosition = new Coord3d(xlab, ylab, zlab);
+
+				var tickPosition = new Coord3d(xlab, ylab, zlab);
 
 				if (_layout.TickLineDisplayed)
 				{
@@ -835,7 +852,9 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 
 			BoundingBox3d tickBounds = _txt.drawText(cam, tickLabel, tickPosition, hAlign, vAlign, color);
 			if (tickBounds != null)
+			{
 				ticksTxtBounds.Add(tickBounds);
+			}
 		}
 
 		public Valign layoutVertical(AxeDirection direction, Valign val, float zdir)
@@ -844,28 +863,39 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			if (val == null || val == Valign.DEFAULT)
 			{
 				if (direction == AxeDirection.AxeZ)
+				{
 					vAlign = Valign.CENTER;
+				}
 				else
 				{
 					if (zdir > 0)
+					{
 						vAlign = Valign.TOP;
+					}
 					else
+					{
 						vAlign = Valign.BOTTOM;
+					}
 				}
 			}
 			else
+			{
 				vAlign = val;
+			}
+
 			return vAlign;
 		}
 
 		public Halign layoutHorizontal(AxeDirection direction, Camera cam, Halign hal, Coord3d tickPosition)
 		{
-			Halign hAlign;
 			if (hal == null || hal == Halign.DEFAULT)
-				hAlign = cam.side(tickPosition) ? Halign.LEFT : Halign.RIGHT;
+			{
+				return cam.side(tickPosition) ? Halign.LEFT : Halign.RIGHT;
+			}
 			else
-				hAlign = hal;
-			return hAlign;
+			{
+				return hal;
+			}
 		}
 
 		public void drawTickLine(Color color, double xpos, double ypos, double zpos, double xlab, double ylab, double zlab)
@@ -891,7 +921,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			// keeps axes that are not at intersection of 2 quads
 			for (int a = 0; a <= na - 1; a++)
 			{
-				if ((_quadIsHidden[_axeXquads[a, 0]] ^ _quadIsHidden[_axeXquads[a, 1]]))
+				if (_quadIsHidden[_axeXquads[a, 0]] ^ _quadIsHidden[_axeXquads[a, 1]])
 				{
 					distAxeX[a] = new Vector3d(_axeXx[a, 0], _axeXy[a, 0], _axeXz[a, 0], _axeXx[a, 1], _axeXy[a, 1], _axeXz[a, 1]).distance(cam.Eye);
 				}
@@ -904,12 +934,9 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			// prefers the lower one
 			for (int a = 0; a <= na - 1; a++)
 			{
-				if ((distAxeX[a] < double.MaxValue))
+				if (distAxeX[a] < double.MaxValue && (Center.z > (_axeXz[a, 0] + _axeXz[a, 1]) / 2))
 				{
-					if ((Center.z > (_axeXz[a, 0] + _axeXz[a, 1]) / 2))
-					{
-						distAxeX[a] *= -1;
-					}
+					distAxeX[a] *= -1;
 				}
 			}
 
@@ -927,7 +954,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			// keeps axes that are not at intersection of 2 quads
 			for (int a = 0; a <= na - 1; a++)
 			{
-				if ((_quadIsHidden[_axeYquads[a, 0]] ^ _quadIsHidden[_axeYquads[a, 1]]))
+				if (_quadIsHidden[_axeYquads[a, 0]] ^ _quadIsHidden[_axeYquads[a, 1]])
 				{
 					distAxeY[a] = new Vector3d(_axeYx[a, 0], _axeYy[a, 0], _axeYz[a, 0], _axeYx[a, 1], _axeYy[a, 1], _axeYz[a, 1]).distance(cam.Eye);
 				}
@@ -940,12 +967,9 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			// prefers the lower one
 			for (int a = 0; a <= na - 1; a++)
 			{
-				if ((distAxeY[a] < double.MaxValue))
+				if (distAxeY[a] < double.MaxValue && Center.z > (_axeYz[a, 0] + _axeYz[a, 1]) / 2)
 				{
-					if ((Center.z > (_axeYz[a, 0] + _axeYz[a, 1]) / 2))
-					{
-						distAxeY[a] *= -1;
-					}
+					distAxeY[a] *= -1;
 				}
 			}
 
@@ -963,7 +987,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			// keeps axes that are not at intersection of 2 quads
 			for (int a = 0; a <= na - 1; a++)
 			{
-				if ((_quadIsHidden[_axeZquads[a, 0]] ^ _quadIsHidden[_axeZquads[a, 1]]))
+				if (_quadIsHidden[_axeZquads[a, 0]] ^ _quadIsHidden[_axeZquads[a, 1]])
 				{
 					distAxeZ[a] = new Vector3d(_axeZx[a, 0], _axeZy[a, 0], _axeZz[a, 0], _axeZx[a, 1], _axeZy[a, 1], _axeZz[a, 1]).distance(cam.Eye);
 				}
@@ -976,9 +1000,9 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			// prefers the lower one
 			for (int a = 0; a <= na - 1; a++)
 			{
-				if ((distAxeZ[a] < double.MaxValue))
+				if (distAxeZ[a] < double.MaxValue)
 				{
-					Coord3d axeCEnter = new Coord3d((_axeZx[a, 0] + _axeZx[a, 1]) / 2, (_axeZy[a, 0] + _axeZy[a, 1]) / 2, (_axeZz[a, 0] + _axeZz[a, 1]) / 2);
+					var axeCEnter = new Coord3d((_axeZx[a, 0] + _axeZx[a, 1]) / 2, (_axeZy[a, 0] + _axeZy[a, 1]) / 2, (_axeZz[a, 0] + _axeZz[a, 1]) / 2);
 					if (!cam.side(axeCEnter))
 					{
 						distAxeZ[a] *= -1;
@@ -1011,6 +1035,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 		{
 			bool[] status = new bool[6];
 			Coord3d se = cam.Eye.divide(_scale);
+
 			if (se.x <= _center.x)
 			{
 				status[0] = false;
@@ -1021,6 +1046,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 				status[0] = true;
 				status[1] = false;
 			}
+
 			if (se.y <= _center.y)
 			{
 				status[2] = false;
@@ -1031,6 +1057,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 				status[2] = true;
 				status[3] = false;
 			}
+
 			if (se.z <= _center.z)
 			{
 				status[4] = false;
@@ -1041,6 +1068,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 				status[4] = true;
 				status[5] = false;
 			}
+
 			return status;
 		}
 
@@ -1055,7 +1083,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			for (int i = 0; i <= veclength - 1; i++)
 			{
 				System.Diagnostics.Debug.WriteLine(" " + buffer[size - count]);
-				count = count - 1;
+				count--;
 			}
 			System.Diagnostics.Debug.WriteLine("");
 			return count;

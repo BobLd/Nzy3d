@@ -24,13 +24,13 @@ namespace Nzy3d.Plot3D.Primitives
 	/// </ul>
 	/// @author Martin Pernollet
 	/// </summary>
-	/// <remarks></remarks>
 	public class Point : AbstractDrawable, ISingleColorable, ISortableDraw
 	{
 		internal Coord3d _xyz;
 		internal Color _rgb;
 
 		internal float _width;
+
 		/// <summary>
 		/// Initialize a point at the origin, with a white color and a width of 1.
 		/// </summary>
@@ -61,7 +61,6 @@ namespace Nzy3d.Plot3D.Primitives
 		/// <param name="xyz">Point coordinates</param>
 		/// <param name="rgb">Point color</param>
 		/// <param name="width">Point width</param>
-		/// <remarks></remarks>
 		public Point(Coord3d xyz, Color rgb, float width)
 		{
 			_bbox = new BoundingBox3d();
@@ -73,10 +72,7 @@ namespace Nzy3d.Plot3D.Primitives
 
 		public override void Draw(Rendering.View.Camera cam)
 		{
-			if ((_transform != null))
-			{
-				_transform.Execute();
-			}
+			_transform?.Execute();
 			GL.PointSize(_width);
 			GL.Begin(PrimitiveType.Points);
 			GL.Color4(_rgb.r, _rgb.g, _rgb.b, _rgb.a);

@@ -1,6 +1,6 @@
 namespace Nzy3d.Maths
 {
-    public class PolygonArray
+	public class PolygonArray
 	{
 		internal double[] _x;
 		internal double[] _y;

@@ -35,16 +35,19 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 				Point_dt point_dt = new Point_dt(x[i], y[i], z_as_fxy[i, i]);
 				_triangulator.insertPoint(point_dt);
 			}
-			List<Polygon> polygons = new List<Polygon>();
+
+			var polygons = new List<Polygon>();
 			IEnumerator<Triangle_dt> trianglesIter = _triangulator.trianglesIterator();
-			while ((trianglesIter.MoveNext()))
+
+			while (trianglesIter.MoveNext())
 			{
 				Triangle_dt triangle = trianglesIter.Current;
 				// isHalfplane means a degenerated triangle 
-				if ((triangle.isHalfplane))
+				if (triangle.isHalfplane)
 				{
 					continue;
 				}
+
 				Polygon newPolygon = buildPolygonFrom(triangle);
 				polygons.Add(newPolygon);
 			}

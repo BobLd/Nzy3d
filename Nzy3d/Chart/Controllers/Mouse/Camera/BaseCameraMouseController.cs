@@ -5,7 +5,7 @@ using Nzy3d.Maths;
 
 namespace Nzy3d.Chart.Controllers.Mouse.Camera
 {
-	public class BaseCameraMouseController : AbstractCameraController, IBaseMouseListener, IBaseMouseMotionListener, IBaseMouseWheelListener
+    public class BaseCameraMouseController : AbstractCameraController, IBaseMouseListener, IBaseMouseMotionListener, IBaseMouseWheelListener
 	{
 		protected Coord2d _prevMouse;
 		protected CameraThreadController _threadController;
@@ -37,11 +37,8 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 				c.Canvas.removeMouseMotionListener(this);
 				c.Canvas.removeMouseWheelListener(this);
 			}
-			if ((!((_threadController == null))))
-			{
-				_threadController.Dispose();
-				// Instead of threadController.stop();
-			}
+
+			_threadController?.Dispose();
 			base.Dispose();
 		}
 

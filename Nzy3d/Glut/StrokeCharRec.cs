@@ -7,6 +7,7 @@ namespace Nzy3d.Glut
 		public float center;
 
 		public float right;
+
 		public StrokeCharRec(int num_strokes, StrokeRec[] stroke, float center, float right)
 		{
 			this.num_strokes = num_strokes;

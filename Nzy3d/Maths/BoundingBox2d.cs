@@ -116,7 +116,7 @@ namespace Nzy3d.Maths
 		/// <remarks>Current object is not modified, a new one is created.</remarks>
 		public BoundingBox2d scale(Coord2d factors)
 		{
-			BoundingBox2d b = new BoundingBox2d();
+			var b = new BoundingBox2d();
 			b.m_xmax = m_xmax * factors.x;
 			b.m_xmin = m_xmin * factors.x;
 			b.m_ymax = m_ymax * factors.y;
@@ -152,31 +152,36 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Bounding box min x value
 		/// </summary>
-		public double xmin {
+		public double xmin
+		{
 			get { return m_xmin; }
 		}
 
 		/// <summary>
 		/// Bounding box max x value
 		/// </summary>
-		public double xmax {
+		public double xmax
+		{
 			get { return m_xmax; }
 		}
 
 		/// <summary>
 		/// Bounding box min y value
 		/// </summary>
-		public double ymin {
+		public double ymin
+		{
 			get { return m_ymin; }
 		}
 
 		/// <summary>
 		/// Bounding box max y value
 		/// </summary>
-		public double ymax {
+		public double ymax
+		{
 			get { return m_ymax; }
 		}
 
+		/// <inheritdoc/>
 		public override string ToString()
 		{
 			return "(BoundingBox2d)" + xmin + "<=x<=" + xmax + " | " + ymin + "<=y<=" + ymax;

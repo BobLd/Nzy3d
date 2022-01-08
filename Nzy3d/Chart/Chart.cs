@@ -10,7 +10,6 @@ namespace Nzy3d.Chart
 {
     public class Chart
 	{
-
 		protected ChartScene _scene;
 		protected View _view;
 		protected ICanvas _canvas;
@@ -19,8 +18,6 @@ namespace Nzy3d.Chart
 		protected Coord3d _previousViewPointProfile;
 		protected List<AbstractCameraController> _controllers;
 		//protected  capabilities As GLCapabilities
-
-
 
 		public static Quality DEFAULT_QUALITY = Quality.Intermediate;
 		public Chart(ICanvas canvas) : this(canvas, DEFAULT_QUALITY)
@@ -41,9 +38,8 @@ namespace Nzy3d.Chart
 			_view.BackgroundColor = Colors.Color.WHITE;
 		}
 
-
 		/// <summary>
-		///     Provides a concrete scene. This method shoud be overriden to inject a custom scene,
+		/// Provides a concrete scene. This method shoud be overriden to inject a custom scene,
 		/// which may rely on several views, and could enhance manipulation of scene graph.
 		/// </summary>
 		protected virtual ChartScene initializeScene(bool graphsort)
@@ -72,7 +68,7 @@ namespace Nzy3d.Chart
 
 		//public System.Drawing.Bitmap Screenshot()
 		//{
-  //          return _canvas.Screenshot();
+		//          return _canvas.Screenshot();
 		//}
 
 		public void updateProjectionsAndRender()
@@ -102,7 +98,8 @@ namespace Nzy3d.Chart
 
 		public void clearControllerList()
 		{
-			foreach (AbstractCameraController controller in _controllers) {
+			foreach (AbstractCameraController controller in _controllers)
+			{
 				controller.Unregister(this);
 			}
 			_controllers.Clear();
@@ -110,7 +107,7 @@ namespace Nzy3d.Chart
 
 		public IEnumerable<AbstractCameraController> getControllers()
 		{
-            return _controllers;
+			return _controllers;
 		}
 
 		public void addDrawable(AbstractDrawable drawable)
@@ -153,43 +150,54 @@ namespace Nzy3d.Chart
 			_view.removeRenderer2d(renderer2d);
 		}
 
-		public View View {
+		public View View
+		{
 			get { return _view; }
 		}
 
-		public ChartScene Scene {
+		public ChartScene Scene
+		{
 			get { return _scene; }
 		}
 
-		public ICanvas Canvas {
+		public ICanvas Canvas
+		{
 			get { return _canvas; }
 		}
 
-		public IAxeLayout AxeLayout {
+		public IAxeLayout AxeLayout
+		{
 			get { return _view.Axe.getLayout(); }
 		}
 
-		public bool AxeDisplayed {
-			set {
+		public bool AxeDisplayed
+		{
+			set
+			{
 				_view.AxeBoxDisplayed = value;
 				_view.Shoot();
 			}
 		}
 
-		public Coord3d Viewpoint {
+		public Coord3d Viewpoint
+		{
 			get { return _view.ViewPoint; }
-			set {
+			set
+			{
 				_view.ViewPoint = value;
 				_view.Shoot();
 			}
 		}
 
-		public ViewPositionMode ViewMode {
+		public ViewPositionMode ViewMode
+		{
 			get { return _view.ViewMode; }
-			set {
+			set
+			{
 				// Store current view mode and view point in memory
 				ViewPositionMode previous = View.ViewMode;
-				switch (previous) {
+				switch (previous)
+				{
 					case ViewPositionMode.FREE:
 						_previousViewPointFree = View.ViewPoint;
 						break;
@@ -204,15 +212,16 @@ namespace Nzy3d.Chart
 				}
 				// Set new view mode and former view point
 				_view.ViewMode = value;
-				switch (previous) {
+				switch (previous)
+				{
 					case ViewPositionMode.FREE:
 						_view.ViewPoint = ((_previousViewPointFree == null) ? View.DEFAULT_VIEW.Clone() : _previousViewPointFree);
 						break;
 					case ViewPositionMode.PROFILE:
-                        _view.ViewPoint = ((_previousViewPointTop == null) ? View.DEFAULT_VIEW.Clone() : _previousViewPointTop);
+						_view.ViewPoint = ((_previousViewPointTop == null) ? View.DEFAULT_VIEW.Clone() : _previousViewPointTop);
 						break;
 					case ViewPositionMode.TOP:
-                        _view.ViewPoint = ((_previousViewPointProfile == null) ? View.DEFAULT_VIEW.Clone() : _previousViewPointProfile);
+						_view.ViewPoint = ((_previousViewPointProfile == null) ? View.DEFAULT_VIEW.Clone() : _previousViewPointProfile);
 						break;
 					default:
 						throw new Exception("Unsupported ViewPositionMode :" + previous);
@@ -221,7 +230,8 @@ namespace Nzy3d.Chart
 			}
 		}
 
-		public Scale Scale {
+		public Scale Scale
+		{
 			get { return new Scale(_view.Bounds.zmin, _view.Bounds.zmax); }
 			set { _view.setScale(value, true); }
 		}
@@ -235,9 +245,7 @@ namespace Nzy3d.Chart
 		{
 			return _canvas.RendererHeight - y;
 		}
-
 	}
-
 }
 
 //=======================================================

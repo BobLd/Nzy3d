@@ -4,19 +4,14 @@ namespace Nzy3d.Events
 {
 	public class ViewModeChangedEventArgs : ObjectEventArgs
 	{
-		private ViewPositionMode _mode;
-		public ViewModeChangedEventArgs(object objectChanged, ViewPositionMode mode) : base(objectChanged)
+        public ViewModeChangedEventArgs(object objectChanged, ViewPositionMode mode) : base(objectChanged)
 		{
-			_mode = mode;
+			Mode = mode;
 		}
 
-		public ViewPositionMode Mode
-		{
-			get { return _mode; }
-		}
-	}
+        public ViewPositionMode Mode { get; }
+    }
 }
-
 
 //=======================================================
 //Service provided by Telerik (www.telerik.com)

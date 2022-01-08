@@ -16,8 +16,6 @@ namespace Nzy3d.Maths
 		/// </param>
 		/// <param name="num">Number to convert to string</param>
 		/// <param name="precision">Number of digits (meaning depends on <paramref name="parseMode"/> value)</param>
-		/// <returns></returns>
-		/// <remarks></remarks>
 		public static string num2str(char parseMode, double num, int precision)
 		{
 			return string.Format("{0:" + parseMode + precision + "}", num);
@@ -28,8 +26,6 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="parseMode"></param>
 		/// <param name="num"></param>
-		/// <returns></returns>
-		/// <remarks></remarks>
 		public static string num2str(char parseMode, double num)
 		{
 			return string.Format("{0:" + parseMode + "}", num);
@@ -54,24 +50,24 @@ namespace Nzy3d.Maths
 			return num2str(Convert.ToChar("g"), num);
 		}
 
-		public static string dat2str(System.DateTime m_date, string format)
+		public static string dat2str(DateTime m_date, string format)
 		{
 			return m_date.ToString(format);
 		}
 
-		public static string dat2str(System.DateTime m_date)
+		public static string dat2str(DateTime m_date)
 		{
 			return dat2str(m_date, "dd/MM/yyyy HH:mm:ss");
 		}
 
-		public static long dat2num(System.DateTime m_date)
+		public static long dat2num(DateTime m_date)
 		{
 			return m_date.Ticks;
 		}
 
-		public static System.DateTime num2date(long m_ticks)
+		public static DateTime num2date(long m_ticks)
 		{
-			return new System.DateTime(m_ticks);
+			return new DateTime(m_ticks);
 		}
 
 		public static string blanks(int length)
@@ -142,7 +138,6 @@ namespace Nzy3d.Maths
 		/// <param name="min">Min value</param>
 		/// <param name="max">Max value</param>
 		/// <param name="nstep">Number of steps (including min and max values)</param>
-		/// <returns></returns>
 		/// <remarks>Algorithm ensure first and last values of array are equal to min and max value without any rounding error.</remarks>
 		public static double[] vector(double min, double max, int nstep)
 		{
@@ -166,7 +161,6 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="min">Min value</param>
 		/// <param name="max">Max value</param>
-		/// <returns></returns>
 		/// <remarks>Algorithm ensure first and last values of array are equal to min and max value without any rounding error.</remarks>
 		public static double[] vector(double min, double max)
 		{
@@ -180,7 +174,6 @@ namespace Nzy3d.Maths
 		/// <param name="min">Min value</param>
 		/// <param name="max">Max value</param>
 		/// <param name="nstep">Number of steps (including min and max values)</param>
-		/// <returns></returns>
 		/// <remarks>Algorithm ensure first and last values of array are equal to min and max value without any rounding error.</remarks>
 		public static int[] vector(int min, int max, int nstep)
 		{
@@ -204,19 +197,18 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="min">Min value</param>
 		/// <param name="max">Max value</param>
-		/// <returns></returns>
 		/// <remarks>Algorithm ensure first and last values of array are equal to min and max value without any rounding error.</remarks>
 		public static int[] vector(int min, int max)
 		{
 			return vector(min, max, Math.Abs(max - min) + 1);
 		}
 
-		public static System.DateTime min(System.DateTime[] dates)
+		public static DateTime min(DateTime[] dates)
 		{
 			return DateTime.MinValue;
 		}
 
-		public static System.DateTime max(System.DateTime[] dates)
+		public static DateTime max(DateTime[] dates)
 		{
 			return DateTime.MaxValue;
 		}

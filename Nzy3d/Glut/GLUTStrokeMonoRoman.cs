@@ -1,68 +1,67 @@
 namespace Nzy3d.Glut
 {
-
-    public class GLUTStrokeMonoRoman
+	public class GLUTStrokeMonoRoman
 	{
 		// char: 33 '!' */
 
-		static CoordRec[] char33_stroke0 = {
+		static readonly CoordRec[] char33_stroke0 = {
 			new CoordRec(52.381F, 100F),
 			new CoordRec(52.381F, 33.3333F)
-
 		};
-		static CoordRec[] char33_stroke1 = {
+
+		static readonly CoordRec[] char33_stroke1 = {
 			new CoordRec(52.381F, 9.5238F),
 			new CoordRec(47.6191F, 4.7619F),
 			new CoordRec(52.381F, 0F),
 			new CoordRec(57.1429F, 4.7619F),
 			new CoordRec(52.381F, 9.5238F)
-
 		};
-		static StrokeRec[] char33 = {
+
+		static readonly StrokeRec[] char33 = {
 			new StrokeRec(2, char33_stroke0),
 			new StrokeRec(5, char33_stroke1)
-
 		};
+
 		// char: 34 '"' */
 
-		static CoordRec[] char34_stroke0 = {
+		static readonly CoordRec[] char34_stroke0 = {
 			new CoordRec(33.3334F, 100F),
 			new CoordRec(33.3334F, 66.6667F)
-
 		};
-		static CoordRec[] char34_stroke1 = {
+
+		static readonly CoordRec[] char34_stroke1 = {
 			new CoordRec(71.4286F, 100F),
 			new CoordRec(71.4286F, 66.6667F)
-
 		};
-		static StrokeRec[] char34 = {
+
+		static readonly StrokeRec[] char34 = {
 			new StrokeRec(2, char34_stroke0),
 			new StrokeRec(2, char34_stroke1)
-
 		};
+
 		// char: 35 '#' */
 
-		static CoordRec[] char35_stroke0 = {
+		static readonly CoordRec[] char35_stroke0 = {
 			new CoordRec(54.7619F, 119.048F),
 			new CoordRec(21.4286F, -33.3333F)
 
 		};
-		static CoordRec[] char35_stroke1 = {
+		static readonly CoordRec[] char35_stroke1 = {
 			new CoordRec(83.3334F, 119.048F),
 			new CoordRec(50F, -33.3333F)
 
 		};
-		static CoordRec[] char35_stroke2 = {
+		static readonly CoordRec[] char35_stroke2 = {
 			new CoordRec(21.4286F, 57.1429F),
 			new CoordRec(88.0952F, 57.1429F)
 
 		};
-		static CoordRec[] char35_stroke3 = {
+		static readonly CoordRec[] char35_stroke3 = {
 			new CoordRec(16.6667F, 28.5714F),
 			new CoordRec(83.3334F, 28.5714F)
 
 		};
-		static StrokeRec[] char35 = {
+		static readonly StrokeRec[] char35 = {
 			new StrokeRec(2, char35_stroke0),
 			new StrokeRec(2, char35_stroke1),
 			new StrokeRec(2, char35_stroke2),
@@ -71,17 +70,17 @@ namespace Nzy3d.Glut
 		};
 		// char: 36 '$' */
 
-		static CoordRec[] char36_stroke0 = {
+		static readonly CoordRec[] char36_stroke0 = {
 			new CoordRec(42.8571F, 119.048F),
 			new CoordRec(42.8571F, -19.0476F)
 
 		};
-		static CoordRec[] char36_stroke1 = {
+		static readonly CoordRec[] char36_stroke1 = {
 			new CoordRec(61.9047F, 119.048F),
 			new CoordRec(61.9047F, -19.0476F)
 
 		};
-		static CoordRec[] char36_stroke2 = {
+		static readonly CoordRec[] char36_stroke2 = {
 			new CoordRec(85.7143F, 85.7143F),
 			new CoordRec(76.1905F, 95.2381F),
 			new CoordRec(61.9047F, 100F),
@@ -104,7 +103,7 @@ namespace Nzy3d.Glut
 			new CoordRec(19.0476F, 14.2857F)
 
 		};
-		static StrokeRec[] char36 = {
+		static readonly StrokeRec[] char36 = {
 			new StrokeRec(2, char36_stroke0),
 			new StrokeRec(2, char36_stroke1),
 			new StrokeRec(20, char36_stroke2)
@@ -112,12 +111,12 @@ namespace Nzy3d.Glut
 		};
 		// char: 37 '%' */
 
-		static CoordRec[] char37_stroke0 = {
+		static readonly CoordRec[] char37_stroke0 = {
 			new CoordRec(95.2381F, 100F),
 			new CoordRec(9.5238F, 0F)
 
 		};
-		static CoordRec[] char37_stroke1 = {
+		static readonly CoordRec[] char37_stroke1 = {
 			new CoordRec(33.3333F, 100F),
 			new CoordRec(42.8571F, 90.4762F),
 			new CoordRec(42.8571F, 80.9524F),
@@ -136,7 +135,7 @@ namespace Nzy3d.Glut
 			new CoordRec(95.2381F, 100F)
 
 		};
-		static CoordRec[] char37_stroke2 = {
+		static readonly CoordRec[] char37_stroke2 = {
 			new CoordRec(76.1905F, 33.3333F),
 			new CoordRec(66.6667F, 28.5714F),
 			new CoordRec(61.9048F, 19.0476F),
@@ -150,7 +149,7 @@ namespace Nzy3d.Glut
 			new CoordRec(76.1905F, 33.3333F)
 
 		};
-		static StrokeRec[] char37 = {
+		static readonly StrokeRec[] char37 = {
 			new StrokeRec(2, char37_stroke0),
 			new StrokeRec(16, char37_stroke1),
 			new StrokeRec(11, char37_stroke2)
@@ -158,7 +157,7 @@ namespace Nzy3d.Glut
 		};
 		// char: 38 '&' */
 
-		static CoordRec[] char38_stroke0 = {
+		static readonly CoordRec[] char38_stroke0 = {
 			new CoordRec(100F, 57.1429F),
 			new CoordRec(100F, 61.9048F),
 			new CoordRec(95.2381F, 66.6667F),
@@ -196,19 +195,19 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char38 = { new StrokeRec(34, char38_stroke0) };
+		static readonly StrokeRec[] char38 = { new StrokeRec(34, char38_stroke0) };
 		// char: 39 ''' */
 
-		static CoordRec[] char39_stroke0 = {
+		static readonly CoordRec[] char39_stroke0 = {
 			new CoordRec(52.381F, 100F),
 			new CoordRec(52.381F, 66.6667F)
 
 		};
 
-		static StrokeRec[] char39 = { new StrokeRec(2, char39_stroke0) };
+		static readonly StrokeRec[] char39 = { new StrokeRec(2, char39_stroke0) };
 		// char: 40 '(' */
 
-		static CoordRec[] char40_stroke0 = {
+		static readonly CoordRec[] char40_stroke0 = {
 			new CoordRec(69.0476F, 119.048F),
 			new CoordRec(59.5238F, 109.524F),
 			new CoordRec(50F, 95.2381F),
@@ -222,10 +221,10 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char40 = { new StrokeRec(10, char40_stroke0) };
+		static readonly StrokeRec[] char40 = { new StrokeRec(10, char40_stroke0) };
 		// char: 41 ')' */
 
-		static CoordRec[] char41_stroke0 = {
+		static readonly CoordRec[] char41_stroke0 = {
 			new CoordRec(35.7143F, 119.048F),
 			new CoordRec(45.2381F, 109.524F),
 			new CoordRec(54.7619F, 95.2381F),
@@ -239,25 +238,25 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char41 = { new StrokeRec(10, char41_stroke0) };
+		static readonly StrokeRec[] char41 = { new StrokeRec(10, char41_stroke0) };
 		// char: 42 '*' */
 
-		static CoordRec[] char42_stroke0 = {
+		static readonly CoordRec[] char42_stroke0 = {
 			new CoordRec(52.381F, 71.4286F),
 			new CoordRec(52.381F, 14.2857F)
 
 		};
-		static CoordRec[] char42_stroke1 = {
+		static readonly CoordRec[] char42_stroke1 = {
 			new CoordRec(28.5715F, 57.1429F),
 			new CoordRec(76.1905F, 28.5714F)
 
 		};
-		static CoordRec[] char42_stroke2 = {
+		static readonly CoordRec[] char42_stroke2 = {
 			new CoordRec(76.1905F, 57.1429F),
 			new CoordRec(28.5715F, 28.5714F)
 
 		};
-		static StrokeRec[] char42 = {
+		static readonly StrokeRec[] char42 = {
 			new StrokeRec(2, char42_stroke0),
 			new StrokeRec(2, char42_stroke1),
 			new StrokeRec(2, char42_stroke2)
@@ -265,24 +264,24 @@ namespace Nzy3d.Glut
 		};
 		// char: 43 '+' */
 
-		static CoordRec[] char43_stroke0 = {
+		static readonly CoordRec[] char43_stroke0 = {
 			new CoordRec(52.3809F, 85.7143F),
 			new CoordRec(52.3809F, 0F)
 
 		};
-		static CoordRec[] char43_stroke1 = {
+		static readonly CoordRec[] char43_stroke1 = {
 			new CoordRec(9.5238F, 42.8571F),
 			new CoordRec(95.2381F, 42.8571F)
 
 		};
-		static StrokeRec[] char43 = {
+		static readonly StrokeRec[] char43 = {
 			new StrokeRec(2, char43_stroke0),
 			new StrokeRec(2, char43_stroke1)
 
 		};
 		// char: 44 ',' */
 
-		static CoordRec[] char44_stroke0 = {
+		static readonly CoordRec[] char44_stroke0 = {
 			new CoordRec(57.1429F, 4.7619F),
 			new CoordRec(52.381F, 0F),
 			new CoordRec(47.6191F, 4.7619F),
@@ -294,19 +293,19 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char44 = { new StrokeRec(8, char44_stroke0) };
+		static readonly StrokeRec[] char44 = { new StrokeRec(8, char44_stroke0) };
 		// char: 45 '-' */
 
-		static CoordRec[] char45_stroke0 = {
+		static readonly CoordRec[] char45_stroke0 = {
 			new CoordRec(9.5238F, 42.8571F),
 			new CoordRec(95.2381F, 42.8571F)
 
 		};
 
-		static StrokeRec[] char45 = { new StrokeRec(2, char45_stroke0) };
+		static readonly StrokeRec[] char45 = { new StrokeRec(2, char45_stroke0) };
 		// char: 46 '.' */
 
-		static CoordRec[] char46_stroke0 = {
+		static readonly CoordRec[] char46_stroke0 = {
 			new CoordRec(52.381F, 9.5238F),
 			new CoordRec(47.6191F, 4.7619F),
 			new CoordRec(52.381F, 0F),
@@ -315,19 +314,19 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char46 = { new StrokeRec(5, char46_stroke0) };
+		static readonly StrokeRec[] char46 = { new StrokeRec(5, char46_stroke0) };
 		// char: 47 '/' */
 
-		static CoordRec[] char47_stroke0 = {
+		static readonly CoordRec[] char47_stroke0 = {
 			new CoordRec(19.0476F, -14.2857F),
 			new CoordRec(85.7143F, 100F)
 
 		};
 
-		static StrokeRec[] char47 = { new StrokeRec(2, char47_stroke0) };
+		static readonly StrokeRec[] char47 = { new StrokeRec(2, char47_stroke0) };
 		// char: 48 '0' */
 
-		static CoordRec[] char48_stroke0 = {
+		static readonly CoordRec[] char48_stroke0 = {
 			new CoordRec(47.619F, 100F),
 			new CoordRec(33.3333F, 95.2381F),
 			new CoordRec(23.8095F, 80.9524F),
@@ -348,10 +347,10 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char48 = { new StrokeRec(17, char48_stroke0) };
+		static readonly StrokeRec[] char48 = { new StrokeRec(17, char48_stroke0) };
 		// char: 49 '1' */
 
-		static CoordRec[] char49_stroke0 = {
+		static readonly CoordRec[] char49_stroke0 = {
 			new CoordRec(40.4762F, 80.9524F),
 			new CoordRec(50F, 85.7143F),
 			new CoordRec(64.2857F, 100F),
@@ -359,10 +358,10 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char49 = { new StrokeRec(4, char49_stroke0) };
+		static readonly StrokeRec[] char49 = { new StrokeRec(4, char49_stroke0) };
 		// char: 50 '2' */
 
-		static CoordRec[] char50_stroke0 = {
+		static readonly CoordRec[] char50_stroke0 = {
 			new CoordRec(23.8095F, 76.1905F),
 			new CoordRec(23.8095F, 80.9524F),
 			new CoordRec(28.5714F, 90.4762F),
@@ -380,10 +379,10 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char50 = { new StrokeRec(14, char50_stroke0) };
+		static readonly StrokeRec[] char50 = { new StrokeRec(14, char50_stroke0) };
 		// char: 51 '3' */
 
-		static CoordRec[] char51_stroke0 = {
+		static readonly CoordRec[] char51_stroke0 = {
 			new CoordRec(28.5714F, 100F),
 			new CoordRec(80.9524F, 100F),
 			new CoordRec(52.3809F, 61.9048F),
@@ -402,28 +401,28 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char51 = { new StrokeRec(15, char51_stroke0) };
+		static readonly StrokeRec[] char51 = { new StrokeRec(15, char51_stroke0) };
 		// char: 52 '4' */
 
-		static CoordRec[] char52_stroke0 = {
+		static readonly CoordRec[] char52_stroke0 = {
 			new CoordRec(64.2857F, 100F),
 			new CoordRec(16.6667F, 33.3333F),
 			new CoordRec(88.0952F, 33.3333F)
 
 		};
-		static CoordRec[] char52_stroke1 = {
+		static readonly CoordRec[] char52_stroke1 = {
 			new CoordRec(64.2857F, 100F),
 			new CoordRec(64.2857F, 0F)
 
 		};
-		static StrokeRec[] char52 = {
+		static readonly StrokeRec[] char52 = {
 			new StrokeRec(3, char52_stroke0),
 			new StrokeRec(2, char52_stroke1)
 
 		};
 		// char: 53 '5' */
 
-		static CoordRec[] char53_stroke0 = {
+		static readonly CoordRec[] char53_stroke0 = {
 			new CoordRec(76.1905F, 100F),
 			new CoordRec(28.5714F, 100F),
 			new CoordRec(23.8095F, 57.1429F),
@@ -444,10 +443,10 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char53 = { new StrokeRec(17, char53_stroke0) };
+		static readonly StrokeRec[] char53 = { new StrokeRec(17, char53_stroke0) };
 		// char: 54 '6' */
 
-		static CoordRec[] char54_stroke0 = {
+		static readonly CoordRec[] char54_stroke0 = {
 			new CoordRec(78.5714F, 85.7143F),
 			new CoordRec(73.8096F, 95.2381F),
 			new CoordRec(59.5238F, 100F),
@@ -474,27 +473,27 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char54 = { new StrokeRec(23, char54_stroke0) };
+		static readonly StrokeRec[] char54 = { new StrokeRec(23, char54_stroke0) };
 		// char: 55 '7' */
 
-		static CoordRec[] char55_stroke0 = {
+		static readonly CoordRec[] char55_stroke0 = {
 			new CoordRec(85.7143F, 100F),
 			new CoordRec(38.0952F, 0F)
 
 		};
-		static CoordRec[] char55_stroke1 = {
+		static readonly CoordRec[] char55_stroke1 = {
 			new CoordRec(19.0476F, 100F),
 			new CoordRec(85.7143F, 100F)
 
 		};
-		static StrokeRec[] char55 = {
+		static readonly StrokeRec[] char55 = {
 			new StrokeRec(2, char55_stroke0),
 			new StrokeRec(2, char55_stroke1)
 
 		};
 		// char: 56 '8' */
 
-		static CoordRec[] char56_stroke0 = {
+		static readonly CoordRec[] char56_stroke0 = {
 			new CoordRec(42.8571F, 100F),
 			new CoordRec(28.5714F, 95.2381F),
 			new CoordRec(23.8095F, 85.7143F),
@@ -527,10 +526,10 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char56 = { new StrokeRec(29, char56_stroke0) };
+		static readonly StrokeRec[] char56 = { new StrokeRec(29, char56_stroke0) };
 		// char: 57 '9' */
 
-		static CoordRec[] char57_stroke0 = {
+		static readonly CoordRec[] char57_stroke0 = {
 			new CoordRec(83.3334F, 66.6667F),
 			new CoordRec(78.5714F, 52.381F),
 			new CoordRec(69.0476F, 42.8571F),
@@ -557,10 +556,10 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char57 = { new StrokeRec(23, char57_stroke0) };
+		static readonly StrokeRec[] char57 = { new StrokeRec(23, char57_stroke0) };
 		// char: 58 ':' */
 
-		static CoordRec[] char58_stroke0 = {
+		static readonly CoordRec[] char58_stroke0 = {
 			new CoordRec(52.381F, 66.6667F),
 			new CoordRec(47.6191F, 61.9048F),
 			new CoordRec(52.381F, 57.1429F),
@@ -568,7 +567,7 @@ namespace Nzy3d.Glut
 			new CoordRec(52.381F, 66.6667F)
 
 		};
-		static CoordRec[] char58_stroke1 = {
+		static readonly CoordRec[] char58_stroke1 = {
 			new CoordRec(52.381F, 9.5238F),
 			new CoordRec(47.6191F, 4.7619F),
 			new CoordRec(52.381F, 0F),
@@ -576,14 +575,14 @@ namespace Nzy3d.Glut
 			new CoordRec(52.381F, 9.5238F)
 
 		};
-		static StrokeRec[] char58 = {
+		static readonly StrokeRec[] char58 = {
 			new StrokeRec(5, char58_stroke0),
 			new StrokeRec(5, char58_stroke1)
 
 		};
 		// char: 59 ';' */
 
-		static CoordRec[] char59_stroke0 = {
+		static readonly CoordRec[] char59_stroke0 = {
 			new CoordRec(52.381F, 66.6667F),
 			new CoordRec(47.6191F, 61.9048F),
 			new CoordRec(52.381F, 57.1429F),
@@ -591,7 +590,7 @@ namespace Nzy3d.Glut
 			new CoordRec(52.381F, 66.6667F)
 
 		};
-		static CoordRec[] char59_stroke1 = {
+		static readonly CoordRec[] char59_stroke1 = {
 			new CoordRec(57.1429F, 4.7619F),
 			new CoordRec(52.381F, 0F),
 			new CoordRec(47.6191F, 4.7619F),
@@ -602,51 +601,51 @@ namespace Nzy3d.Glut
 			new CoordRec(47.6191F, -19.0476F)
 
 		};
-		static StrokeRec[] char59 = {
+		static readonly StrokeRec[] char59 = {
 			new StrokeRec(5, char59_stroke0),
 			new StrokeRec(8, char59_stroke1)
 
 		};
 		// char: 60 '<' */
 
-		static CoordRec[] char60_stroke0 = {
+		static readonly CoordRec[] char60_stroke0 = {
 			new CoordRec(90.4762F, 85.7143F),
 			new CoordRec(14.2857F, 42.8571F),
 			new CoordRec(90.4762F, 0F)
 
 		};
 
-		static StrokeRec[] char60 = { new StrokeRec(3, char60_stroke0) };
+		static readonly StrokeRec[] char60 = { new StrokeRec(3, char60_stroke0) };
 		// char: 61 '=' */
 
-		static CoordRec[] char61_stroke0 = {
+		static readonly CoordRec[] char61_stroke0 = {
 			new CoordRec(9.5238F, 57.1429F),
 			new CoordRec(95.2381F, 57.1429F)
 
 		};
-		static CoordRec[] char61_stroke1 = {
+		static readonly CoordRec[] char61_stroke1 = {
 			new CoordRec(9.5238F, 28.5714F),
 			new CoordRec(95.2381F, 28.5714F)
 
 		};
-		static StrokeRec[] char61 = {
+		static readonly StrokeRec[] char61 = {
 			new StrokeRec(2, char61_stroke0),
 			new StrokeRec(2, char61_stroke1)
 
 		};
 		// char: 62 '>' */
 
-		static CoordRec[] char62_stroke0 = {
+		static readonly CoordRec[] char62_stroke0 = {
 			new CoordRec(14.2857F, 85.7143F),
 			new CoordRec(90.4762F, 42.8571F),
 			new CoordRec(14.2857F, 0F)
 
 		};
 
-		static StrokeRec[] char62 = { new StrokeRec(3, char62_stroke0) };
+		static readonly StrokeRec[] char62 = { new StrokeRec(3, char62_stroke0) };
 		// char: 63 '?' */
 
-		static CoordRec[] char63_stroke0 = {
+		static readonly CoordRec[] char63_stroke0 = {
 			new CoordRec(23.8095F, 76.1905F),
 			new CoordRec(23.8095F, 80.9524F),
 			new CoordRec(28.5714F, 90.4762F),
@@ -663,7 +662,7 @@ namespace Nzy3d.Glut
 			new CoordRec(52.3809F, 33.3333F)
 
 		};
-		static CoordRec[] char63_stroke1 = {
+		static readonly CoordRec[] char63_stroke1 = {
 			new CoordRec(52.3809F, 9.5238F),
 			new CoordRec(47.619F, 4.7619F),
 			new CoordRec(52.3809F, 0F),
@@ -671,14 +670,14 @@ namespace Nzy3d.Glut
 			new CoordRec(52.3809F, 9.5238F)
 
 		};
-		static StrokeRec[] char63 = {
+		static readonly StrokeRec[] char63 = {
 			new StrokeRec(14, char63_stroke0),
 			new StrokeRec(5, char63_stroke1)
 
 		};
 		// char: 64 '@' */
 
-		static CoordRec[] char64_stroke0 = {
+		static readonly CoordRec[] char64_stroke0 = {
 			new CoordRec(64.2857F, 52.381F),
 			new CoordRec(54.7619F, 57.1429F),
 			new CoordRec(45.2381F, 57.1429F),
@@ -689,7 +688,7 @@ namespace Nzy3d.Glut
 			new CoordRec(64.2857F, 38.0952F)
 
 		};
-		static CoordRec[] char64_stroke1 = {
+		static readonly CoordRec[] char64_stroke1 = {
 			new CoordRec(64.2857F, 57.1429F),
 			new CoordRec(64.2857F, 38.0952F),
 			new CoordRec(69.0476F, 33.3333F),
@@ -711,29 +710,29 @@ namespace Nzy3d.Glut
 			new CoordRec(69.0476F, 19.0476F)
 
 		};
-		static StrokeRec[] char64 = {
+		static readonly StrokeRec[] char64 = {
 			new StrokeRec(8, char64_stroke0),
 			new StrokeRec(19, char64_stroke1)
 
 		};
 		// char: 65 'A' */
 
-		static CoordRec[] char65_stroke0 = {
+		static readonly CoordRec[] char65_stroke0 = {
 			new CoordRec(52.3809F, 100F),
 			new CoordRec(14.2857F, 0F)
 
 		};
-		static CoordRec[] char65_stroke1 = {
+		static readonly CoordRec[] char65_stroke1 = {
 			new CoordRec(52.3809F, 100F),
 			new CoordRec(90.4762F, 0F)
 
 		};
-		static CoordRec[] char65_stroke2 = {
+		static readonly CoordRec[] char65_stroke2 = {
 			new CoordRec(28.5714F, 33.3333F),
 			new CoordRec(76.1905F, 33.3333F)
 
 		};
-		static StrokeRec[] char65 = {
+		static readonly StrokeRec[] char65 = {
 			new StrokeRec(2, char65_stroke0),
 			new StrokeRec(2, char65_stroke1),
 			new StrokeRec(2, char65_stroke2)
@@ -741,12 +740,12 @@ namespace Nzy3d.Glut
 		};
 		// char: 66 'B' */
 
-		static CoordRec[] char66_stroke0 = {
+		static readonly CoordRec[] char66_stroke0 = {
 			new CoordRec(19.0476F, 100F),
 			new CoordRec(19.0476F, 0F)
 
 		};
-		static CoordRec[] char66_stroke1 = {
+		static readonly CoordRec[] char66_stroke1 = {
 			new CoordRec(19.0476F, 100F),
 			new CoordRec(61.9047F, 100F),
 			new CoordRec(76.1905F, 95.2381F),
@@ -758,7 +757,7 @@ namespace Nzy3d.Glut
 			new CoordRec(61.9047F, 52.381F)
 
 		};
-		static CoordRec[] char66_stroke2 = {
+		static readonly CoordRec[] char66_stroke2 = {
 			new CoordRec(19.0476F, 52.381F),
 			new CoordRec(61.9047F, 52.381F),
 			new CoordRec(76.1905F, 47.619F),
@@ -771,7 +770,7 @@ namespace Nzy3d.Glut
 			new CoordRec(19.0476F, 0F)
 
 		};
-		static StrokeRec[] char66 = {
+		static readonly StrokeRec[] char66 = {
 			new StrokeRec(2, char66_stroke0),
 			new StrokeRec(9, char66_stroke1),
 			new StrokeRec(10, char66_stroke2)
@@ -779,7 +778,7 @@ namespace Nzy3d.Glut
 		};
 		// char: 67 'C' */
 
-		static CoordRec[] char67_stroke0 = {
+		static readonly CoordRec[] char67_stroke0 = {
 			new CoordRec(88.0952F, 76.1905F),
 			new CoordRec(83.3334F, 85.7143F),
 			new CoordRec(73.8096F, 95.2381F),
@@ -801,15 +800,15 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char67 = { new StrokeRec(18, char67_stroke0) };
+		static readonly StrokeRec[] char67 = { new StrokeRec(18, char67_stroke0) };
 		// char: 68 'D' */
 
-		static CoordRec[] char68_stroke0 = {
+		static readonly CoordRec[] char68_stroke0 = {
 			new CoordRec(19.0476F, 100F),
 			new CoordRec(19.0476F, 0F)
 
 		};
-		static CoordRec[] char68_stroke1 = {
+		static readonly CoordRec[] char68_stroke1 = {
 			new CoordRec(19.0476F, 100F),
 			new CoordRec(52.3809F, 100F),
 			new CoordRec(66.6666F, 95.2381F),
@@ -824,34 +823,34 @@ namespace Nzy3d.Glut
 			new CoordRec(19.0476F, 0F)
 
 		};
-		static StrokeRec[] char68 = {
+		static readonly StrokeRec[] char68 = {
 			new StrokeRec(2, char68_stroke0),
 			new StrokeRec(12, char68_stroke1)
 
 		};
 		// char: 69 'E' */
 
-		static CoordRec[] char69_stroke0 = {
+		static readonly CoordRec[] char69_stroke0 = {
 			new CoordRec(21.4286F, 100F),
 			new CoordRec(21.4286F, 0F)
 
 		};
-		static CoordRec[] char69_stroke1 = {
+		static readonly CoordRec[] char69_stroke1 = {
 			new CoordRec(21.4286F, 100F),
 			new CoordRec(83.3334F, 100F)
 
 		};
-		static CoordRec[] char69_stroke2 = {
+		static readonly CoordRec[] char69_stroke2 = {
 			new CoordRec(21.4286F, 52.381F),
 			new CoordRec(59.5238F, 52.381F)
 
 		};
-		static CoordRec[] char69_stroke3 = {
+		static readonly CoordRec[] char69_stroke3 = {
 			new CoordRec(21.4286F, 0F),
 			new CoordRec(83.3334F, 0F)
 
 		};
-		static StrokeRec[] char69 = {
+		static readonly StrokeRec[] char69 = {
 			new StrokeRec(2, char69_stroke0),
 			new StrokeRec(2, char69_stroke1),
 			new StrokeRec(2, char69_stroke2),
@@ -860,22 +859,22 @@ namespace Nzy3d.Glut
 		};
 		// char: 70 'F' */
 
-		static CoordRec[] char70_stroke0 = {
+		static readonly CoordRec[] char70_stroke0 = {
 			new CoordRec(21.4286F, 100F),
 			new CoordRec(21.4286F, 0F)
 
 		};
-		static CoordRec[] char70_stroke1 = {
+		static readonly CoordRec[] char70_stroke1 = {
 			new CoordRec(21.4286F, 100F),
 			new CoordRec(83.3334F, 100F)
 
 		};
-		static CoordRec[] char70_stroke2 = {
+		static readonly CoordRec[] char70_stroke2 = {
 			new CoordRec(21.4286F, 52.381F),
 			new CoordRec(59.5238F, 52.381F)
 
 		};
-		static StrokeRec[] char70 = {
+		static readonly StrokeRec[] char70 = {
 			new StrokeRec(2, char70_stroke0),
 			new StrokeRec(2, char70_stroke1),
 			new StrokeRec(2, char70_stroke2)
@@ -883,7 +882,7 @@ namespace Nzy3d.Glut
 		};
 		// char: 71 'G' */
 
-		static CoordRec[] char71_stroke0 = {
+		static readonly CoordRec[] char71_stroke0 = {
 			new CoordRec(88.0952F, 76.1905F),
 			new CoordRec(83.3334F, 85.7143F),
 			new CoordRec(73.8096F, 95.2381F),
@@ -905,34 +904,34 @@ namespace Nzy3d.Glut
 			new CoordRec(88.0952F, 38.0952F)
 
 		};
-		static CoordRec[] char71_stroke1 = {
+		static readonly CoordRec[] char71_stroke1 = {
 			new CoordRec(64.2857F, 38.0952F),
 			new CoordRec(88.0952F, 38.0952F)
 
 		};
-		static StrokeRec[] char71 = {
+		static readonly StrokeRec[] char71 = {
 			new StrokeRec(19, char71_stroke0),
 			new StrokeRec(2, char71_stroke1)
 
 		};
 		// char: 72 'H' */
 
-		static CoordRec[] char72_stroke0 = {
+		static readonly CoordRec[] char72_stroke0 = {
 			new CoordRec(19.0476F, 100F),
 			new CoordRec(19.0476F, 0F)
 
 		};
-		static CoordRec[] char72_stroke1 = {
+		static readonly CoordRec[] char72_stroke1 = {
 			new CoordRec(85.7143F, 100F),
 			new CoordRec(85.7143F, 0F)
 
 		};
-		static CoordRec[] char72_stroke2 = {
+		static readonly CoordRec[] char72_stroke2 = {
 			new CoordRec(19.0476F, 52.381F),
 			new CoordRec(85.7143F, 52.381F)
 
 		};
-		static StrokeRec[] char72 = {
+		static readonly StrokeRec[] char72 = {
 			new StrokeRec(2, char72_stroke0),
 			new StrokeRec(2, char72_stroke1),
 			new StrokeRec(2, char72_stroke2)
@@ -940,16 +939,16 @@ namespace Nzy3d.Glut
 		};
 		// char: 73 'I' */
 
-		static CoordRec[] char73_stroke0 = {
+		static readonly CoordRec[] char73_stroke0 = {
 			new CoordRec(52.381F, 100F),
 			new CoordRec(52.381F, 0F)
 
 		};
 
-		static StrokeRec[] char73 = { new StrokeRec(2, char73_stroke0) };
+		static readonly StrokeRec[] char73 = { new StrokeRec(2, char73_stroke0) };
 		// char: 74 'J' */
 
-		static CoordRec[] char74_stroke0 = {
+		static readonly CoordRec[] char74_stroke0 = {
 			new CoordRec(76.1905F, 100F),
 			new CoordRec(76.1905F, 23.8095F),
 			new CoordRec(71.4286F, 9.5238F),
@@ -963,25 +962,25 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char74 = { new StrokeRec(10, char74_stroke0) };
+		static readonly StrokeRec[] char74 = { new StrokeRec(10, char74_stroke0) };
 		// char: 75 'K' */
 
-		static CoordRec[] char75_stroke0 = {
+		static readonly CoordRec[] char75_stroke0 = {
 			new CoordRec(19.0476F, 100F),
 			new CoordRec(19.0476F, 0F)
 
 		};
-		static CoordRec[] char75_stroke1 = {
+		static readonly CoordRec[] char75_stroke1 = {
 			new CoordRec(85.7143F, 100F),
 			new CoordRec(19.0476F, 33.3333F)
 
 		};
-		static CoordRec[] char75_stroke2 = {
+		static readonly CoordRec[] char75_stroke2 = {
 			new CoordRec(42.8571F, 57.1429F),
 			new CoordRec(85.7143F, 0F)
 
 		};
-		static StrokeRec[] char75 = {
+		static readonly StrokeRec[] char75 = {
 			new StrokeRec(2, char75_stroke0),
 			new StrokeRec(2, char75_stroke1),
 			new StrokeRec(2, char75_stroke2)
@@ -989,44 +988,44 @@ namespace Nzy3d.Glut
 		};
 		// char: 76 'L' */
 
-		static CoordRec[] char76_stroke0 = {
+		static readonly CoordRec[] char76_stroke0 = {
 			new CoordRec(23.8095F, 100F),
 			new CoordRec(23.8095F, 0F)
 
 		};
-		static CoordRec[] char76_stroke1 = {
+		static readonly CoordRec[] char76_stroke1 = {
 			new CoordRec(23.8095F, 0F),
 			new CoordRec(80.9524F, 0F)
 
 		};
-		static StrokeRec[] char76 = {
+		static readonly StrokeRec[] char76 = {
 			new StrokeRec(2, char76_stroke0),
 			new StrokeRec(2, char76_stroke1)
 
 		};
 		// char: 77 'M' */
 
-		static CoordRec[] char77_stroke0 = {
+		static readonly CoordRec[] char77_stroke0 = {
 			new CoordRec(14.2857F, 100F),
 			new CoordRec(14.2857F, 0F)
 
 		};
-		static CoordRec[] char77_stroke1 = {
+		static readonly CoordRec[] char77_stroke1 = {
 			new CoordRec(14.2857F, 100F),
 			new CoordRec(52.3809F, 0F)
 
 		};
-		static CoordRec[] char77_stroke2 = {
+		static readonly CoordRec[] char77_stroke2 = {
 			new CoordRec(90.4762F, 100F),
 			new CoordRec(52.3809F, 0F)
 
 		};
-		static CoordRec[] char77_stroke3 = {
+		static readonly CoordRec[] char77_stroke3 = {
 			new CoordRec(90.4762F, 100F),
 			new CoordRec(90.4762F, 0F)
 
 		};
-		static StrokeRec[] char77 = {
+		static readonly StrokeRec[] char77 = {
 			new StrokeRec(2, char77_stroke0),
 			new StrokeRec(2, char77_stroke1),
 			new StrokeRec(2, char77_stroke2),
@@ -1035,22 +1034,22 @@ namespace Nzy3d.Glut
 		};
 		// char: 78 'N' */
 
-		static CoordRec[] char78_stroke0 = {
+		static readonly CoordRec[] char78_stroke0 = {
 			new CoordRec(19.0476F, 100F),
 			new CoordRec(19.0476F, 0F)
 
 		};
-		static CoordRec[] char78_stroke1 = {
+		static readonly CoordRec[] char78_stroke1 = {
 			new CoordRec(19.0476F, 100F),
 			new CoordRec(85.7143F, 0F)
 
 		};
-		static CoordRec[] char78_stroke2 = {
+		static readonly CoordRec[] char78_stroke2 = {
 			new CoordRec(85.7143F, 100F),
 			new CoordRec(85.7143F, 0F)
 
 		};
-		static StrokeRec[] char78 = {
+		static readonly StrokeRec[] char78 = {
 			new StrokeRec(2, char78_stroke0),
 			new StrokeRec(2, char78_stroke1),
 			new StrokeRec(2, char78_stroke2)
@@ -1058,7 +1057,7 @@ namespace Nzy3d.Glut
 		};
 		// char: 79 'O' */
 
-		static CoordRec[] char79_stroke0 = {
+		static readonly CoordRec[] char79_stroke0 = {
 			new CoordRec(42.8571F, 100F),
 			new CoordRec(33.3333F, 95.2381F),
 			new CoordRec(23.8095F, 85.7143F),
@@ -1083,15 +1082,15 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char79 = { new StrokeRec(21, char79_stroke0) };
+		static readonly StrokeRec[] char79 = { new StrokeRec(21, char79_stroke0) };
 		// char: 80 'P' */
 
-		static CoordRec[] char80_stroke0 = {
+		static readonly CoordRec[] char80_stroke0 = {
 			new CoordRec(19.0476F, 100F),
 			new CoordRec(19.0476F, 0F)
 
 		};
-		static CoordRec[] char80_stroke1 = {
+		static readonly CoordRec[] char80_stroke1 = {
 			new CoordRec(19.0476F, 100F),
 			new CoordRec(61.9047F, 100F),
 			new CoordRec(76.1905F, 95.2381F),
@@ -1104,14 +1103,14 @@ namespace Nzy3d.Glut
 			new CoordRec(19.0476F, 47.619F)
 
 		};
-		static StrokeRec[] char80 = {
+		static readonly StrokeRec[] char80 = {
 			new StrokeRec(2, char80_stroke0),
 			new StrokeRec(10, char80_stroke1)
 
 		};
 		// char: 81 'Q' */
 
-		static CoordRec[] char81_stroke0 = {
+		static readonly CoordRec[] char81_stroke0 = {
 			new CoordRec(42.8571F, 100F),
 			new CoordRec(33.3333F, 95.2381F),
 			new CoordRec(23.8095F, 85.7143F),
@@ -1135,24 +1134,24 @@ namespace Nzy3d.Glut
 			new CoordRec(42.8571F, 100F)
 
 		};
-		static CoordRec[] char81_stroke1 = {
+		static readonly CoordRec[] char81_stroke1 = {
 			new CoordRec(57.1428F, 19.0476F),
 			new CoordRec(85.7143F, -9.5238F)
 
 		};
-		static StrokeRec[] char81 = {
+		static readonly StrokeRec[] char81 = {
 			new StrokeRec(21, char81_stroke0),
 			new StrokeRec(2, char81_stroke1)
 
 		};
 		// char: 82 'R' */
 
-		static CoordRec[] char82_stroke0 = {
+		static readonly CoordRec[] char82_stroke0 = {
 			new CoordRec(19.0476F, 100F),
 			new CoordRec(19.0476F, 0F)
 
 		};
-		static CoordRec[] char82_stroke1 = {
+		static readonly CoordRec[] char82_stroke1 = {
 			new CoordRec(19.0476F, 100F),
 			new CoordRec(61.9047F, 100F),
 			new CoordRec(76.1905F, 95.2381F),
@@ -1165,12 +1164,12 @@ namespace Nzy3d.Glut
 			new CoordRec(19.0476F, 52.381F)
 
 		};
-		static CoordRec[] char82_stroke2 = {
+		static readonly CoordRec[] char82_stroke2 = {
 			new CoordRec(52.3809F, 52.381F),
 			new CoordRec(85.7143F, 0F)
 
 		};
-		static StrokeRec[] char82 = {
+		static readonly StrokeRec[] char82 = {
 			new StrokeRec(2, char82_stroke0),
 			new StrokeRec(10, char82_stroke1),
 			new StrokeRec(2, char82_stroke2)
@@ -1178,7 +1177,7 @@ namespace Nzy3d.Glut
 		};
 		// char: 83 'S' */
 
-		static CoordRec[] char83_stroke0 = {
+		static readonly CoordRec[] char83_stroke0 = {
 			new CoordRec(85.7143F, 85.7143F),
 			new CoordRec(76.1905F, 95.2381F),
 			new CoordRec(61.9047F, 100F),
@@ -1202,27 +1201,27 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char83 = { new StrokeRec(20, char83_stroke0) };
+		static readonly StrokeRec[] char83 = { new StrokeRec(20, char83_stroke0) };
 		// char: 84 'T' */
 
-		static CoordRec[] char84_stroke0 = {
+		static readonly CoordRec[] char84_stroke0 = {
 			new CoordRec(52.3809F, 100F),
 			new CoordRec(52.3809F, 0F)
 
 		};
-		static CoordRec[] char84_stroke1 = {
+		static readonly CoordRec[] char84_stroke1 = {
 			new CoordRec(19.0476F, 100F),
 			new CoordRec(85.7143F, 100F)
 
 		};
-		static StrokeRec[] char84 = {
+		static readonly StrokeRec[] char84 = {
 			new StrokeRec(2, char84_stroke0),
 			new StrokeRec(2, char84_stroke1)
 
 		};
 		// char: 85 'U' */
 
-		static CoordRec[] char85_stroke0 = {
+		static readonly CoordRec[] char85_stroke0 = {
 			new CoordRec(19.0476F, 100F),
 			new CoordRec(19.0476F, 28.5714F),
 			new CoordRec(23.8095F, 14.2857F),
@@ -1236,47 +1235,47 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char85 = { new StrokeRec(10, char85_stroke0) };
+		static readonly StrokeRec[] char85 = { new StrokeRec(10, char85_stroke0) };
 		// char: 86 'V' */
 
-		static CoordRec[] char86_stroke0 = {
+		static readonly CoordRec[] char86_stroke0 = {
 			new CoordRec(14.2857F, 100F),
 			new CoordRec(52.3809F, 0F)
 
 		};
-		static CoordRec[] char86_stroke1 = {
+		static readonly CoordRec[] char86_stroke1 = {
 			new CoordRec(90.4762F, 100F),
 			new CoordRec(52.3809F, 0F)
 
 		};
-		static StrokeRec[] char86 = {
+		static readonly StrokeRec[] char86 = {
 			new StrokeRec(2, char86_stroke0),
 			new StrokeRec(2, char86_stroke1)
 
 		};
 		// char: 87 'W' */
 
-		static CoordRec[] char87_stroke0 = {
+		static readonly CoordRec[] char87_stroke0 = {
 			new CoordRec(4.7619F, 100F),
 			new CoordRec(28.5714F, 0F)
 
 		};
-		static CoordRec[] char87_stroke1 = {
+		static readonly CoordRec[] char87_stroke1 = {
 			new CoordRec(52.3809F, 100F),
 			new CoordRec(28.5714F, 0F)
 
 		};
-		static CoordRec[] char87_stroke2 = {
+		static readonly CoordRec[] char87_stroke2 = {
 			new CoordRec(52.3809F, 100F),
 			new CoordRec(76.1905F, 0F)
 
 		};
-		static CoordRec[] char87_stroke3 = {
+		static readonly CoordRec[] char87_stroke3 = {
 			new CoordRec(100F, 100F),
 			new CoordRec(76.1905F, 0F)
 
 		};
-		static StrokeRec[] char87 = {
+		static readonly StrokeRec[] char87 = {
 			new StrokeRec(2, char87_stroke0),
 			new StrokeRec(2, char87_stroke1),
 			new StrokeRec(2, char87_stroke2),
@@ -1285,57 +1284,57 @@ namespace Nzy3d.Glut
 		};
 		// char: 88 'X' */
 
-		static CoordRec[] char88_stroke0 = {
+		static readonly CoordRec[] char88_stroke0 = {
 			new CoordRec(19.0476F, 100F),
 			new CoordRec(85.7143F, 0F)
 
 		};
-		static CoordRec[] char88_stroke1 = {
+		static readonly CoordRec[] char88_stroke1 = {
 			new CoordRec(85.7143F, 100F),
 			new CoordRec(19.0476F, 0F)
 
 		};
-		static StrokeRec[] char88 = {
+		static readonly StrokeRec[] char88 = {
 			new StrokeRec(2, char88_stroke0),
 			new StrokeRec(2, char88_stroke1)
 
 		};
 		// char: 89 'Y' */
 
-		static CoordRec[] char89_stroke0 = {
+		static readonly CoordRec[] char89_stroke0 = {
 			new CoordRec(14.2857F, 100F),
 			new CoordRec(52.3809F, 52.381F),
 			new CoordRec(52.3809F, 0F)
 
 		};
-		static CoordRec[] char89_stroke1 = {
+		static readonly CoordRec[] char89_stroke1 = {
 			new CoordRec(90.4762F, 100F),
 			new CoordRec(52.3809F, 52.381F)
 
 		};
-		static StrokeRec[] char89 = {
+		static readonly StrokeRec[] char89 = {
 			new StrokeRec(3, char89_stroke0),
 			new StrokeRec(2, char89_stroke1)
 
 		};
 		// char: 90 'Z' */
 
-		static CoordRec[] char90_stroke0 = {
+		static readonly CoordRec[] char90_stroke0 = {
 			new CoordRec(85.7143F, 100F),
 			new CoordRec(19.0476F, 0F)
 
 		};
-		static CoordRec[] char90_stroke1 = {
+		static readonly CoordRec[] char90_stroke1 = {
 			new CoordRec(19.0476F, 100F),
 			new CoordRec(85.7143F, 100F)
 
 		};
-		static CoordRec[] char90_stroke2 = {
+		static readonly CoordRec[] char90_stroke2 = {
 			new CoordRec(19.0476F, 0F),
 			new CoordRec(85.7143F, 0F)
 
 		};
-		static StrokeRec[] char90 = {
+		static readonly StrokeRec[] char90 = {
 			new StrokeRec(2, char90_stroke0),
 			new StrokeRec(2, char90_stroke1),
 			new StrokeRec(2, char90_stroke2)
@@ -1343,27 +1342,27 @@ namespace Nzy3d.Glut
 		};
 		// char: 91 '[' */
 
-		static CoordRec[] char91_stroke0 = {
+		static readonly CoordRec[] char91_stroke0 = {
 			new CoordRec(35.7143F, 119.048F),
 			new CoordRec(35.7143F, -33.3333F)
 
 		};
-		static CoordRec[] char91_stroke1 = {
+		static readonly CoordRec[] char91_stroke1 = {
 			new CoordRec(40.4762F, 119.048F),
 			new CoordRec(40.4762F, -33.3333F)
 
 		};
-		static CoordRec[] char91_stroke2 = {
+		static readonly CoordRec[] char91_stroke2 = {
 			new CoordRec(35.7143F, 119.048F),
 			new CoordRec(69.0476F, 119.048F)
 
 		};
-		static CoordRec[] char91_stroke3 = {
+		static readonly CoordRec[] char91_stroke3 = {
 			new CoordRec(35.7143F, -33.3333F),
 			new CoordRec(69.0476F, -33.3333F)
 
 		};
-		static StrokeRec[] char91 = {
+		static readonly StrokeRec[] char91 = {
 			new StrokeRec(2, char91_stroke0),
 			new StrokeRec(2, char91_stroke1),
 			new StrokeRec(2, char91_stroke2),
@@ -1372,36 +1371,36 @@ namespace Nzy3d.Glut
 		};
 		// char: 92 '\' */
 
-		static CoordRec[] char92_stroke0 = {
+		static readonly CoordRec[] char92_stroke0 = {
 			new CoordRec(19.0476F, 100F),
 			new CoordRec(85.7143F, -14.2857F)
 
 		};
 
-		static StrokeRec[] char92 = { new StrokeRec(2, char92_stroke0) };
+		static readonly StrokeRec[] char92 = { new StrokeRec(2, char92_stroke0) };
 		// char: 93 ']' */
 
-		static CoordRec[] char93_stroke0 = {
+		static readonly CoordRec[] char93_stroke0 = {
 			new CoordRec(64.2857F, 119.048F),
 			new CoordRec(64.2857F, -33.3333F)
 
 		};
-		static CoordRec[] char93_stroke1 = {
+		static readonly CoordRec[] char93_stroke1 = {
 			new CoordRec(69.0476F, 119.048F),
 			new CoordRec(69.0476F, -33.3333F)
 
 		};
-		static CoordRec[] char93_stroke2 = {
+		static readonly CoordRec[] char93_stroke2 = {
 			new CoordRec(35.7143F, 119.048F),
 			new CoordRec(69.0476F, 119.048F)
 
 		};
-		static CoordRec[] char93_stroke3 = {
+		static readonly CoordRec[] char93_stroke3 = {
 			new CoordRec(35.7143F, -33.3333F),
 			new CoordRec(69.0476F, -33.3333F)
 
 		};
-		static StrokeRec[] char93 = {
+		static readonly StrokeRec[] char93 = {
 			new StrokeRec(2, char93_stroke0),
 			new StrokeRec(2, char93_stroke1),
 			new StrokeRec(2, char93_stroke2),
@@ -1410,24 +1409,24 @@ namespace Nzy3d.Glut
 		};
 		// char: 94 '^' */
 
-		static CoordRec[] char94_stroke0 = {
+		static readonly CoordRec[] char94_stroke0 = {
 			new CoordRec(52.3809F, 109.524F),
 			new CoordRec(14.2857F, 42.8571F)
 
 		};
-		static CoordRec[] char94_stroke1 = {
+		static readonly CoordRec[] char94_stroke1 = {
 			new CoordRec(52.3809F, 109.524F),
 			new CoordRec(90.4762F, 42.8571F)
 
 		};
-		static StrokeRec[] char94 = {
+		static readonly StrokeRec[] char94 = {
 			new StrokeRec(2, char94_stroke0),
 			new StrokeRec(2, char94_stroke1)
 
 		};
 		// char: 95 '_' */
 
-		static CoordRec[] char95_stroke0 = {
+		static readonly CoordRec[] char95_stroke0 = {
 			new CoordRec(0F, -33.3333F),
 			new CoordRec(104.762F, -33.3333F),
 			new CoordRec(104.762F, -28.5714F),
@@ -1436,33 +1435,33 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char95 = { new StrokeRec(5, char95_stroke0) };
+		static readonly StrokeRec[] char95 = { new StrokeRec(5, char95_stroke0) };
 		// char: 96 '`' */
 
-		static CoordRec[] char96_stroke0 = {
+		static readonly CoordRec[] char96_stroke0 = {
 			new CoordRec(42.8572F, 100F),
 			new CoordRec(66.6667F, 71.4286F)
 
 		};
-		static CoordRec[] char96_stroke1 = {
+		static readonly CoordRec[] char96_stroke1 = {
 			new CoordRec(42.8572F, 100F),
 			new CoordRec(38.0953F, 95.2381F),
 			new CoordRec(66.6667F, 71.4286F)
 
 		};
-		static StrokeRec[] char96 = {
+		static readonly StrokeRec[] char96 = {
 			new StrokeRec(2, char96_stroke0),
 			new StrokeRec(3, char96_stroke1)
 
 		};
 		// char: 97 'a' */
 
-		static CoordRec[] char97_stroke0 = {
+		static readonly CoordRec[] char97_stroke0 = {
 			new CoordRec(80.9524F, 66.6667F),
 			new CoordRec(80.9524F, 0F)
 
 		};
-		static CoordRec[] char97_stroke1 = {
+		static readonly CoordRec[] char97_stroke1 = {
 			new CoordRec(80.9524F, 52.381F),
 			new CoordRec(71.4285F, 61.9048F),
 			new CoordRec(61.9047F, 66.6667F),
@@ -1479,19 +1478,19 @@ namespace Nzy3d.Glut
 			new CoordRec(80.9524F, 14.2857F)
 
 		};
-		static StrokeRec[] char97 = {
+		static readonly StrokeRec[] char97 = {
 			new StrokeRec(2, char97_stroke0),
 			new StrokeRec(14, char97_stroke1)
 
 		};
 		// char: 98 'b' */
 
-		static CoordRec[] char98_stroke0 = {
+		static readonly CoordRec[] char98_stroke0 = {
 			new CoordRec(23.8095F, 100F),
 			new CoordRec(23.8095F, 0F)
 
 		};
-		static CoordRec[] char98_stroke1 = {
+		static readonly CoordRec[] char98_stroke1 = {
 			new CoordRec(23.8095F, 52.381F),
 			new CoordRec(33.3333F, 61.9048F),
 			new CoordRec(42.8571F, 66.6667F),
@@ -1508,14 +1507,14 @@ namespace Nzy3d.Glut
 			new CoordRec(23.8095F, 14.2857F)
 
 		};
-		static StrokeRec[] char98 = {
+		static readonly StrokeRec[] char98 = {
 			new StrokeRec(2, char98_stroke0),
 			new StrokeRec(14, char98_stroke1)
 
 		};
 		// char: 99 'c' */
 
-		static CoordRec[] char99_stroke0 = {
+		static readonly CoordRec[] char99_stroke0 = {
 			new CoordRec(80.9524F, 52.381F),
 			new CoordRec(71.4285F, 61.9048F),
 			new CoordRec(61.9047F, 66.6667F),
@@ -1533,15 +1532,15 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char99 = { new StrokeRec(14, char99_stroke0) };
+		static readonly StrokeRec[] char99 = { new StrokeRec(14, char99_stroke0) };
 		// char: 100 'd' */
 
-		static CoordRec[] char100_stroke0 = {
+		static readonly CoordRec[] char100_stroke0 = {
 			new CoordRec(80.9524F, 100F),
 			new CoordRec(80.9524F, 0F)
 
 		};
-		static CoordRec[] char100_stroke1 = {
+		static readonly CoordRec[] char100_stroke1 = {
 			new CoordRec(80.9524F, 52.381F),
 			new CoordRec(71.4285F, 61.9048F),
 			new CoordRec(61.9047F, 66.6667F),
@@ -1558,14 +1557,14 @@ namespace Nzy3d.Glut
 			new CoordRec(80.9524F, 14.2857F)
 
 		};
-		static StrokeRec[] char100 = {
+		static readonly StrokeRec[] char100 = {
 			new StrokeRec(2, char100_stroke0),
 			new StrokeRec(14, char100_stroke1)
 
 		};
 		// char: 101 'e' */
 
-		static CoordRec[] char101_stroke0 = {
+		static readonly CoordRec[] char101_stroke0 = {
 			new CoordRec(23.8095F, 38.0952F),
 			new CoordRec(80.9524F, 38.0952F),
 			new CoordRec(80.9524F, 47.619F),
@@ -1586,10 +1585,10 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char101 = { new StrokeRec(17, char101_stroke0) };
+		static readonly StrokeRec[] char101 = { new StrokeRec(17, char101_stroke0) };
 		// char: 102 'f' */
 
-		static CoordRec[] char102_stroke0 = {
+		static readonly CoordRec[] char102_stroke0 = {
 			new CoordRec(71.4286F, 100F),
 			new CoordRec(61.9048F, 100F),
 			new CoordRec(52.381F, 95.2381F),
@@ -1597,19 +1596,19 @@ namespace Nzy3d.Glut
 			new CoordRec(47.6191F, 0F)
 
 		};
-		static CoordRec[] char102_stroke1 = {
+		static readonly CoordRec[] char102_stroke1 = {
 			new CoordRec(33.3334F, 66.6667F),
 			new CoordRec(66.6667F, 66.6667F)
 
 		};
-		static StrokeRec[] char102 = {
+		static readonly StrokeRec[] char102 = {
 			new StrokeRec(5, char102_stroke0),
 			new StrokeRec(2, char102_stroke1)
 
 		};
 		// char: 103 'g' */
 
-		static CoordRec[] char103_stroke0 = {
+		static readonly CoordRec[] char103_stroke0 = {
 			new CoordRec(80.9524F, 66.6667F),
 			new CoordRec(80.9524F, -9.5238F),
 			new CoordRec(76.1905F, -23.8095F),
@@ -1619,7 +1618,7 @@ namespace Nzy3d.Glut
 			new CoordRec(38.0952F, -28.5714F)
 
 		};
-		static CoordRec[] char103_stroke1 = {
+		static readonly CoordRec[] char103_stroke1 = {
 			new CoordRec(80.9524F, 52.381F),
 			new CoordRec(71.4285F, 61.9048F),
 			new CoordRec(61.9047F, 66.6667F),
@@ -1636,19 +1635,19 @@ namespace Nzy3d.Glut
 			new CoordRec(80.9524F, 14.2857F)
 
 		};
-		static StrokeRec[] char103 = {
+		static readonly StrokeRec[] char103 = {
 			new StrokeRec(7, char103_stroke0),
 			new StrokeRec(14, char103_stroke1)
 
 		};
 		// char: 104 'h' */
 
-		static CoordRec[] char104_stroke0 = {
+		static readonly CoordRec[] char104_stroke0 = {
 			new CoordRec(26.1905F, 100F),
 			new CoordRec(26.1905F, 0F)
 
 		};
-		static CoordRec[] char104_stroke1 = {
+		static readonly CoordRec[] char104_stroke1 = {
 			new CoordRec(26.1905F, 47.619F),
 			new CoordRec(40.4762F, 61.9048F),
 			new CoordRec(50F, 66.6667F),
@@ -1658,14 +1657,14 @@ namespace Nzy3d.Glut
 			new CoordRec(78.5715F, 0F)
 
 		};
-		static StrokeRec[] char104 = {
+		static readonly StrokeRec[] char104 = {
 			new StrokeRec(2, char104_stroke0),
 			new StrokeRec(7, char104_stroke1)
 
 		};
 		// char: 105 'i' */
 
-		static CoordRec[] char105_stroke0 = {
+		static readonly CoordRec[] char105_stroke0 = {
 			new CoordRec(47.6191F, 100F),
 			new CoordRec(52.381F, 95.2381F),
 			new CoordRec(57.1429F, 100F),
@@ -1673,19 +1672,19 @@ namespace Nzy3d.Glut
 			new CoordRec(47.6191F, 100F)
 
 		};
-		static CoordRec[] char105_stroke1 = {
+		static readonly CoordRec[] char105_stroke1 = {
 			new CoordRec(52.381F, 66.6667F),
 			new CoordRec(52.381F, 0F)
 
 		};
-		static StrokeRec[] char105 = {
+		static readonly StrokeRec[] char105 = {
 			new StrokeRec(5, char105_stroke0),
 			new StrokeRec(2, char105_stroke1)
 
 		};
 		// char: 106 'j' */
 
-		static CoordRec[] char106_stroke0 = {
+		static readonly CoordRec[] char106_stroke0 = {
 			new CoordRec(57.1429F, 100F),
 			new CoordRec(61.9048F, 95.2381F),
 			new CoordRec(66.6667F, 100F),
@@ -1693,7 +1692,7 @@ namespace Nzy3d.Glut
 			new CoordRec(57.1429F, 100F)
 
 		};
-		static CoordRec[] char106_stroke1 = {
+		static readonly CoordRec[] char106_stroke1 = {
 			new CoordRec(61.9048F, 66.6667F),
 			new CoordRec(61.9048F, -14.2857F),
 			new CoordRec(57.1429F, -28.5714F),
@@ -1701,29 +1700,29 @@ namespace Nzy3d.Glut
 			new CoordRec(38.0953F, -33.3333F)
 
 		};
-		static StrokeRec[] char106 = {
+		static readonly StrokeRec[] char106 = {
 			new StrokeRec(5, char106_stroke0),
 			new StrokeRec(5, char106_stroke1)
 
 		};
 		// char: 107 'k' */
 
-		static CoordRec[] char107_stroke0 = {
+		static readonly CoordRec[] char107_stroke0 = {
 			new CoordRec(26.1905F, 100F),
 			new CoordRec(26.1905F, 0F)
 
 		};
-		static CoordRec[] char107_stroke1 = {
+		static readonly CoordRec[] char107_stroke1 = {
 			new CoordRec(73.8095F, 66.6667F),
 			new CoordRec(26.1905F, 19.0476F)
 
 		};
-		static CoordRec[] char107_stroke2 = {
+		static readonly CoordRec[] char107_stroke2 = {
 			new CoordRec(45.2381F, 38.0952F),
 			new CoordRec(78.5715F, 0F)
 
 		};
-		static StrokeRec[] char107 = {
+		static readonly StrokeRec[] char107 = {
 			new StrokeRec(2, char107_stroke0),
 			new StrokeRec(2, char107_stroke1),
 			new StrokeRec(2, char107_stroke2)
@@ -1731,21 +1730,21 @@ namespace Nzy3d.Glut
 		};
 		// char: 108 'l' */
 
-		static CoordRec[] char108_stroke0 = {
+		static readonly CoordRec[] char108_stroke0 = {
 			new CoordRec(52.381F, 100F),
 			new CoordRec(52.381F, 0F)
 
 		};
 
-		static StrokeRec[] char108 = { new StrokeRec(2, char108_stroke0) };
+		static readonly StrokeRec[] char108 = { new StrokeRec(2, char108_stroke0) };
 		// char: 109 'm' */
 
-		static CoordRec[] char109_stroke0 = {
+		static readonly CoordRec[] char109_stroke0 = {
 			new CoordRec(0F, 66.6667F),
 			new CoordRec(0F, 0F)
 
 		};
-		static CoordRec[] char109_stroke1 = {
+		static readonly CoordRec[] char109_stroke1 = {
 			new CoordRec(0F, 47.619F),
 			new CoordRec(14.2857F, 61.9048F),
 			new CoordRec(23.8095F, 66.6667F),
@@ -1755,7 +1754,7 @@ namespace Nzy3d.Glut
 			new CoordRec(52.381F, 0F)
 
 		};
-		static CoordRec[] char109_stroke2 = {
+		static readonly CoordRec[] char109_stroke2 = {
 			new CoordRec(52.381F, 47.619F),
 			new CoordRec(66.6667F, 61.9048F),
 			new CoordRec(76.1905F, 66.6667F),
@@ -1765,7 +1764,7 @@ namespace Nzy3d.Glut
 			new CoordRec(104.762F, 0F)
 
 		};
-		static StrokeRec[] char109 = {
+		static readonly StrokeRec[] char109 = {
 			new StrokeRec(2, char109_stroke0),
 			new StrokeRec(7, char109_stroke1),
 			new StrokeRec(7, char109_stroke2)
@@ -1773,12 +1772,12 @@ namespace Nzy3d.Glut
 		};
 		// char: 110 'n' */
 
-		static CoordRec[] char110_stroke0 = {
+		static readonly CoordRec[] char110_stroke0 = {
 			new CoordRec(26.1905F, 66.6667F),
 			new CoordRec(26.1905F, 0F)
 
 		};
-		static CoordRec[] char110_stroke1 = {
+		static readonly CoordRec[] char110_stroke1 = {
 			new CoordRec(26.1905F, 47.619F),
 			new CoordRec(40.4762F, 61.9048F),
 			new CoordRec(50F, 66.6667F),
@@ -1788,14 +1787,14 @@ namespace Nzy3d.Glut
 			new CoordRec(78.5715F, 0F)
 
 		};
-		static StrokeRec[] char110 = {
+		static readonly StrokeRec[] char110 = {
 			new StrokeRec(2, char110_stroke0),
 			new StrokeRec(7, char110_stroke1)
 
 		};
 		// char: 111 'o' */
 
-		static CoordRec[] char111_stroke0 = {
+		static readonly CoordRec[] char111_stroke0 = {
 			new CoordRec(45.2381F, 66.6667F),
 			new CoordRec(35.7143F, 61.9048F),
 			new CoordRec(26.1905F, 52.381F),
@@ -1816,15 +1815,15 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char111 = { new StrokeRec(17, char111_stroke0) };
+		static readonly StrokeRec[] char111 = { new StrokeRec(17, char111_stroke0) };
 		// char: 112 'p' */
 
-		static CoordRec[] char112_stroke0 = {
+		static readonly CoordRec[] char112_stroke0 = {
 			new CoordRec(23.8095F, 66.6667F),
 			new CoordRec(23.8095F, -33.3333F)
 
 		};
-		static CoordRec[] char112_stroke1 = {
+		static readonly CoordRec[] char112_stroke1 = {
 			new CoordRec(23.8095F, 52.381F),
 			new CoordRec(33.3333F, 61.9048F),
 			new CoordRec(42.8571F, 66.6667F),
@@ -1841,19 +1840,19 @@ namespace Nzy3d.Glut
 			new CoordRec(23.8095F, 14.2857F)
 
 		};
-		static StrokeRec[] char112 = {
+		static readonly StrokeRec[] char112 = {
 			new StrokeRec(2, char112_stroke0),
 			new StrokeRec(14, char112_stroke1)
 
 		};
 		// char: 113 'q' */
 
-		static CoordRec[] char113_stroke0 = {
+		static readonly CoordRec[] char113_stroke0 = {
 			new CoordRec(80.9524F, 66.6667F),
 			new CoordRec(80.9524F, -33.3333F)
 
 		};
-		static CoordRec[] char113_stroke1 = {
+		static readonly CoordRec[] char113_stroke1 = {
 			new CoordRec(80.9524F, 52.381F),
 			new CoordRec(71.4285F, 61.9048F),
 			new CoordRec(61.9047F, 66.6667F),
@@ -1870,19 +1869,19 @@ namespace Nzy3d.Glut
 			new CoordRec(80.9524F, 14.2857F)
 
 		};
-		static StrokeRec[] char113 = {
+		static readonly StrokeRec[] char113 = {
 			new StrokeRec(2, char113_stroke0),
 			new StrokeRec(14, char113_stroke1)
 
 		};
 		// char: 114 'r' */
 
-		static CoordRec[] char114_stroke0 = {
+		static readonly CoordRec[] char114_stroke0 = {
 			new CoordRec(33.3334F, 66.6667F),
 			new CoordRec(33.3334F, 0F)
 
 		};
-		static CoordRec[] char114_stroke1 = {
+		static readonly CoordRec[] char114_stroke1 = {
 			new CoordRec(33.3334F, 38.0952F),
 			new CoordRec(38.0953F, 52.381F),
 			new CoordRec(47.6191F, 61.9048F),
@@ -1890,14 +1889,14 @@ namespace Nzy3d.Glut
 			new CoordRec(71.4286F, 66.6667F)
 
 		};
-		static StrokeRec[] char114 = {
+		static readonly StrokeRec[] char114 = {
 			new StrokeRec(2, char114_stroke0),
 			new StrokeRec(5, char114_stroke1)
 
 		};
 		// char: 115 's' */
 
-		static CoordRec[] char115_stroke0 = {
+		static readonly CoordRec[] char115_stroke0 = {
 			new CoordRec(78.5715F, 52.381F),
 			new CoordRec(73.8095F, 61.9048F),
 			new CoordRec(59.5238F, 66.6667F),
@@ -1918,10 +1917,10 @@ namespace Nzy3d.Glut
 
 		};
 
-		static StrokeRec[] char115 = { new StrokeRec(17, char115_stroke0) };
+		static readonly StrokeRec[] char115 = { new StrokeRec(17, char115_stroke0) };
 		// char: 116 't' */
 
-		static CoordRec[] char116_stroke0 = {
+		static readonly CoordRec[] char116_stroke0 = {
 			new CoordRec(47.6191F, 100F),
 			new CoordRec(47.6191F, 19.0476F),
 			new CoordRec(52.381F, 4.7619F),
@@ -1929,19 +1928,19 @@ namespace Nzy3d.Glut
 			new CoordRec(71.4286F, 0F)
 
 		};
-		static CoordRec[] char116_stroke1 = {
+		static readonly CoordRec[] char116_stroke1 = {
 			new CoordRec(33.3334F, 66.6667F),
 			new CoordRec(66.6667F, 66.6667F)
 
 		};
-		static StrokeRec[] char116 = {
+		static readonly StrokeRec[] char116 = {
 			new StrokeRec(5, char116_stroke0),
 			new StrokeRec(2, char116_stroke1)
 
 		};
 		// char: 117 'u' */
 
-		static CoordRec[] char117_stroke0 = {
+		static readonly CoordRec[] char117_stroke0 = {
 			new CoordRec(26.1905F, 66.6667F),
 			new CoordRec(26.1905F, 19.0476F),
 			new CoordRec(30.9524F, 4.7619F),
@@ -1951,56 +1950,56 @@ namespace Nzy3d.Glut
 			new CoordRec(78.5715F, 19.0476F)
 
 		};
-		static CoordRec[] char117_stroke1 = {
+		static readonly CoordRec[] char117_stroke1 = {
 			new CoordRec(78.5715F, 66.6667F),
 			new CoordRec(78.5715F, 0F)
 
 		};
-		static StrokeRec[] char117 = {
+		static readonly StrokeRec[] char117 = {
 			new StrokeRec(7, char117_stroke0),
 			new StrokeRec(2, char117_stroke1)
 
 		};
 		// char: 118 'v' */
 
-		static CoordRec[] char118_stroke0 = {
+		static readonly CoordRec[] char118_stroke0 = {
 			new CoordRec(23.8095F, 66.6667F),
 			new CoordRec(52.3809F, 0F)
 
 		};
-		static CoordRec[] char118_stroke1 = {
+		static readonly CoordRec[] char118_stroke1 = {
 			new CoordRec(80.9524F, 66.6667F),
 			new CoordRec(52.3809F, 0F)
 
 		};
-		static StrokeRec[] char118 = {
+		static readonly StrokeRec[] char118 = {
 			new StrokeRec(2, char118_stroke0),
 			new StrokeRec(2, char118_stroke1)
 
 		};
 		// char: 119 'w' */
 
-		static CoordRec[] char119_stroke0 = {
+		static readonly CoordRec[] char119_stroke0 = {
 			new CoordRec(14.2857F, 66.6667F),
 			new CoordRec(33.3333F, 0F)
 
 		};
-		static CoordRec[] char119_stroke1 = {
+		static readonly CoordRec[] char119_stroke1 = {
 			new CoordRec(52.3809F, 66.6667F),
 			new CoordRec(33.3333F, 0F)
 
 		};
-		static CoordRec[] char119_stroke2 = {
+		static readonly CoordRec[] char119_stroke2 = {
 			new CoordRec(52.3809F, 66.6667F),
 			new CoordRec(71.4286F, 0F)
 
 		};
-		static CoordRec[] char119_stroke3 = {
+		static readonly CoordRec[] char119_stroke3 = {
 			new CoordRec(90.4762F, 66.6667F),
 			new CoordRec(71.4286F, 0F)
 
 		};
-		static StrokeRec[] char119 = {
+		static readonly StrokeRec[] char119 = {
 			new StrokeRec(2, char119_stroke0),
 			new StrokeRec(2, char119_stroke1),
 			new StrokeRec(2, char119_stroke2),
@@ -2009,29 +2008,29 @@ namespace Nzy3d.Glut
 		};
 		// char: 120 'x' */
 
-		static CoordRec[] char120_stroke0 = {
+		static readonly CoordRec[] char120_stroke0 = {
 			new CoordRec(26.1905F, 66.6667F),
 			new CoordRec(78.5715F, 0F)
 
 		};
-		static CoordRec[] char120_stroke1 = {
+		static readonly CoordRec[] char120_stroke1 = {
 			new CoordRec(78.5715F, 66.6667F),
 			new CoordRec(26.1905F, 0F)
 
 		};
-		static StrokeRec[] char120 = {
+		static readonly StrokeRec[] char120 = {
 			new StrokeRec(2, char120_stroke0),
 			new StrokeRec(2, char120_stroke1)
 
 		};
 		// char: 121 'y' */
 
-		static CoordRec[] char121_stroke0 = {
+		static readonly CoordRec[] char121_stroke0 = {
 			new CoordRec(26.1905F, 66.6667F),
 			new CoordRec(54.7619F, 0F)
 
 		};
-		static CoordRec[] char121_stroke1 = {
+		static readonly CoordRec[] char121_stroke1 = {
 			new CoordRec(83.3334F, 66.6667F),
 			new CoordRec(54.7619F, 0F),
 			new CoordRec(45.2381F, -19.0476F),
@@ -2040,29 +2039,29 @@ namespace Nzy3d.Glut
 			new CoordRec(21.4286F, -33.3333F)
 
 		};
-		static StrokeRec[] char121 = {
+		static readonly StrokeRec[] char121 = {
 			new StrokeRec(2, char121_stroke0),
 			new StrokeRec(6, char121_stroke1)
 
 		};
 		// char: 122 'z' */
 
-		static CoordRec[] char122_stroke0 = {
+		static readonly CoordRec[] char122_stroke0 = {
 			new CoordRec(78.5715F, 66.6667F),
 			new CoordRec(26.1905F, 0F)
 
 		};
-		static CoordRec[] char122_stroke1 = {
+		static readonly CoordRec[] char122_stroke1 = {
 			new CoordRec(26.1905F, 66.6667F),
 			new CoordRec(78.5715F, 66.6667F)
 
 		};
-		static CoordRec[] char122_stroke2 = {
+		static readonly CoordRec[] char122_stroke2 = {
 			new CoordRec(26.1905F, 0F),
 			new CoordRec(78.5715F, 0F)
 
 		};
-		static StrokeRec[] char122 = {
+		static readonly StrokeRec[] char122 = {
 			new StrokeRec(2, char122_stroke0),
 			new StrokeRec(2, char122_stroke1),
 			new StrokeRec(2, char122_stroke2)
@@ -2070,7 +2069,7 @@ namespace Nzy3d.Glut
 		};
 		// char: 123 '{' */
 
-		static CoordRec[] char123_stroke0 = {
+		static readonly CoordRec[] char123_stroke0 = {
 			new CoordRec(64.2857F, 119.048F),
 			new CoordRec(54.7619F, 114.286F),
 			new CoordRec(50F, 109.524F),
@@ -2083,7 +2082,7 @@ namespace Nzy3d.Glut
 			new CoordRec(50F, 47.619F)
 
 		};
-		static CoordRec[] char123_stroke1 = {
+		static readonly CoordRec[] char123_stroke1 = {
 			new CoordRec(54.7619F, 114.286F),
 			new CoordRec(50F, 104.762F),
 			new CoordRec(50F, 95.2381F),
@@ -2103,7 +2102,7 @@ namespace Nzy3d.Glut
 			new CoordRec(54.7619F, -28.5714F)
 
 		};
-		static CoordRec[] char123_stroke2 = {
+		static readonly CoordRec[] char123_stroke2 = {
 			new CoordRec(50F, 38.0952F),
 			new CoordRec(59.5238F, 28.5714F),
 			new CoordRec(59.5238F, 19.0476F),
@@ -2116,7 +2115,7 @@ namespace Nzy3d.Glut
 			new CoordRec(64.2857F, -33.3333F)
 
 		};
-		static StrokeRec[] char123 = {
+		static readonly StrokeRec[] char123 = {
 			new StrokeRec(10, char123_stroke0),
 			new StrokeRec(17, char123_stroke1),
 			new StrokeRec(10, char123_stroke2)
@@ -2124,16 +2123,16 @@ namespace Nzy3d.Glut
 		};
 		// char: 124 '|' */
 
-		static CoordRec[] char124_stroke0 = {
+		static readonly CoordRec[] char124_stroke0 = {
 			new CoordRec(52.381F, 119.048F),
 			new CoordRec(52.381F, -33.3333F)
 
 		};
 
-		static StrokeRec[] char124 = { new StrokeRec(2, char124_stroke0) };
+		static readonly StrokeRec[] char124 = { new StrokeRec(2, char124_stroke0) };
 		// char: 125 '}' */
 
-		static CoordRec[] char125_stroke0 = {
+		static readonly CoordRec[] char125_stroke0 = {
 			new CoordRec(40.4762F, 119.048F),
 			new CoordRec(50F, 114.286F),
 			new CoordRec(54.7619F, 109.524F),
@@ -2146,7 +2145,7 @@ namespace Nzy3d.Glut
 			new CoordRec(54.7619F, 47.619F)
 
 		};
-		static CoordRec[] char125_stroke1 = {
+		static readonly CoordRec[] char125_stroke1 = {
 			new CoordRec(50F, 114.286F),
 			new CoordRec(54.7619F, 104.762F),
 			new CoordRec(54.7619F, 95.2381F),
@@ -2166,7 +2165,7 @@ namespace Nzy3d.Glut
 			new CoordRec(50F, -28.5714F)
 
 		};
-		static CoordRec[] char125_stroke2 = {
+		static readonly CoordRec[] char125_stroke2 = {
 			new CoordRec(54.7619F, 38.0952F),
 			new CoordRec(45.2381F, 28.5714F),
 			new CoordRec(45.2381F, 19.0476F),
@@ -2179,7 +2178,7 @@ namespace Nzy3d.Glut
 			new CoordRec(40.4762F, -33.3333F)
 
 		};
-		static StrokeRec[] char125 = {
+		static readonly StrokeRec[] char125 = {
 			new StrokeRec(10, char125_stroke0),
 			new StrokeRec(17, char125_stroke1),
 			new StrokeRec(10, char125_stroke2)
@@ -2187,7 +2186,7 @@ namespace Nzy3d.Glut
 		};
 		// char: 126 '~' */
 
-		static CoordRec[] char126_stroke0 = {
+		static readonly CoordRec[] char126_stroke0 = {
 			new CoordRec(9.5238F, 28.5714F),
 			new CoordRec(9.5238F, 38.0952F),
 			new CoordRec(14.2857F, 52.381F),
@@ -2201,7 +2200,7 @@ namespace Nzy3d.Glut
 			new CoordRec(95.2381F, 47.619F)
 
 		};
-		static CoordRec[] char126_stroke1 = {
+		static readonly CoordRec[] char126_stroke1 = {
 			new CoordRec(9.5238F, 38.0952F),
 			new CoordRec(14.2857F, 47.619F),
 			new CoordRec(23.8095F, 52.381F),
@@ -2215,19 +2214,19 @@ namespace Nzy3d.Glut
 			new CoordRec(95.2381F, 57.1429F)
 
 		};
-		static StrokeRec[] char126 = {
+		static readonly StrokeRec[] char126 = {
 			new StrokeRec(11, char126_stroke0),
 			new StrokeRec(11, char126_stroke1)
 
 		};
 		// char: 127 */
 
-		static CoordRec[] char127_stroke0 = {
+		static readonly CoordRec[] char127_stroke0 = {
 			new CoordRec(71.4286F, 100F),
 			new CoordRec(33.3333F, -33.3333F)
 
 		};
-		static CoordRec[] char127_stroke1 = {
+		static readonly CoordRec[] char127_stroke1 = {
 			new CoordRec(47.619F, 66.6667F),
 			new CoordRec(33.3333F, 61.9048F),
 			new CoordRec(23.8095F, 52.381F),
@@ -2247,12 +2246,12 @@ namespace Nzy3d.Glut
 			new CoordRec(47.619F, 66.6667F)
 
 		};
-		static StrokeRec[] char127 = {
+		static readonly StrokeRec[] char127 = {
 			new StrokeRec(2, char127_stroke0),
 			new StrokeRec(17, char127_stroke1)
 
 		};
-		static StrokeCharRec[] chars = {
+		static readonly StrokeCharRec[] chars = {
 			new StrokeCharRec(0, null, 0f, 0f),
 			new StrokeCharRec(0, null, 0f, 0f),
 			new StrokeCharRec(0, null, 0f, 0f),
@@ -2381,11 +2380,10 @@ namespace Nzy3d.Glut
 			new StrokeCharRec(3, char125, 52.381f, 104.762f),
 			new StrokeCharRec(2, char126, 52.381f, 104.762f),
 			new StrokeCharRec(2, char127, 52.381f, 104.762f)
-
 		};
-		public static StrokeFontRec glutStrokeMonoRoman = new StrokeFontRec("Roman", 128, chars, 119.048f, -33.3333f);
-	}
 
+		public static readonly StrokeFontRec glutStrokeMonoRoman = new StrokeFontRec("Roman", 128, chars, 119.048f, -33.3333f);
+	}
 }
 
 //=======================================================

@@ -23,10 +23,12 @@ namespace Nzy3d.Plot3D.Primitives.Axes.Layout.Providers
 			float lstep = (max - min) / (steps - 1);
 			ticks[0] = min;
 			ticks[steps - 1] = max;
+
 			for (int t = 1; t <= steps - 2; t++)
 			{
 				ticks[t] = min + t * lstep;
 			}
+
 			return ticks;
 		}
 	}

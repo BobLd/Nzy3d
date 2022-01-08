@@ -43,7 +43,6 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <param name="maxx">maximum x coordinate</param>
 		/// <param name="miny">minimum y coordinate</param>
 		/// <param name="maxy">maximum y coordinate</param>
-		/// <remarks></remarks>
 		public BoundingBox(double minx, double maxx, double miny, double maxy)
 		{
 			init(minx, maxx, miny, maxy);
@@ -68,7 +67,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <param name="y2">The second y-value</param>
 		private void init(double x1, double x2, double y1, double y2)
 		{
-			if ((x1 < x2))
+			if (x1 < x2)
 			{
 				m_minx = x1;
 				m_maxx = x2;
@@ -78,7 +77,8 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 				m_minx = x2;
 				m_maxx = x1;
 			}
-			if ((y1 < y2))
+
+			if (y1 < y2)
 			{
 				m_miny = y1;
 				m_maxy = y2;

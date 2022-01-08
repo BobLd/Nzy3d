@@ -3,7 +3,7 @@ using Nzy3d.Plot3D.Primitives;
 
 namespace Nzy3d.Plot3D.Builder.Concrete
 {
-    public class RingExtrapolator : OrthonormalTessellator
+	public class RingExtrapolator : OrthonormalTessellator
 	{
 		internal float _ringMax;
 		internal ColorMapper _cmap;
@@ -23,10 +23,10 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 			throw new Exception("Forbidden constructor");
 		}
 
-		public override Primitives.AbstractComposite build(float[] x, float[] y, float[] z)
+		public override AbstractComposite build(float[] x, float[] y, float[] z)
 		{
 			setData(x, y, z);
-			Shape s = new Shape();
+			var s = new Shape();
 			s.Add(getExtrapolatedRingPolygons());
 			return s;
 		}
@@ -35,17 +35,20 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 		{
 			//backup current coords and extrapolate
 			float[] xbackup = (float[])x.Clone();
-            float[] ybackup = (float[])y.Clone();
-            float[,] zbackup = (float[,])z.Clone();
+			float[] ybackup = (float[])y.Clone();
+			float[,] zbackup = (float[,])z.Clone();
 			// compute required extrapolation
 			float sstep = x[1] - x[0];
 			int nstep = x.Length;
-			int ENLARGE = 2;
-			int required = (int)(Math.Ceiling((_ringMax * 2 - sstep * nstep) / sstep));
+			const int ENLARGE = 2;
+			int required = (int)Math.Ceiling((_ringMax * 2 - sstep * nstep) / sstep);
 			required = (required < 0 ? ENLARGE : required + ENLARGE);
-			if ((required > 0)) {
+
+			if (required > 0)
+			{
 				extrapolate(required);
 			}
+
 			_interpolator.x = x;
 			_interpolator.y = y;
 			_interpolator.z = z;
@@ -62,12 +65,12 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 		/// are maximized
 		/// </summary>
 		/// <param name="n"></param>
-		/// <remarks></remarks>
 		public void extrapolate(int n)
 		{
 			float[] xnew = new float[x.Length + n * 2];
 			float[] ynew = new float[y.Length + n * 2];
 			float[,] znew = new float[x.Length + n * 2, y.Length + n * 2];
+
 			// assume x and y grid are allready sorted and create new grids
 			float xmin = x[0];
 			float xmax = x[x.Length - 1];
@@ -75,40 +78,58 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 			float ymin = y[0];
 			float ymax = y[y.Length - 1];
 			float ygap = y[1] - y[0];
-			for (int i = 0; i <= xnew.Length - 1; i++) {
+
+			for (int i = 0; i <= xnew.Length - 1; i++)
+			{
 				// --- x grid ---
 				// fill before
-				if ((i < n)) {
+				if (i < n)
+				{
 					xnew[i] = xmin - (n - i) * xgap;
-				// copy content
-				} else if ((i >= n & i < x.Length + n)) {
+					// copy content
+				}
+				else if (i >= n & i < x.Length + n)
+				{
 					xnew[i] = x[i - n];
-				// fill after
-				} else if ((i >= x.Length + n)) {
+					// fill after
+				}
+				else if (i >= x.Length + n)
+				{
 					xnew[i] = xmax + (i - (x.Length + n) + 1) * xgap;
 				}
+
 				// --- y grid ---
-				for (int j = 0; j <= ynew.Length - 1; j++) {
+				for (int j = 0; j <= ynew.Length - 1; j++)
+				{
 					// fill before
-					if ((j < n)) {
+					if ((j < n))
+					{
 						ynew[j] = ymin - (n - j) * ygap;
 						znew[i, j] = float.NaN;
-					// copy content
-					} else if ((j >= n & j < (y.Length + n))) {
+						// copy content
+					}
+					else if (j >= n & j < (y.Length + n))
+					{
 						ynew[j] = y[j - n];
 						// copy z grid
-						if ((i >= n & i < x.Length + n)) {
+						if (i >= n & i < x.Length + n)
+						{
 							znew[i, j] = z[i - n, j - n];
-						} else {
+						}
+						else
+						{
 							znew[i, j] = float.NaN;
 						}
-					// fill after
-					} else if ((j >= (y.Length + n))) {
+						// fill after
+					}
+					else if (j >= (y.Length + n))
+					{
 						ynew[j] = ymax + (j - (y.Length + n) + 1) * ygap;
 						znew[i, j] = float.NaN;
 					}
 				}
 			}
+
 			// extrapolation
 			float olddiameter = xgap * (x.Length) / 2;
 			float newdiameter = xgap * (x.Length - 1 + n * 2) / 2;
@@ -119,14 +140,19 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 			int ymiddle = (ynew.Length - 1) / 2;
 			// assume it is an uneven grid		
 			// start from center, and add extrapolated values iteratively on each quadrant
-			for (int i = xmiddle; i <= xnew.Length - 1; i++) {
-				for (int j = ymiddle; j <= ynew.Length - 1; j++) {
+			for (int i = xmiddle; i <= xnew.Length - 1; i++)
+			{
+				for (int j = ymiddle; j <= ynew.Length - 1; j++)
+				{
 					float sqrad = xnew[i] * xnew[i] + ynew[j] * ynew[j];
 					// distance to center
-					if ((sqrad < olddiameter)) {
+					if ((sqrad < olddiameter))
+					{
 						// ignore existing values
 						continue;
-					} else if ((sqrad < newdiameter & sqrad >= olddiameter)) {
+					}
+					else if ((sqrad < newdiameter & sqrad >= olddiameter))
+					{
 						// ignore existing values
 						int xopp = i - 2 * (i - xmiddle);
 						int yopp = j - 2 * (j - ymiddle);
@@ -138,13 +164,16 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 						// right down
 						znew[xopp, yopp] = getExtrapolatedZ(znew, xopp, yopp);
 						// left  down
-					//if(sqrad > newdiameter)
-					} else {
+						//if(sqrad > newdiameter)
+					}
+					else
+					{
 						// ignore values standing outside desired diameter
 						znew[i, j] = float.NaN;
 					}
 				}
 			}
+
 			// store result
 			x = xnew;
 			y = ynew;
@@ -159,23 +188,29 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 			dynamic up = (currentYi + 1 < grid.GetLength(1) ? currentYi + 1 : currentYi);
 			float cumval = 0;
 			int nval = 0;
-			for (int u = left; u <= right; u++) {
-				for (int v = bottom; v <= up; v++) {
-					if ((!float.IsNaN(grid[u, v]))) {
+
+			for (int u = left; u <= right; u++)
+			{
+				for (int v = bottom; v <= up; v++)
+				{
+					if (!float.IsNaN(grid[u, v]))
+					{
 						cumval += grid[u, v];
-						nval += 1;
+						nval++;
 					}
 				}
 			}
-			if ((nval > 0)) {
+
+			if (nval > 0)
+			{
 				return cumval / nval;
-			} else {
+			}
+			else
+			{
 				return float.NaN;
 			}
 		}
-
 	}
-
 }
 
 //=======================================================

@@ -2,7 +2,7 @@ using OpenTK.Mathematics;
 
 namespace Nzy3d.Colors
 {
-    public class Color
+	public class Color
 	{
 		#region "Members"
 		public double r;
@@ -22,17 +22,16 @@ namespace Nzy3d.Colors
 		public static Color MAGENTA = new Color(1.0, 0.0, 1.0);
 		public static Color CYAN = new Color(0.0, 1.0, 1.0);
 		#endregion
+
 		static internal Random randObj = new Random();
 
 		#region "Constructors"
-
 		/// <summary>
-		///  Initialize a color with values between 0 and 1 and an alpha channel set to maximum
+		/// Initialize a color with values between 0 and 1 and an alpha channel set to maximum
 		/// </summary>
 		/// <param name="r">Red value (between 0 and 1)</param>
 		/// <param name="g">Green value (between 0 and 1)</param>
 		/// <param name="b">Blue value (between 0 and 1)</param>
-		/// <remarks></remarks>
 		public Color(double r, double g, double b) : this(r, g, b, 1)
 		{
 		}
@@ -43,7 +42,6 @@ namespace Nzy3d.Colors
 		/// <param name="r">Red value (between 0 and 255)</param>
 		/// <param name="g">Green value (between 0 and 255)</param>
 		/// <param name="b">Blue value (between 0 and 255)</param>
-		/// <remarks></remarks>
 		public Color(int r, int g, int b) : this(Convert.ToDouble(r / 255), Convert.ToDouble(g / 255), Convert.ToDouble(b / 255), 1)
 		{
 		}
@@ -55,7 +53,6 @@ namespace Nzy3d.Colors
 		/// <param name="g">Green value (between 0 and 1)</param>
 		/// <param name="b">Blue value (between 0 and 1)</param>
 		/// <param name="a">a value (between 0 and 1)</param>
-		/// <remarks></remarks>
 		public Color(double r, double g, double b, double a)
 		{
 			this.r = r;
@@ -71,20 +68,16 @@ namespace Nzy3d.Colors
 		/// <param name="g">Green value (between 0 and 255)</param>
 		/// <param name="b">Blue value (between 0 and 255)</param>
 		/// <param name="a">a value (between 0 and 255)</param>
-		/// <remarks></remarks>
 		public Color(int r, int g, int b, int a) : this(Convert.ToDouble(r / 255), Convert.ToDouble(g / 255), Convert.ToDouble(b / 255), Convert.ToDouble(a / 255))
 		{
 		}
-
 		#endregion
 
 		#region "Methods"
-
 		/// <summary>
 		/// Multiply current color components (including alpha value) by <paramref name="factor"/> color components values and assign value to current color.
 		/// </summary>
 		/// <param name="factor">Multiply values.</param>
-		/// <remarks></remarks>
 		public void mul(Color factor)
 		{
 			this.r *= factor.r;
@@ -111,8 +104,6 @@ namespace Nzy3d.Colors
 		/// <summary>
 		/// Returns the string representation of this color, including alpha channel value
 		/// </summary>
-		/// <returns></returns>
-		/// <remarks></remarks>
 		public override string ToString()
 		{
 			return "(Color) r=" + r + " g=" + g + " b=" + b + " a=" + a;

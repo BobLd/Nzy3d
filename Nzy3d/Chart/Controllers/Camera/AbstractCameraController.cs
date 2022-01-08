@@ -4,9 +4,8 @@ namespace Nzy3d.Chart.Controllers.Camera
 {
 	public class AbstractCameraController : AbstractController
 	{
-
-
 		public static bool DEFAULT_UPDATE_VIEW = false;
+
 		public AbstractCameraController() : base()
 		{
 		}
@@ -28,7 +27,6 @@ namespace Nzy3d.Chart.Controllers.Camera
 			}
 			fireControllerEvent(ControllerType.ROTATE, move);
 		}
-
 
 		protected void Shift(float factor)
 		{

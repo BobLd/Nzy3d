@@ -2,7 +2,7 @@ using Nzy3d.Plot3D.Rendering.View;
 
 namespace Nzy3d.Plot3D.Primitives
 {
-	public interface ISortableDraw
+    public interface ISortableDraw
 	{
 		double getDistance(Camera camera);
 		double getShortestDistance(Camera camera);

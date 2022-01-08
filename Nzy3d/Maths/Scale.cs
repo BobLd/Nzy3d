@@ -1,27 +1,16 @@
 namespace Nzy3d.Maths
 {
-    public class Scale
+	public class Scale
 	{
-		private double m_min;
-
-		private double m_max;
 		public Scale(double min, double max)
 		{
-			m_min = min;
-			m_max = max;
+			Min = min;
+			Max = max;
 		}
 
-		public double Min
-		{
-			get { return m_min; }
-			set { m_min = value; }
-		}
+		public double Min { get; set; }
 
-		public double Max
-		{
-			get { return m_max; }
-			set { m_max = value; }
-		}
+		public double Max { get; set; }
 
 		public double Range
 		{
@@ -44,7 +33,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public bool Contains(double value)
 		{
-			return (Min <= value & value <= Max);
+			return Min <= value & value <= Max;
 		}
 
 		public bool isMaxNan()
@@ -87,7 +76,7 @@ namespace Nzy3d.Maths
 
 		public override string ToString()
 		{
-			return ("min=" + Min + " max=" + Max);
+			return "min=" + Min + " max=" + Max;
 		}
 	}
 }

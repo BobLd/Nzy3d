@@ -42,6 +42,7 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 			{
 				throw new Exception("x, y, and z arrays must agree in length.");
 			}
+
 			// Initialize loading
 			this.x = unique(x);
 			this.y = unique(y);
@@ -58,7 +59,7 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 			for (int p = 0; p <= z.Length - 1; p++)
 			{
 				found = find(this.x, this.y, x[p], y[p]);
-				if ((!found))
+				if (!found)
 				{
 					throw new Exception("it seems (x[p],y[p]) has not been properly stored into (this.x,this.y)");
 				}
@@ -70,9 +71,11 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 		{
 			float[] copy = (float[])data.Clone();
 			System.Array.Sort(copy);
+
 			// count unique values
 			int nunique = 0;
 			float last = float.NaN;
+
 			for (int i = 0; i <= copy.Length - 1; i++)
 			{
 				if (float.IsNaN(copy[i]))
@@ -81,10 +84,11 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 				}
 				else if (copy[i] != last)
 				{
-					nunique += 1;
+                    nunique++;
 					last = copy[i];
 				}
 			}
+
 			// Fill a sorted unique array
 			float[] result = new float[nunique];
 			last = float.NaN;
@@ -93,13 +97,13 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 			{
 				if (float.IsNaN(copy[d]))
 				{
-					//         /System.out.println("Ignoring NaN value at " + d);
+					// System.out.println("Ignoring NaN value at " + d);
 				}
 				else if (copy[d] != last)
 				{
 					result[r] = copy[d];
 					last = copy[d];
-					r += 1;
+                    r++;
 				}
 			}
 			return result;
@@ -122,10 +126,12 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 					xi = i;
 				}
 			}
+
 			if (xi == -1)
 			{
 				return false;
 			}
+
 			for (int j = 0; j <= y.Length - 1; j++)
 			{
 				if (y[j] == vy)
@@ -133,10 +139,12 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 					yj = j;
 				}
 			}
+
 			if (yj == -1)
 			{
 				return false;
 			}
+
 			findxi = xi;
 			findyj = yj;
 			return true;
@@ -156,27 +164,30 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 				{
 					// Compute quad making a polygon
 					Point[] p = getRealQuadStandingOnPoint(xi, yi);
-					if ((!validZ(p)))
+					if (!validZ(p))
 					{
 						continue;
 						// ignore non valid set of points
 					}
-					if (((cmap != null)))
+
+                    if (cmap != null)
 					{
 						p[0].Color = cmap.Color(p[0].xyz);
 						p[1].Color = cmap.Color(p[1].xyz);
 						p[2].Color = cmap.Color(p[2].xyz);
 						p[3].Color = cmap.Color(p[3].xyz);
 					}
-					if (((colorFactor != null)))
+
+					if (colorFactor != null)
 					{
 						p[0].rgb.mul(colorFactor);
 						p[1].rgb.mul(colorFactor);
 						p[2].rgb.mul(colorFactor);
 						p[3].rgb.mul(colorFactor);
 					}
+
 					// Store quad
-					Polygon quad = new Polygon();
+					var quad = new Polygon();
 					for (int pi = 0; pi <= p.Length - 1; pi++)
 					{
 						quad.Add(p[pi]);
@@ -194,26 +205,29 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 
 		public object getSquarePolygonsAroundCoordinates(ColorMapper cmap, Color colorFactor)
 		{
-			List<Polygon> polygons = new List<Polygon>();
+			var polygons = new List<Polygon>();
+
 			for (int xi = 0; xi <= x.Length - 2; xi++)
 			{
 				for (int yi = 0; yi <= y.Length - 2; yi++)
 				{
 					// Compute quad making a polygon
 					Point[] p = getEstimatedQuadSurroundingPoint(xi, yi);
-					if ((!validZ(p)))
+					if (!validZ(p))
 					{
 						continue;
 						// ignore non valid set of points
 					}
-					if (((cmap != null)))
+
+                    if (cmap != null)
 					{
 						p[0].Color = cmap.Color(p[0].xyz);
 						p[1].Color = cmap.Color(p[1].xyz);
 						p[2].Color = cmap.Color(p[2].xyz);
 						p[3].Color = cmap.Color(p[3].xyz);
 					}
-					if (((colorFactor != null)))
+
+                    if (colorFactor != null)
 					{
 						p[0].rgb.mul(colorFactor);
 						p[1].rgb.mul(colorFactor);
@@ -256,7 +270,7 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 		{
 			foreach (Point p in points)
 			{
-				if ((!validZ(p)))
+				if (!validZ(p))
 				{
 					return false;
 				}
@@ -266,7 +280,7 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 
 		internal bool validZ(Point p)
 		{
-			return !(double.IsNaN(p.xyz.z));
+			return !double.IsNaN(p.xyz.z);
 		}
 
 		public override AbstractComposite build(float[] x, float[] y, float[] z)

@@ -1,10 +1,10 @@
 namespace Nzy3d.Maths
 {
-    /// <summary>
-    /// An Angle3d stores three 3d points, considering the angle is on the second one.
-    /// An instance may return angle(), cos() and sin()
-    /// </summary>
-    public class Angle3d
+	/// <summary>
+	/// An Angle3d stores three 3d points, considering the angle is on the second one.
+	/// An instance may return angle(), cos() and sin()
+	/// </summary>
+	public class Angle3d
 	{
 		#region "Members"
 		private double x1;
@@ -15,7 +15,7 @@ namespace Nzy3d.Maths
 		private double y3;
 		private double z1;
 		private double z2;
-			#endregion
+		#endregion
 
 		private double z3;
 
@@ -43,17 +43,16 @@ namespace Nzy3d.Maths
 		#endregion
 
 		#region "Functions"
-
 		/// <summary>
 		/// Computes the sinus of the angle
 		/// </summary>
 		public double sin()
 		{
-			Coord3d c2 = new Coord3d(x2, y2, z2);
-			Vector3d v1 = new Vector3d(x1, y1, z1, x2, y2, z2);
-			Vector3d v3 = new Vector3d(x3, y3, z3, x2, y2, z2);
-			Coord3d c4 = v1.cross(v3).@add(c2);
-			Vector3d v4 = new Vector3d(c4, c2);
+			var c2 = new Coord3d(x2, y2, z2);
+			var v1 = new Vector3d(x1, y1, z1, x2, y2, z2);
+			var v3 = new Vector3d(x3, y3, z3, x2, y2, z2);
+			var c4 = v1.cross(v3).@add(c2);
+			var v4 = new Vector3d(c4, c2);
 			return (c4.z >= 0 ? 1 : -1) * v4.norm() / (v1.norm() * v3.norm());
 		}
 
@@ -62,9 +61,9 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public double cos()
 		{
-			Vector3d v1 = new Vector3d(x1, y1, z1, x2, y2, z2);
-			Vector3d v3 = new Vector3d(x3, y3, z3, x2, y2, z2);
-            return v1.dot(v3) / (v1.norm() * v3.norm());
+			var v1 = new Vector3d(x1, y1, z1, x2, y2, z2);
+			var v3 = new Vector3d(x3, y3, z3, x2, y2, z2);
+			return v1.dot(v3) / (v1.norm() * v3.norm());
 		}
 
 		/// <summary>
@@ -73,9 +72,12 @@ namespace Nzy3d.Maths
 		public double angle()
 		{
 			// between 0 and PI: Math.acos(cos());
-			if ((sin() > 0)) {
+			if (sin() > 0)
+			{
 				return Math.Acos(cos());
-			} else {
+			}
+			else
+			{
 				return Math.PI * 2 - Math.Acos(cos());
 			}
 		}

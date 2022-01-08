@@ -1,9 +1,8 @@
 using Nzy3d.Events;
-using System.Collections.Generic;
 
 namespace Nzy3d.Chart.Controllers
 {
-	public class AbstractController
+    public class AbstractController
 	{
 		protected List<Chart> _targets = new List<Chart>();
 

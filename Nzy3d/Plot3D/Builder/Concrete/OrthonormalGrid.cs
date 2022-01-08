@@ -17,18 +17,18 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 		{
 			double xstep = xrange.Range / (xsteps - 1);
 			double ystep = yrange.Range / (ysteps - 1);
-			List<Coord3d> output = new List<Coord3d>();
+			var output = new List<Coord3d>();
+
 			for (int xi = 0; xi <= xsteps - 1; xi++)
 			{
 				for (int yi = 0; yi <= ysteps - 1; yi++)
 				{
-					double x = 0;
-					double y = 0;
-					x = xrange.Min + xi * xstep;
-					y = yrange.Min + yi * ystep;
-					output.Add(new Coord3d(x, y, mapper.f(x, y)));
+                    double x = xrange.Min + xi * xstep;
+                    double y = yrange.Min + yi * ystep;
+                    output.Add(new Coord3d(x, y, mapper.f(x, y)));
 				}
 			}
+
 			return output;
 		}
 	}

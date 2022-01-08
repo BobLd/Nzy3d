@@ -1,6 +1,6 @@
 namespace Nzy3d.Maths
 {
-    public class Pair<X, Y>
+	public class Pair<X, Y>
 	{
 		//Implements ISerializable
 

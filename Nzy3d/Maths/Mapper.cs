@@ -6,9 +6,8 @@ namespace Nzy3d.Maths
 	/// It moreover provide the service of gathering input and computed output
 	/// into a  <see cref="Coordinates"/> object, that provides arrays of
 	/// X,Y, and Z coordinates as float values.
-	/// <see cref="Mapper"/> is deprecated. One should use <see cref="plot3D.builder.Mapper"/> instead
+	/// <see cref="Mapper"/> is deprecated. One should use <see cref="Mapper"/> instead
 	/// </summary>
-	/// <remarks></remarks>
 	public abstract class Mapper
 	{
 		/// <summary>
@@ -76,8 +75,6 @@ namespace Nzy3d.Maths
 		///  Return a structure containing X, Y, and Z coordinates as arrays of double.
 		/// </summary>
 		/// <param name="xy">A single coordinate point. Dimension must be equal to 2.</param>
-		/// <returns></returns>
-		/// <remarks></remarks>
 		public Coordinates getCoordinates(double[] xy)
 		{
 			if (xy.GetLength(0) != 2)
@@ -98,8 +95,6 @@ namespace Nzy3d.Maths
 		///  Return a structure containing X, Y, and Z coordinates as arrays of double.
 		/// </summary>
 		/// <param name="xy">A single coordinate point. Dimension must be equal to 2.</param>
-		/// <returns></returns>
-		/// <remarks></remarks>
 		public Coordinates getCoordinates(float[] xy)
 		{
 			if (xy.GetLength(0) != 2)

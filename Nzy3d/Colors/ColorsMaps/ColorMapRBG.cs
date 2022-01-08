@@ -1,8 +1,6 @@
-using Nzy3d.Colors;
-
 namespace Nzy3d.Colors.ColorMaps
 {
-    public class ColorMapRBG : IColorMap
+	public class ColorMapRBG : IColorMap
 	{
 		private bool m_direction;
 		public bool Direction
@@ -22,19 +20,25 @@ namespace Nzy3d.Colors.ColorMaps
 		}
 
 		/// <summary>
-		/// Helper function 
+		/// <para>
+		/// Helper function
+		/// </para>
+		/// <para>
 		/// Return the influence of a color, by comparing the input value to the color spectrum.
-		/// 
+		/// </para>
+		/// <para>
 		///  The design of a colormap implies defining the influence of each base color
 		///  (red, green, and blue) over the range of input data.
 		///  For this reason, the value given to this function is a number between 0 and 1,
 		///  indicating the position of the input value in the colormap.
 		///  Any value standing outside of colormap boundaries should have the "maximal" or
 		///  "minimal" color.
-		/// 
+		/// </para>
+		/// <para>
 		///  Exemple:
 		///  A rainbow colormap is a progressive transition from blue, to green and red.
 		///  The mix between these 3 colors, may be expressed by the definition of 3 functions:
+		/// </para>
 		///  <code>
 		///        blue     green     red
 		///      /-------\/-------\/-------\
@@ -44,7 +48,7 @@ namespace Nzy3d.Colors.ColorMaps
 		///  |----------------|----------------|
 		///  0               0.5               1
 		///  </code>
-		/// 
+		///
 		///  In order to get the color of an input value standing between 0 and 1, the user
 		///  should call:
 		/// d
@@ -120,8 +124,6 @@ namespace Nzy3d.Colors.ColorMaps
 		/// <summary>
 		/// Returns the string representation of this colormap
 		/// </summary>
-		/// <returns></returns>
-		/// <remarks></remarks>
 		public override string ToString()
 		{
 			return "ColorMapRGB";

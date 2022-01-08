@@ -4,7 +4,6 @@ namespace Nzy3d.Plot3D.Primitives
 	/// Allows building custom shapes defined by an {@link ArrayList} of {@link Polygon}s.
 	/// Such {@link ArrayList} must be defined by the user.
 	/// </summary>
-	/// <remarks></remarks>
 	public class Shape : AbstractComposite
 	{
 		public Shape() : base()

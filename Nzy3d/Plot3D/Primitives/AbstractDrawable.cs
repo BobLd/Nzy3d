@@ -8,6 +8,7 @@ using OpenTK.Graphics.OpenGL;
 namespace Nzy3d.Plot3D.Primitives
 {
 	/// <summary>
+	/// <para>
 	/// A <see cref="AbstractDrawable"/> defines objects that may be rendered into an OpenGL
 	/// context provided by a <see cref="ICanvas"/>.
 	/// <br/>
@@ -31,10 +32,9 @@ namespace Nzy3d.Plot3D.Primitives
 	/// according to a rendering into the FeedBack buffer. This is currently supported
 	/// specifically for the <see cref="AxeBox"/> object but could be extended with some few more
 	/// algorithm for referencing all GL2 polygons.
-	///
-	/// @author Martin Pernollet
+	/// </para>
+	/// <para>@author Martin Pernollet</para>
 	/// </summary>
-	/// <remarks></remarks>
 	public abstract class AbstractDrawable : IGLRenderer, ISortableDraw
 	{
 		internal Transform.Transform _transform;
@@ -100,14 +100,7 @@ namespace Nzy3d.Plot3D.Primitives
 		{
 			get
 			{
-				if ((_bbox != null))
-				{
-					return _bbox.getCenter();
-				}
-				else
-				{
-					return Coord3d.INVALID;
-				}
+				return _bbox != null ? _bbox.getCenter() : Coord3d.INVALID;
 			}
 		}
 

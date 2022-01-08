@@ -3,7 +3,7 @@ using Range = Nzy3d.Maths.Range;
 
 namespace Nzy3d.Plot3D.Builder.Concrete
 {
-	public class RingGrid : Grid
+    public class RingGrid : Grid
 	{
 		internal double sqradius;
 		public RingGrid(double radius, int xysteps, int enlargeSteps) : base(new Range(-radius - (enlargeSteps * radius / xysteps), radius + (enlargeSteps * radius / xysteps)), xysteps)
@@ -19,21 +19,21 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 		{
 			double xstep = xrange.Range / xsteps;
 			double ystep = yrange.Range / ysteps;
-			List<Coord3d> output = new List<Coord3d>();
+			var output = new List<Coord3d>();
+
 			for (int xi = -(xsteps - 1) / 2; xi <= (xsteps - 1) / 2; xi++)
 			{
 				for (int yi = -(ysteps - 1) / 2; yi <= (ysteps - 1) / 2; yi++)
 				{
-					double x = 0;
-					double y = 0;
-					x = xi * xstep;
-					y = yi * ystep;
+					double x = xi * xstep;
+					double y = yi * ystep;
 					if (sqradius > x * x + y * y)
 					{
 						output.Add(new Coord3d(x, y, mapper.f(x, y)));
 					}
 				}
 			}
+
 			return output;
 		}
 	}

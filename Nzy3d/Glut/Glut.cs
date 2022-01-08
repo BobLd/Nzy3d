@@ -3,7 +3,7 @@ using OpenTK.Mathematics;
 
 namespace Nzy3d.Glut
 {
-	internal static class Glut
+    internal static class Glut
 	{
 		public const int STROKE_ROMAN = 0;
 		public const int STROKE_MONO_ROMAN = 1;
@@ -17,7 +17,8 @@ namespace Nzy3d.Glut
 		public const int BITMAP_HELVETICA_18 = 8;
 
 		private static float[,] boxVertices;
-		private static float[,] boxNormals = {
+
+		private static readonly float[,] boxNormals = {
 			{
 				-1.0F,
 				0.0F,
@@ -48,9 +49,9 @@ namespace Nzy3d.Glut
 				0.0F,
 				-1.0F
 			}
-
 		};
-		private static int[,] boxFaces = {
+
+		private static readonly int[,] boxFaces = {
 			{
 				0,
 				1,
@@ -148,20 +149,21 @@ namespace Nzy3d.Glut
 
 		public static bool UnProject(Vector4d winPos, Matrix4d modelMatrix, Matrix4d projMatrix, double[] viewport, ref Vector4d objPos)
 		{
-			Matrix4d p = Matrix4d.Mult(modelMatrix, projMatrix);
-			Matrix4d finalMatrix = Matrix4d.Invert(p);
-			Vector4d @in = winPos;
+			var p = Matrix4d.Mult(modelMatrix, projMatrix);
+			var finalMatrix = Matrix4d.Invert(p);
+			var _in = winPos;
 
 			// Map x and y from window coordinates 
-			@in.X = (@in.X - viewport[0]) / viewport[2];
-			@in.Y = (@in.Y - viewport[1]) / viewport[3];
-			// Map to range -1 to 1 
-			@in.X = @in.X * 2.0 - 1.0;
-			@in.Y = @in.Y * 2.0 - 1.0;
-			@in.Z = @in.Z * 2.0 - 1.0;
-			@in.W = 1.0;
+			_in.X = (_in.X - viewport[0]) / viewport[2];
+			_in.Y = (_in.Y - viewport[1]) / viewport[3];
 
-			Vector4d @out = Vector4d.TransformRow(@in, finalMatrix);
+			// Map to range -1 to 1 
+			_in.X = _in.X * 2.0 - 1.0;
+			_in.Y = _in.Y * 2.0 - 1.0;
+			_in.Z = _in.Z * 2.0 - 1.0;
+			_in.W = 1.0;
+
+			var @out = Vector4d.TransformRow(_in, finalMatrix);
 
 			if (@out.W == 0.0)
 			{
@@ -180,50 +182,45 @@ namespace Nzy3d.Glut
 		{
 			objPos.W = 1;
 
-			Vector4d @out = default(Vector4d);
+			var _out = Vector4d.TransformRow(objPos, modelMatrix);
+			_out = Vector4d.TransformRow(_out, projMatrix);
 
-			@out = Vector4d.TransformRow(objPos, modelMatrix);
-			@out = Vector4d.TransformRow(@out, projMatrix);
-
-			if (@out.W == 0)
+			if (_out.W == 0)
 			{
 				return false;
 			}
 
-			@out.W = (1 / @out.W) * 0.5;
+			_out.W = (1 / _out.W) * 0.5;
 
 			// Map X/Y/Z to range 0-1
-			@out.X = @out.X * @out.W + 0.5;
-			@out.Y = @out.Y * @out.W + 0.5;
-			@out.Z = @out.Z * @out.W + 0.5;
+			_out.X = _out.X * _out.W + 0.5;
+			_out.Y = _out.Y * _out.W + 0.5;
+			_out.Z = _out.Z * _out.W + 0.5;
 
 			// Map x, y to viewport
 			winPos = new Vector4d();
-			winPos.X = @out.X * viewport[2] + viewport[0];
-			winPos.Y = @out.Y * viewport[3] + viewport[1];
-			winPos.Z = @out.Z;
+			winPos.X = _out.X * viewport[2] + viewport[0];
+			winPos.Y = _out.Y * viewport[3] + viewport[1];
+			winPos.Z = _out.Z;
 
 			return true;
 		}
 
 		public static void Perspective(double fovy, double aspect, double zNear, double zFar)
 		{
-			double sine = 0;
-			double cotangent = 0;
-			double deltaZ = 0;
-			double radians = fovy / 2 * System.Math.PI / 180;
+			double radians = fovy / 2 * Math.PI / 180;
 
-			deltaZ = zFar - zNear;
-			sine = System.Math.Sin(radians);
+			double deltaZ = zFar - zNear;
+			double sine = Math.Sin(radians);
 
-			if (((deltaZ == 0) | (sine == 0) | (aspect == 0)))
+			if ((deltaZ == 0) | (sine == 0) | (aspect == 0))
 			{
 				return;
 			}
 
-			cotangent = System.Math.Cos(radians) / sine;
+			double cotangent = Math.Cos(radians) / sine;
 
-			Matrix4d matrix = MakeIdentityD();
+			var matrix = MakeIdentityD();
 			matrix.M11 = cotangent / aspect;
 			matrix.M22 = cotangent;
 			matrix.M33 = -(zFar + zNear) / deltaZ;
@@ -246,20 +243,20 @@ namespace Nzy3d.Glut
 
 		public static void LookAt(double eyeX, double eyeY, double eyeZ, double centerX, double centerY, double centerZ, double upX, double upY, double upZ)
 		{
-			Vector3d forward = new Vector3d(centerX - eyeX, centerY - eyeY, centerZ - eyeZ);
+			var forward = new Vector3d(centerX - eyeX, centerY - eyeY, centerZ - eyeZ);
 
-			Vector3d up = new Vector3d(upX, upY, upZ);
+			var up = new Vector3d(upX, upY, upZ);
 
 			forward.Normalize();
 
 			//Side = forward x up
-			Vector3d side = Vector3d.Cross(forward, up);
+			var side = Vector3d.Cross(forward, up);
 			side.Normalize();
 
 			//Recompute up as: up = side x forward 
 			up = Vector3d.Cross(side, forward);
 
-			Matrix4d matrix = MakeIdentityD();
+			var matrix = MakeIdentityD();
 
 			matrix.M11 = side.X;
 			matrix.M21 = side.Y;
@@ -330,24 +327,28 @@ namespace Nzy3d.Glut
 		{
 			BitmapFontRec fontinfo = getBitmapFont(font);
 			int c = (int)cin & 0xffff;
+
 			if (c < fontinfo.first | c >= fontinfo.first + fontinfo.num_chars)
 			{
 				return;
 			}
+
 			BitmapCharRec ch = fontinfo.ch[c - fontinfo.first];
-			if ((ch != null))
+
+			if (ch != null)
 			{
 				GL.Bitmap(ch.width, ch.height, ch.xorig, ch.yorig, ch.advance, 0, ch.bitmap);
 			}
 		}
 
-		private static BitmapFontRec[] bitmapFonts = new BitmapFontRec[9];
+		private static readonly BitmapFontRec[] bitmapFonts = new BitmapFontRec[9];
 
-		private static StrokeFontRec[] strokeFonts = new StrokeFontRec[9];
+		private static readonly StrokeFontRec[] strokeFonts = new StrokeFontRec[9];
+
 		private static BitmapFontRec getBitmapFont(int font)
 		{
 			BitmapFontRec rec = bitmapFonts[font];
-			if ((rec == null))
+			if (rec == null)
 			{
 				switch (font)
 				{

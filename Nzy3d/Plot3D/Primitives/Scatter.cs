@@ -9,9 +9,7 @@ namespace Nzy3d.Plot3D.Primitives
     public class Scatter : AbstractDrawable, ISingleColorable
     {
         private Color[] _colors;
-        private Color _color;
         private Coord3d[] _coordinates;
-        private float _width;
 
         public Scatter()
         {
@@ -51,11 +49,11 @@ namespace Nzy3d.Plot3D.Primitives
         {
             _transform?.Execute();
 
-            GL.PointSize(_width);
+            GL.PointSize(Width);
             GL.Begin(PrimitiveType.Points);
             if (_colors == null)
             {
-                GL.Color4(_color.r, _color.g, _color.b, _color.a);
+                GL.Color4(Color.r, Color.g, Color.b, Color.a);
             }
 
             if (_coordinates != null)
@@ -116,16 +114,8 @@ namespace Nzy3d.Plot3D.Primitives
             }
         }
 
-        private float Width
-        {
-            get => _width;
-            set => _width = value;
-        }
+        private float Width { get; set; }
 
-        public Color Color
-        {
-            get => _color;
-            set => _color = value;
-        }
+        public Color Color { get; set; }
     }
 }

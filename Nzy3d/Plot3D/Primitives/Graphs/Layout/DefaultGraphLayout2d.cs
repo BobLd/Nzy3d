@@ -4,7 +4,8 @@ namespace Nzy3d.Plot3D.Primitives.Graphs.Layout
 {
     public class DefaultGraphLayout2d<V> : IGraphLayout2d<V>
 	{
-        private List<Tuple<V, Coord2d>> _values = new List<Tuple<V,Coord2d>>();
+        private readonly List<Tuple<V, Coord2d>> _values = new List<Tuple<V,Coord2d>>();
+
         /*
 		public Maths.Coord2d getV(V v)
 		{

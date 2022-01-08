@@ -51,7 +51,6 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Computed and returns the bound of datas in the grid (x,y,z)
 		/// </summary>
-		/// <returns></returns>
 		/// <remarks>BoundingBox is recomputed each time the function is called, in contrary to nzy3D where it is kept in a dangerous cache.</remarks>
 		public BoundingBox3d getBounds()
 		{

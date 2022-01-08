@@ -1,24 +1,16 @@
-using Nzy3d.Maths;
 using Nzy3d.Plot3D.Primitives;
 
 namespace Nzy3d.Maths
 {
-    /// <summary>
-    /// A BoundingBox3d stores a couple of maximal and minimal limit on
-    ///  each dimension (x, y) in cartesian coordinates. It provides functions for enlarging
-    ///  the box by adding cartesian coordinates or an other
-    ///  BoundingBox3d (that is equivalent to computing the union of the
-    ///  current BoundingBox and another one).
-    /// </summary>
-    public class BoundingBox3d
+	/// <summary>
+	/// A BoundingBox3d stores a couple of maximal and minimal limit on
+	/// each dimension (x, y) in cartesian coordinates. It provides functions for enlarging
+	/// the box by adding cartesian coordinates or an other
+	/// BoundingBox3d (that is equivalent to computing the union of the
+	/// current BoundingBox and another one).
+	/// </summary>
+	public class BoundingBox3d
 	{
-		private double m_xmin;
-		private double m_xmax;
-		private double m_ymin;
-		private double m_ymax;
-		private double m_zmin;
-
-		private double m_zmax;
 		/// <summary>
 		/// Initialize a BoundingBox by calling its reset method.
 		/// </summary>
@@ -54,14 +46,16 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Initialize a BoundingBox with given centre and edgeLength (equals in all directions)
 		/// </summary>
-		public BoundingBox3d(Coord3d center, double edgeLength) : this(center.x - edgeLength / 2, center.x + edgeLength / 2, center.y - edgeLength / 2, center.y + edgeLength / 2, center.z - edgeLength / 2, center.z + edgeLength / 2)
+		public BoundingBox3d(Coord3d center, double edgeLength)
+			: this(center.x - edgeLength / 2, center.x + edgeLength / 2, center.y - edgeLength / 2, center.y + edgeLength / 2, center.z - edgeLength / 2, center.z + edgeLength / 2)
 		{
 		}
 
 		/// <summary>
 		/// Initialize a BoundingBox with another bounding box (i.e. performs a copy)
 		/// </summary>
-		public BoundingBox3d(BoundingBox3d anotherBox) : this(anotherBox.m_xmin, anotherBox.m_xmax, anotherBox.m_ymin, anotherBox.m_ymax, anotherBox.m_zmin, anotherBox.m_zmax)
+		public BoundingBox3d(BoundingBox3d anotherBox)
+			: this(anotherBox.xmin, anotherBox.xmax, anotherBox.ymin, anotherBox.ymax, anotherBox.zmin, anotherBox.zmax)
 		{
 		}
 
@@ -70,12 +64,12 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public BoundingBox3d(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax)
 		{
-			m_xmin = xmin;
-			m_xmax = xmax;
-			m_ymin = ymin;
-			m_ymax = ymax;
-			m_zmin = zmin;
-			m_zmax = zmax;
+			this.xmin = xmin;
+			this.xmax = xmax;
+			this.ymin = ymin;
+			this.ymax = ymax;
+			this.zmin = zmin;
+			this.zmax = zmax;
 		}
 
 		/// <summary>
@@ -84,12 +78,12 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public void reset()
 		{
-			m_xmin = double.MaxValue;
-			m_xmax = double.MinValue;
-			m_ymin = double.MaxValue;
-			m_ymax = double.MinValue;
-			m_zmin = double.MaxValue;
-			m_zmax = double.MinValue;
+			xmin = double.MaxValue;
+			xmax = double.MinValue;
+			ymin = double.MaxValue;
+			ymax = double.MinValue;
+			zmin = double.MaxValue;
+			zmax = double.MinValue;
 		}
 
 		/// <summary>
@@ -97,7 +91,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public bool valid()
 		{
-			return (m_xmin <= m_xmax & m_ymin <= m_ymax & m_zmin <= m_zmax);
+			return (xmin <= xmax & ymin <= ymax & zmin <= zmax);
 		}
 
 		/// <summary>
@@ -106,18 +100,18 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public void @add(double x, double y, double z)
 		{
-			if (x > m_xmax)
-				m_xmax = x;
-			if (x < m_xmin)
-				m_xmin = x;
-			if (y > m_ymax)
-				m_ymax = y;
-			if (y < m_ymin)
-				m_ymin = y;
-			if (z > m_zmax)
-				m_zmax = z;
-			if (z < m_zmin)
-				m_zmin = z;
+			if (x > xmax)
+				xmax = x;
+			if (x < xmin)
+				xmin = x;
+			if (y > ymax)
+				ymax = y;
+			if (y < ymin)
+				ymin = y;
+			if (z > zmax)
+				zmax = z;
+			if (z < zmin)
+				zmin = z;
 		}
 
 		/// <summary>
@@ -154,8 +148,8 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public void Add(BoundingBox3d b)
 		{
-			this.@add(b.m_xmin, b.m_ymin, b.m_zmin);
-			this.@add(b.m_xmax, b.m_ymax, b.m_zmax);
+			this.@add(b.xmin, b.ymin, b.zmin);
+			this.@add(b.xmax, b.ymax, b.zmax);
 		}
 
 		/// <summary>
@@ -163,7 +157,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public Coord3d getCenter()
 		{
-			return new Coord3d((m_xmax + m_xmin) / 2, (m_ymax + m_ymin) / 2, (m_zmax + m_zmin) / 2);
+			return new Coord3d((xmax + xmin) / 2, (ymax + ymin) / 2, (zmax + zmin) / 2);
 		}
 
 		/// <summary>
@@ -172,7 +166,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public double getRadius()
 		{
-			return getCenter().distance(new Coord3d(m_xmin, m_ymin, m_zmin));
+			return getCenter().distance(new Coord3d(xmin, ymin, zmin));
 		}
 
 		/// <summary>
@@ -182,13 +176,13 @@ namespace Nzy3d.Maths
 		/// <remarks>Current object is not modified, a new one is created.</remarks>
 		public BoundingBox3d scale(Coord3d factors)
 		{
-			BoundingBox3d b = new BoundingBox3d();
-			b.m_xmax = m_xmax * factors.x;
-			b.m_xmin = m_xmin * factors.x;
-			b.m_ymax = m_ymax * factors.y;
-			b.m_ymin = m_ymin * factors.y;
-			b.m_zmax = m_zmax * factors.z;
-			b.m_zmin = m_zmin * factors.z;
+			var b = new BoundingBox3d();
+			b.xmax = xmax * factors.x;
+			b.xmin = xmin * factors.x;
+			b.ymax = ymax * factors.y;
+			b.ymin = ymin * factors.y;
+			b.zmax = zmax * factors.z;
+			b.zmin = zmin * factors.z;
 			return b;
 		}
 
@@ -199,13 +193,13 @@ namespace Nzy3d.Maths
 		/// <remarks>Current object is not modified, a new one is created.</remarks>
 		public BoundingBox3d shift(Coord3d offset)
 		{
-			BoundingBox3d b = new BoundingBox3d();
-			b.m_xmax = m_xmax + offset.x;
-			b.m_xmin = m_xmin + offset.x;
-			b.m_ymax = m_ymax + offset.y;
-			b.m_ymin = m_ymin + offset.y;
-			b.m_zmax = m_zmax + offset.z;
-			b.m_zmin = m_zmin + offset.z;
+			var b = new BoundingBox3d();
+			b.xmax = xmax + offset.x;
+			b.xmin = xmin + offset.x;
+			b.ymax = ymax + offset.y;
+			b.ymin = ymin + offset.y;
+			b.zmax = zmax + offset.z;
+			b.zmin = zmin + offset.z;
 			return b;
 		}
 
@@ -215,13 +209,13 @@ namespace Nzy3d.Maths
 		/// <remarks>Current object is not modified, a new one is created.</remarks>
 		public BoundingBox3d margin(double marg)
 		{
-			BoundingBox3d b = new BoundingBox3d();
-			b.m_xmax = m_xmax + marg;
-			b.m_xmin = m_xmin - marg;
-			b.m_ymax = m_ymax + marg;
-			b.m_ymin = m_ymin - marg;
-			b.m_zmax = m_zmax + marg;
-			b.m_zmin = m_zmin - marg;
+			var b = new BoundingBox3d();
+			b.xmax = xmax + marg;
+			b.xmin = xmin - marg;
+			b.ymax = ymax + marg;
+			b.ymin = ymin - marg;
+			b.zmax = zmax + marg;
+			b.zmin = zmin - marg;
 			return b;
 		}
 
@@ -231,15 +225,14 @@ namespace Nzy3d.Maths
 		/// <remarks>Modify current object.</remarks>
 		public void selfMargin(double marg)
 		{
-			BoundingBox3d b = new BoundingBox3d();
-			m_xmax += marg;
-			m_xmin -= marg;
-			m_ymax += marg;
-			m_ymin -= marg;
-			m_zmax += marg;
-			m_zmin -= marg;
+			var b = new BoundingBox3d();
+			xmax += marg;
+			xmin -= marg;
+			ymax += marg;
+			ymin -= marg;
+			zmax += marg;
+			zmin -= marg;
 		}
-
 
 		/// <summary>
 		/// Return true if <paramref name="anotherBox"/> is contained in this box.
@@ -247,7 +240,7 @@ namespace Nzy3d.Maths
 		/// <remarks>if b1.contains(b2), then b1.intersect(b2) as well.</remarks>
 		public bool contains(BoundingBox3d anotherBox)
 		{
-			return m_xmin <= anotherBox.m_xmin & anotherBox.m_xmax <= m_xmax & m_ymin <= anotherBox.m_ymin & anotherBox.m_ymax <= m_ymax & m_zmin <= anotherBox.m_zmin & anotherBox.m_zmax <= m_zmax;
+			return xmin <= anotherBox.xmin & anotherBox.xmax <= xmax & ymin <= anotherBox.ymin & anotherBox.ymax <= ymax & zmin <= anotherBox.zmin & anotherBox.zmax <= zmax;
 		}
 
 		/// <summary>
@@ -255,7 +248,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public bool contains(Coord3d aPoint)
 		{
-			return m_xmin <= aPoint.x & aPoint.x <= m_xmax & m_ymin <= aPoint.y & aPoint.y <= m_ymax & m_zmin <= aPoint.z & aPoint.z <= m_zmax;
+			return xmin <= aPoint.x & aPoint.x <= xmax & ymin <= aPoint.y & aPoint.y <= ymax & zmin <= aPoint.z & aPoint.z <= zmax;
 		}
 
 		/// <summary>
@@ -263,62 +256,38 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public bool intersect(BoundingBox3d anotherBox)
 		{
-			return (m_xmin <= anotherBox.m_xmin & anotherBox.m_xmin <= m_xmax) | (m_xmin <= anotherBox.m_xmax & anotherBox.m_xmax <= m_xmax) & (m_ymin <= anotherBox.m_ymin & anotherBox.m_ymin <= m_ymax) | (m_ymin <= anotherBox.m_ymax & anotherBox.m_ymax <= m_ymax) & (m_zmin <= anotherBox.m_zmin & anotherBox.m_zmin <= m_zmax) | (m_zmin <= anotherBox.m_zmax & anotherBox.m_zmax <= m_zmax);
+			return (xmin <= anotherBox.xmin & anotherBox.xmin <= xmax) | (xmin <= anotherBox.xmax & anotherBox.xmax <= xmax) & (ymin <= anotherBox.ymin & anotherBox.ymin <= ymax) | (ymin <= anotherBox.ymax & anotherBox.ymax <= ymax) & (zmin <= anotherBox.zmin & anotherBox.zmin <= zmax) | (zmin <= anotherBox.zmax & anotherBox.zmax <= zmax);
 		}
 
 		/// <summary>
 		/// Bounding box min x value
 		/// </summary>
-		public double xmin
-		{
-			get { return m_xmin; }
-			set { m_xmin = value; }
-		}
+		public double xmin { get; set; }
 
 		/// <summary>
 		/// Bounding box max x value
 		/// </summary>
-		public double xmax
-		{
-			get { return m_xmax; }
-			set { m_xmax = value; }
-		}
+		public double xmax { get; set; }
 
 		/// <summary>
 		/// Bounding box min y value
 		/// </summary>
-		public double ymin
-		{
-			get { return m_ymin; }
-			set { m_ymin = value; }
-		}
+		public double ymin { get; set; }
 
 		/// <summary>
 		/// Bounding box max y value
 		/// </summary>
-		public double ymax
-		{
-			get { return m_ymax; }
-			set { m_ymax = value; }
-		}
+		public double ymax { get; set; }
 
 		/// <summary>
 		/// Bounding box min z value
 		/// </summary>
-		public double zmin
-		{
-			get { return m_zmin; }
-			set { m_zmin = value; }
-		}
+		public double zmin { get; set; }
 
 		/// <summary>
 		/// Bounding box max z value
 		/// </summary>
-		public double zmax
-		{
-			get { return m_zmax; }
-			set { m_zmax = value; }
-		}
+		public double zmax { get; set; }
 
 		public List<Coord3d> Vertices
 		{

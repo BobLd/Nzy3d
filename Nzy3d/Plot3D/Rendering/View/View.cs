@@ -583,7 +583,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 		internal Coord3d Squarify()
 		{
 			// Get the view bounds
-			BoundingBox3d bounds = default(BoundingBox3d);
+			BoundingBox3d bounds;
 			switch (_boundmode)
 			{
 				case ViewBoundMode.AUTO_FIT:
@@ -595,6 +595,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 				default:
 					throw new Exception("Unsupported bound mode : " + _boundmode);
 			}
+
 			// Compute factors
 			float xLen = (float)(bounds.xmax - bounds.xmin);
 			float yLen = (float)(bounds.ymax - bounds.ymin);
@@ -605,16 +606,19 @@ namespace Nzy3d.Plot3D.Rendering.View
 				xLen = 1;
 				// throw new ArithmeticException("x scale is infinite, nan or 0");
 			}
+
 			if (float.IsInfinity(yLen) | float.IsNaN(yLen) | yLen == 0)
 			{
 				yLen = 1;
 				// throw new ArithmeticException("y scale is infinite, nan or 0");
 			}
+
 			if (float.IsInfinity(zLen) | float.IsNaN(zLen) | zLen == 0)
 			{
 				zLen = 1;
 				// throw new ArithmeticException("z scale is infinite, nan or 0");
 			}
+
 			if (float.IsInfinity(lmax) | float.IsNaN(lmax) | lmax == 0)
 			{
 				lmax = 1;
@@ -622,12 +626,9 @@ namespace Nzy3d.Plot3D.Rendering.View
 			}
 			return new Coord3d(lmax / xLen, lmax / yLen, lmax / zLen);
 		}
-
-
 		#endregion
 
 		#region "GL2"
-
 		/// <summary>
 		/// The init function specifies general GL settings that impact the rendering
 		/// quality and performance (computation speed).
@@ -635,7 +636,6 @@ namespace Nzy3d.Plot3D.Rendering.View
 		/// The rendering settings are set by the Quality instance given in
 		/// the constructor parameters.
 		/// </summary>
-		/// <remarks></remarks>
 		public void Init()
 		{
 			InitQuality();
@@ -654,10 +654,12 @@ namespace Nzy3d.Plot3D.Rendering.View
 			{
 				GL.Disable(EnableCap.DepthTest);
 			}
+
 			// Blending
 			//GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 			GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 			// on/off is handled by each viewport (camera or image)
+
 			// Activate transparency
 			if (_quality.AlphaActivated)
 			{
@@ -671,6 +673,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			{
 				GL.Disable(EnableCap.AlphaTest);
 			}
+
 			// Make smooth colors for polygons (interpolate color between points)
 			if (_quality.SmoothColor)
 			{
@@ -680,6 +683,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			{
 				GL.ShadeModel(ShadingModel.Flat);
 			}
+
 			// Make smoothing setting
 			if (_quality.SmoothLine)
 			{
@@ -690,6 +694,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			{
 				GL.Disable(EnableCap.LineSmooth);
 			}
+
 			if (_quality.SmoothPoint)
 			{
 				GL.Enable(EnableCap.PointSmooth);
@@ -813,15 +818,16 @@ namespace Nzy3d.Plot3D.Rendering.View
 		public void UpdateCamera(ViewPort viewport, BoundingBox3d boundsScaled, float sceneRadiusScaled)
 		{
 			Coord3d target = _center.multiply(_scaling);
-			Coord3d eye = default(Coord3d);
 			_viewpoint.z = sceneRadiusScaled * 2;
+
+			Coord3d eye;
 			// maintain a reasonnable distance to the scene for viewing it
 			switch (_viewmode)
 			{
-				case Modes.ViewPositionMode.FREE:
+				case ViewPositionMode.FREE:
 					eye = _viewpoint.cartesian().@add(target);
 					break;
-				case Modes.ViewPositionMode.TOP:
+				case ViewPositionMode.TOP:
 					eye = _viewpoint;
 					eye.x = -PI_div2;
 					// on x
@@ -829,7 +835,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 					// on top
 					eye = eye.cartesian().@add(target);
 					break;
-				case Modes.ViewPositionMode.PROFILE:
+				case ViewPositionMode.PROFILE:
 					eye = _viewpoint;
 					eye.y = 0;
 					eye = eye.cartesian().@add(target);
@@ -837,7 +843,8 @@ namespace Nzy3d.Plot3D.Rendering.View
 				default:
 					throw new Exception("Unsupported viewmode : " + _viewmode);
 			}
-			Coord3d up = default(Coord3d);
+
+			Coord3d up;
 			if (Math.Abs(_viewpoint.y) == PI_div2)
 			{
 				// handle up vector
@@ -851,6 +858,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 				{
 					up = new Coord3d(direction.x, direction.y, 0);
 				}
+
 				// handle "on-top" events
 				if (!_wasOnTopAtLastRendering)
 				{
@@ -873,8 +881,9 @@ namespace Nzy3d.Plot3D.Rendering.View
 			_cam.Target = target;
 			_cam.Up = up;
 			_cam.Eye = eye;
+
 			// Set rendering volume
-			if (_viewmode == Modes.ViewPositionMode.TOP)
+			if (_viewmode == ViewPositionMode.TOP)
 			{
 				_cam.RenderingSphereRadius = (float)(Math.Max(boundsScaled.xmax - boundsScaled.xmin, boundsScaled.ymax - boundsScaled.ymin) / 2);
 				// correctCameraPositionForIncludingTextLabels(viewport) ' quite experimental !
@@ -883,6 +892,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			{
 				_cam.RenderingSphereRadius = sceneRadiusScaled;
 			}
+
 			// Setup camera (i.e. projection matrix)
 			//cam.setViewPort(canvas.getRendererWidth(),
 			// canvas.getRendererHeight(), left, right);
@@ -892,16 +902,13 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 		public void RenderAxeBox()
 		{
-			// For debug
-			GL.GetDouble(GetPName.ModelviewMatrix, out Matrix4d test);
-			// End for debug
-
 			if (_axeBoxDisplayed)
 			{
 				GL.MatrixMode(MatrixMode.Modelview);
 				_scene.LightSet.Disable();
 				_axe.setScale(_scaling);
 				_axe.Draw(_cam);
+
 				// for debug
 				if (DISPLAY_AXE_WHOLE_BOUNDS)
 				{
@@ -931,8 +938,8 @@ namespace Nzy3d.Plot3D.Rendering.View
 				// gl.glEnable(GL2.GL_LIGHT0);
 				// gl.glDisable(GL2.GL_LIGHTING);
 			}
-			Transform.Transform transform = new Transform.Transform(new Transform.Scale(_scaling));
-			Scene.Graph.Transform = transform;
+
+			Scene.Graph.Transform = new Transform.Transform(new Transform.Scale(_scaling));
 			Scene.Graph.Draw(_cam);
 		}
 
@@ -942,9 +949,11 @@ namespace Nzy3d.Plot3D.Rendering.View
 		}
 
 		/// <summary>
+		/// <para>
 		/// Renders all provided Tooltips and Renderer2ds on top of
 		/// the scene.
-		///
+		/// </para>
+		/// <para>
 		/// Due to the behaviour of the Overlay implementation, Java2d
 		/// geometries must be drawn relative to the Chart's
 		/// IScreenCanvas, BUT will then be stretched to fit in the
@@ -953,19 +962,22 @@ namespace Nzy3d.Plot3D.Rendering.View
 		/// Indeed, when View is not maximized (like the default behaviour), the
 		/// viewport remains square and centered in the canvas, meaning the Overlay
 		/// won't cover the full canvas area.
-		///
+		/// </para>
+		/// <para>
 		/// In other words, the following piece of code draws a border around the
 		/// View, and not around the complete chart canvas, although queried
 		/// to occupy chart canvas dimensions:
-		///
+		/// </para>
+		/// <para>
 		/// g2d.drawRect(1, 1, chart.getCanvas().getRendererWidth()-2,
 		/// chart.getCanvas().getRendererHeight()-2);
-		///
+		/// </para>
+		/// <para>
 		/// renderOverlay() must be called while the OpenGL2 context for the
 		/// drawable is current, and after the OpenGL2 scene has been rendered.
+		/// </para>
 		/// </summary>
 		/// <param name="viewport"></param>
-		/// <remarks></remarks>
 		public void RenderOverlay(ViewPort viewport)
 		{
 			// NOT Implemented so far
@@ -979,7 +991,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			Clear();
 			AxeBox abox = (AxeBox)_axe;
 			BoundingBox3d newBounds = abox.WholeBounds.scale(_scaling);
-			if (_viewmode == Modes.ViewPositionMode.TOP)
+			if (_viewmode == ViewPositionMode.TOP)
 			{
 				float radius = (float)Math.Max(newBounds.xmax - newBounds.xmin, newBounds.ymax - newBounds.ymin);
 				radius += radius * STRETCH_RATIO;
@@ -994,11 +1006,8 @@ namespace Nzy3d.Plot3D.Rendering.View
 				_cam.Eye = eye;
 			}
 		}
-
 		#endregion
-
 	}
-
 }
 
 //=======================================================

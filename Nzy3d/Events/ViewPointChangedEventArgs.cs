@@ -4,17 +4,13 @@ namespace Nzy3d.Events
 {
 	public class ViewPointChangedEventArgs : ObjectEventArgs
 	{
-		private Coord3d _viewPoint;
-		public ViewPointChangedEventArgs(object objectChanged, Coord3d viewPoint) : base(objectChanged)
+        public ViewPointChangedEventArgs(object objectChanged, Coord3d viewPoint) : base(objectChanged)
 		{
-			_viewPoint = viewPoint;
+			ViewPoint = viewPoint;
 		}
 
-		public Coord3d ViewPoint
-		{
-			get { return _viewPoint; }
-		}
-	}
+        public Coord3d ViewPoint { get; }
+    }
 }
 
 //=======================================================

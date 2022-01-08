@@ -4,7 +4,7 @@ using Nzy3d.Plot3D.Rendering.View;
 
 namespace Nzy3d.Factories
 {
-	public class ViewFactory
+    public class ViewFactory
 	{
 		public static View getInstance(Scene scene, ICanvas canvas, Quality quality)
 		{

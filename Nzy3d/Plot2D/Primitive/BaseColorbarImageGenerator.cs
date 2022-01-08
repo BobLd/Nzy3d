@@ -12,7 +12,7 @@ namespace Nzy3d.Plot2D.Primitive
 		internal ITickRenderer _renderer;
 		internal float _min;
 		internal float _max;
-		internal bool _hasBackground = false;
+		internal bool _hasBackground;
 		internal Color _backgroundColor;
 		internal Color _foregroundColor = Color.BLACK;
 		public static int MIN_BAR_WIDTH = 100;

@@ -2,9 +2,7 @@ namespace Nzy3d.Events
 {
 	public class DrawableChangedEventArgs : ObjectEventArgs
 	{
-
-		private FieldChanged _what;
-		public enum FieldChanged : int
+        public enum FieldChanged : byte
 		{
 			Data = 0,
 			Transform = 1,
@@ -15,14 +13,11 @@ namespace Nzy3d.Events
 
 		public DrawableChangedEventArgs(object objectChanged, FieldChanged what) : base(objectChanged)
 		{
-			_what = what;
+			What = what;
 		}
 
-		public FieldChanged What
-		{
-			get { return _what; }
-		}
-	}
+        public FieldChanged What { get; }
+    }
 }
 
 //=======================================================

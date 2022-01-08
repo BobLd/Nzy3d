@@ -5,7 +5,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Nzy3d.Plot3D.Primitives
 {
-    public class Polygon : AbstractWireframeable, ISingleColorable, IMultiColorable
+	public class Polygon : AbstractWireframeable, ISingleColorable, IMultiColorable
 	{
 		public enum PolygonMode
 		{
@@ -32,10 +32,8 @@ namespace Nzy3d.Plot3D.Primitives
 
 		public override void Draw(Rendering.View.Camera cam)
 		{
-			if ((_transform != null))
-			{
-				_transform.Execute();
-			}
+			_transform?.Execute();
+
 			if (_facestatus)
 			{
 				ApplyPolygonModeFill();
@@ -43,6 +41,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					EnablePolygonOffsetFill();
 				}
+
 				GL.Begin(PrimitiveType.Polygon);
 				foreach (Point p in _points)
 				{
@@ -53,12 +52,14 @@ namespace Nzy3d.Plot3D.Primitives
 					GL.Color4(p.Color.r, p.Color.g, p.Color.b, p.Color.a);
 					GL.Vertex3(p.xyz.x, p.xyz.y, p.xyz.z);
 				}
+
 				GL.End();
 				if (_wfstatus & _polygonOffsetFillEnable)
 				{
 					DisablePolygonOffsetFill();
 				}
 			}
+
 			if (_wfstatus)
 			{
 				ApplyPolygonModeLine();
@@ -66,14 +67,18 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					EnablePolygonOffsetFill();
 				}
+
 				GL.Color4(_wfcolor.r, _wfcolor.g, _wfcolor.b, _wfcolor.a);
 				GL.LineWidth(_wfwidth);
 				GL.Begin(PrimitiveType.Polygon);
+
 				foreach (Point p in _points)
 				{
 					GL.Vertex3(p.xyz.x, p.xyz.y, p.xyz.z);
 				}
+
 				GL.End();
+
 				if (_polygonOffsetFillEnable)
 				{
 					DisablePolygonOffsetFill();
@@ -178,7 +183,7 @@ namespace Nzy3d.Plot3D.Primitives
 		public override double getShortestDistance(Rendering.View.Camera camera)
 		{
 			double min = double.MaxValue;
-			double dist = 0;
+			double dist;
 			foreach (Point p in _points)
 			{
 				dist = p.getDistance(camera);
@@ -187,6 +192,7 @@ namespace Nzy3d.Plot3D.Primitives
 					min = dist;
 				}
 			}
+
 			dist = Barycentre.distance(camera.Eye);
 			if (dist < min)
 			{
@@ -198,10 +204,9 @@ namespace Nzy3d.Plot3D.Primitives
 		public override double getLongestDistance(Rendering.View.Camera camera)
 		{
 			double max = 0;
-			double dist = 0;
 			foreach (Point p in _points)
 			{
-				dist = p.getDistance(camera);
+				double dist = p.getDistance(camera);
 				if (dist > max)
 				{
 					max = dist;
@@ -232,13 +237,12 @@ namespace Nzy3d.Plot3D.Primitives
 		/// </summary>
 		/// <param name="composite"></param>
 		/// <param name="polygonOffsetFillEnable">status to apply to all polygons contained in composite (and recursively to child composites)</param>
-		/// <remarks></remarks>
 		public static void SetPolygonOffsetFillEnable(AbstractComposite composite, bool polygonOffsetFillEnable)
 		{
 			foreach (AbstractDrawable d in composite.GetDrawables)
 			{
-				Polygon dP = d as Polygon;
-				AbstractComposite dC = d as AbstractComposite;
+				var dP = d as Polygon;
+				var dC = d as AbstractComposite;
 				if (dP != null)
 				{
 					dP.PolygonOffsetFillEnable = polygonOffsetFillEnable;

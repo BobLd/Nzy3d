@@ -55,7 +55,7 @@ namespace Nzy3d.Chart.Controllers.Thread.Camera
 					Rotate(_move);
 					System.Threading.Thread.Sleep(_sleep);
 				}
-				catch (System.Threading.ThreadInterruptedException ex)
+				catch (ThreadInterruptedException)
 				{
 					_process = null;
 				}

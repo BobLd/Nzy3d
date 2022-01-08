@@ -8,8 +8,6 @@ namespace Nzy3d.Plot3D.Primitives
     public class ScatterMultiColor : AbstractDrawable, IMultiColorable
     {
         private Coord3d[] _coordinates;
-        private float _width;
-        private ColorMapper _mapper;
 
         public ScatterMultiColor(Coord3d[] coordinates, ColorMapper mapper, float width = 1.0f)
         {
@@ -29,14 +27,14 @@ namespace Nzy3d.Plot3D.Primitives
         {
             _transform?.Execute();
 
-            GL.PointSize(_width);
+            GL.PointSize(Width);
             GL.Begin(PrimitiveType.Points);
 
             if (_coordinates != null)
             {
                 foreach (Coord3d c in _coordinates)
                 {
-                    var color = _mapper.Color(c); // TODO: should store result in the point color
+                    var color = ColorMapper.Color(c); // TODO: should store result in the point color
                     GL.Color4(color.r, color.g, color.b, color.a);
                     GL.Vertex3(c.x, c.y, c.z);
                 }
@@ -75,16 +73,8 @@ namespace Nzy3d.Plot3D.Primitives
             }
         }
 
-        private float Width
-        {
-            get => _width;
-            set => _width = value;
-        }
+        private float Width { get; }
 
-        public ColorMapper ColorMapper
-        {
-            get => _mapper;
-            set => _mapper = value;
-        }
+        public ColorMapper ColorMapper { get; set; }
     }
 }

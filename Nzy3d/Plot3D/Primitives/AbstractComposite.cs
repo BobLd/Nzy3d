@@ -6,12 +6,12 @@ using Nzy3d.Plot3D.Rendering.View;
 namespace Nzy3d.Plot3D.Primitives
 {
 	/// <summary>
+	/// <para>
 	/// A Composite gathers several Drawable and provides default methods
 	/// for rendering them all in one call.
-	///
-	/// @author Martin Pernollet
+	/// </para>
+	/// <para>@author Martin Pernollet</para>
 	/// </summary>
-	/// <remarks></remarks>
 	public class AbstractComposite : AbstractWireframeable, ISingleColorable, IMultiColorable
 	{
 		internal List<AbstractDrawable> _components = new List<AbstractDrawable>();
@@ -108,10 +108,7 @@ namespace Nzy3d.Plot3D.Primitives
 			{
 				foreach (AbstractDrawable s in _components)
 				{
-					if ((s != null))
-					{
-						s.Draw(cam);
-					}
+					s?.Draw(cam);
 				}
 			}
 		}
@@ -129,7 +126,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (AbstractDrawable s in _components)
 					{
-						if ((s != null))
+						if (s != null)
 						{
 							s.Transform = value;
 						}
@@ -150,7 +147,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (AbstractDrawable c in _components)
 					{
-						if ((c != null) && (c.Bounds != null))
+						if (c?.Bounds != null)
 						{
 							box.Add(c.Bounds);
 						}
@@ -170,8 +167,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (AbstractDrawable c in _components)
 					{
-						AbstractWireframeable cWF = c as AbstractWireframeable;
-						if (cWF != null)
+						if (c is AbstractWireframeable cWF)
 						{
 							cWF.WireframeColor = value;
 						}
@@ -190,8 +186,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (AbstractDrawable c in _components)
 					{
-						AbstractWireframeable cWF = c as AbstractWireframeable;
-						if (cWF != null)
+						if (c is AbstractWireframeable cWF)
 						{
 							cWF.WireframeDisplayed = value;
 						}
@@ -210,8 +205,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (AbstractDrawable c in _components)
 					{
-						AbstractWireframeable cWF = c as AbstractWireframeable;
-						if (cWF != null)
+						if (c is AbstractWireframeable cWF)
 						{
 							cWF.WireframeWidth = value;
 						}
@@ -230,8 +224,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (AbstractDrawable c in _components)
 					{
-						AbstractWireframeable cWF = c as AbstractWireframeable;
-						if (cWF != null)
+						if (c is AbstractWireframeable cWF)
 						{
 							cWF.FaceDisplayed = value;
 						}
@@ -250,8 +243,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (AbstractDrawable c in _components)
 					{
-						AbstractWireframeable cWF = c as AbstractWireframeable;
-						if (cWF != null)
+						if (c is AbstractWireframeable cWF)
 						{
 							cWF.Displayed = value;
 						}
@@ -270,13 +262,11 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (AbstractDrawable c in _components)
 					{
-						IMultiColorable cIM = c as IMultiColorable;
-						ISingleColorable cIC = c as ISingleColorable;
-						if (cIM != null)
+						if (c is IMultiColorable cIM)
 						{
 							cIM.ColorMapper = value;
 						}
-						else if (cIC != null)
+						else if (c is ISingleColorable cIC)
 						{
 							cIC.Color = value.Color(c.Barycentre);
 						}
@@ -296,8 +286,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (AbstractDrawable c in _components)
 					{
-						ISingleColorable cIC = c as ISingleColorable;
-						if (cIC != null)
+						if (c is ISingleColorable cIC)
 						{
 							cIC.Color = value;
 						}
@@ -325,8 +314,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (AbstractDrawable c in _components)
 					{
-						AbstractComposite cAC = c as AbstractComposite;
-						if (cAC != null)
+						if (c is AbstractComposite cAC)
 						{
 							output += "\r\n" + ((AbstractComposite)c).toString(depth + 1);
 						}
@@ -338,7 +326,7 @@ namespace Nzy3d.Plot3D.Primitives
 						{
 							output += "\r\n" + Utils.blanks(depth + 1) + "(null)";
 						}
-						k += 1;
+						k++;
 					}
 				}
 			}

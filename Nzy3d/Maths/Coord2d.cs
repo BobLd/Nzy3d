@@ -1,24 +1,26 @@
 namespace Nzy3d.Maths
 {
 	/// <summary>
-	/// A <see cref="maths.Coord2d"/> stores a 2 dimensional coordinate for cartesian (x,y) or
+	/// A <see cref="Coord2d"/> stores a 2 dimensional coordinate for cartesian (x,y) or
 	/// polar (a,r) mode, and provide operators allowing to add, substract,
 	/// multiply and divises coordinate values, as well as computing the distance between
 	/// two points, and converting polar and cartesian coordinates.
 	/// </summary>
-	/// <remarks></remarks>
 	public class Coord2d
 	{
 		#region "Members"
 		public double x;
 		#endregion
+
 		public double y;
 
 		#region "Constants"
-		public static Coord2d ORIGIN = new Coord2d(0, 0);
-		public static Coord2d INVALID = new Coord2d(double.NaN, double.NaN);
+		public static readonly Coord2d ORIGIN = new Coord2d(0, 0);
+
+		public static readonly Coord2d INVALID = new Coord2d(double.NaN, double.NaN);
 		#endregion
-		public static Coord2d IDENTITY = new Coord2d(1, 1);
+
+		public static readonly Coord2d IDENTITY = new Coord2d(1, 1);
 
 		#region "Constructors"
 		public Coord2d() : this(0, 0)
@@ -33,12 +35,10 @@ namespace Nzy3d.Maths
 		#endregion
 
 		#region "Constructors"
-
 		/// <summary>
 		/// Set all values of Coord2d
 		/// </summary>
 		/// <returns>Self</returns>
-		/// <remarks></remarks>
 		public Coord2d setvalues(double xx, double yy)
 		{
 			x = xx;
@@ -71,7 +71,7 @@ namespace Nzy3d.Maths
 
 		/// <summary>
 		/// Add values of another <see cref="Coord2d"/> to all components of the current <see cref="Coord2d"/> and return the result
-		/// in a new <see cref="Coord2d"/>. 
+		/// in a new <see cref="Coord2d"/>.
 		/// </summary>
 		/// <param name="coord">Coordinate with values to add</param>
 		/// <remarks>Current object is not modified</remarks>
@@ -81,7 +81,7 @@ namespace Nzy3d.Maths
 		}
 
 		/// <summary>
-		/// Add a value to all components of the current <see cref="Coord2d"/>. 
+		/// Add a value to all components of the current <see cref="Coord2d"/>.
 		/// </summary>
 		/// <param name="value">Value to add to both coordinates (x and y)</param>
 		public void addSelf(double value)
@@ -102,7 +102,7 @@ namespace Nzy3d.Maths
 		}
 
 		/// <summary>
-		/// Add values of another <see cref="Coord2d"/> to all components of the current <see cref="Coord2d"/>. 
+		/// Add values of another <see cref="Coord2d"/> to all components of the current <see cref="Coord2d"/>.
 		/// </summary>
 		/// <param name="coord">Coordinate with values to add</param>
 		public void addSelf(Coord2d coord)
@@ -113,7 +113,7 @@ namespace Nzy3d.Maths
 
 		/// <summary>
 		/// Substract a value to all components of the current <see cref="Coord2d"/> and return the result
-		/// in a new <see cref="Coord2d"/>. 
+		/// in a new <see cref="Coord2d"/>.
 		/// </summary>
 		/// <param name="value">Value to substract to both coordinates (x and y)</param>
 		/// <remarks>Current object is not modified</remarks>
@@ -136,7 +136,7 @@ namespace Nzy3d.Maths
 
 		/// <summary>
 		/// Substract values of another <see cref="Coord2d"/> to all components of the current <see cref="Coord2d"/> and return the result
-		/// in a new <see cref="Coord2d"/>. 
+		/// in a new <see cref="Coord2d"/>.
 		/// </summary>
 		/// <param name="coord">Coordinate with values to substract</param>
 		/// <remarks>Current object is not modified</remarks>
@@ -146,7 +146,7 @@ namespace Nzy3d.Maths
 		}
 
 		/// <summary>
-		/// Substract a value to all components of the current <see cref="Coord2d"/>. 
+		/// Substract a value to all components of the current <see cref="Coord2d"/>.
 		/// </summary>
 		/// <param name="value">Value to substract to both coordinates (x and y)</param>
 		public void substractSelf(double value)
@@ -167,7 +167,7 @@ namespace Nzy3d.Maths
 		}
 
 		/// <summary>
-		/// Substract values of another <see cref="Coord2d"/> to all components of the current <see cref="Coord2d"/>. 
+		/// Substract values of another <see cref="Coord2d"/> to all components of the current <see cref="Coord2d"/>.
 		/// </summary>
 		/// <param name="coord">Coordinate with values to substract</param>
 		public void substractSelf(Coord2d coord)
@@ -211,7 +211,7 @@ namespace Nzy3d.Maths
 		}
 
 		/// <summary>
-		/// Multiply components of the current <see cref="Coord2d"/> with a given value. 
+		/// Multiply components of the current <see cref="Coord2d"/> with a given value.
 		/// </summary>
 		/// <param name="value">Value to multiply both coordinates with (x and y)</param>
 		public void multiplySelf(double value)
@@ -221,7 +221,7 @@ namespace Nzy3d.Maths
 		}
 
 		/// <summary>
-		/// Multiply components of the current <see cref="Coord2d"/> with given values. 
+		/// Multiply components of the current <see cref="Coord2d"/> with given values.
 		/// </summary>
 		/// <param name="xi">x value to multiply with</param>
 		/// <param name="yi">y value to multiply with</param>
@@ -232,7 +232,7 @@ namespace Nzy3d.Maths
 		}
 
 		/// <summary>
-		/// Multiply components of the current <see cref="Coord2d"/> with values of another <see cref="Coord2d"/>. 
+		/// Multiply components of the current <see cref="Coord2d"/> with values of another <see cref="Coord2d"/>.
 		/// </summary>
 		/// <param name="coord">Coordinate with values to multiply with</param>
 		public void multiplySelf(Coord2d coord)
@@ -266,7 +266,7 @@ namespace Nzy3d.Maths
 
 		/// <summary>
 		/// Divide components of the current <see cref="Coord2d"/> by components of another <see cref="Coord2d"/> and return the result
-		/// in a new <see cref="Coord2d"/>. 
+		/// in a new <see cref="Coord2d"/>.
 		/// </summary>
 		/// <param name="coord">Coordinate with values to divide with</param>
 		/// <remarks>Current object is not modified</remarks>
@@ -276,7 +276,7 @@ namespace Nzy3d.Maths
 		}
 
 		/// <summary>
-		/// Divide components of the current <see cref="Coord2d"/> by a given value. 
+		/// Divide components of the current <see cref="Coord2d"/> by a given value.
 		/// </summary>
 		/// <param name="value">Value to divide both coordinates by (x and y)</param>
 		public void divideSelf(double value)
@@ -286,7 +286,7 @@ namespace Nzy3d.Maths
 		}
 
 		/// <summary>
-		/// Divide components of the current <see cref="Coord2d"/> by given values. 
+		/// Divide components of the current <see cref="Coord2d"/> by given values.
 		/// </summary>
 		/// <param name="xi">x value to divide by</param>
 		/// <param name="yi">y value to divide by</param>
@@ -297,7 +297,7 @@ namespace Nzy3d.Maths
 		}
 
 		/// <summary>
-		/// Divide components of the current <see cref="Coord2d"/> by values of another <see cref="Coord2d"/>. 
+		/// Divide components of the current <see cref="Coord2d"/> by values of another <see cref="Coord2d"/>.
 		/// </summary>
 		/// <param name="coord">Coordinate with values to divide by</param>
 		public void divideSelf(Coord2d coord)

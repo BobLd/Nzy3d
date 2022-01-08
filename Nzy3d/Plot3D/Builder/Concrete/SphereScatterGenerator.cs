@@ -2,11 +2,11 @@ using Nzy3d.Maths;
 
 namespace Nzy3d.Plot3D.Builder.Concrete
 {
-	public class SphereScatterGenerator
+    public class SphereScatterGenerator
 	{
 		public static object Generate(Coord3d center, double radius, int steps, bool half)
 		{
-			List<Coord3d> coords = new List<Coord3d>();
+			var coords = new List<Coord3d>();
 			double inc = Math.PI / steps;
 			double i = 0;
 			int jrat = (half ? 1 : 2);
@@ -15,8 +15,8 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 				double j = 0;
 				while (j < (jrat * Math.PI))
 				{
-					Coord3d c = (new Coord3d(i, j, radius)).cartesian();
-					if ((center != null))
+					var c = new Coord3d(i, j, radius).cartesian();
+					if (center != null)
 					{
 						c.x += center.x;
 						c.y += center.y;

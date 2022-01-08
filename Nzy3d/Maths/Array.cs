@@ -1,6 +1,6 @@
 namespace Nzy3d.Maths
 {
-    public class Array
+	public class Array
 	{
 		public static int[] Clone(int[] input)
 		{
@@ -55,7 +55,8 @@ namespace Nzy3d.Maths
 		public static double[,] toColumnMatrix(double[] input)
 		{
 			double[,] output = new double[input.Length, 1];
-			for (int i = 0; i < input.Length; i++) {
+			for (int i = 0; i < input.Length; i++)
+			{
 				output[i, 0] = input[i];
 			}
 			return output;
@@ -67,7 +68,8 @@ namespace Nzy3d.Maths
 		public static float[,] toColumnMatrix(float[] input)
 		{
 			float[,] output = new float[input.Length, 1];
-			for (int i = 0; i < input.Length; i++) {
+			for (int i = 0; i < input.Length; i++)
+			{
 				output[i, 0] = input[i];
 			}
 			return output;
@@ -79,7 +81,8 @@ namespace Nzy3d.Maths
 		public static double[,] toColumnMatrixAsDouble(float[] input)
 		{
 			double[,] output = new double[input.Length, 1];
-			for (int i = 0; i <= input.Length - 1; i++) {
+			for (int i = 0; i <= input.Length - 1; i++)
+			{
 				output[i, 0] = input[i];
 			}
 			return output;
@@ -90,7 +93,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public static bool Find(double[] values, double value)
 		{
-			return (System.Array.Find(values, x => (x == value)) >= 0);
+			return System.Array.Find(values, x => x == value) >= 0;
 		}
 
 		/// <summary>
@@ -116,14 +119,18 @@ namespace Nzy3d.Maths
 
 		public static double[] Flatten(double[,] matrix, bool ignoreNaN)
 		{
-			if (matrix.Length == 0) {
+			if (matrix.Length == 0)
+			{
 				return new double[0];
 			}
 			double[] vector = new double[matrix.Length];
 			int k = 0;
-			for (int i = 0; i <= matrix.GetLength(0) - 1; i++) {
-				for (int j = 0; j <= matrix.GetLength(1) - 1; j++) {
-					if (!(ignoreNaN && double.IsNaN(matrix[i, j]))) {
+			for (int i = 0; i <= matrix.GetLength(0) - 1; i++)
+			{
+				for (int j = 0; j <= matrix.GetLength(1) - 1; j++)
+				{
+					if (!(ignoreNaN && double.IsNaN(matrix[i, j])))
+					{
 						vector[k] = matrix[i, j];
 						k += 1;
 					}
@@ -140,14 +147,18 @@ namespace Nzy3d.Maths
 
 		public static float[] Flatten(float[,] matrix, bool ignoreNaN)
 		{
-			if (matrix.Length == 0) {
+			if (matrix.Length == 0)
+			{
 				return new float[0];
 			}
 			float[] vector = new float[matrix.Length];
 			int k = 0;
-			for (int i = 0; i <= matrix.GetLength(0) - 1; i++) {
-				for (int j = 0; j <= matrix.GetLength(1) - 1; j++) {
-					if (!(ignoreNaN && double.IsNaN(matrix[i, j]))) {
+			for (int i = 0; i <= matrix.GetLength(0) - 1; i++)
+			{
+				for (int j = 0; j <= matrix.GetLength(1) - 1; j++)
+				{
+					if (!(ignoreNaN && double.IsNaN(matrix[i, j])))
+					{
 						vector[k] = matrix[i, j];
 						k += 1;
 					}
@@ -157,15 +168,18 @@ namespace Nzy3d.Maths
 			return Array.Clone(vector, k);
 		}
 
-        public static double[] FilterNaNs(double[] input)
+		public static double[] FilterNaNs(double[] input)
 		{
-			if (input.Length == 0) {
+			if (input.Length == 0)
+			{
 				return new double[0];
 			}
 			double[] vector = new double[input.Length];
 			int k = 0;
-			for (int i = 0; i <= input.GetLength(0) - 1; i++) {
-				if (!(double.IsNaN(input[i]))) {
+			for (int i = 0; i <= input.GetLength(0) - 1; i++)
+			{
+				if (!(double.IsNaN(input[i])))
+				{
 					vector[k] = input[i];
 					k += 1;
 				}
@@ -177,8 +191,10 @@ namespace Nzy3d.Maths
 		public static int CountNaNs(double[] input)
 		{
 			int k = 0;
-			for (int i = 0; i <= input.GetLength(0) - 1; i++) {
-				if (double.IsNaN(input[i])) {
+			for (int i = 0; i <= input.GetLength(0) - 1; i++)
+			{
+				if (double.IsNaN(input[i]))
+				{
 					k += 1;
 				}
 			}
@@ -187,8 +203,10 @@ namespace Nzy3d.Maths
 
 		public static bool atLeastOneNonNan(double[] input)
 		{
-			for (int i = 0; i <= input.GetLength(0) - 1; i++) {
-				if (!double.IsNaN(input[i])) {
+			for (int i = 0; i <= input.GetLength(0) - 1; i++)
+			{
+				if (!double.IsNaN(input[i]))
+				{
 					return true;
 				}
 			}
@@ -199,12 +217,12 @@ namespace Nzy3d.Maths
 		/// Sort input array, and return the final order of initial values.
 		/// </summary>
 		/// <param name="input"></param>
-		/// <returns></returns>
 		/// <remarks>Input array is modified and sorted after call to this method.</remarks>
 		public static int[] sortAscending(int[] input)
 		{
 			int[] ordered = new int[input.Length];
-			for (int i = 0; i <= ordered.Length - 1; i++) {
+			for (int i = 0; i <= ordered.Length - 1; i++)
+			{
 				ordered[i] = i;
 			}
 			System.Array.Sort(input, ordered);
@@ -215,13 +233,13 @@ namespace Nzy3d.Maths
 		/// Sort input array, and return the final order of initial values.
 		/// </summary>
 		/// <param name="input"></param>
-		/// <returns></returns>
 		/// <remarks>Input array is modified and sorted after call to this method.</remarks>
 		public static int[] sortAscending(float[] input)
 		{
 			int[] ordered = new int[input.Length];
-			for (int i = 0; i <= ordered.Length - 1; i++) {
-                ordered[i] = i;
+			for (int i = 0; i <= ordered.Length - 1; i++)
+			{
+				ordered[i] = i;
 			}
 			System.Array.Sort(input, ordered);
 			return ordered;
@@ -231,13 +249,13 @@ namespace Nzy3d.Maths
 		/// Sort input array, and return the final order of initial values.
 		/// </summary>
 		/// <param name="input"></param>
-		/// <returns></returns>
 		/// <remarks>Input array is modified and sorted after call to this method.</remarks>
 		public static int[] sortAscending(double[] input)
 		{
 			int[] ordered = new int[input.Length];
-			for (int i = 0; i <= ordered.Length - 1; i++) {
-                ordered[i] = i;
+			for (int i = 0; i <= ordered.Length - 1; i++)
+			{
+				ordered[i] = i;
 			}
 			System.Array.Sort(input, ordered);
 			return ordered;
@@ -247,13 +265,13 @@ namespace Nzy3d.Maths
 		/// Sort input array, and return the final order of initial values.
 		/// </summary>
 		/// <param name="input"></param>
-		/// <returns></returns>
 		/// <remarks>Input array is modified and sorted after call to this method.</remarks>
 		public static int[] sortAscending(System.DateTime[] input)
 		{
 			int[] ordered = new int[input.Length];
-			for (int i = 0; i <= ordered.Length - 1; i++) {
-                ordered[i] = i;
+			for (int i = 0; i <= ordered.Length - 1; i++)
+			{
+				ordered[i] = i;
 			}
 			System.Array.Sort(input, ordered);
 			return ordered;
@@ -263,7 +281,6 @@ namespace Nzy3d.Maths
 		/// Sort input array in descending order, and return the final order of initial values.
 		/// </summary>
 		/// <param name="input"></param>
-		/// <returns></returns>
 		/// <remarks>Input array is modified and sorted after call to this method.</remarks>
 		public static int[] sortDescending(int[] input)
 		{
@@ -277,7 +294,6 @@ namespace Nzy3d.Maths
 		/// Sort input array in descending order, and return the final order of initial values.
 		/// </summary>
 		/// <param name="input"></param>
-		/// <returns></returns>
 		/// <remarks>Input array is modified and sorted after call to this method.</remarks>
 		public static int[] sortDescending(float[] input)
 		{
@@ -291,7 +307,6 @@ namespace Nzy3d.Maths
 		/// Sort input array in descending order, and return the final order of initial values.
 		/// </summary>
 		/// <param name="input"></param>
-		/// <returns></returns>
 		/// <remarks>Input array is modified and sorted after call to this method.</remarks>
 		public static int[] sortDescending(double[] input)
 		{
@@ -305,7 +320,6 @@ namespace Nzy3d.Maths
 		/// Sort input array in descending order, and return the final order of initial values.
 		/// </summary>
 		/// <param name="input"></param>
-		/// <returns></returns>
 		/// <remarks>Input array is modified and sorted after call to this method.</remarks>
 		public static int[] sortDescending(System.DateTime[] input)
 		{
@@ -317,7 +331,8 @@ namespace Nzy3d.Maths
 
 		public static void WriteConsole(Coord3d[] input)
 		{
-			for (int i = 0; i <= input.Length - 1; i++) {
+			for (int i = 0; i <= input.Length - 1; i++)
+			{
 				System.Diagnostics.Debug.WriteLine(input[i]);
 			}
 			System.Diagnostics.Debug.WriteLine("");
@@ -325,7 +340,8 @@ namespace Nzy3d.Maths
 
 		public static void WriteConsole(double[] input)
 		{
-			for (int i = 0; i <= input.Length - 1; i++) {
+			for (int i = 0; i <= input.Length - 1; i++)
+			{
 				System.Diagnostics.Debug.WriteLine(input[i]);
 			}
 			System.Diagnostics.Debug.WriteLine("");
@@ -333,7 +349,8 @@ namespace Nzy3d.Maths
 
 		public static void WriteConsole(float[] input)
 		{
-			for (int i = 0; i <= input.Length - 1; i++) {
+			for (int i = 0; i <= input.Length - 1; i++)
+			{
 				System.Diagnostics.Debug.WriteLine(input[i]);
 			}
 			System.Diagnostics.Debug.WriteLine("");
@@ -341,7 +358,8 @@ namespace Nzy3d.Maths
 
 		public static void WriteConsole(int[] input)
 		{
-			for (int i = 0; i <= input.Length - 1; i++) {
+			for (int i = 0; i <= input.Length - 1; i++)
+			{
 				System.Diagnostics.Debug.WriteLine(input[i]);
 			}
 			System.Diagnostics.Debug.WriteLine("");
@@ -349,7 +367,8 @@ namespace Nzy3d.Maths
 
 		public static void WriteConsole(char[] input)
 		{
-			for (int i = 0; i <= input.Length - 1; i++) {
+			for (int i = 0; i <= input.Length - 1; i++)
+			{
 				System.Diagnostics.Debug.WriteLine(input[i]);
 			}
 			System.Diagnostics.Debug.WriteLine("");
@@ -357,8 +376,10 @@ namespace Nzy3d.Maths
 
 		public static void WriteConsole(double[,] input)
 		{
-			for (int i = 0; i <= input.GetLength(0) - 1; i++) {
-				for (int j = 0; j <= input.GetLength(1) - 1; j++) {
+			for (int i = 0; i <= input.GetLength(0) - 1; i++)
+			{
+				for (int j = 0; j <= input.GetLength(1) - 1; j++)
+				{
 					System.Diagnostics.Debug.Write(input[i, j] + "\t");
 				}
 				System.Diagnostics.Debug.WriteLine("");
@@ -368,8 +389,10 @@ namespace Nzy3d.Maths
 
 		public static void WriteConsole(float[,] input)
 		{
-			for (int i = 0; i <= input.GetLength(0) - 1; i++) {
-				for (int j = 0; j <= input.GetLength(1) - 1; j++) {
+			for (int i = 0; i <= input.GetLength(0) - 1; i++)
+			{
+				for (int j = 0; j <= input.GetLength(1) - 1; j++)
+				{
 					System.Diagnostics.Debug.Write(input[i, j] + "\t");
 				}
 				System.Diagnostics.Debug.WriteLine("");
@@ -379,8 +402,10 @@ namespace Nzy3d.Maths
 
 		public static void WriteConsole(int[,] input)
 		{
-			for (int i = 0; i <= input.GetLength(0) - 1; i++) {
-				for (int j = 0; j <= input.GetLength(1) - 1; j++) {
+			for (int i = 0; i <= input.GetLength(0) - 1; i++)
+			{
+				for (int j = 0; j <= input.GetLength(1) - 1; j++)
+				{
 					System.Diagnostics.Debug.Write(input[i, j] + "\t");
 				}
 				System.Diagnostics.Debug.WriteLine("");

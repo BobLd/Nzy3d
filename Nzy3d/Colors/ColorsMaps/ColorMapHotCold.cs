@@ -15,16 +15,11 @@ namespace Nzy3d.Colors.ColorMaps
 	/// to white and last, red.
 	/// </para>
 	/// </summary>
-	/// <remarks></remarks>
 	public class ColorMapHotCold : IColorMap
 	{
-		private bool m_direction;
-		public bool Direction {
-			get { return m_direction; }
-			set { m_direction = value; }
-		}
+        public bool Direction { get; set; }
 
-		public Color GetColor(IColorMappable colorable, double v)
+        public Color GetColor(IColorMappable colorable, double v)
 		{
 			return GetColor(0, 0, v, colorable.ZMin, colorable.ZMax);
 		}
@@ -37,14 +32,22 @@ namespace Nzy3d.Colors.ColorMaps
 		private Color GetColor(double x, double y, double z, double zMin, double zMax)
 		{
 			double rel_value = 0;
-			if (z < zMin) {
+			if (z < zMin)
+			{
 				rel_value = 0;
-			} else if (z > zMax) {
+			}
+			else if (z > zMax)
+			{
 				rel_value = 1;
-			} else {
-				if (m_direction) {
+			}
+			else
+			{
+				if (Direction)
+				{
 					rel_value = (z - zMin) / (zMax - zMin);
-				} else {
+				}
+				else
+				{
 					rel_value = (zMax - z) / (zMax - zMin);
 				}
 			}
@@ -54,21 +57,30 @@ namespace Nzy3d.Colors.ColorMaps
 			return new Color(r, v, b);
 		}
 
-        private double colorComponentAbsolute(double value, double bLeft, double bRight, double tLeft, double tRight)
+		private double colorComponentAbsolute(double value, double bLeft, double bRight, double tLeft, double tRight)
 		{
-			if (value < bLeft | value > bRight) {
+			if (value < bLeft | value > bRight)
+			{
 				// a gauche ou a droite du creneau
 				return 0;
-			} else if (value > tLeft | value < tRight) {
+			}
+			else if (value > tLeft | value < tRight)
+			{
 				// sur le plateau haut
 				return 1;
-			} else if (value >= bLeft & value <= tLeft) {
+			}
+			else if (value >= bLeft & value <= tLeft)
+			{
 				// sur la pente gauche du creneau
 				return (value - bLeft) / (tLeft - bLeft);
-			} else if (value >= tRight & value <= bRight) {
+			}
+			else if (value >= tRight & value <= bRight)
+			{
 				// sur la pente droite du creneau
 				return (value - bRight) / (tRight - bRight);
-			} else {
+			}
+			else
+			{
 				throw new Exception("ColorMap did not achieve to compute current color.");
 			}
 		}
@@ -76,8 +88,6 @@ namespace Nzy3d.Colors.ColorMaps
 		/// <summary>
 		/// Returns the string representation of this colormap
 		/// </summary>
-		/// <returns></returns>
-		/// <remarks></remarks>
 		public override string ToString()
 		{
 			return "ColorMapHotCold";

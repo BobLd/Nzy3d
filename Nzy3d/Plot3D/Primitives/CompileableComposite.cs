@@ -1,6 +1,7 @@
 using Nzy3d.Colors;
 using Nzy3d.Events;
 using Nzy3d.Maths;
+using Nzy3d.Plot3D.Rendering.Canvas;
 using Nzy3d.Plot3D.Rendering.View;
 using OpenTK.Graphics.OpenGL;
 
@@ -14,7 +15,7 @@ namespace Nzy3d.Plot3D.Primitives
 	/// <para>
 	/// Compiling the object take the time needed to render it as a standard <see cref="AbstractComposite"/>,
 	/// and rendering it once it is compiled seems to take roughly half the time up to now.
-	/// Since compilation occurs during a <see cref="CompileableComposite.Draw" />, the first call to <see cref="CompileableComposite.Draw" /> is supposed
+	/// Since compilation occurs during a <see cref="Draw" />, the first call to <see cref="Draw" /> is supposed
 	/// to be 1.5x longer than a standard <see cref="AbstractComposite"/>, while all next cycles would be 0.5x
 	/// longer.
 	/// </para>
@@ -31,14 +32,13 @@ namespace Nzy3d.Plot3D.Primitives
 	/// </para>
 	/// <para>@author Nils Hoffmann</para>
 	/// </summary>
-	/// <remarks></remarks>
 	public class CompileableComposite : AbstractWireframeable, ISingleColorable, IMultiColorable
 	{
 		private int _dlID = -1;
-		private bool _resetDL = false;
+		private bool _resetDL;
 		internal ColorMapper _mapper;
 		internal Color _color;
-		internal bool _detailedToString = false;
+		internal bool _detailedToString;
 
 		internal List<AbstractDrawable> _components;
 		public CompileableComposite() : base()
@@ -57,15 +57,16 @@ namespace Nzy3d.Plot3D.Primitives
 
 		/// <summary>
 		/// Reset the object if required, compile the object if it is not compiled,
-		/// and execute actual rendering. 
+		/// and execute actual rendering.
 		/// </summary>
 		/// <param name="cam">Camera to draw for.</param>
-		public override void Draw(Rendering.View.Camera cam)
+		public override void Draw(Camera cam)
 		{
 			if (_resetDL)
 			{
 				this.Reset();
 			}
+
 			if (_dlID == -1)
 			{
 				this.Compile(cam);
@@ -74,9 +75,9 @@ namespace Nzy3d.Plot3D.Primitives
 		}
 
 		/// <summary>
-		/// If you call compile, the display list will be regenerated. 
+		/// If you call compile, the display list will be regenerated.
 		/// </summary>
-		internal void Compile(Rendering.View.Camera cam)
+		internal void Compile(Camera cam)
 		{
 			this.Reset();
 			// clear old list
@@ -87,12 +88,9 @@ namespace Nzy3d.Plot3D.Primitives
 			GL.EndList();
 		}
 
-		internal void Execute(Rendering.View.Camera cam)
+		internal void Execute(Camera cam)
 		{
-			if ((_transform != null))
-			{
-				_transform.Execute();
-			}
+			_transform?.Execute();
 			GL.CallList(_dlID);
 		}
 
@@ -110,17 +108,19 @@ namespace Nzy3d.Plot3D.Primitives
 		}
 
 		/// <summary>
-		/// When a drawable has a null transform, no transform is applied at draw(...). 
+		/// When a drawable has a null transform, no transform is applied at draw(...).
 		/// </summary>
 		internal void NullifyChildrenTransforms()
 		{
+			throw new NotImplementedException("CompileableComposite.NullifyChildrenTransforms: BobLd - need to check lock here");
 
 			lock (_components)
 			{
 			}
+
 			foreach (AbstractDrawable c in _components)
 			{
-				if ((c != null))
+				if (c != null)
 				{
 					c.Transform = null;
 				}
@@ -133,10 +133,7 @@ namespace Nzy3d.Plot3D.Primitives
 			{
 				foreach (AbstractDrawable s in _components)
 				{
-					if ((s != null))
-					{
-						s.Draw(cam);
-					}
+					s?.Draw(cam);
 				}
 			}
 		}
@@ -230,7 +227,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (AbstractDrawable c in _components)
 					{
-						if ((c != null) && (c.Bounds != null))
+						if (c?.Bounds != null)
 						{
 							box.Add(c.Bounds);
 						}
@@ -250,8 +247,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (AbstractDrawable c in _components)
 					{
-						AbstractWireframeable cWf = c as AbstractWireframeable;
-						if (cWf != null)
+						if (c is AbstractWireframeable cWf)
 						{
 							cWf.WireframeColor = Color;
 						}
@@ -271,8 +267,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (AbstractDrawable c in _components)
 					{
-						AbstractWireframeable cWf = c as AbstractWireframeable;
-						if (cWf != null)
+						if (c is AbstractWireframeable cWf)
 						{
 							cWf.WireframeDisplayed = value;
 						}
@@ -292,8 +287,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (AbstractDrawable c in _components)
 					{
-						AbstractWireframeable cWf = c as AbstractWireframeable;
-						if (cWf != null)
+						if (c is AbstractWireframeable cWf)
 						{
 							cWf.WireframeWidth = value;
 						}
@@ -313,8 +307,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (AbstractDrawable c in _components)
 					{
-						AbstractWireframeable cWf = c as AbstractWireframeable;
-						if (cWf != null)
+						if (c is AbstractWireframeable cWf)
 						{
 							cWf.FaceDisplayed = value;
 						}
@@ -334,13 +327,11 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (AbstractDrawable c in _components)
 					{
-						IMultiColorable cMC = c as IMultiColorable;
-						ISingleColorable cSC = c as ISingleColorable;
-						if (cMC != null)
+						if (c is IMultiColorable cMC)
 						{
 							cMC.ColorMapper = value;
 						}
-						else if (cSC != null)
+						else if (c is ISingleColorable cSC)
 						{
 							cSC.Color = value.Color(c.Barycentre);
 						}
@@ -361,8 +352,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (AbstractDrawable c in _components)
 					{
-						ISingleColorable cSC = c as ISingleColorable;
-						if (cSC != null)
+						if (c is ISingleColorable cSC)
 						{
 							cSC.Color = value;
 						}
@@ -391,8 +381,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (AbstractDrawable c in _components)
 					{
-						AbstractComposite cAc = c as AbstractComposite;
-						if (cAc != null)
+						if (c is AbstractComposite cAc)
 						{
 							output += "\r\n" + cAc.toString(depth + 1);
 						}
@@ -404,7 +393,7 @@ namespace Nzy3d.Plot3D.Primitives
 						{
 							output += "\r\n" + Utils.blanks(depth + 1) + "(null)";
 						}
-						k += 1;
+						k++;
 					}
 				}
 			}

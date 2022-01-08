@@ -16,12 +16,7 @@ namespace Nzy3d.Colors.ColorMaps
 	/// </summary>
 	public class ColorMapWhiteBlue : IColorMap
 	{
-		private bool m_direction;
-		public bool Direction
-		{
-			get { return m_direction; }
-			set { m_direction = value; }
-		}
+		public bool Direction { get; set; }
 
 		public Color GetColor(IColorMappable colorable, double v)
 		{
@@ -49,7 +44,7 @@ namespace Nzy3d.Colors.ColorMaps
 			}
 			else
 			{
-				if (m_direction)
+				if (Direction)
 				{
 					rel_value = (z - zMin) / (zMax - zMin);
 				}
@@ -64,8 +59,6 @@ namespace Nzy3d.Colors.ColorMaps
 		/// <summary>
 		/// Returns the string representation of this colormap
 		/// </summary>
-		/// <returns></returns>
-		/// <remarks></remarks>
 		public override string ToString()
 		{
 			return "ColorMapWhiteBlue";

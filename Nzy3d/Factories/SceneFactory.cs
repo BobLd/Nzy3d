@@ -2,15 +2,13 @@ using Nzy3d.Chart;
 
 namespace Nzy3d.Factories
 {
-
-    public class SceneFactory
+	public class SceneFactory
 	{
 		public static ChartScene getInstance(bool sort)
 		{
 			return new ChartScene(sort);
 		}
 	}
-
 }
 
 //=======================================================
