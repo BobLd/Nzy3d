@@ -77,7 +77,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes.Layout
 				YTickColor = value;
 				ZTickColor = value;
 				GridColor = value;
-				QuadColor = value.negativeColor();
+				QuadColor = value.NegativeColor();
 			}
 		}
 

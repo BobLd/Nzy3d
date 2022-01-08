@@ -72,10 +72,10 @@ namespace Nzy3d.Plot3D.Builder.Concrete
                     p[1].Color = _cmap.Color(p[1].XYZ);
                     p[2].Color = _cmap.Color(p[2].XYZ);
                     p[3].Color = _cmap.Color(p[3].XYZ);
-                    p[0].Rgb.mul(_factor);
-                    p[1].Rgb.mul(_factor);
-                    p[2].Rgb.mul(_factor);
-                    p[3].Rgb.mul(_factor);
+                    p[0].Rgb.Mul(_factor);
+                    p[1].Rgb.Mul(_factor);
+                    p[2].Rgb.Mul(_factor);
+                    p[3].Rgb.Mul(_factor);
 
                     float[] radius = new float[p.Length];
 
@@ -158,7 +158,7 @@ namespace Nzy3d.Plot3D.Builder.Concrete
                                 // Generate a point on the circle that replaces s+1
                                 intersection = FindPoint(p[seq[s]], p[seq[s + 1]], ringRadius);
                                 intersection.Color = _cmap.Color(intersection.XYZ);
-                                intersection.Rgb.mul(_factor);
+                                intersection.Rgb.Mul(_factor);
                                 polygon.Add(intersection);
                             }
                             else if ((!isIn[seq[s]]) && isIn[seq[s + 1]])
@@ -177,7 +177,7 @@ namespace Nzy3d.Plot3D.Builder.Concrete
                                 // Generate a point on the circle that replaces s
                                 intersection = FindPoint(p[seq[s]], p[seq[s + 1]], ringRadius);
                                 intersection.Color = _cmap.Color(intersection.XYZ);
-                                intersection.Rgb.mul(_factor);
+                                intersection.Rgb.Mul(_factor);
                                 polygon.Add(intersection);
 
                                 if (!done[seq[s + 1]])

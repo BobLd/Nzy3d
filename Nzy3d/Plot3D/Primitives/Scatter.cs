@@ -53,7 +53,7 @@ namespace Nzy3d.Plot3D.Primitives
             GL.Begin(PrimitiveType.Points);
             if (_colors == null)
             {
-                GL.Color4(Color.r, Color.g, Color.b, Color.a);
+                GL.Color4(Color.R, Color.G, Color.B, Color.A);
             }
 
             if (_coordinates != null)
@@ -63,7 +63,7 @@ namespace Nzy3d.Plot3D.Primitives
                 {
                     if (_colors != null)
                     {
-                        GL.Color4(_colors[k].r, _colors[k].g, _colors[k].b, _colors[k].a);
+                        GL.Color4(_colors[k].R, _colors[k].G, _colors[k].B, _colors[k].A);
                         k++;
                     }
 

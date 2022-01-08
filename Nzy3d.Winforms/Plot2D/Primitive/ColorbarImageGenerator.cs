@@ -57,7 +57,7 @@ namespace Nzy3d.Winforms.Plot2D.Primitive
 			// Draw background
 			if (_hasBackground)
 			{
-				graphic.FillRectangle(new System.Drawing.SolidBrush(_backgroundColor.toColor()), 0, 0, width, height);
+				graphic.FillRectangle(new System.Drawing.SolidBrush(_backgroundColor.ToColor()), 0, 0, width, height);
 			}
 			// Draw colorbar centering in half the Legend text height
 			for (int h = txtSize / 2; h <= (height - txtSize / 2); h++)
@@ -68,10 +68,10 @@ namespace Nzy3d.Winforms.Plot2D.Primitive
 				Color c = _mapper.Color(v);
 				//To allow the Color to be a variable independent of the coordinates
 				// Draw line
-				graphic.DrawLine(new System.Drawing.Pen(new System.Drawing.SolidBrush(c.toColor())), 0, height - h, barWidth, height - h);
+				graphic.DrawLine(new System.Drawing.Pen(new System.Drawing.SolidBrush(c.ToColor())), 0, height - h, barWidth, height - h);
 			}
 			// Contour of bar
-			graphic.FillRectangle(new System.Drawing.SolidBrush(_foregroundColor.toColor()), 0, Convert.ToSingle(txtSize / 2), barWidth, height - txtSize);
+			graphic.FillRectangle(new System.Drawing.SolidBrush(_foregroundColor.ToColor()), 0, Convert.ToSingle(txtSize / 2), barWidth, height - txtSize);
 			// Text annotation
 			if (((_provider != null)))
 			{
@@ -84,7 +84,7 @@ namespace Nzy3d.Winforms.Plot2D.Primitive
 					ypos = txtSize + (height - txtSize - (height - txtSize) * ((ticks[t] - _min) / (_max - _min)));
 					//Making sure that the first and last tick appear in the colorbar
 					txt = _renderer.Format(ticks[t]);
-					graphic.DrawString(txt, new System.Drawing.Font("Arial", txtSize, System.Drawing.GraphicsUnit.Pixel), new System.Drawing.SolidBrush(_foregroundColor.toColor()), barWidth + 1, ypos);
+					graphic.DrawString(txt, new System.Drawing.Font("Arial", txtSize, System.Drawing.GraphicsUnit.Pixel), new System.Drawing.SolidBrush(_foregroundColor.ToColor()), barWidth + 1, ypos);
 				}
 			}
 			return image;

@@ -49,7 +49,7 @@ namespace Nzy3d.Plot3D.Primitives
 					{
 						p.Color = _mapper.Color(p.XYZ);
 					}
-					GL.Color4(p.Color.r, p.Color.g, p.Color.b, p.Color.a);
+					GL.Color4(p.Color.R, p.Color.G, p.Color.B, p.Color.A);
 					GL.Vertex3(p.XYZ.X, p.XYZ.Y, p.XYZ.Z);
 				}
 
@@ -68,7 +68,7 @@ namespace Nzy3d.Plot3D.Primitives
                     EnablePolygonOffsetFill();
 				}
 
-				GL.Color4(_wfcolor.r, _wfcolor.g, _wfcolor.b, _wfcolor.a);
+				GL.Color4(_wfcolor.R, _wfcolor.G, _wfcolor.B, _wfcolor.A);
 				GL.LineWidth(_wfwidth);
 				GL.Begin(PrimitiveType.Polygon);
 

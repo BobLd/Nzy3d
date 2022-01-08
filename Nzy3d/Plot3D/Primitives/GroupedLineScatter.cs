@@ -91,12 +91,12 @@ namespace Nzy3d.Plot3D.Primitives
                     //Setup colors
                     if (_colors == null)
                     {
-                        GL.Color4(Color.r, Color.g, Color.b, Color.a);
+                        GL.Color4(Color.R, Color.G, Color.B, Color.A);
                     }
 
                     if (_colors != null)
                     {
-                        GL.Color4(_colors[k].r, _colors[k].g, _colors[k].b, _colors[k].a);
+                        GL.Color4(_colors[k].R, _colors[k].G, _colors[k].B, _colors[k].A);
                         k++;
                         if (k >= _colors.Length) k = 0; //Roll over the color list
                     }

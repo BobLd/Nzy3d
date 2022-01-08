@@ -27,7 +27,7 @@ namespace Nzy3d.WinformsDemo
             surface.FaceDisplayed = true;
             surface.WireframeDisplayed = true;
             surface.WireframeColor = Color.CYAN;
-            surface.WireframeColor.mul(new Color(1, 1, 1, 0.5));
+            surface.WireframeColor.Mul(new Color(1, 1, 1, 0.5));
             return surface;
         }
         #endregion

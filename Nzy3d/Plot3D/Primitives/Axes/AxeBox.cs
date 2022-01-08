@@ -124,7 +124,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			{
 				Color quadcolor = _layout.QuadColor;
 				GL.PolygonMode(MaterialFace.Back, PolygonMode.Fill);
-				GL.Color4(quadcolor.r, quadcolor.g, quadcolor.b, quadcolor.a);
+				GL.Color4(quadcolor.R, quadcolor.G, quadcolor.B, quadcolor.A);
 				GL.LineWidth(1);
 				GL.Enable(EnableCap.PolygonOffsetFill);
 				GL.PolygonOffset(1, 1);
@@ -137,13 +137,13 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			// Edge part of quads making the surrounding box
 			Color gridcolor = _layout.GridColor;
 			GL.PolygonMode(MaterialFace.Back, PolygonMode.Line);
-			GL.Color4(gridcolor.r, gridcolor.g, gridcolor.b, gridcolor.a);
+			GL.Color4(gridcolor.R, gridcolor.G, gridcolor.B, gridcolor.A);
 			GL.LineWidth(1);
 			DrawCube(RenderingMode.Render);
 
 			// Draw grids on non hidden quads
 			GL.PolygonMode(MaterialFace.Back, PolygonMode.Line);
-			GL.Color4(gridcolor.r, gridcolor.g, gridcolor.b, gridcolor.a);
+			GL.Color4(gridcolor.R, gridcolor.G, gridcolor.B, gridcolor.A);
 			GL.LineWidth(1);
 			GL.LineStipple(1, 0xaaaa);
 			GL.Enable(EnableCap.LineStipple);
@@ -907,7 +907,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 
 		public void DrawTickLine(Color color, double xpos, double ypos, double zpos, double xlab, double ylab, double zlab)
 		{
-			GL.Color3(color.r, color.g, color.b);
+			GL.Color3(color.R, color.G, color.B);
 			GL.LineWidth(1);
 
 			// Draw the tick line

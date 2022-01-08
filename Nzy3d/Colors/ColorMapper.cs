@@ -32,7 +32,7 @@ namespace Nzy3d.Colors
 			Color @out = ColorMap.GetColor(this, coord.X, coord.Y, coord.Z);
 			if (m_factor != null)
 			{
-				@out.mul(m_factor);
+				@out.Mul(m_factor);
 			}
 			return @out;
 		}
@@ -42,7 +42,7 @@ namespace Nzy3d.Colors
 			Color @out = ColorMap.GetColor(this, v);
 			if (m_factor != null)
 			{
-				@out.mul(m_factor);
+				@out.Mul(m_factor);
 			}
 			return @out;
 		}

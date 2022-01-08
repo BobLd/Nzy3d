@@ -5,22 +5,37 @@ namespace Nzy3d.Colors
 	public class Color
 	{
 		#region "Members"
-		public double r;
-		public double g;
-		public double b;
-		public double a;
+		/// <summary>
+		/// Red channel.
+		/// </summary>
+		public double R;
+
+		/// <summary>
+		/// Green channel.
+		/// </summary>
+		public double G;
+
+		/// <summary>
+		/// Blue channel.
+		/// </summary>
+		public double B;
+
+		/// <summary>
+		/// Alpha channel.
+		/// </summary>
+		public double A;
 		#endregion
 
 		#region "Constants"
-		public static Color BLACK = new Color(0.0, 0.0, 0.0);
-		public static Color WHITE = new Color(1.0, 1.0, 1.0);
-		public static Color GRAY = new Color(0.5, 0.5, 0.5);
-		public static Color RED = new Color(1.0, 0.0, 0.0);
-		public static Color GREEN = new Color(0.0, 1.0, 0.0);
-		public static Color BLUE = new Color(0.0, 0.0, 1.0);
-		public static Color YELLOW = new Color(1.0, 1.0, 0.0);
-		public static Color MAGENTA = new Color(1.0, 0.0, 1.0);
-		public static Color CYAN = new Color(0.0, 1.0, 1.0);
+		public static readonly Color BLACK = new Color(0.0, 0.0, 0.0);
+		public static readonly Color WHITE = new Color(1.0, 1.0, 1.0);
+		public static readonly Color GRAY = new Color(0.5, 0.5, 0.5);
+		public static readonly Color RED = new Color(1.0, 0.0, 0.0);
+		public static readonly Color GREEN = new Color(0.0, 1.0, 0.0);
+		public static readonly Color BLUE = new Color(0.0, 0.0, 1.0);
+		public static readonly Color YELLOW = new Color(1.0, 1.0, 0.0);
+		public static readonly Color MAGENTA = new Color(1.0, 0.0, 1.0);
+		public static readonly Color CYAN = new Color(0.0, 1.0, 1.0);
 		#endregion
 
 		static internal Random randObj = new Random();
@@ -32,7 +47,8 @@ namespace Nzy3d.Colors
 		/// <param name="r">Red value (between 0 and 1)</param>
 		/// <param name="g">Green value (between 0 and 1)</param>
 		/// <param name="b">Blue value (between 0 and 1)</param>
-		public Color(double r, double g, double b) : this(r, g, b, 1)
+		public Color(double r, double g, double b)
+			: this(r, g, b, 1)
 		{
 		}
 
@@ -42,7 +58,8 @@ namespace Nzy3d.Colors
 		/// <param name="r">Red value (between 0 and 255)</param>
 		/// <param name="g">Green value (between 0 and 255)</param>
 		/// <param name="b">Blue value (between 0 and 255)</param>
-		public Color(int r, int g, int b) : this(Convert.ToDouble(r / 255), Convert.ToDouble(g / 255), Convert.ToDouble(b / 255), 1)
+		public Color(int r, int g, int b)
+			: this(r, g, b, 1)
 		{
 		}
 
@@ -55,10 +72,10 @@ namespace Nzy3d.Colors
 		/// <param name="a">a value (between 0 and 1)</param>
 		public Color(double r, double g, double b, double a)
 		{
-			this.r = r;
-			this.g = g;
-			this.b = b;
-			this.a = a;
+			this.R = r;
+			this.G = g;
+			this.B = b;
+			this.A = a;
 		}
 
 		/// <summary>
@@ -68,7 +85,8 @@ namespace Nzy3d.Colors
 		/// <param name="g">Green value (between 0 and 255)</param>
 		/// <param name="b">Blue value (between 0 and 255)</param>
 		/// <param name="a">a value (between 0 and 255)</param>
-		public Color(int r, int g, int b, int a) : this(Convert.ToDouble(r / 255), Convert.ToDouble(g / 255), Convert.ToDouble(b / 255), Convert.ToDouble(a / 255))
+		public Color(int r, int g, int b, int a)
+			: this(r / 255.0, g / 255.0, b / 255.0, a / 255.0)
 		{
 		}
 		#endregion
@@ -78,25 +96,25 @@ namespace Nzy3d.Colors
 		/// Multiply current color components (including alpha value) by <paramref name="factor"/> color components values and assign value to current color.
 		/// </summary>
 		/// <param name="factor">Multiply values.</param>
-		public void mul(Color factor)
+		public void Mul(Color factor)
 		{
-			this.r *= factor.r;
-			this.g *= factor.g;
-			this.b *= factor.b;
-			this.a *= factor.a;
+			this.R *= factor.R;
+			this.G *= factor.G;
+			this.B *= factor.B;
+			this.A *= factor.A;
 		}
 
 		/// <summary>
 		/// Returns the hexadecimal representation of this color, without alpha channel value
 		/// </summary>
-		public string toHexString
+		public string HexString
 		{
 			get
 			{
 				string hexa = "#";
-				hexa += this.r.ToString("X2");
-				hexa += this.g.ToString("X2");
-				hexa += this.b.ToString("X2");
+				hexa += this.R.ToString("X2");
+				hexa += this.G.ToString("X2");
+				hexa += this.B.ToString("X2");
 				return hexa;
 			}
 		}
@@ -106,55 +124,43 @@ namespace Nzy3d.Colors
 		/// </summary>
 		public override string ToString()
 		{
-			return "(Color) r=" + r + " g=" + g + " b=" + b + " a=" + a;
+			return "(Color) r=" + R + " g=" + G + " b=" + B + " a=" + A;
 		}
 
-		public double[] toArray()
+		public double[] ToArray()
+		{
+			return new double[] { R, G, B, A };
+		}
+
+		public double[] Negative()
 		{
 			return new double[] {
-				r,
-				g,
-				b,
-				a
+				1 - R,
+				1 - G,
+				1 - B,
+				A
 			};
 		}
 
-		public double[] negative()
+		public Color NegativeColor()
 		{
-			return new double[] {
-				1 - r,
-				1 - g,
-				1 - b,
-				a
-			};
+			return new Color(1 - R, 1 - G, 1 - B, A);
 		}
 
-		public Color negativeColor()
-		{
-			return new Color(1 - r, 1 - g, 1 - b, a);
-		}
-
-		public static Color random()
+		public static Color Random()
 		{
 			return new Color(randObj.NextDouble(), randObj.NextDouble(), randObj.NextDouble());
 		}
 
-		public System.Drawing.Color toColor()
+		public System.Drawing.Color ToColor()
 		{
-			return System.Drawing.Color.FromArgb((int)a, (int)r, (int)g, (int)b);
+			return System.Drawing.Color.FromArgb((int)A, (int)R, (int)G, (int)B);
 		}
 		#endregion
 
 		public Color4 OpenTKColor4
 		{
-			get { return new Color4(Convert.ToSingle(this.r), Convert.ToSingle(this.g), Convert.ToSingle(this.b), Convert.ToSingle(this.a)); }
+			get { return new Color4(Convert.ToSingle(this.R), Convert.ToSingle(this.G), Convert.ToSingle(this.B), Convert.ToSingle(this.A)); }
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

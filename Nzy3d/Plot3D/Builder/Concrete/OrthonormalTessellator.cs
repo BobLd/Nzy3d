@@ -183,10 +183,10 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 
 					if (colorFactor != null)
 					{
-						p[0].Rgb.mul(colorFactor);
-						p[1].Rgb.mul(colorFactor);
-						p[2].Rgb.mul(colorFactor);
-						p[3].Rgb.mul(colorFactor);
+						p[0].Rgb.Mul(colorFactor);
+						p[1].Rgb.Mul(colorFactor);
+						p[2].Rgb.Mul(colorFactor);
+						p[3].Rgb.Mul(colorFactor);
 					}
 
 					// Store quad
@@ -232,10 +232,10 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 
                     if (colorFactor != null)
 					{
-						p[0].Rgb.mul(colorFactor);
-						p[1].Rgb.mul(colorFactor);
-						p[2].Rgb.mul(colorFactor);
-						p[3].Rgb.mul(colorFactor);
+						p[0].Rgb.Mul(colorFactor);
+						p[1].Rgb.Mul(colorFactor);
+						p[2].Rgb.Mul(colorFactor);
+						p[3].Rgb.Mul(colorFactor);
 					}
 					// Store quad
 					Polygon quad = new Polygon();

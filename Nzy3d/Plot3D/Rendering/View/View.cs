@@ -729,7 +729,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 		// Clear color and depth buffer (same as Clear)
 		public void ClearColorAndDepth()
 		{
-			GL.ClearColor((float)_bgColor.r, (float)_bgColor.g, (float)_bgColor.b, (float)_bgColor.a);
+			GL.ClearColor((float)_bgColor.R, (float)_bgColor.G, (float)_bgColor.B, (float)_bgColor.A);
 			// clear with background
 			GL.ClearDepth(1);
 			GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
