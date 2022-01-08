@@ -7,7 +7,7 @@ namespace Nzy3d.Maths
 	/// as a Coord3d, as well as dot product and norm.
 	/// </para>
 	/// </summary>
-	public class Vector2d
+	public struct Vector2d
 	{
 		#region "Members"
 		private readonly double x1;

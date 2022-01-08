@@ -1,11 +1,13 @@
 namespace Nzy3d.Maths
 {
 	/// <summary>
-	/// Storage for a 3 dimensional vector defined by two points.
+	/// <para>Storage for a 3 dimensional vector defined by two points.</para>
+	/// <para>
 	/// Provide the vector function that returns the vector
 	/// as a Coord3d, as well as dot product and norm.
+	/// </para>
 	/// </summary>
-	public class Vector3d
+	public struct Vector3d
 	{
 		private readonly double m_x1;
 		private readonly double m_x2;
@@ -24,7 +26,8 @@ namespace Nzy3d.Maths
 			m_z2 = z2;
 		}
 
-		public Vector3d(Coord3d p1, Coord3d p2) : this(p1.X, p2.X, p1.Y, p2.Y, p1.Z, p2.Z)
+		public Vector3d(Coord3d p1, Coord3d p2)
+			: this(p1.X, p2.X, p1.Y, p2.Y, p1.Z, p2.Z)
 		{
 		}
 
