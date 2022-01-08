@@ -16,7 +16,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public BoundingBox3d()
 		{
-			reset();
+			Reset();
 		}
 
 		/// <summary>
@@ -24,10 +24,10 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public BoundingBox3d(List<Coord3d> lst)
 		{
-			reset();
+			Reset();
 			foreach (Coord3d c in lst)
 			{
-				@add(c);
+				Add(c);
 			}
 		}
 
@@ -36,10 +36,10 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public BoundingBox3d(Polygon pol)
 		{
-			reset();
+			Reset();
 			foreach (Point p in pol.GetPoints)
 			{
-				@add(p);
+				Add(p);
 			}
 		}
 
@@ -47,7 +47,7 @@ namespace Nzy3d.Maths
 		/// Initialize a BoundingBox with given centre and edgeLength (equals in all directions)
 		/// </summary>
 		public BoundingBox3d(Coord3d center, double edgeLength)
-			: this(center.x - edgeLength / 2, center.x + edgeLength / 2, center.y - edgeLength / 2, center.y + edgeLength / 2, center.z - edgeLength / 2, center.z + edgeLength / 2)
+			: this(center.X - edgeLength / 2, center.X + edgeLength / 2, center.Y - edgeLength / 2, center.Y + edgeLength / 2, center.Z - edgeLength / 2, center.Z + edgeLength / 2)
 		{
 		}
 
@@ -55,7 +55,7 @@ namespace Nzy3d.Maths
 		/// Initialize a BoundingBox with another bounding box (i.e. performs a copy)
 		/// </summary>
 		public BoundingBox3d(BoundingBox3d anotherBox)
-			: this(anotherBox.xmin, anotherBox.xmax, anotherBox.ymin, anotherBox.ymax, anotherBox.zmin, anotherBox.zmax)
+			: this(anotherBox.XMin, anotherBox.XMax, anotherBox.YMin, anotherBox.YMax, anotherBox.ZMin, anotherBox.ZMax)
 		{
 		}
 
@@ -64,82 +64,99 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public BoundingBox3d(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax)
 		{
-			this.xmin = xmin;
-			this.xmax = xmax;
-			this.ymin = ymin;
-			this.ymax = ymax;
-			this.zmin = zmin;
-			this.zmax = zmax;
+			this.XMin = xmin;
+			this.XMax = xmax;
+			this.YMin = ymin;
+			this.YMax = ymax;
+			this.ZMin = zmin;
+			this.ZMax = zmax;
 		}
 
 		/// <summary>
 		///  Initialize the bounding box with Double.MAX_VALUE as minimum
 		/// value, and Double.MIN_VALUE as maximum value for each dimension.
 		/// </summary>
-		public void reset()
+		public void Reset()
 		{
-			xmin = double.MaxValue;
-			xmax = double.MinValue;
-			ymin = double.MaxValue;
-			ymax = double.MinValue;
-			zmin = double.MaxValue;
-			zmax = double.MinValue;
+			XMin = double.MaxValue;
+			XMax = double.MinValue;
+			YMin = double.MaxValue;
+			YMax = double.MinValue;
+			ZMin = double.MaxValue;
+			ZMax = double.MinValue;
 		}
 
 		/// <summary>
 		/// Check if bounding box is valid (i.e. limits are consistents).
 		/// </summary>
-		public bool valid()
+		public bool IsValid()
 		{
-			return (xmin <= xmax & ymin <= ymax & zmin <= zmax);
+			return XMin <= XMax && YMin <= YMax && ZMin <= ZMax;
 		}
 
 		/// <summary>
 		/// Adds an x,y,z point to the bounding box, and enlarge the bounding
 		/// box if this points lies outside of it.
 		/// </summary>
-		public void @add(double x, double y, double z)
+		public void Add(double x, double y, double z)
 		{
-			if (x > xmax)
-				xmax = x;
-			if (x < xmin)
-				xmin = x;
-			if (y > ymax)
-				ymax = y;
-			if (y < ymin)
-				ymin = y;
-			if (z > zmax)
-				zmax = z;
-			if (z < zmin)
-				zmin = z;
+			if (x > XMax)
+			{
+				XMax = x;
+			}
+
+			if (x < XMin)
+			{
+				XMin = x;
+			}
+
+			if (y > YMax)
+			{
+				YMax = y;
+			}
+
+			if (y < YMin)
+			{
+				YMin = y;
+			}
+
+			if (z > ZMax)
+			{
+				ZMax = z;
+			}
+
+			if (z < ZMin)
+			{
+				ZMin = z;
+			}
 		}
 
 		/// <summary>
 		/// Adds a <see cref="Coord3d"/> point to the bounding box, and enlarge the bounding
 		/// box if this points lies outside of it.
 		/// </summary>
-		public void @add(Coord3d p)
+		public void Add(Coord3d p)
 		{
-			this.@add(p.x, p.y, p.z);
+			this.Add(p.X, p.Y, p.Z);
 		}
 
 		/// <summary>
 		/// Adds a set of coordinates from a polygon to the bounding box
 		/// </summary>
-		public void @add(Polygon pol)
+		public void Add(Polygon pol)
 		{
 			foreach (Point p in pol.GetPoints)
 			{
-				@add(p);
+				Add(p);
 			}
 		}
 
 		/// <summary>
 		/// Adds a point to the bounding box
 		/// </summary>
-		public void @add(Point p)
+		public void Add(Point p)
 		{
-			@add(p.xyz.x, p.xyz.y, p.xyz.z);
+			Add(p.XYZ.X, p.XYZ.Y, p.XYZ.Z);
 		}
 
 		/// <summary>
@@ -148,25 +165,25 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public void Add(BoundingBox3d b)
 		{
-			this.@add(b.xmin, b.ymin, b.zmin);
-			this.@add(b.xmax, b.ymax, b.zmax);
+			this.Add(b.XMin, b.YMin, b.ZMin);
+			this.Add(b.XMax, b.YMax, b.ZMax);
 		}
 
 		/// <summary>
 		/// Compute and return the center point of the BoundingBox3d
 		/// </summary>
-		public Coord3d getCenter()
+		public Coord3d GetCenter()
 		{
-			return new Coord3d((xmax + xmin) / 2, (ymax + ymin) / 2, (zmax + zmin) / 2);
+			return new Coord3d((XMax + XMin) / 2, (YMax + YMin) / 2, (ZMax + ZMin) / 2);
 		}
 
 		/// <summary>
 		/// Return the radius of the Sphere containing the Bounding Box,
 		/// i.e., the distance between the center and the point (xmin, ymin, zmin).
 		/// </summary>
-		public double getRadius()
+		public double GetRadius()
 		{
-			return getCenter().distance(new Coord3d(xmin, ymin, zmin));
+			return GetCenter().Distance(new Coord3d(XMin, YMin, ZMin));
 		}
 
 		/// <summary>
@@ -174,16 +191,17 @@ namespace Nzy3d.Maths
 		/// Scaling does not modify the current bounding box.
 		/// </summary>
 		/// <remarks>Current object is not modified, a new one is created.</remarks>
-		public BoundingBox3d scale(Coord3d factors)
+		public BoundingBox3d Scale(Coord3d factors)
 		{
-			var b = new BoundingBox3d();
-			b.xmax = xmax * factors.x;
-			b.xmin = xmin * factors.x;
-			b.ymax = ymax * factors.y;
-			b.ymin = ymin * factors.y;
-			b.zmax = zmax * factors.z;
-			b.zmin = zmin * factors.z;
-			return b;
+            return new BoundingBox3d
+            {
+                XMax = XMax * factors.X,
+                XMin = XMin * factors.X,
+                YMax = YMax * factors.Y,
+                YMin = YMin * factors.Y,
+                ZMax = ZMax * factors.Z,
+                ZMin = ZMin * factors.Z
+            };
 		}
 
 		/// <summary>
@@ -191,136 +209,132 @@ namespace Nzy3d.Maths
 		/// Shifting does not modify the current bounding box.
 		/// </summary>
 		/// <remarks>Current object is not modified, a new one is created.</remarks>
-		public BoundingBox3d shift(Coord3d offset)
+		public BoundingBox3d Shift(Coord3d offset)
 		{
-			var b = new BoundingBox3d();
-			b.xmax = xmax + offset.x;
-			b.xmin = xmin + offset.x;
-			b.ymax = ymax + offset.y;
-			b.ymin = ymin + offset.y;
-			b.zmax = zmax + offset.z;
-			b.zmin = zmin + offset.z;
-			return b;
+			return new BoundingBox3d
+			{
+				XMax = XMax + offset.X,
+				XMin = XMin + offset.X,
+				YMax = YMax + offset.Y,
+				YMin = YMin + offset.Y,
+				ZMax = ZMax + offset.Z,
+				ZMin = ZMin + offset.Z
+			};
 		}
 
 		/// <summary>
 		/// Return a copy of the current bounding box after adding a margin to all limits (positiv to max limits, negativ to min limits)
 		/// </summary>
 		/// <remarks>Current object is not modified, a new one is created.</remarks>
-		public BoundingBox3d margin(double marg)
+		public BoundingBox3d Margin(double marg)
 		{
-			var b = new BoundingBox3d();
-			b.xmax = xmax + marg;
-			b.xmin = xmin - marg;
-			b.ymax = ymax + marg;
-			b.ymin = ymin - marg;
-			b.zmax = zmax + marg;
-			b.zmin = zmin - marg;
-			return b;
+			return new BoundingBox3d
+			{
+				XMax = XMax + marg,
+				XMin = XMin - marg,
+				YMax = YMax + marg,
+				YMin = YMin - marg,
+				ZMax = ZMax + marg,
+				ZMin = ZMin - marg
+			};
 		}
 
 		/// <summary>
 		/// Return a copy of the current bounding box after adding a margin to all limits (positiv to max limits, negativ to min limits)
 		/// </summary>
 		/// <remarks>Modify current object.</remarks>
-		public void selfMargin(double marg)
+		public void SelfMargin(double marg)
 		{
-			var b = new BoundingBox3d();
-			xmax += marg;
-			xmin -= marg;
-			ymax += marg;
-			ymin -= marg;
-			zmax += marg;
-			zmin -= marg;
+			XMax += marg;
+			XMin -= marg;
+			YMax += marg;
+			YMin -= marg;
+			ZMax += marg;
+			ZMin -= marg;
 		}
 
 		/// <summary>
 		/// Return true if <paramref name="anotherBox"/> is contained in this box.
 		/// </summary>
 		/// <remarks>if b1.contains(b2), then b1.intersect(b2) as well.</remarks>
-		public bool contains(BoundingBox3d anotherBox)
+		public bool Contains(BoundingBox3d anotherBox)
 		{
-			return xmin <= anotherBox.xmin & anotherBox.xmax <= xmax & ymin <= anotherBox.ymin & anotherBox.ymax <= ymax & zmin <= anotherBox.zmin & anotherBox.zmax <= zmax;
+			return XMin <= anotherBox.XMin && anotherBox.XMax <= XMax && YMin <= anotherBox.YMin && anotherBox.YMax <= YMax && ZMin <= anotherBox.ZMin && anotherBox.ZMax <= ZMax;
 		}
 
 		/// <summary>
 		/// Return true if <paramref name="aPoint"/> is contained in this box.
 		/// </summary>
-		public bool contains(Coord3d aPoint)
+		public bool Contains(Coord3d aPoint)
 		{
-			return xmin <= aPoint.x & aPoint.x <= xmax & ymin <= aPoint.y & aPoint.y <= ymax & zmin <= aPoint.z & aPoint.z <= zmax;
+			return XMin <= aPoint.X && aPoint.X <= XMax && YMin <= aPoint.Y && aPoint.Y <= YMax && ZMin <= aPoint.Z && aPoint.Z <= ZMax;
 		}
 
 		/// <summary>
 		/// Return true if <paramref name="anotherBox"/> intersects with this box.
 		/// </summary>
-		public bool intersect(BoundingBox3d anotherBox)
+		public bool Intersect(BoundingBox3d anotherBox)
 		{
-			return (xmin <= anotherBox.xmin & anotherBox.xmin <= xmax) | (xmin <= anotherBox.xmax & anotherBox.xmax <= xmax) & (ymin <= anotherBox.ymin & anotherBox.ymin <= ymax) | (ymin <= anotherBox.ymax & anotherBox.ymax <= ymax) & (zmin <= anotherBox.zmin & anotherBox.zmin <= zmax) | (zmin <= anotherBox.zmax & anotherBox.zmax <= zmax);
+			return (XMin <= anotherBox.XMin && anotherBox.XMin <= XMax) || XMin <= anotherBox.XMax && anotherBox.XMax <= XMax && YMin <= anotherBox.YMin && anotherBox.YMin <= YMax ||
+				    YMin <= anotherBox.YMax && anotherBox.YMax <= YMax && ZMin <= anotherBox.ZMin && anotherBox.ZMin <= ZMax || (ZMin <= anotherBox.ZMax && anotherBox.ZMax <= ZMax);
 		}
 
 		/// <summary>
 		/// Bounding box min x value
 		/// </summary>
-		public double xmin { get; set; }
+		public double XMin { get; set; }
 
 		/// <summary>
 		/// Bounding box max x value
 		/// </summary>
-		public double xmax { get; set; }
+		public double XMax { get; set; }
 
 		/// <summary>
 		/// Bounding box min y value
 		/// </summary>
-		public double ymin { get; set; }
+		public double YMin { get; set; }
 
 		/// <summary>
 		/// Bounding box max y value
 		/// </summary>
-		public double ymax { get; set; }
+		public double YMax { get; set; }
 
 		/// <summary>
 		/// Bounding box min z value
 		/// </summary>
-		public double zmin { get; set; }
+		public double ZMin { get; set; }
 
 		/// <summary>
 		/// Bounding box max z value
 		/// </summary>
-		public double zmax { get; set; }
+		public double ZMax { get; set; }
 
 		public List<Coord3d> Vertices
 		{
 			get
 			{
-				List<Coord3d> edges = new List<Coord3d>();
-				edges.Add(new Coord3d(xmin, ymin, zmin));
-				edges.Add(new Coord3d(xmin, ymax, zmin));
-				edges.Add(new Coord3d(xmax, ymax, zmin));
-				edges.Add(new Coord3d(xmax, ymin, zmin));
-				edges.Add(new Coord3d(xmin, ymin, zmax));
-				edges.Add(new Coord3d(xmin, ymax, zmax));
-				edges.Add(new Coord3d(xmax, ymax, zmax));
-				edges.Add(new Coord3d(xmax, ymin, zmax));
-				return edges;
+				return new List<Coord3d>
+				{
+					new Coord3d(XMin, YMin, ZMin),
+					new Coord3d(XMin, YMax, ZMin),
+					new Coord3d(XMax, YMax, ZMin),
+					new Coord3d(XMax, YMin, ZMin),
+					new Coord3d(XMin, YMin, ZMax),
+					new Coord3d(XMin, YMax, ZMax),
+					new Coord3d(XMax, YMax, ZMax),
+					new Coord3d(XMax, YMin, ZMax)
+				};
 			}
 		}
 
-		public static BoundingBox3d newBoundsAtOrign()
+		public static BoundingBox3d NewBoundsAtOrign()
 		{
 			return new BoundingBox3d(Coord3d.ORIGIN, 0);
 		}
 
 		public override string ToString()
 		{
-			return "(BoundingBox3d)" + xmin + "<=x<=" + xmax + " | " + ymin + "<=y<=" + ymax + " | " + zmin + "<=y<=" + zmax;
+			return "(BoundingBox3d)" + XMin + "<=x<=" + XMax + " | " + YMin + "<=y<=" + YMax + " | " + ZMin + "<=y<=" + ZMax;
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

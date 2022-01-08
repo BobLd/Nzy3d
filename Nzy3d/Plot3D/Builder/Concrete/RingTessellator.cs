@@ -24,11 +24,11 @@ namespace Nzy3d.Plot3D.Builder.Concrete
             throw new Exception("Forbidden constructor");
         }
 
-        public override AbstractComposite build(float[] x, float[] y, float[] z)
+        public override AbstractComposite Build(float[] x, float[] y, float[] z)
         {
-            setData(x, y, z);
+            SetData(x, y, z);
             Shape s = new Shape();
-            s.Add(getInterpolatedRingPolygons());
+            s.Add(GetInterpolatedRingPolygons());
             return s;
         }
 
@@ -59,42 +59,41 @@ namespace Nzy3d.Plot3D.Builder.Concrete
         /// As a consequence, it is suggested to provide data ranging outside of ringMin
         /// and ringMax, in order to be sure to have a perfect round surface.
         /// </summary>
-        public List<Polygon> getInterpolatedRingPolygons()
+        public List<Polygon> GetInterpolatedRingPolygons()
         {
             var polygons = new List<Polygon>();
-            bool[] isIn = null;
-            for (int xi = 0; xi <= x.Length - 2; xi++)
+            for (int xi = 0; xi <= X.Length - 2; xi++)
             {
-                for (int yi = 0; yi <= y.Length - 2; yi++)
+                for (int yi = 0; yi <= Y.Length - 2; yi++)
                 {
                     // Compute points surrounding current point
-                    Point[] p = getRealQuadStandingOnPoint(xi, yi);
-                    p[0].Color = _cmap.Color(p[0].xyz);
-                    p[1].Color = _cmap.Color(p[1].xyz);
-                    p[2].Color = _cmap.Color(p[2].xyz);
-                    p[3].Color = _cmap.Color(p[3].xyz);
-                    p[0].rgb.mul(_factor);
-                    p[1].rgb.mul(_factor);
-                    p[2].rgb.mul(_factor);
-                    p[3].rgb.mul(_factor);
+                    Point[] p = GetRealQuadStandingOnPoint(xi, yi);
+                    p[0].Color = _cmap.Color(p[0].XYZ);
+                    p[1].Color = _cmap.Color(p[1].XYZ);
+                    p[2].Color = _cmap.Color(p[2].XYZ);
+                    p[3].Color = _cmap.Color(p[3].XYZ);
+                    p[0].Rgb.mul(_factor);
+                    p[1].Rgb.mul(_factor);
+                    p[2].Rgb.mul(_factor);
+                    p[3].Rgb.mul(_factor);
 
                     float[] radius = new float[p.Length];
 
                     for (int i = 0; i <= p.Length - 1; i++)
                     {
-                        radius[i] = radius2d(p[i]);
+                        radius[i] = Radius2d(p[i]);
                     }
 
                     // Compute status of each point according to there radius, or NaN status
-                    isIn = isInside(p, radius, _ringMin, _ringMax);
+                    bool[] isIn = IsInside(p, radius, _ringMin, _ringMax);
 
                     // Ignore polygons that are out
-                    if ((!isIn[0]) & (!isIn[1]) & (!isIn[2]) & (!isIn[3]))
+                    if ((!isIn[0]) && (!isIn[1]) && (!isIn[2]) && (!isIn[3]))
                     {
                         continue;
                     }
 
-                    if (isIn[0] & isIn[1] & isIn[2] & isIn[3])
+                    if (isIn[0] && isIn[1] && isIn[2] && isIn[3])
                     {
                         // Directly store polygons that have non NaN values for all points
                         var quad = new Polygon();
@@ -107,9 +106,10 @@ namespace Nzy3d.Plot3D.Builder.Concrete
                     else
                     {
                         // Partly inside: generate points that intersect a radius
-                        Polygon polygon = new Polygon();
+                        var polygon = new Polygon();
                         int[] seq = { 0, 1, 2, 3, 0 };
                         bool[] done = new bool[4];
+
                         for (int pi = 0; pi <= done.Length - 1; pi++)
                         {
                             done[pi] = false;
@@ -123,7 +123,7 @@ namespace Nzy3d.Plot3D.Builder.Concrete
                             float ringRadius;
 
                             // Case of point s "in" and point s+1 "in"
-                            if (isIn[seq[s]] & isIn[seq[s + 1]])
+                            if (isIn[seq[s]] && isIn[seq[s + 1]])
                             {
                                 if (!done[seq[s]])
                                 {
@@ -137,7 +137,7 @@ namespace Nzy3d.Plot3D.Builder.Concrete
                                     done[seq[s + 1]] = true;
                                 }
                             }
-                            else if (isIn[seq[s]] & (!isIn[seq[s + 1]]))
+                            else if (isIn[seq[s]] && (!isIn[seq[s + 1]]))
                             {
                                 // Case of point s "in" and point s+1 "out"
                                 if (!done[seq[s]])
@@ -156,12 +156,12 @@ namespace Nzy3d.Plot3D.Builder.Concrete
                                 }
 
                                 // Generate a point on the circle that replaces s+1
-                                intersection = findPoint(p[seq[s]], p[seq[s + 1]], ringRadius);
-                                intersection.Color = _cmap.Color(intersection.xyz);
-                                intersection.rgb.mul(_factor);
+                                intersection = FindPoint(p[seq[s]], p[seq[s + 1]], ringRadius);
+                                intersection.Color = _cmap.Color(intersection.XYZ);
+                                intersection.Rgb.mul(_factor);
                                 polygon.Add(intersection);
                             }
-                            else if ((!isIn[seq[s]]) & isIn[seq[s + 1]])
+                            else if ((!isIn[seq[s]]) && isIn[seq[s + 1]])
                             {
                                 //Case of point s "out" and point s+1 "in"
                                 // Select the radius on which the point is supposed to stand
@@ -175,9 +175,9 @@ namespace Nzy3d.Plot3D.Builder.Concrete
                                 }
 
                                 // Generate a point on the circle that replaces s
-                                intersection = findPoint(p[seq[s]], p[seq[s + 1]], ringRadius);
-                                intersection.Color = _cmap.Color(intersection.xyz);
-                                intersection.rgb.mul(_factor);
+                                intersection = FindPoint(p[seq[s]], p[seq[s + 1]], ringRadius);
+                                intersection.Color = _cmap.Color(intersection.XYZ);
+                                intersection.Rgb.mul(_factor);
                                 polygon.Add(intersection);
 
                                 if (!done[seq[s + 1]])
@@ -202,129 +202,122 @@ namespace Nzy3d.Plot3D.Builder.Concrete
         /// <summary>
         /// Indicates which point lies inside and outside the given min and max radius.
         /// </summary>
-        internal bool[] isInside(Point[] p, float[] radius, float minRadius, float maxRadius)
+        internal static bool[] IsInside(Point[] p, float[] radius, float minRadius, float maxRadius)
         {
             bool[] isIn = new bool[4];
-            isIn[0] = (!double.IsNaN(p[0].xyz.z)) & radius[0] < maxRadius & radius[0] >= minRadius;
-            isIn[1] = (!double.IsNaN(p[1].xyz.z)) & radius[1] < maxRadius & radius[1] >= minRadius;
-            isIn[2] = (!double.IsNaN(p[2].xyz.z)) & radius[2] < maxRadius & radius[2] >= minRadius;
-            isIn[3] = (!double.IsNaN(p[3].xyz.z)) & radius[3] < maxRadius & radius[3] >= minRadius;
+            isIn[0] = (!double.IsNaN(p[0].XYZ.Z)) && radius[0] < maxRadius && radius[0] >= minRadius;
+            isIn[1] = (!double.IsNaN(p[1].XYZ.Z)) && radius[1] < maxRadius && radius[1] >= minRadius;
+            isIn[2] = (!double.IsNaN(p[2].XYZ.Z)) && radius[2] < maxRadius && radius[2] >= minRadius;
+            isIn[3] = (!double.IsNaN(p[3].XYZ.Z)) && radius[3] < maxRadius && radius[3] >= minRadius;
             return isIn;
         }
 
-        internal float radius2d(Point p)
+        internal static float Radius2d(Point p)
         {
-            return (float)Math.Sqrt(p.xyz.x * p.xyz.x + p.xyz.y * p.xyz.y);
+            return (float)Math.Sqrt(p.XYZ.X * p.XYZ.X + p.XYZ.Y * p.XYZ.Y);
         }
 
         /// <summary>
         /// Return a point that is the intersection between a segment and a circle
         /// Throws ArithmeticException if points do not stand on an squared (orthonormal) grid.
         /// </summary>
-        private Point findPoint(Point p1, Point p2, float ringRadius)
+        private Point FindPoint(Point p1, Point p2, float ringRadius)
         {
             double x3, y3, z3, w1, w2, alpha;
 
             // We know that the seeked point is on a horizontal or vertial line
 
             //We know x3 and radius and seek y3, using intermediate alpha
-            if ((p1.xyz.x == p2.xyz.x))
+            if (p1.XYZ.X == p2.XYZ.X)
             {
-                x3 = p1.xyz.x;
+                x3 = p1.XYZ.X;
                 alpha = Math.Acos(x3 / ringRadius);
-                if (p1.xyz.y < 0 & p2.xyz.y < 0)
+                if (p1.XYZ.Y < 0 && p2.XYZ.Y < 0)
                 {
                     y3 = -Math.Sin(alpha) * ringRadius;
                 }
-                else if (p1.xyz.y > 0 & p2.xyz.y > 0)
+                else if (p1.XYZ.Y > 0 && p2.XYZ.Y > 0)
                 {
                     y3 = Math.Sin(alpha) * ringRadius;
                 }
-                else if (p1.xyz.y == -p2.xyz.y)
+                else if (p1.XYZ.Y == -p2.XYZ.Y)
                 {
                     y3 = 0;
                     // ne peut pas arriver
                 }
                 else
                 {
-                    throw new ArithmeticException(("no alignement between p1(" + p1.xyz.x + "," + p1.xyz.y + "," + p1.xyz.z + ") and p2(" + p2.xyz.x + "," + p2.xyz.y + "," + p2.xyz.z + ")"));
+                    throw new ArithmeticException("no alignement between p1(" + p1.XYZ.X + "," + p1.XYZ.Y + "," + p1.XYZ.Z + ") and p2(" + p2.XYZ.X + "," + p2.XYZ.Y + "," + p2.XYZ.Z + ")");
                 }
 
                 // and now get z3
-                if ((!double.IsNaN(p1.xyz.z)) & double.IsNaN(p2.xyz.z))
+                if ((!double.IsNaN(p1.XYZ.Z)) && double.IsNaN(p2.XYZ.Z))
                 {
-                    z3 = p1.xyz.z;
+                    z3 = p1.XYZ.Z;
                 }
-                else if (double.IsNaN(p1.xyz.z) & (!double.IsNaN(p2.xyz.z)))
+                else if (double.IsNaN(p1.XYZ.Z) && (!double.IsNaN(p2.XYZ.Z)))
                 {
-                    z3 = p2.xyz.z;
+                    z3 = p2.XYZ.Z;
                 }
-                else if ((!double.IsNaN(p1.xyz.z)) & (!double.IsNaN(p2.xyz.z)))
+                else if ((!double.IsNaN(p1.XYZ.Z)) && (!double.IsNaN(p2.XYZ.Z)))
                 {
-                    w2 = (Math.Sqrt((x3 - p1.xyz.x) * (x3 - p1.xyz.x) + (y3 - p1.xyz.y) * (y3 - p1.xyz.y)) / Math.Sqrt((p2.xyz.x - p1.xyz.x) * (p2.xyz.x - p1.xyz.x) + (p2.xyz.y - p1.xyz.y) * (p2.xyz.y - p1.xyz.y)));
+                    w2 = (Math.Sqrt((x3 - p1.XYZ.X) * (x3 - p1.XYZ.X) + (y3 - p1.XYZ.Y) * (y3 - p1.XYZ.Y)) / Math.Sqrt((p2.XYZ.X - p1.XYZ.X) * (p2.XYZ.X - p1.XYZ.X) + (p2.XYZ.Y - p1.XYZ.Y) * (p2.XYZ.Y - p1.XYZ.Y)));
                     w1 = 1 - w2;
-                    z3 = w1 * p1.xyz.z + w2 * p2.xyz.z;
+                    z3 = w1 * p1.XYZ.Z + w2 * p2.XYZ.Z;
                 }
                 else
                 {
-                    throw new ArithmeticException(("can't compute z3 with p1(" + p1.xyz.x + "," + p1.xyz.y + ") and p2(" + p2.xyz.x + "," + p2.xyz.y + ")"));
+                    throw new ArithmeticException("can't compute z3 with p1(" + p1.XYZ.X + "," + p1.XYZ.Y + ") and p2(" + p2.XYZ.X + "," + p2.XYZ.Y + ")");
                 }
                 // We know y3 and radius and seek x3, using intermediate alpha
             }
-            else if (p1.xyz.y == p2.xyz.y)
+            else if (p1.XYZ.Y == p2.XYZ.Y)
             {
-                y3 = p1.xyz.y;
+                y3 = p1.XYZ.Y;
                 alpha = Math.Asin(y3 / ringRadius);
-                if (p1.xyz.x < 0 & p2.xyz.x < 0)
+                if (p1.XYZ.X < 0 && p2.XYZ.X < 0)
                 {
                     x3 = -Math.Cos(alpha) * ringRadius;
                 }
-                else if (p1.xyz.x > 0 & p2.xyz.x > 0)
+                else if (p1.XYZ.X > 0 && p2.XYZ.X > 0)
                 {
                     x3 = Math.Cos(alpha) * ringRadius;
                 }
-                else if (p1.xyz.x == -p2.xyz.x)
+                else if (p1.XYZ.X == -p2.XYZ.X)
                 {
                     x3 = 0;
                     // ne peut pas arriver
                 }
                 else
                 {
-                    throw new ArithmeticException(("no alignement between p1(" + p1.xyz.x + "," + p1.xyz.y + "," + p1.xyz.z + ") and p2(" + p2.xyz.x + "," + p2.xyz.y + "," + p2.xyz.z + ")"));
+                    throw new ArithmeticException("no alignement between p1(" + p1.XYZ.X + "," + p1.XYZ.Y + "," + p1.XYZ.Z + ") and p2(" + p2.XYZ.X + "," + p2.XYZ.Y + "," + p2.XYZ.Z + ")");
                 }
 
                 // and now get z3
-                if ((!double.IsNaN(p1.xyz.z)) & double.IsNaN(p2.xyz.z))
+                if ((!double.IsNaN(p1.XYZ.Z)) && double.IsNaN(p2.XYZ.Z))
                 {
-                    z3 = p1.xyz.z;
+                    z3 = p1.XYZ.Z;
                 }
-                else if (double.IsNaN(p1.xyz.z) & (!double.IsNaN(p2.xyz.z)))
+                else if (double.IsNaN(p1.XYZ.Z) && (!double.IsNaN(p2.XYZ.Z)))
                 {
-                    z3 = p2.xyz.z;
+                    z3 = p2.XYZ.Z;
                 }
-                else if ((!double.IsNaN(p1.xyz.z)) & (!double.IsNaN(p2.xyz.z)))
+                else if ((!double.IsNaN(p1.XYZ.Z)) && (!double.IsNaN(p2.XYZ.Z)))
                 {
-                    w2 = (Math.Sqrt((x3 - p1.xyz.x) * (x3 - p1.xyz.x) + (y3 - p1.xyz.y) * (y3 - p1.xyz.y)) / Math.Sqrt((p2.xyz.x - p1.xyz.x) * (p2.xyz.x - p1.xyz.x) + (p2.xyz.y - p1.xyz.y) * (p2.xyz.y - p1.xyz.y)));
+                    w2 = (Math.Sqrt((x3 - p1.XYZ.X) * (x3 - p1.XYZ.X) + (y3 - p1.XYZ.Y) * (y3 - p1.XYZ.Y)) / Math.Sqrt((p2.XYZ.X - p1.XYZ.X) * (p2.XYZ.X - p1.XYZ.X) + (p2.XYZ.Y - p1.XYZ.Y) * (p2.XYZ.Y - p1.XYZ.Y)));
                     w1 = 1 - w2;
-                    z3 = w1 * p1.xyz.z + w2 * p2.xyz.z;
+                    z3 = w1 * p1.XYZ.Z + w2 * p2.XYZ.Z;
                 }
                 else
                 {
-                    throw new ArithmeticException(("can't compute z3 with p1(" + p1.xyz.x + "," + p1.xyz.y + ") and p2(" + p2.xyz.x + "," + p2.xyz.y + ")"));
+                    throw new ArithmeticException("can't compute z3 with p1(" + p1.XYZ.X + "," + p1.XYZ.Y + ") and p2(" + p2.XYZ.X + "," + p2.XYZ.Y + ")");
                 }
             }
             else
             {
-                throw new ArithmeticException(("no alignement between p1(" + p1.xyz.x + "," + p1.xyz.y + ") and p2(" + p2.xyz.x + "," + p2.xyz.y + ")"));
+                throw new ArithmeticException("no alignement between p1(" + p1.XYZ.X + "," + p1.XYZ.Y + ") and p2(" + p2.XYZ.X + "," + p2.XYZ.Y + ")");
             }
             return new Point(new Coord3d(x3, y3, z3));
         }
     }
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

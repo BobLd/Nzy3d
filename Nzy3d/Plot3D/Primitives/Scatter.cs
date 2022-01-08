@@ -42,7 +42,7 @@ namespace Nzy3d.Plot3D.Primitives
         public void Clear()
         {
             _coordinates = null;
-            _bbox.reset();
+            _bbox.Reset();
         }
 
         public override void Draw(Camera cam)
@@ -61,13 +61,13 @@ namespace Nzy3d.Plot3D.Primitives
                 int k = 0;
                 foreach (Coord3d c in _coordinates)
                 {
-                    if ((_colors != null))
+                    if (_colors != null)
                     {
                         GL.Color4(_colors[k].r, _colors[k].g, _colors[k].b, _colors[k].a);
                         k++;
                     }
 
-                    GL.Vertex3(c.x, c.y, c.z);
+                    GL.Vertex3(c.X, c.Y, c.Z);
                 }
             }
             GL.End();
@@ -87,10 +87,10 @@ namespace Nzy3d.Plot3D.Primitives
 
         private void UpdateBounds()
         {
-            _bbox.reset();
+            _bbox.Reset();
             foreach (var c in _coordinates)
             {
-                _bbox.add(c);
+                _bbox.Add(c);
             }
         }
 
@@ -110,11 +110,11 @@ namespace Nzy3d.Plot3D.Primitives
             set
             {
                 _colors = value;
-                fireDrawableChanged(new DrawableChangedEventArgs(this, DrawableChangedEventArgs.FieldChanged.Color));
+                FireDrawableChanged(new DrawableChangedEventArgs(this, DrawableChangedEventArgs.FieldChanged.Color));
             }
         }
 
-        private float Width { get; set; }
+        private float Width { get; }
 
         public Color Color { get; set; }
     }

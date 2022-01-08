@@ -12,19 +12,21 @@ namespace Nzy3d.Plot3D.Rendering.Ordering
 			points.Sort(this);
 		}
 
-		public int Compare(Maths.Coord3d o1, Maths.Coord3d o2)
+		public int Compare(Coord3d o1, Coord3d o2)
 		{
-			if ((_camera == null))
+			if (_camera == null)
 			{
 				throw new Exception("No available camera for computing PointOrderingStrategy");
 			}
+
 			// Reflexivity
 			if (o1.Equals(o2))
 			{
 				return 0;
 			}
-			double dist1 = _camera.Eye.distance(o1);
-			double dist2 = _camera.Eye.distance(o2);
+
+			double dist1 = _camera.Eye.Distance(o1);
+			double dist2 = _camera.Eye.Distance(o2);
 			if (dist1 == dist2)
 			{
 				return 0;
@@ -38,6 +40,7 @@ namespace Nzy3d.Plot3D.Rendering.Ordering
 				return -1;
 			}
 		}
+
 		//
 		// Operation must be:
 		// symetric: compare(a,b)=-compare(b,a)
@@ -46,10 +49,3 @@ namespace Nzy3d.Plot3D.Rendering.Ordering
 		//
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

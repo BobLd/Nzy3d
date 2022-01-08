@@ -6,89 +6,70 @@ namespace Nzy3d.Maths
 	/// </summary>
 	public class Coordinates
 	{
-		private float[] m_x;
-		private float[] m_y;
-
-		private float[] m_z;
-		public Coordinates(float[] xi, float[] yi, float[] zi)
+        public Coordinates(float[] xi, float[] yi, float[] zi)
 		{
-			this.m_x = xi;
-			this.m_y = yi;
-			this.m_z = zi;
+			this.X = xi;
+			this.Y = yi;
+			this.Z = zi;
 		}
 
 		public Coordinates(Coord3d[] coords)
 		{
 			int nbCoords = coords.Length;
-			m_x = new float[nbCoords];
-			m_y = new float[nbCoords];
-			m_z = new float[nbCoords];
+			X = new float[nbCoords];
+			Y = new float[nbCoords];
+			Z = new float[nbCoords];
 			for (int iCoord = 0; iCoord <= nbCoords - 1; iCoord++)
 			{
-				m_x[iCoord] = (float)coords[iCoord].x;
-				m_y[iCoord] = (float)coords[iCoord].y;
-				m_z[iCoord] = (float)coords[iCoord].z;
+				X[iCoord] = (float)coords[iCoord].X;
+				Y[iCoord] = (float)coords[iCoord].Y;
+				Z[iCoord] = (float)coords[iCoord].Z;
 			}
 		}
 
 		public Coordinates(List<Coord3d> coords)
 		{
 			int nbCoords = coords.Count;
-			m_x = new float[nbCoords];
-			m_y = new float[nbCoords];
-			m_z = new float[nbCoords];
+			X = new float[nbCoords];
+			Y = new float[nbCoords];
+			Z = new float[nbCoords];
 			for (int iCoord = 0; iCoord <= nbCoords - 1; iCoord++)
 			{
-				m_x[iCoord] = (float)coords[iCoord].x;
-				m_y[iCoord] = (float)coords[iCoord].y;
-				m_z[iCoord] = (float)coords[iCoord].z;
+				X[iCoord] = (float)coords[iCoord].X;
+				Y[iCoord] = (float)coords[iCoord].Y;
+				Z[iCoord] = (float)coords[iCoord].Z;
 			}
 		}
 
-		public float[] x
-		{
-			get { return this.m_x; }
-		}
+        public float[] X { get; }
 
-		public float[] y
-		{
-			get { return this.m_y; }
-		}
+        public float[] Y { get; }
 
-		public float[] z
-		{
-			get { return this.m_z; }
-		}
+        public float[] Z { get; }
 
-		public Coord3d[] toArray()
+        public Coord3d[] ToArray()
 		{
-			Coord3d[] array = new Coord3d[m_x.Length];
-			for (int iCoord = 0; iCoord <= m_x.Length - 1; iCoord++)
+			var array = new Coord3d[X.Length];
+			for (int iCoord = 0; iCoord <= X.Length - 1; iCoord++)
 			{
-				array[iCoord] = new Coord3d(m_x[iCoord], m_y[iCoord], m_z[iCoord]);
+				array[iCoord] = new Coord3d(X[iCoord], Y[iCoord], Z[iCoord]);
 			}
 			return array;
 		}
 
+		/// <inheritdoc/>
 		public override string ToString()
 		{
 			string txt = "";
-			for (int iCoord = 0; iCoord <= m_x.Length - 1; iCoord++)
+			for (int iCoord = 0; iCoord <= X.Length - 1; iCoord++)
 			{
 				if (iCoord > 0)
 				{
 					txt += "\r\n";
 				}
-				txt += "[" + iCoord + "]" + m_x[iCoord] + "|" + m_y[iCoord] + "|" + m_z[iCoord];
+				txt += "[" + iCoord + "]" + X[iCoord] + "|" + Y[iCoord] + "|" + Z[iCoord];
 			}
 			return txt;
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

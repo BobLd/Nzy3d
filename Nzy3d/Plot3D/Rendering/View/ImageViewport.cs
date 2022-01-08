@@ -2,10 +2,8 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Nzy3d.Plot3D.Rendering.View
 {
-
-    public class ImageViewport : AbstractViewport
+	public class ImageViewport : AbstractViewport
 	{
-
 		internal int _imageHeight;
 		internal int _imageWidth;
 		//internal System.Drawing.Bitmap _imageObj;
@@ -21,7 +19,6 @@ namespace Nzy3d.Plot3D.Rendering.View
 		/// If the picture is bigger than the viewport, it is simply centered in it,
 		/// otherwise, it is scaled in order to fit into the viewport.
 		/// </summary>
-		/// <remarks></remarks>
 		public virtual void Render()
 		{
 			GL.MatrixMode(MatrixMode.Projection);
@@ -53,25 +50,17 @@ namespace Nzy3d.Plot3D.Rendering.View
 		/// <summary>
 		/// Return the minimum size for this graphic.
 		/// </summary>
-		public virtual System.Drawing.Size MinimumSize {
+		public virtual System.Drawing.Size MinimumSize
+		{
 			get { return new System.Drawing.Size(0, 0); }
 		}
 
 		/// <summary>
 		/// Return the prefered size for this graphic.
 		/// </summary>
-		public System.Drawing.Size PreferedSize {
+		public System.Drawing.Size PreferedSize
+		{
 			get { return new System.Drawing.Size(1, 1); }
 		}
-
-
 	}
-
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

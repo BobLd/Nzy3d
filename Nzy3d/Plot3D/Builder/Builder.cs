@@ -7,7 +7,7 @@ using Nzy3d.Plot3D.Primitives;
 
 namespace Nzy3d.Plot3D.Builder
 {
-	public class Builder
+    public class Builder
 	{
 		static internal IColorMap _colorMap = new ColorMapRainbow();
 		static internal Color _colorFactor = new Color(1, 1, 1, 1);
@@ -15,52 +15,53 @@ namespace Nzy3d.Plot3D.Builder
 		static internal bool _wireframeDisplayed;
 
 		static internal Color _wireframeColor = Color.BLACK;
-		public static Shape buildOrthonomal(OrthonormalGrid grid, Mapper mapper)
+
+		public static Shape BuildOrthonomal(OrthonormalGrid grid, Mapper mapper)
 		{
 			var tesselator = new OrthonormalTessellator();
-			return (Shape)tesselator.build(grid.Apply(mapper));
+			return (Shape)tesselator.Build(grid.Apply(mapper));
 		}
 
-		public static Shape buildRing(OrthonormalGrid grid, Mapper mapper, float ringMin, float ringMax)
+		public static Shape BuildRing(OrthonormalGrid grid, Mapper mapper, float ringMin, float ringMax)
 		{
 			var tesselator = new RingTessellator(ringMin, ringMax, new ColorMapper(new ColorMapRainbow(), 0, 1), Color.BLACK);
-			return (Shape)tesselator.build(grid.Apply(mapper));
+			return (Shape)tesselator.Build(grid.Apply(mapper));
 		}
 
-		public static Shape buildRing(OrthonormalGrid grid, Mapper mapper, float ringMin, float ringMax, ColorMapper cmap, Color factor)
+		public static Shape BuildRing(OrthonormalGrid grid, Mapper mapper, float ringMin, float ringMax, ColorMapper cmap, Color factor)
 		{
 			var tesselator = new RingTessellator(ringMin, ringMax, cmap, factor);
-			return (Shape)tesselator.build(grid.Apply(mapper));
+			return (Shape)tesselator.Build(grid.Apply(mapper));
 		}
 
-		public static Shape buildDelaunay(List<Coord3d> coordinates)
+		public static Shape BuildDelaunay(List<Coord3d> coordinates)
 		{
 			var tesselator = new DelaunayTessellator();
-			return (Shape)tesselator.build(coordinates);
+			return (Shape)tesselator.Build(coordinates);
 		}
 
 		// BIG SURFACE
-		public static CompileableComposite buildOrthonormalBig(OrthonormalGrid grid, Mapper mapper)
+		public static CompileableComposite BuildOrthonormalBig(OrthonormalGrid grid, Mapper mapper)
 		{
 			var tesselator = new OrthonormalTessellator();
-			Shape s1 = (Shape)tesselator.build(grid.Apply(mapper));
-			return buildComposite(applyStyling(s1));
+			Shape s1 = (Shape)tesselator.Build(grid.Apply(mapper));
+			return BuildComposite(ApplyStyling(s1));
 		}
 
-		public static Shape applyStyling(Shape s)
+		public static Shape ApplyStyling(Shape s)
 		{
-			s.ColorMapper = new ColorMapper(_colorMap, s.Bounds.zmin, s.Bounds.zmax);
+			s.ColorMapper = new ColorMapper(_colorMap, s.Bounds.ZMin, s.Bounds.ZMax);
 			s.FaceDisplayed = _faceDisplayed;
 			s.WireframeDisplayed = _wireframeDisplayed;
 			s.WireframeColor = _wireframeColor;
 			return s;
 		}
 
-		public static CompileableComposite buildComposite(Shape s)
+		public static CompileableComposite BuildComposite(Shape s)
 		{
 			var sls = new CompileableComposite();
 			sls.Add(s.GetDrawables);
-			sls.ColorMapper = new ColorMapper(_colorMap, sls.Bounds.zmin, sls.Bounds.zmax, _colorFactor);
+			sls.ColorMapper = new ColorMapper(_colorMap, sls.Bounds.ZMin, sls.Bounds.ZMax, _colorFactor);
 			sls.FaceDisplayed = s.FaceDisplayed;
 			sls.WireframeDisplayed = s.WireframeDisplayed;
 			sls.WireframeColor = s.WireframeColor;
@@ -68,10 +69,3 @@ namespace Nzy3d.Plot3D.Builder
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

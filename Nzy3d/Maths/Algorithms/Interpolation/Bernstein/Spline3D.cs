@@ -24,17 +24,18 @@ namespace Nzy3d.Maths.Algorithms.Interpolation.Bernstein
 	public class Spline3D
 	{
 		public static double DEFAULT_TIGHTNESS = 0.25;
+		public List<Coord3d> MPointList;
+		public List<Coord3d> Vertices;
+		public BernsteinPolynomial Bernstein;
+		public Coord3d[] Delta;
+		public Coord3d[] CoeffA;
+		public double[] Bi;
+
 		internal Coord3d[] points;
-		public List<Coord3d> mpointList;
-		public List<Coord3d> vertices;
-		public BernsteinPolynomial bernstein;
-		public Coord3d[] delta;
-		public Coord3d[] coeffA;
-		public double[] bi;
 		internal double mtightness;
 		internal double invTightness;
-
 		internal int numP;
+
 		/// <summary>
 		/// Constructor (default tightness, no control points and no predefined bernstein polynomial)
 		/// </summary>
@@ -59,9 +60,9 @@ namespace Nzy3d.Maths.Algorithms.Interpolation.Bernstein
 		public Spline3D(List<Coord3d> rawPoints, BernsteinPolynomial b, double tightness)
 		{
 			this.Tightness = tightness;
-			mpointList = new List<Coord3d>();
-			mpointList.AddRange(rawPoints);
-			bernstein = b;
+			MPointList = new List<Coord3d>();
+			MPointList.AddRange(rawPoints);
+			Bernstein = b;
 		}
 
 		/// <summary>
@@ -100,13 +101,13 @@ namespace Nzy3d.Maths.Algorithms.Interpolation.Bernstein
 			}
 		}
 
-		public List<Coord3d> pointList
+		public List<Coord3d> PointList
 		{
-			get { return mpointList; }
+			get { return MPointList; }
 			set
 			{
-				mpointList.Clear();
-				mpointList.AddRange(value);
+				MPointList.Clear();
+				MPointList.AddRange(value);
 			}
 		}
 
@@ -124,7 +125,7 @@ namespace Nzy3d.Maths.Algorithms.Interpolation.Bernstein
 		/// <returns>Itself</returns>
 		public Spline3D Add(Coord3d p)
 		{
-			mpointList.Add(p);
+			MPointList.Add(p);
 			return this;
 		}
 
@@ -139,19 +140,19 @@ namespace Nzy3d.Maths.Algorithms.Interpolation.Bernstein
 
 		public void UpdateCoefficients()
 		{
-			numP = pointList.Count;
+			numP = PointList.Count;
 			if (points == null || points.Length - 1 != numP)
 			{
-				coeffA = new Coord3d[numP];
-				delta = new Coord3d[numP];
-				bi = new double[numP];
+				CoeffA = new Coord3d[numP];
+				Delta = new Coord3d[numP];
+				Bi = new double[numP];
 				for (int i = 0; i <= numP - 1; i++)
 				{
-					coeffA[i] = new Coord3d();
-					delta[i] = new Coord3d();
+					CoeffA[i] = new Coord3d();
+					Delta[i] = new Coord3d();
 				}
 			}
-			points = pointList.ToArray();
+			points = PointList.ToArray();
 		}
 
 		public List<Coord3d> ComputeVertices(int resolution)
@@ -159,77 +160,78 @@ namespace Nzy3d.Maths.Algorithms.Interpolation.Bernstein
 			UpdateCoefficients();
             resolution++;
 
-			if (bernstein == null || bernstein.resolution != resolution)
+			if (Bernstein == null || Bernstein.resolution != resolution)
 			{
-				bernstein = new BernsteinPolynomial(resolution);
+				Bernstein = new BernsteinPolynomial(resolution);
 			}
-			if (vertices == null)
+
+			if (Vertices == null)
 			{
-				vertices = new List<Coord3d>();
+				Vertices = new List<Coord3d>();
 			}
 			else
 			{
-				vertices.Clear();
+				Vertices.Clear();
 			}
 
-			findCPoints();
+			FindCPoints();
             resolution--;
 
 			for (int i = 0; i <= numP - 2; i++)
 			{
 				Coord3d p = points[i];
 				Coord3d q = points[i + 1];
-                Coord3d deltaP = delta[i].@add(p);
-                Coord3d deltaQ = q.substract(delta[i + 1]);
+                Coord3d deltaP = Delta[i].Add(p);
+                Coord3d deltaQ = q.Substract(Delta[i + 1]);
                 for (int k = 0; k <= resolution - 1; k++)
 				{
-					double x = p.x * bernstein.b0[k] + deltaP.x * bernstein.b1[k] + deltaQ.x * bernstein.b2[k] + q.x * bernstein.b3[k];
-					double y = p.y * bernstein.b0[k] + deltaP.y * bernstein.b1[k] + deltaQ.y * bernstein.b2[k] + q.y * bernstein.b3[k];
-					double z = p.z * bernstein.b0[k] + deltaP.z * bernstein.b1[k] + deltaQ.z * bernstein.b2[k] + q.z * bernstein.b3[k];
-					vertices.Add(new Coord3d(x, y, z));
+					double x = p.X * Bernstein.b0[k] + deltaP.X * Bernstein.b1[k] + deltaQ.X * Bernstein.b2[k] + q.X * Bernstein.b3[k];
+					double y = p.Y * Bernstein.b0[k] + deltaP.Y * Bernstein.b1[k] + deltaQ.Y * Bernstein.b2[k] + q.Y * Bernstein.b3[k];
+					double z = p.Z * Bernstein.b0[k] + deltaP.Z * Bernstein.b1[k] + deltaQ.Z * Bernstein.b2[k] + q.Z * Bernstein.b3[k];
+					Vertices.Add(new Coord3d(x, y, z));
 				}
 			}
-			vertices.Add(points[points.Length - 1]);
-			return vertices;
+			Vertices.Add(points[points.Length - 1]);
+			return Vertices;
 		}
 
-		internal void findCPoints()
+		internal void FindCPoints()
 		{
-			bi[1] = -Tightness;
-			coeffA[1].setvalues((points[2].x - points[0].x - delta[0].x) * Tightness, (points[2].y - points[0].y - delta[0].y) * Tightness, (points[2].z - points[0].z - delta[0].z) * Tightness);
+			Bi[1] = -Tightness;
+			CoeffA[1].SetValues((points[2].X - points[0].X - Delta[0].X) * Tightness, (points[2].Y - points[0].Y - Delta[0].Y) * Tightness, (points[2].Z - points[0].Z - Delta[0].Z) * Tightness);
 			// correction: original java code : for (int i = 2; i < numP - 1; i++)
 
 			for (int i = 2; i <= numP - 2; i++)
 			{
-				bi[i] = -1 / (invTightness + bi[i - 1]);
-				coeffA[i].setvalues(-(points[i + 1].x - points[i - 1].x - coeffA[i - 1].x) * bi[i], -(points[i + 1].y - points[i - 1].y - coeffA[i - 1].y) * bi[i], -(points[i + 1].z - points[i - 1].z - coeffA[i - 1].z) * bi[i]);
+				Bi[i] = -1 / (invTightness + Bi[i - 1]);
+				CoeffA[i].SetValues(-(points[i + 1].X - points[i - 1].X - CoeffA[i - 1].X) * Bi[i], -(points[i + 1].Y - points[i - 1].Y - CoeffA[i - 1].Y) * Bi[i], -(points[i + 1].Z - points[i - 1].Z - CoeffA[i - 1].Z) * Bi[i]);
 			}
 
 			for (int i = numP - 2; i >= 1; i += -1)
 			{
-				delta[i].setvalues(coeffA[i].x + delta[i + 1].x * bi[i], coeffA[i].y + delta[i + 1].y * bi[i], coeffA[i].z + delta[i + 1].z * bi[i]);
+				Delta[i].SetValues(CoeffA[i].X + Delta[i + 1].X * Bi[i], CoeffA[i].Y + Delta[i + 1].Y * Bi[i], CoeffA[i].Z + Delta[i + 1].Z * Bi[i]);
 			}
 		}
 
-		public List<Coord3d> getDecimatedVertices(double dstep)
+		public List<Coord3d> GetDecimatedVertices(double dstep)
 		{
 			var steps = new List<Coord3d>();
-			int num = vertices.Count;
+			int num = Vertices.Count;
 			int i = 0;
-			Coord3d b = vertices[0];
+			Coord3d b = Vertices[0];
 			Coord3d curr = b.Clone();
 			while (i < num - 1)
 			{
 				Coord3d a = b;
-				b = vertices[i + 1];
-				Coord3d dir = b.substract(a);
-				double segLen = 1 / dir.magSquared();
-				Coord3d stepDir = dir.normalizeTo(dstep);
-				curr = a.interpolateTo(b, curr.substract(a).dot(dir) * segLen);
-				while (curr.substract(a).dot(dir) / segLen <= 1)
+				b = Vertices[i + 1];
+				Coord3d dir = b.Substract(a);
+				double segLen = 1 / dir.MagSquared();
+				Coord3d stepDir = dir.NormalizeTo(dstep);
+				curr = a.InterpolateTo(b, curr.Substract(a).Dot(dir) * segLen);
+				while (curr.Substract(a).Dot(dir) / segLen <= 1)
 				{
 					steps.Add(curr.Clone());
-					curr.addSelf(stepDir);
+					curr.AddSelf(stepDir);
 				}
 				i++;
 			}
@@ -237,10 +239,3 @@ namespace Nzy3d.Maths.Algorithms.Interpolation.Bernstein
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

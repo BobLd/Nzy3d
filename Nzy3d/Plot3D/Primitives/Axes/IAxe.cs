@@ -7,12 +7,12 @@ namespace Nzy3d.Plot3D.Primitives.Axes
     public interface IAxe
 	{
 		void Dispose();
-		void setAxe(BoundingBox3d box);
+		void SetAxe(BoundingBox3d box);
 		void Draw(Camera camera);
-		void setScale(Coord3d scale);
-		BoundingBox3d getBoxBounds();
-		Coord3d getCenter();
-		IAxeLayout getLayout();
+		void SetScale(Coord3d scale);
+		BoundingBox3d GetBoxBounds();
+		Coord3d GetCenter();
+		IAxeLayout GetLayout();
 	}
 }
 

@@ -6,7 +6,9 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 	{
 		private float[] _x;
 		private float[] _y;
+#pragma warning disable RCS1169, IDE0044 // Make field read-only.
 		private float[] _z;
+#pragma warning restore RCS1169, IDE0044 // Make field read-only.
 		private float[,] _z_as_fxy;
 		private int _findxi;
 
@@ -15,42 +17,43 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 		{
 			if (coords == null)
 			{
-				throw new ArgumentException("Function call with illegal value 'Nothing' for parameter coords.", "coords");
+				throw new ArgumentException("Function call with illegal value 'Nothing' for parameter coords.", nameof(coords));
 			}
 
-			if (coords.x == null)
+			if (coords.X == null)
 			{
-				throw new ArgumentException("Illegal result value 'Nothing' on x property of parameter coords.", "coords");
+				throw new ArgumentException("Illegal result value 'Nothing' on x property of parameter coords.", nameof(coords));
 			}
 
-			if (coords.y == null)
+			if (coords.Y == null)
 			{
-				throw new ArgumentException("Illegal result value 'Nothing' on y property of parameter coords.", "coords");
+				throw new ArgumentException("Illegal result value 'Nothing' on y property of parameter coords.", nameof(coords));
 			}
 
-			if (coords.z == null)
+			if (coords.Z == null)
 			{
-				throw new ArgumentException("Illegal result value 'Nothing' on z property of parameter coords.", "coords");
+				throw new ArgumentException("Illegal result value 'Nothing' on z property of parameter coords.", nameof(coords));
 			}
 
-			if (coords.x.Length != coords.y.Length)
+			if (coords.X.Length != coords.Y.Length)
 			{
-				throw new ArgumentException("Parameter coords has different x size (" + coords.x.Length + ") than y size (" + coords.y.Length + ")", "coords");
+				throw new ArgumentException("Parameter coords has different x size (" + coords.X.Length + ") than y size (" + coords.Y.Length + ")", nameof(coords));
 			}
 
-			if (coords.x.Length != coords.z.Length)
+			if (coords.X.Length != coords.Z.Length)
 			{
-				throw new ArgumentException("Parameter coords has different x size (" + coords.x.Length + ") than z size (" + coords.z.Length + ")", "coords");
+				throw new ArgumentException("Parameter coords has different x size (" + coords.X.Length + ") than z size (" + coords.Z.Length + ")", nameof(coords));
 			}
 
-			setData(coords);
+			SetData(coords);
 		}
 
-		internal void setData(Coordinates coords)
+		internal void SetData(Coordinates coords)
 		{
-			_x = MakeCoordinatesUnique(coords.x);
-			_y = MakeCoordinatesUnique(coords.y);
+			_x = MakeCoordinatesUnique(coords.X);
+			_y = MakeCoordinatesUnique(coords.Y);
 			_z_as_fxy = new float[_x.Length, _y.Length];
+
 			for (int i = 0; i <= _x.Length - 1; i++)
 			{
 				for (int j = 0; j <= _y.Length - 1; j++)
@@ -59,14 +62,14 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 				}
 			}
 
-			for (int p = 0; p <= coords.z.Length - 1; p++)
+			for (int p = 0; p <= coords.Z.Length - 1; p++)
 			{
-				bool found = Find(_x, _y, coords.x[p], coords.y[p]);
+				bool found = Find(_x, _y, coords.X[p], coords.Y[p]);
 				if (!found)
 				{
 					throw new Exception("It seems (x[p],y[p]) has not been properly stored into (this.x,this.y)");
 				}
-				_z_as_fxy[_findxi, _findyj] = coords.z[p];
+				_z_as_fxy[_findxi, _findyj] = coords.Z[p];
 			}
 		}
 
@@ -76,7 +79,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 			{
 				for (int j = 0; j <= y.Length - 1; j++)
 				{
-					if (x[i] == vx & y[j] == vy)
+					if (x[i] == vx && y[j] == vy)
 					{
 						_findxi = i;
 						_findyj = j;
@@ -134,31 +137,24 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 			return result;
 		}
 
-		public float[,] get_Z_as_fxy()
+		public float[,] Get_Z_as_fxy()
 		{
 			return this._z_as_fxy;
 		}
 
-		public float[] getX()
+		public float[] GetX()
 		{
 			return this._y;
 		}
 
-		public float[] getY()
+		public float[] GetY()
 		{
 			return this._y;
 		}
 
-		public float[] getZ()
+		public float[] GetZ()
 		{
 			return this._z;
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

@@ -16,23 +16,23 @@ namespace Nzy3d.Plot3D.Text
 			defSceneOffset = new Coord3d();
 		}
 
-		public abstract void drawSimpleText(Camera cam, string s, Coord3d position, Color color);
+		public abstract void DrawSimpleText(Camera cam, string s, Coord3d position, Color color);
 
-		public BoundingBox3d drawText(Camera cam, string s, Coord3d position, Halign halign, Valign valign, Color color)
+		public BoundingBox3d DrawText(Camera cam, string s, Coord3d position, Halign halign, Valign valign, Color color)
 		{
-			return drawText(cam, s, position, halign, valign, color, defScreenOffset, defSceneOffset);
+			return DrawText(cam, s, position, halign, valign, color, defScreenOffset, defSceneOffset);
 		}
 
-		public BoundingBox3d drawText(Camera cam, string s, Coord3d position, Halign halign, Valign valign, Color color, Coord2d screenOffset)
+		public BoundingBox3d DrawText(Camera cam, string s, Coord3d position, Halign halign, Valign valign, Color color, Coord2d screenOffset)
 		{
-			return drawText(cam, s, position, halign, valign, color, screenOffset, defSceneOffset);
+			return DrawText(cam, s, position, halign, valign, color, screenOffset, defSceneOffset);
 		}
 
-		public abstract BoundingBox3d drawText(Camera cam, string s, Coord3d position, Halign halign, Valign valign, Color color, Coord2d screenOffset, Coord3d sceneOffset);
+		public abstract BoundingBox3d DrawText(Camera cam, string s, Coord3d position, Halign halign, Valign valign, Color color, Coord2d screenOffset, Coord3d sceneOffset);
 
-		public BoundingBox3d drawText(Camera cam, string s, Coord3d position, Halign halign, Valign valign, Color color, Coord3d sceneOffset)
+		public BoundingBox3d DrawText(Camera cam, string s, Coord3d position, Halign halign, Valign valign, Color color, Coord3d sceneOffset)
 		{
-			return drawText(cam, s, position, halign, valign, color, defScreenOffset, sceneOffset);
+			return DrawText(cam, s, position, halign, valign, color, defScreenOffset, sceneOffset);
 		}
 	}
 }

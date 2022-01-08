@@ -62,10 +62,10 @@ namespace Nzy3d.Plot3D.Rendering.Lights
 				GL.MatrixMode(MatrixMode.Modelview);
 				GL.LoadIdentity();
 
-				GL.Translate(_position.x * scale.x, _position.y * scale.y, _position.z * scale.z);
+				GL.Translate(_position.X * scale.X, _position.Y * scale.Y, _position.Z * scale.Z);
 
 				// Light position representation (cube)
-				if ((_representationDisplayed))
+				if (_representationDisplayed)
 				{
 					GL.Disable(EnableCap.Lighting);
 					GL.Color3(0.0, 1.0, 1.0);
@@ -73,6 +73,7 @@ namespace Nzy3d.Plot3D.Rendering.Lights
 					Glut.Glut.SolidCube(10);
 					GL.Enable(EnableCap.Lighting);
 				}
+
 				// Actual light source setting	TODO: check we really need to define @ each rendering	
 				LightSwitch.Enable(_lightId);
 				GL.Light(LightName.Light0, LightParameter.Position, _positionZero);

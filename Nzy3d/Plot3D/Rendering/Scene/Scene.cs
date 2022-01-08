@@ -5,26 +5,26 @@ using Nzy3d.Plot3D.Rendering.Scene;
 
 namespace Nzy3d.Plot3D.Rendering.View
 {
-
-    /// <summary>
-    /// A Scene holds a <see cref="Graph"/> to be rendered by a list
-    /// <see cref="View"/>s.
-    ///
-    /// The creation of Views is not of user concern, since it is handled
-    /// during the registration of the Scene by a <see cref="ICanvas"/>.
-    /// The newView() is thus Friend because it is supposed to be called
-    /// by a Canvas3d or a View only.
-    ///
-    /// The Scene is called by the <see cref="Renderer3d"/> to provide the effective
-    /// (Friend) GL2 calls for initialization (List and Texture loading),
-    /// clearing of window, and current view rendering.
-    ///
-    /// @author Martin Pernollet
-    /// </summary>
-    /// <remarks></remarks>
-    public class Scene
+	/// <summary>
+	/// <para>
+	/// A Scene holds a <see cref="Graph"/> to be rendered by a list
+	/// <see cref="View"/>s.
+	/// </para>
+	/// <para>
+	/// The creation of Views is not of user concern, since it is handled
+	/// during the registration of the Scene by a <see cref="ICanvas"/>.
+	/// The newView() is thus Friend because it is supposed to be called
+	/// by a Canvas3d or a View only.
+	/// </para>
+	/// <para>
+	/// The Scene is called by the <see cref="Renderer3d"/> to provide the effective
+	/// (Friend) GL2 calls for initialization (List and Texture loading),
+	/// clearing of window, and current view rendering.
+	/// </para>
+	/// <para>@author Martin Pernollet</para>
+	/// </summary>
+	public class Scene
 	{
-
 		internal List<View> _views;
 		internal Graph _graph;
 
@@ -53,7 +53,8 @@ namespace Nzy3d.Plot3D.Rendering.View
 		public void Dispose()
 		{
 			_graph.Dispose();
-			foreach (View v in _views) {
+			foreach (View v in _views)
+			{
 				v.Dispose();
 			}
 			_views.Clear();
@@ -62,7 +63,8 @@ namespace Nzy3d.Plot3D.Rendering.View
 		/// <summary>
 		/// Get/Set the scene graph attached to this scene
 		/// </summary>
-		public Graph Graph {
+		public Graph Graph
+		{
 			get { return _graph; }
 			set { _graph = value; }
 		}
@@ -70,12 +72,14 @@ namespace Nzy3d.Plot3D.Rendering.View
 		/// <summary>
 		/// Get/Set the light set attached to this scene
 		/// </summary>
-		public LightSet LightSet {
+		public LightSet LightSet
+		{
 			get { return _lighSet; }
 			set { _lighSet = value; }
 		}
 
-		public IEnumerable<View> Views {
+		public IEnumerable<View> Views
+		{
 			get { return _views; }
 		}
 
@@ -138,14 +142,14 @@ namespace Nzy3d.Plot3D.Rendering.View
 		/// <summary>
 		/// Instantiate a View attached to the given Canvas, and return its reference
 		/// </summary>
-		public virtual View newView(ICanvas canvas, Quality quality)
+		public virtual View NewView(ICanvas canvas, Quality quality)
 		{
 			View view = new View(this, canvas, quality);
 			_views.Add(view);
 			return view;
 		}
 
-		public virtual void clearView(View view)
+		public virtual void ClearView(View view)
 		{
 			_views.Remove(view);
 			view.Dispose();
@@ -158,14 +162,5 @@ namespace Nzy3d.Plot3D.Rendering.View
 		{
 			return _graph.ToString();
 		}
-
 	}
-
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

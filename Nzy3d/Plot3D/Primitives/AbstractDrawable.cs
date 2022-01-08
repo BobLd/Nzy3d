@@ -10,7 +10,7 @@ namespace Nzy3d.Plot3D.Primitives
 	/// <summary>
 	/// <para>
 	/// A <see cref="AbstractDrawable"/> defines objects that may be rendered into an OpenGL
-	/// context provided by a <see cref="ICanvas"/>.
+	/// context provided by a <see cref="Rendering.Canvas.ICanvas"/>.
 	/// <br/>
 	/// A <see cref="AbstractDrawable"/> must basically provide a rendering function called draw()
 	/// that receives a reference to a GL2 and a GLU context. It may also
@@ -30,7 +30,7 @@ namespace Nzy3d.Plot3D.Primitives
 	/// <br/>
 	/// Note: A <see cref="AbstractDrawable"/> may last provide the information whether it is displayed or not,
 	/// according to a rendering into the FeedBack buffer. This is currently supported
-	/// specifically for the <see cref="AxeBox"/> object but could be extended with some few more
+	/// specifically for the <see cref="Axes.AxeBox"/> object but could be extended with some few more
 	/// algorithm for referencing all GL2 polygons.
 	/// </para>
 	/// <para>@author Martin Pernollet</para>
@@ -46,25 +46,22 @@ namespace Nzy3d.Plot3D.Primitives
 		internal bool _legendDisplayed = false;
 		public void Dispose()
 		{
-			if ((_listeners != null))
-			{
-				_listeners.Clear();
-			}
+			_listeners?.Clear();
 		}
 
 		public abstract void Draw(Camera cam);
 
-		internal void CallC(Color c)
+		internal static void CallC(Color c)
 		{
 			GL.Color4(c.r, c.g, c.b, c.a);
 		}
 
-		internal void CallC(Color c, float alpha)
+		internal static void CallC(Color c, float alpha)
 		{
 			GL.Color4(c.r, c.g, c.b, alpha);
 		}
 
-		internal void CallWithAlphaFactor(Color c, float alpha)
+		internal static void CallWithAlphaFactor(Color c, float alpha)
 		{
 			GL.Color4(c.r, c.g, c.b, c.a * alpha);
 		}
@@ -79,7 +76,7 @@ namespace Nzy3d.Plot3D.Primitives
 			set
 			{
 				_transform = value;
-				fireDrawableChanged(DrawableChangedEventArgs.FieldChanged.Transform);
+				FireDrawableChanged(DrawableChangedEventArgs.FieldChanged.Transform);
 			}
 		}
 
@@ -100,7 +97,7 @@ namespace Nzy3d.Plot3D.Primitives
 		{
 			get
 			{
-				return _bbox != null ? _bbox.getCenter() : Coord3d.INVALID;
+				return _bbox != null ? _bbox.GetCenter() : Coord3d.INVALID;
 			}
 		}
 
@@ -113,23 +110,23 @@ namespace Nzy3d.Plot3D.Primitives
 			set
 			{
 				_displayed = value;
-				fireDrawableChanged(DrawableChangedEventArgs.FieldChanged.Displayed);
+				FireDrawableChanged(DrawableChangedEventArgs.FieldChanged.Displayed);
 			}
 		}
 
-		public virtual double getDistance(Camera camera)
+		public virtual double GetDistance(Camera camera)
 		{
-			return Barycentre.distance(camera.Eye);
+			return Barycentre.Distance(camera.Eye);
 		}
 
-		public virtual double getLongestDistance(Camera camera)
+		public virtual double GetLongestDistance(Camera camera)
 		{
-			return getDistance(camera);
+			return GetDistance(camera);
 		}
 
-		public virtual double getShortestDistance(Camera camera)
+		public virtual double GetShortestDistance(Camera camera)
 		{
-			return getDistance(camera);
+			return GetDistance(camera);
 		}
 
 		public Legend Legend
@@ -139,13 +136,13 @@ namespace Nzy3d.Plot3D.Primitives
 			{
 				_legend = value;
 				_legendDisplayed = true;
-				fireDrawableChanged(DrawableChangedEventArgs.FieldChanged.Metadata);
+				FireDrawableChanged(DrawableChangedEventArgs.FieldChanged.Metadata);
 			}
 		}
 
 		public bool HasLegend
 		{
-			get { return (_legend != null); }
+			get { return _legend != null; }
 		}
 
 		public bool LegendDisplayed
@@ -154,22 +151,22 @@ namespace Nzy3d.Plot3D.Primitives
 			set { _legendDisplayed = value; }
 		}
 
-		public void addDrawableListener(IDrawableListener listener)
+		public void AddDrawableListener(IDrawableListener listener)
 		{
 			_listeners.Add(listener);
 		}
 
-		public void removeDrawableListener(IDrawableListener listener)
+		public void RemoveDrawableListener(IDrawableListener listener)
 		{
 			_listeners.Remove(listener);
 		}
 
-		internal void fireDrawableChanged(DrawableChangedEventArgs.FieldChanged eventType)
+		internal void FireDrawableChanged(DrawableChangedEventArgs.FieldChanged eventType)
 		{
-			fireDrawableChanged(new DrawableChangedEventArgs(this, eventType));
+			FireDrawableChanged(new DrawableChangedEventArgs(this, eventType));
 		}
 
-		internal void fireDrawableChanged(DrawableChangedEventArgs e)
+		internal void FireDrawableChanged(DrawableChangedEventArgs e)
 		{
 			foreach (IDrawableListener listener in _listeners)
 			{
@@ -182,19 +179,12 @@ namespace Nzy3d.Plot3D.Primitives
 		/// </summary>
 		public override string ToString()
 		{
-			return toString(0);
+			return ToString(0);
 		}
 
-		public virtual string toString(int depth)
+		public virtual string ToString(int depth)
 		{
 			return Utils.blanks(depth) + "(" + this.GetType().Name + ")";
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

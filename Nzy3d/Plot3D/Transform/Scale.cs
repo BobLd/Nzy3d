@@ -5,7 +5,7 @@ namespace Nzy3d.Plot3D.Transform
 {
     public class Scale : ITransformer
 	{
-		private Coord3d _scale;
+		private readonly Coord3d _scale;
 		public Scale(Coord3d scale)
 		{
 			_scale = scale;
@@ -13,12 +13,12 @@ namespace Nzy3d.Plot3D.Transform
 
 		public Coord3d Compute(Coord3d input)
 		{
-			return input.multiply(_scale);
+			return input.Multiply(_scale);
 		}
 
 		public void Execute()
 		{
-			GL.Scale(_scale.x, _scale.y, _scale.z);
+			GL.Scale(_scale.X, _scale.Y, _scale.Z);
 		}
 
 		public override string ToString()

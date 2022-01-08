@@ -7,14 +7,11 @@ using Nzy3d.Plot3D.Primitives.Axes;
 using Nzy3d.Plot3D.Rendering.Canvas;
 using Nzy3d.Plot3D.Rendering.View.Modes;
 using OpenTK.Graphics.OpenGL;
-using OpenTK.Mathematics;
 
 namespace Nzy3d.Plot3D.Rendering.View
 {
-
 	public class View
 	{
-
 		public static float STRETCH_RATIO = 0.25f;
 		// force to have all object maintained in screen, meaning axebox won't always keep the same size.
 		internal bool MAINTAIN_ALL_OBJECTS_IN_VIEW = false;
@@ -56,9 +53,9 @@ namespace Nzy3d.Plot3D.Rendering.View
 		public View(Scene scene, ICanvas canvas, Quality quality)
 		{
 			BoundingBox3d sceneBounds = scene.Graph.Bounds;
-			_viewpoint = (Coord3d)DEFAULT_VIEW.Clone();
-			_center = (Coord3d)sceneBounds.getCenter();
-			_scaling = (Coord3d)Coord3d.IDENTITY.Clone();
+			_viewpoint = DEFAULT_VIEW.Clone();
+			_center = sceneBounds.GetCenter();
+			_scaling = Coord3d.IDENTITY.Clone();
 			_viewmode = ViewPositionMode.FREE;
 			_boundmode = ViewBoundMode.AUTO_FIT;
 			_cameraMode = CameraMode.ORTHOGONAL;
@@ -113,9 +110,9 @@ namespace Nzy3d.Plot3D.Rendering.View
 		public void Rotate(Coord2d move, bool updateView)
 		{
 			Coord3d eye = this.ViewPoint;
-			eye.x -= move.x;
-			eye.y += move.y;
-			setViewPoint(eye, updateView);
+			eye.X -= move.x;
+			eye.Y += move.y;
+			SetViewPoint(eye, updateView);
 			//fireControllerEvent(ControllerType.ROTATE, eye);
 		}
 
@@ -128,7 +125,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 		{
 			Scale current = this.Scale;
 			Scale newScale = current.@add(factor * current.Range);
-			setScale(newScale, updateView);
+			SetScale(newScale, updateView);
 			//fireControllerEvent(ControllerType.SHIFT, newScale);
 		}
 
@@ -141,30 +138,34 @@ namespace Nzy3d.Plot3D.Rendering.View
 		{
 			Scale current = this.Scale;
 			double range = current.Max - current.Min;
+
 			if (range <= 0)
 			{
 				return;
 			}
+
 			double center = (current.Max + current.Min) / 2;
 			double zmin = center + (current.Min - center) * factor;
 			double zmax = center + (current.Max - center) * factor;
+
 			// set min/max according to bounds
 			Scale scale = null;
-			if ((zmin < zmax))
+			if (zmin < zmax)
 			{
 				scale = new Scale(zmin, zmax);
 			}
 			else
 			{
 				// forbid to have zmin = zmax if we zoom in
-				if ((factor < 1))
+				if (factor < 1)
 				{
 					scale = new Scale(center, center);
 				}
 			}
-			if ((scale != null))
+
+			if (scale != null)
 			{
-				setScale(scale, updateView);
+				SetScale(scale, updateView);
 				// fireControllerEvent(ControllerType.ZOOM, scale);
 			}
 		}
@@ -176,33 +177,35 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 		public void ZoomX(float factor, bool updateView)
 		{
-			double range = this.Bounds.xmax - this.Bounds.xmin;
+			double range = this.Bounds.XMax - this.Bounds.XMin;
 			if (range <= 0)
 			{
 				return;
 			}
-			double center = (this.Bounds.xmax + this.Bounds.xmin) / 2;
-			double min = center + (this.Bounds.xmin - center) * factor;
-			double max = center + (this.Bounds.xmax - center) * factor;
+			double center = (this.Bounds.XMax + this.Bounds.XMin) / 2;
+			double min = center + (this.Bounds.XMin - center) * factor;
+			double max = center + (this.Bounds.XMax - center) * factor;
+
 			// set min/max according to bounds
 			Scale scale = null;
-			if ((min < max))
+			if (min < max)
 			{
 				scale = new Scale(min, max);
 			}
 			else
 			{
 				// forbid to have min = max if we zoom in
-				if ((factor < 1))
+				if (factor < 1)
 				{
 					scale = new Scale(center, center);
 				}
 			}
-			if ((scale != null))
+
+			if (scale != null)
 			{
 				BoundingBox3d bounds = this.Bounds;
-				bounds.xmin = scale.Min;
-				bounds.xmax = scale.Max;
+				bounds.XMin = scale.Min;
+				bounds.XMax = scale.Max;
 				this.BoundManual = bounds;
 				if (updateView)
 				{
@@ -219,33 +222,35 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 		public void ZoomY(float factor, bool updateView)
 		{
-			double range = this.Bounds.ymax - this.Bounds.ymin;
+			double range = this.Bounds.YMax - this.Bounds.YMin;
 			if (range <= 0)
 			{
 				return;
 			}
-			double center = (this.Bounds.ymax + this.Bounds.ymin) / 2;
-			double min = center + (this.Bounds.ymin - center) * factor;
-			double max = center + (this.Bounds.ymax - center) * factor;
+			double center = (this.Bounds.YMax + this.Bounds.YMin) / 2;
+			double min = center + (this.Bounds.YMin - center) * factor;
+			double max = center + (this.Bounds.YMax - center) * factor;
+
 			// set min/max according to bounds
 			Scale scale = null;
-			if ((min < max))
+			if (min < max)
 			{
 				scale = new Scale(min, max);
 			}
 			else
 			{
 				// forbid to have min = max if we zoom in
-				if ((factor < 1))
+				if (factor < 1)
 				{
 					scale = new Scale(center, center);
 				}
 			}
-			if ((scale != null))
+
+			if (scale != null)
 			{
 				BoundingBox3d bounds = this.Bounds;
-				bounds.ymin = scale.Min;
-				bounds.ymax = scale.Max;
+				bounds.YMin = scale.Min;
+				bounds.YMax = scale.Max;
 				this.BoundManual = bounds;
 				if (updateView)
 				{
@@ -262,33 +267,35 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 		public void ZoomZ(float factor, bool updateView)
 		{
-			double range = this.Bounds.zmax - this.Bounds.zmin;
+			double range = this.Bounds.ZMax - this.Bounds.ZMin;
 			if (range <= 0)
 			{
 				return;
 			}
-			double center = (this.Bounds.zmax + this.Bounds.zmin) / 2;
-			double min = center + (this.Bounds.zmin - center) * factor;
-			double max = center + (this.Bounds.zmax - center) * factor;
+			double center = (this.Bounds.ZMax + this.Bounds.ZMin) / 2;
+			double min = center + (this.Bounds.ZMin - center) * factor;
+			double max = center + (this.Bounds.ZMax - center) * factor;
+
 			// set min/max according to bounds
 			Scale scale = null;
-			if ((min < max))
+			if (min < max)
 			{
 				scale = new Scale(min, max);
 			}
 			else
 			{
 				// forbid to have min = max if we zoom in
-				if ((factor < 1))
+				if (factor < 1)
 				{
 					scale = new Scale(center, center);
 				}
 			}
-			if ((scale != null))
+
+			if (scale != null)
 			{
 				BoundingBox3d bounds = this.Bounds;
-				bounds.zmin = scale.Min;
-				bounds.zmax = scale.Max;
+				bounds.ZMin = scale.Min;
+				bounds.ZMax = scale.Max;
 				this.BoundManual = bounds;
 				if (updateView)
 				{
@@ -306,15 +313,15 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 		public Scale Scale
 		{
-			get { return new Scale(this.Bounds.zmin, this.Bounds.zmax); }
-			set { setScale(value, true); }
+			get { return new Scale(this.Bounds.ZMin, this.Bounds.ZMax); }
+			set { SetScale(value, true); }
 		}
 
-		public void setScale(Scale scale, bool notify)
+		public void SetScale(Scale scale, bool notify)
 		{
 			BoundingBox3d bounds = this.Bounds;
-			bounds.zmin = scale.Min;
-			bounds.zmax = scale.Max;
+			bounds.ZMin = scale.Min;
+			bounds.ZMax = scale.Max;
 			this.BoundManual = bounds;
 			if (notify)
 			{
@@ -326,10 +333,10 @@ namespace Nzy3d.Plot3D.Rendering.View
 		/// Set the surrounding AxeBox dimensions and the Camera target, and the
 		/// colorbar range.
 		/// </summary>
-		public void lookToBox(BoundingBox3d box)
+		public void LookToBox(BoundingBox3d box)
 		{
-			_center = box.getCenter();
-			_axe.setAxe(box);
+			_center = box.GetCenter();
+			_axe.SetAxe(box);
 			_targetBox = box;
 		}
 
@@ -338,7 +345,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 		/// </summary>
 		public BoundingBox3d Bounds
 		{
-			get { return _axe.getBoxBounds(); }
+			get { return _axe.GetBoxBounds(); }
 		}
 
 		public ViewBoundMode BoundsMode
@@ -358,22 +365,22 @@ namespace Nzy3d.Plot3D.Rendering.View
 		public Coord3d ViewPoint
 		{
 			get { return _viewpoint; }
-			set { setViewPoint(value, true); }
+			set { SetViewPoint(value, true); }
 		}
 
-		public void setViewPoint(Coord3d polar, bool updateView)
+		public void SetViewPoint(Coord3d polar, bool updateView)
 		{
 			_viewpoint = polar;
-			_viewpoint.y = (_viewpoint.y < -PI_div2 ? -PI_div2 : _viewpoint.y);
-			_viewpoint.y = (_viewpoint.y > PI_div2 ? PI_div2 : _viewpoint.y);
+			_viewpoint.Y = (_viewpoint.Y < -PI_div2 ? -PI_div2 : _viewpoint.Y);
+			_viewpoint.Y = (_viewpoint.Y > PI_div2 ? PI_div2 : _viewpoint.Y);
 			if (updateView)
 			{
 				Shoot();
 			}
-			fireViewPointChangedEvent(new ViewPointChangedEventArgs(this, polar));
+			FireViewPointChangedEvent(new ViewPointChangedEventArgs(this, polar));
 		}
 
-		public Coord3d getLastViewScaling()
+		public Coord3d GetLastViewScaling()
 		{
 			return _scaling;
 		}
@@ -384,7 +391,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			set
 			{
 				_axe = value;
-				updateBounds();
+				UpdateBounds();
 			}
 		}
 
@@ -449,29 +456,29 @@ namespace Nzy3d.Plot3D.Rendering.View
 			get { return _canvas; }
 		}
 
-		public void addRenderer2d(IBaseRenderer2D renderer)
+		public void AddRenderer2d(IBaseRenderer2D renderer)
 		{
 			_renderers.Add(renderer);
 		}
 
-		public void removeRenderer2d(IBaseRenderer2D renderer)
+		public void RemoveRenderer2d(IBaseRenderer2D renderer)
 		{
 			_renderers.Remove(renderer);
 		}
 
-		public void addViewOnTopEventListener(IViewIsVerticalEventListener listener)
+		public void AddViewOnTopEventListener(IViewIsVerticalEventListener listener)
 		{
 			_viewOnTopListeners.Add(listener);
 		}
 
-		public void removeViewOnTopEventListener(IViewIsVerticalEventListener listener)
+		public void RemoveViewOnTopEventListener(IViewIsVerticalEventListener listener)
 		{
 			_viewOnTopListeners.Remove(listener);
 		}
 
-		internal void fireViewOnTopEvent(bool isOnTop)
+		internal void FireViewOnTopEvent(bool isOnTop)
 		{
-			ViewIsVerticalEventArgs e = new ViewIsVerticalEventArgs(this);
+			var e = new ViewIsVerticalEventArgs(this);
 			if (isOnTop)
 			{
 				foreach (IViewIsVerticalEventListener listener in _viewOnTopListeners)
@@ -488,17 +495,17 @@ namespace Nzy3d.Plot3D.Rendering.View
 			}
 		}
 
-		public void addViewPointChangedListener(IViewPointChangedListener listener)
+		public void AddViewPointChangedListener(IViewPointChangedListener listener)
 		{
 			_viewPointChangedListeners.Add(listener);
 		}
 
-		public void removeViewPointChangedListener(IViewPointChangedListener listener)
+		public void RemoveViewPointChangedListener(IViewPointChangedListener listener)
 		{
 			_viewPointChangedListeners.Remove(listener);
 		}
 
-		internal void fireViewPointChangedEvent(ViewPointChangedEventArgs e)
+		internal void FireViewPointChangedEvent(ViewPointChangedEventArgs e)
 		{
 			foreach (IViewPointChangedListener vp in _viewPointChangedListeners)
 			{
@@ -514,23 +521,23 @@ namespace Nzy3d.Plot3D.Rendering.View
 			set
 			{
 				_boundmode = value;
-				updateBounds();
+				UpdateBounds();
 			}
 		}
 
 		/// <summary>
 		/// Set the bounds of the view according to the current BoundMode, and orders a Camera.shoot().
 		/// </summary>
-		public void updateBounds()
+		public void UpdateBounds()
 		{
 			switch (_boundmode)
 			{
 				case ViewBoundMode.AUTO_FIT:
-					lookToBox(Scene.Graph.Bounds);
+					LookToBox(Scene.Graph.Bounds);
 					// set axe and camera
 					break;
 				case ViewBoundMode.MANUAL:
-					lookToBox(_viewbounds);
+					LookToBox(_viewbounds);
 					// set axe and camera
 					break;
 				default:
@@ -544,10 +551,9 @@ namespace Nzy3d.Plot3D.Rendering.View
 		/// BoundMode, and orders a shoot() if refresh is True
 		/// </summary>
 		/// <param name="refresh">Wether to order a shoot() or not.</param>
-		/// <remarks></remarks>
-		public void updateBoundsForceUpdate(bool refresh)
+		public void UpdateBoundsForceUpdate(bool refresh)
 		{
-			lookToBox(Scene.Graph.Bounds);
+			LookToBox(Scene.Graph.Bounds);
 			if (refresh)
 			{
 				Shoot();
@@ -559,7 +565,6 @@ namespace Nzy3d.Plot3D.Rendering.View
 		/// ViewBoundMode.MANUAL, meaning that any call to updateBounds()
 		/// will update view bounds to the current bounds.
 		/// </summary>
-		/// <value></value>
 		/// <remarks>The camero.shoot is not called in this case</remarks>
 		public BoundingBox3d BoundManual
 		{
@@ -567,18 +572,19 @@ namespace Nzy3d.Plot3D.Rendering.View
 			{
 				_viewbounds = value;
 				_boundmode = ViewBoundMode.MANUAL;
-				lookToBox(_viewbounds);
+				LookToBox(_viewbounds);
 			}
 		}
 
 		/// <summary>
+		/// <para>
 		/// Return a 3d scaling factor that allows scaling the scene into a square
 		/// box, according to the current ViewBoundMode.
 		/// <p/>
 		/// If the scene bounds are Infinite, NaN or zero, for a given dimension, the
 		/// scaler will be set to 1 on the given dimension.
-		///
-		/// @return a scaling factor for each dimension.
+		/// </para>
+		/// <para>@return a scaling factor for each dimension.</para>
 		/// </summary>
 		internal Coord3d Squarify()
 		{
@@ -597,33 +603,34 @@ namespace Nzy3d.Plot3D.Rendering.View
 			}
 
 			// Compute factors
-			float xLen = (float)(bounds.xmax - bounds.xmin);
-			float yLen = (float)(bounds.ymax - bounds.ymin);
-			float zLen = (float)(bounds.zmax - bounds.zmin);
+			float xLen = (float)(bounds.XMax - bounds.XMin);
+			float yLen = (float)(bounds.YMax - bounds.YMin);
+			float zLen = (float)(bounds.ZMax - bounds.ZMin);
 			float lmax = Math.Max(Math.Max(xLen, yLen), zLen);
-			if (float.IsInfinity(xLen) | float.IsNaN(xLen) | xLen == 0)
+			if (float.IsInfinity(xLen) || float.IsNaN(xLen) || xLen == 0)
 			{
 				xLen = 1;
 				// throw new ArithmeticException("x scale is infinite, nan or 0");
 			}
 
-			if (float.IsInfinity(yLen) | float.IsNaN(yLen) | yLen == 0)
+			if (float.IsInfinity(yLen) || float.IsNaN(yLen) || yLen == 0)
 			{
 				yLen = 1;
 				// throw new ArithmeticException("y scale is infinite, nan or 0");
 			}
 
-			if (float.IsInfinity(zLen) | float.IsNaN(zLen) | zLen == 0)
+			if (float.IsInfinity(zLen) || float.IsNaN(zLen) || zLen == 0)
 			{
 				zLen = 1;
 				// throw new ArithmeticException("z scale is infinite, nan or 0");
 			}
 
-			if (float.IsInfinity(lmax) | float.IsNaN(lmax) | lmax == 0)
+			if (float.IsInfinity(lmax) || float.IsNaN(lmax) || lmax == 0)
 			{
 				lmax = 1;
 				// throw new ArithmeticException("lmax is infinite, nan or 0");
 			}
+
 			return new Coord3d(lmax / xLen, lmax / yLen, lmax / zLen);
 		}
 		#endregion
@@ -768,7 +775,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 		public void RenderScene(ViewPort viewport)
 		{
 			UpdateQuality();
-			UpdateCamera(viewport, computeScaling());
+			UpdateCamera(viewport, ComputeScaling());
 			RenderAxeBox();
 			RenderSceneGraph();
 		}
@@ -785,7 +792,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			}
 		}
 
-		public BoundingBox3d computeScaling()
+		public BoundingBox3d ComputeScaling()
 		{
 			//-- Scale the scene's view -------------------
 			if (Squared)
@@ -796,60 +803,62 @@ namespace Nzy3d.Plot3D.Rendering.View
 			{
 				_scaling = (Coord3d)Coord3d.IDENTITY.Clone();
 			}
+
 			// Compute the bounds for computing cam distance, clipping planes, etc ...
-			if ((_targetBox == null))
+			if (_targetBox == null)
 			{
 				_targetBox = new BoundingBox3d(0, 1, 0, 1, 0, 1);
 			}
-			BoundingBox3d boundsScaled = new BoundingBox3d();
-			boundsScaled.Add(_targetBox.scale(_scaling));
+
+			var boundsScaled = new BoundingBox3d();
+			boundsScaled.Add(_targetBox.Scale(_scaling));
 			if (MAINTAIN_ALL_OBJECTS_IN_VIEW)
 			{
-				boundsScaled.Add(Scene.Graph.Bounds.scale(_scaling));
+				boundsScaled.Add(Scene.Graph.Bounds.Scale(_scaling));
 			}
 			return boundsScaled;
 		}
 
 		public void UpdateCamera(ViewPort viewport, BoundingBox3d boundsScaled)
 		{
-			UpdateCamera(viewport, boundsScaled, (float)boundsScaled.getRadius());
+			UpdateCamera(viewport, boundsScaled, (float)boundsScaled.GetRadius());
 		}
 
 		public void UpdateCamera(ViewPort viewport, BoundingBox3d boundsScaled, float sceneRadiusScaled)
 		{
-			Coord3d target = _center.multiply(_scaling);
-			_viewpoint.z = sceneRadiusScaled * 2;
+			Coord3d target = _center.Multiply(_scaling);
+			_viewpoint.Z = sceneRadiusScaled * 2;
 
 			Coord3d eye;
 			// maintain a reasonnable distance to the scene for viewing it
 			switch (_viewmode)
 			{
 				case ViewPositionMode.FREE:
-					eye = _viewpoint.cartesian().@add(target);
+					eye = _viewpoint.Cartesian().Add(target);
 					break;
 				case ViewPositionMode.TOP:
 					eye = _viewpoint;
-					eye.x = -PI_div2;
+					eye.X = -PI_div2;
 					// on x
-					eye.y = PI_div2;
+					eye.Y = PI_div2;
 					// on top
-					eye = eye.cartesian().@add(target);
+					eye = eye.Cartesian().Add(target);
 					break;
 				case ViewPositionMode.PROFILE:
 					eye = _viewpoint;
-					eye.y = 0;
-					eye = eye.cartesian().@add(target);
+					eye.Y = 0;
+					eye = eye.Cartesian().Add(target);
 					break;
 				default:
 					throw new Exception("Unsupported viewmode : " + _viewmode);
 			}
 
 			Coord3d up;
-			if (Math.Abs(_viewpoint.y) == PI_div2)
+			if (Math.Abs(_viewpoint.Y) == PI_div2)
 			{
 				// handle up vector
-				Coord2d direction = new Coord2d(_viewpoint.x, _viewpoint.y).cartesian();
-				if (_viewpoint.y > 0)
+				Coord2d direction = new Coord2d(_viewpoint.X, _viewpoint.Y).cartesian();
+				if (_viewpoint.Y > 0)
 				{
 					// on top
 					up = new Coord3d(-direction.x, -direction.y, 0);
@@ -863,7 +872,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 				if (!_wasOnTopAtLastRendering)
 				{
 					_wasOnTopAtLastRendering = true;
-					fireViewOnTopEvent(true);
+					FireViewOnTopEvent(true);
 				}
 			}
 			else
@@ -874,9 +883,10 @@ namespace Nzy3d.Plot3D.Rendering.View
 				if (_wasOnTopAtLastRendering)
 				{
 					_wasOnTopAtLastRendering = false;
-					fireViewOnTopEvent(false);
+					FireViewOnTopEvent(false);
 				}
 			}
+
 			// Apply camera settings
 			_cam.Target = target;
 			_cam.Up = up;
@@ -885,7 +895,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			// Set rendering volume
 			if (_viewmode == ViewPositionMode.TOP)
 			{
-				_cam.RenderingSphereRadius = (float)(Math.Max(boundsScaled.xmax - boundsScaled.xmin, boundsScaled.ymax - boundsScaled.ymin) / 2);
+				_cam.RenderingSphereRadius = (float)(Math.Max(boundsScaled.XMax - boundsScaled.XMin, boundsScaled.YMax - boundsScaled.YMin) / 2);
 				// correctCameraPositionForIncludingTextLabels(viewport) ' quite experimental !
 			}
 			else
@@ -897,7 +907,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			//cam.setViewPort(canvas.getRendererWidth(),
 			// canvas.getRendererHeight(), left, right);
 			_cam.SetViewPort(viewport);
-			_cam.shoot(_cameraMode);
+			_cam.Shoot(_cameraMode);
 		}
 
 		public void RenderAxeBox()
@@ -906,19 +916,21 @@ namespace Nzy3d.Plot3D.Rendering.View
 			{
 				GL.MatrixMode(MatrixMode.Modelview);
 				_scene.LightSet.Disable();
-				_axe.setScale(_scaling);
+				_axe.SetScale(_scaling);
 				_axe.Draw(_cam);
 
 				// for debug
 				if (DISPLAY_AXE_WHOLE_BOUNDS)
 				{
-					AxeBox abox = (AxeBox)_axe;
+					var abox = (AxeBox)_axe;
 					BoundingBox3d box = abox.WholeBounds;
-					Parallelepiped p = new Parallelepiped(box);
-					p.FaceDisplayed = false;
-					p.WireframeColor = Color.MAGENTA;
-					p.WireframeDisplayed = true;
-					p.Draw(_cam);
+                    var p = new Parallelepiped(box)
+                    {
+                        FaceDisplayed = false,
+                        WireframeColor = Color.MAGENTA,
+                        WireframeDisplayed = true
+                    };
+                    p.Draw(_cam);
 				}
 				_scene.LightSet.Enable();
 			}
@@ -983,25 +995,26 @@ namespace Nzy3d.Plot3D.Rendering.View
 			// NOT Implemented so far
 		}
 
-		internal void correctCameraPositionForIncludingTextLabels(ViewPort viewport)
+		internal void CorrectCameraPositionForIncludingTextLabels(ViewPort viewport)
 		{
 			_cam.SetViewPort(viewport);
-			_cam.shoot(_cameraMode);
+			_cam.Shoot(_cameraMode);
 			_axe.Draw(_cam);
 			Clear();
 			AxeBox abox = (AxeBox)_axe;
-			BoundingBox3d newBounds = abox.WholeBounds.scale(_scaling);
+			BoundingBox3d newBounds = abox.WholeBounds.Scale(_scaling);
+
 			if (_viewmode == ViewPositionMode.TOP)
 			{
-				float radius = (float)Math.Max(newBounds.xmax - newBounds.xmin, newBounds.ymax - newBounds.ymin);
+				float radius = (float)Math.Max(newBounds.XMax - newBounds.XMin, newBounds.YMax - newBounds.YMin);
 				radius += radius * STRETCH_RATIO;
 				_cam.RenderingSphereRadius = radius;
 			}
 			else
 			{
-				_cam.RenderingSphereRadius = (float)newBounds.getRadius();
-				Coord3d target = newBounds.getCenter();
-				Coord3d eye = _viewpoint.cartesian().@add(target);
+				_cam.RenderingSphereRadius = (float)newBounds.GetRadius();
+				Coord3d target = newBounds.GetCenter();
+				Coord3d eye = _viewpoint.Cartesian().Add(target);
 				_cam.Target = target;
 				_cam.Eye = eye;
 			}
@@ -1009,10 +1022,3 @@ namespace Nzy3d.Plot3D.Rendering.View
 		#endregion
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

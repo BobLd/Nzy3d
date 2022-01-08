@@ -4,15 +4,10 @@ namespace Nzy3d.Plot3D.Primitives
 {
     public interface ISortableDraw
 	{
-		double getDistance(Camera camera);
-		double getShortestDistance(Camera camera);
-		double getLongestDistance(Camera camera);
+		double GetDistance(Camera camera);
+
+		double GetShortestDistance(Camera camera);
+
+		double GetLongestDistance(Camera camera);
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

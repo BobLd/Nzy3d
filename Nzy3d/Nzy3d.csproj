@@ -15,4 +15,8 @@
     <Folder Include="Plot3D\Rendering\Legends\Colorbars\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
 </Project>

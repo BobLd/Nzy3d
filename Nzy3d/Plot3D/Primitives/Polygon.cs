@@ -37,26 +37,26 @@ namespace Nzy3d.Plot3D.Primitives
 			if (_facestatus)
 			{
 				ApplyPolygonModeFill();
-				if (_wfstatus & _polygonOffsetFillEnable)
+				if (_wfstatus && _polygonOffsetFillEnable)
 				{
-					EnablePolygonOffsetFill();
+                    EnablePolygonOffsetFill();
 				}
 
 				GL.Begin(PrimitiveType.Polygon);
 				foreach (Point p in _points)
 				{
-					if ((_mapper != null))
+					if (_mapper != null)
 					{
-						p.Color = _mapper.Color(p.xyz);
+						p.Color = _mapper.Color(p.XYZ);
 					}
 					GL.Color4(p.Color.r, p.Color.g, p.Color.b, p.Color.a);
-					GL.Vertex3(p.xyz.x, p.xyz.y, p.xyz.z);
+					GL.Vertex3(p.XYZ.X, p.XYZ.Y, p.XYZ.Z);
 				}
 
 				GL.End();
-				if (_wfstatus & _polygonOffsetFillEnable)
+				if (_wfstatus && _polygonOffsetFillEnable)
 				{
-					DisablePolygonOffsetFill();
+                    DisablePolygonOffsetFill();
 				}
 			}
 
@@ -65,7 +65,7 @@ namespace Nzy3d.Plot3D.Primitives
 				ApplyPolygonModeLine();
 				if (_polygonOffsetFillEnable)
 				{
-					EnablePolygonOffsetFill();
+                    EnablePolygonOffsetFill();
 				}
 
 				GL.Color4(_wfcolor.r, _wfcolor.g, _wfcolor.b, _wfcolor.a);
@@ -74,14 +74,14 @@ namespace Nzy3d.Plot3D.Primitives
 
 				foreach (Point p in _points)
 				{
-					GL.Vertex3(p.xyz.x, p.xyz.y, p.xyz.z);
+					GL.Vertex3(p.XYZ.X, p.XYZ.Y, p.XYZ.Z);
 				}
 
 				GL.End();
 
 				if (_polygonOffsetFillEnable)
 				{
-					DisablePolygonOffsetFill();
+                    DisablePolygonOffsetFill();
 				}
 			}
 		}
@@ -122,13 +122,13 @@ namespace Nzy3d.Plot3D.Primitives
 			}
 		}
 
-		internal void EnablePolygonOffsetFill()
+		internal static void EnablePolygonOffsetFill()
 		{
 			GL.Enable(EnableCap.PolygonOffsetFill);
 			GL.PolygonOffset(1, 1);
 		}
 
-		internal void DisablePolygonOffsetFill()
+		internal static void DisablePolygonOffsetFill()
 		{
 			GL.Disable(EnableCap.PolygonOffsetFill);
 		}
@@ -140,14 +140,14 @@ namespace Nzy3d.Plot3D.Primitives
 		public void Add(Point point)
 		{
 			_points.Add(point);
-			_bbox.@add(point);
+			_bbox.Add(point);
 			// Recompute Center
 			_center = new Coord3d();
 			foreach (Point p in _points)
 			{
-				_center.addSelf(p.xyz);
+				_center.AddSelf(p.XYZ);
 			}
-			_center.divideSelf(_points.Count);
+			_center.DivideSelf(_points.Count);
 		}
 
 		/// <summary>
@@ -175,25 +175,25 @@ namespace Nzy3d.Plot3D.Primitives
 			get { return _points.Count; }
 		}
 
-		public override double getDistance(Rendering.View.Camera camera)
+		public override double GetDistance(Rendering.View.Camera camera)
 		{
-			return Barycentre.distance(camera.Eye);
+			return Barycentre.Distance(camera.Eye);
 		}
 
-		public override double getShortestDistance(Rendering.View.Camera camera)
+		public override double GetShortestDistance(Rendering.View.Camera camera)
 		{
 			double min = double.MaxValue;
 			double dist;
 			foreach (Point p in _points)
 			{
-				dist = p.getDistance(camera);
+				dist = p.GetDistance(camera);
 				if (dist < min)
 				{
 					min = dist;
 				}
 			}
 
-			dist = Barycentre.distance(camera.Eye);
+			dist = Barycentre.Distance(camera.Eye);
 			if (dist < min)
 			{
 				min = dist;
@@ -201,12 +201,12 @@ namespace Nzy3d.Plot3D.Primitives
 			return min;
 		}
 
-		public override double getLongestDistance(Rendering.View.Camera camera)
+		public override double GetLongestDistance(Rendering.View.Camera camera)
 		{
 			double max = 0;
 			foreach (Point p in _points)
 			{
-				double dist = p.getDistance(camera);
+				double dist = p.GetDistance(camera);
 				if (dist > max)
 				{
 					max = dist;
@@ -241,17 +241,15 @@ namespace Nzy3d.Plot3D.Primitives
 		{
 			foreach (AbstractDrawable d in composite.GetDrawables)
 			{
-				var dP = d as Polygon;
-				var dC = d as AbstractComposite;
-				if (dP != null)
-				{
-					dP.PolygonOffsetFillEnable = polygonOffsetFillEnable;
-				}
-				else if (dC != null)
-				{
-					SetPolygonOffsetFillEnable(dC, polygonOffsetFillEnable);
-				}
-			}
+                if (d is Polygon dP)
+                {
+                    dP.PolygonOffsetFillEnable = polygonOffsetFillEnable;
+                }
+                else if (d is AbstractComposite dC)
+                {
+                    SetPolygonOffsetFillEnable(dC, polygonOffsetFillEnable);
+                }
+            }
 		}
 
 		public ColorMapper ColorMapper
@@ -260,7 +258,7 @@ namespace Nzy3d.Plot3D.Primitives
 			set
 			{
 				_mapper = value;
-				fireDrawableChanged(new DrawableChangedEventArgs(this, DrawableChangedEventArgs.FieldChanged.Color));
+				FireDrawableChanged(new DrawableChangedEventArgs(this, DrawableChangedEventArgs.FieldChanged.Color));
 			}
 		}
 
@@ -274,11 +272,11 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					p.Color = value;
 				}
-				fireDrawableChanged(new DrawableChangedEventArgs(this, DrawableChangedEventArgs.FieldChanged.Color));
+				FireDrawableChanged(new DrawableChangedEventArgs(this, DrawableChangedEventArgs.FieldChanged.Color));
 			}
 		}
 
-		public override string toString(int depth)
+		public override string ToString(int depth)
 		{
 			return Utils.blanks(depth) + "(Polygon) #points=" + this.Size;
 		}

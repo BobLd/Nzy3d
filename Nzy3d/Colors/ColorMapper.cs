@@ -7,13 +7,11 @@ namespace Nzy3d.Colors
 {
     public class ColorMapper : IColorMappable
 	{
-        private IColorMap m_colormap;
-
-		private Color m_factor;
+        private readonly Color m_factor;
 
 		public ColorMapper(IColorMap colormap, double zmin, double zmax, Color factor)
 		{
-			m_colormap = colormap;
+			ColorMap = colormap;
 			ZMin = zmin;
 			ZMax = zmax;
 			m_factor = factor;
@@ -27,14 +25,11 @@ namespace Nzy3d.Colors
 		{
 		}
 
-		public IColorMap ColorMap
-		{
-			get { return m_colormap; }
-		}
+        public IColorMap ColorMap { get; }
 
-		public Color Color(Coord3d coord)
+        public Color Color(Coord3d coord)
 		{
-			Color @out = m_colormap.GetColor(this, coord.x, coord.y, coord.z);
+			Color @out = ColorMap.GetColor(this, coord.X, coord.Y, coord.Z);
 			if (m_factor != null)
 			{
 				@out.mul(m_factor);
@@ -44,7 +39,7 @@ namespace Nzy3d.Colors
 
 		public Color Color(double v)
 		{
-			Color @out = m_colormap.GetColor(this, v);
+			Color @out = ColorMap.GetColor(this, v);
 			if (m_factor != null)
 			{
 				@out.mul(m_factor);
@@ -91,10 +86,3 @@ namespace Nzy3d.Colors
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

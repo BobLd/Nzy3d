@@ -8,24 +8,26 @@ using OpenTK.Graphics.OpenGL;
 namespace Nzy3d.Plot3D.Rendering.Scene
 {
     /// <summary>
-    /// The scene's <see cref="Graph"/> basically stores the scene content and facilitate objects control
-    ///
+    /// <para>The scene's <see cref="Graph"/> basically stores the scene content and facilitate objects control</para>
+    /// <para>
     /// The graph may decompose all <see cref="AbstractComposite"/> into a list of their <see cref="AbstractDrawable"/>s primitives
     /// if constructor is called with parameters enabling sorting.
-    ///
+    /// </para>
+    /// <para>
     /// The list of primitives is ordered using either the provided <see cref="DefaultOrderingStrategy"/>
     /// or an other specified <see cref="AbstractOrderingStrategy"/>. Sorting is usefull for handling transparency
     /// properly.
-    ///
+    /// </para>
+    /// <para>
     /// The <see cref="Graph"/> maintains a reference to its mother <see cref="Scene"/> in order to
     /// inform the <see cref="View"/>s when its content has change and that repainting is required.
-    ///
+    /// </para>
+    /// <para>
     /// The add() method allows adding a <see cref="AbstractDrawable"/> to the scene Graph and updates
     /// all views' viewpoint in order to target the center of the scene.
-    ///
-    /// @author Martin Pernollet
+    /// </para>
+    /// <para>@author Martin Pernollet</para>
     /// </summary>
-    /// <remarks></remarks>
     public class Graph
 	{
 		internal List<AbstractDrawable> _components;
@@ -60,10 +62,7 @@ namespace Nzy3d.Plot3D.Rendering.Scene
 			{
 				foreach (AbstractDrawable c in _components)
 				{
-					if ((c != null))
-					{
-						c.Dispose();
-					}
+					c?.Dispose();
 				}
 				_components.Clear();
 			}
@@ -80,7 +79,7 @@ namespace Nzy3d.Plot3D.Rendering.Scene
 			{
 				foreach (View.View view in _scene.Views)
 				{
-					view.updateBounds();
+					view.UpdateBounds();
 				}
 			}
 		}
@@ -100,7 +99,7 @@ namespace Nzy3d.Plot3D.Rendering.Scene
 			{
 				foreach (View.View view in _scene.Views)
 				{
-					view.updateBounds();
+					view.UpdateBounds();
 				}
 			}
 		}
@@ -112,15 +111,15 @@ namespace Nzy3d.Plot3D.Rendering.Scene
 
 		public void Remove(AbstractDrawable drawable, bool updateViews)
 		{
-			bool output = false;
-			lock (_components)
+            lock (_components)
 			{
-				output = _components.Remove(drawable);
-			}
+                bool output = _components.Remove(drawable);
+            }
+
 			BoundingBox3d bbox = this.Bounds;
 			foreach (View.View view in _scene.Views)
 			{
-				view.lookToBox(bbox);
+				view.LookToBox(bbox);
 				if (updateViews)
 				{
 					view.Shoot();
@@ -147,12 +146,11 @@ namespace Nzy3d.Plot3D.Rendering.Scene
 				{
 					foreach (AbstractDrawable c in _components)
 					{
-						IGLBindedResource cIGL = c as IGLBindedResource;
-						if (cIGL != null)
-						{
-							@out.Add(cIGL);
-						}
-					}
+                        if (c is IGLBindedResource cIGL)
+                        {
+                            @out.Add(cIGL);
+                        }
+                    }
 				}
 				return @out;
 			}
@@ -162,7 +160,7 @@ namespace Nzy3d.Plot3D.Rendering.Scene
 		{
 			foreach (IGLBindedResource r in this.AllGLBindedResources)
 			{
-				if (!r.hasMountedOnce())
+				if (!r.HasMountedOnce())
 				{
 					r.Mount();
 				}
@@ -217,12 +215,11 @@ namespace Nzy3d.Plot3D.Rendering.Scene
 			{
 				foreach (AbstractDrawable d in _components)
 				{
-					ISelectable dS = d as ISelectable;
-					if (dS != null)
-					{
-						dS.Project(camera);
-					}
-				}
+                    if (d is ISelectable dS)
+                    {
+                        dS.Project(camera);
+                    }
+                }
 			}
 		}
 
@@ -246,7 +243,7 @@ namespace Nzy3d.Plot3D.Rendering.Scene
 				{
 					foreach (AbstractDrawable c in _components)
 					{
-						if ((c != null))
+						if (c != null)
 						{
 							c.Transform = value;
 						}
@@ -270,7 +267,7 @@ namespace Nzy3d.Plot3D.Rendering.Scene
 					{
 						foreach (AbstractDrawable a in _components)
 						{
-							if (((a != null)) && ((a.Bounds != null)))
+							if (a?.Bounds != null)
 							{
 								box.Add(a.Bounds);
 							}
@@ -293,7 +290,7 @@ namespace Nzy3d.Plot3D.Rendering.Scene
 				{
 					foreach (AbstractDrawable a in _components)
 					{
-						if (((a != null)) && (a.HasLegend & a.LegendDisplayed))
+						if (a?.HasLegend == true && a.LegendDisplayed)
 						{
 							list.Add(a.Legend);
 						}
@@ -306,16 +303,16 @@ namespace Nzy3d.Plot3D.Rendering.Scene
 		/// <summary>
 		/// Returns the number of components with displayed legend
 		/// </summary>
-		public int hasLengends()
+		public int HasLengends()
 		{
 			int k = 0;
 			lock (_components)
 			{
 				foreach (AbstractDrawable a in _components)
 				{
-					if (((a != null)) && (a.HasLegend & a.LegendDisplayed))
+					if (a?.HasLegend == true && a.LegendDisplayed)
 					{
-						k += 1;
+                        k++;
 					}
 				}
 			}
@@ -333,15 +330,15 @@ namespace Nzy3d.Plot3D.Rendering.Scene
 			{
 				foreach (AbstractDrawable a in _components)
 				{
-					if (((a != null)))
+					if (a != null)
 					{
-						output += " Graph element [" + k + "]:" + a.toString(1) + "\r\n";
+						output += " Graph element [" + k + "]:" + a.ToString(1) + "\r\n";
 					}
 					else
 					{
-						output += " Graph element [" + k + "]:(null)" + "\r\n";
+						output += " Graph element [" + k + "]:(null)\r\n";
 					}
-					k += 1;
+                    k++;
 				}
 			}
 			return output;

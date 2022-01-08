@@ -29,8 +29,8 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 		/// </summary>
 		public AxeBase(BoundingBox3d box)
 		{
-			setAxe(box);
-			setScale(new Coord3d(1, 1, 1));
+			SetAxe(box);
+			SetScale(new Coord3d(1, 1, 1));
 		}
 
 		public void Dispose()
@@ -40,45 +40,45 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 		public void Draw(Camera camera)
 		{
 			GL.LoadIdentity();
-			GL.Scale(_scale.x, _scale.y, _scale.y);
+			GL.Scale(_scale.X, _scale.Y, _scale.Y);
 			GL.LineWidth(2);
 			GL.Begin(PrimitiveType.Lines);
 			GL.Color3(1, 0, 0);
 			// R
-			GL.Vertex3(_bbox.xmin, _bbox.ymin, _bbox.zmin);
-			GL.Vertex3(_bbox.xmax, 0, 0);
+			GL.Vertex3(_bbox.XMin, _bbox.YMin, _bbox.ZMin);
+			GL.Vertex3(_bbox.XMax, 0, 0);
 			GL.Color3(0, 1, 0);
 			// G
-			GL.Vertex3(_bbox.xmin, _bbox.ymin, _bbox.zmin);
-			GL.Vertex3(0, _bbox.ymax, 0);
+			GL.Vertex3(_bbox.XMin, _bbox.YMin, _bbox.ZMin);
+			GL.Vertex3(0, _bbox.YMax, 0);
 			GL.Color3(0, 0, 1);
 			// B
-			GL.Vertex3(_bbox.xmin, _bbox.ymin, _bbox.zmin);
-			GL.Vertex3(0, 0, _bbox.zmax);
+			GL.Vertex3(_bbox.XMin, _bbox.YMin, _bbox.ZMin);
+			GL.Vertex3(0, 0, _bbox.ZMax);
 			GL.End();
 		}
 
-		public BoundingBox3d getBoxBounds()
+		public BoundingBox3d GetBoxBounds()
 		{
 			return _bbox;
 		}
 
-		public Coord3d getCenter()
+		public Coord3d GetCenter()
 		{
-			return new Coord3d(_bbox.xmin, _bbox.ymin, _bbox.zmin);
+			return new Coord3d(_bbox.XMin, _bbox.YMin, _bbox.ZMin);
 		}
 
-		public IAxeLayout getLayout()
+		public IAxeLayout GetLayout()
 		{
 			return _layout;
 		}
 
-		public void setAxe(BoundingBox3d box)
+		public void SetAxe(BoundingBox3d box)
 		{
 			_bbox = box;
 		}
 
-		public void setScale(Coord3d scale)
+		public void SetScale(Coord3d scale)
 		{
 			_scale = scale;
 		}

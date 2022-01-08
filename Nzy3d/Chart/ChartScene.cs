@@ -19,20 +19,20 @@ namespace Nzy3d.Chart
 			_view.BoundManual = new BoundingBox3d(0, 0, 0, 0, 0, 0);
 		}
 
-		public override View newView(ICanvas canvas, Quality quality)
+		public override View NewView(ICanvas canvas, Quality quality)
 		{
 			if (_nview > 0)
 			{
 				throw new Exception("A view has already been defined for this scene. Can not use several views.");
 			}
-			_nview += 1;
-			_view = base.newView(canvas, quality);
+            _nview++;
+			_view = base.NewView(canvas, quality);
 			return _view;
 		}
 
-		public override void clearView(View view)
+		public override void ClearView(View view)
 		{
-			base.clearView(view);
+			base.ClearView(view);
 			_nview = 0;
 		}
 	}

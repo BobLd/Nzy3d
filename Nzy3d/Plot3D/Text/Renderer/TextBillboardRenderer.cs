@@ -41,44 +41,46 @@ namespace Nzy3d.Plot3D.Text.Renderers
     public class TextBillboardRenderer : AbstractTextRenderer, ITextRenderer
 	{
 		// px heigth
-		private static int charHeight = 13;
+		private const int charHeight = 13;
+
 		// px width
-		private static int charWidth = 8;
+		private const int charWidth = 8;
+
 		// px between 2 characters
-		private static int charOffset = 2;
+		private const int charOffset = 2;
 
 		public TextBillboardRenderer() : base()
 		{
 		}
 
-		public override void drawSimpleText(Camera cam, string s, Coord3d position, Color color)
+		public override void DrawSimpleText(Camera cam, string s, Coord3d position, Color color)
 		{
 			GL.Color3(color.r, color.g, color.b);
-			GL.RasterPos3(position.x, position.y, position.z);
-			printString(s, Halign.RIGHT, Valign.GROUND);
+			GL.RasterPos3(position.X, position.Y, position.Z);
+			PrintString(s, Halign.RIGHT, Valign.GROUND);
 		}
 
-		public override BoundingBox3d drawText(Camera cam, string s, Coord3d position, Halign halign, Valign valign, Color color, Coord2d screenOffset, Coord3d sceneOffset)
+		public override BoundingBox3d DrawText(Camera cam, string s, Coord3d position, Halign halign, Valign valign, Color color, Coord2d screenOffset, Coord3d sceneOffset)
 		{
 			GL.Color3(color.r, color.g, color.b);
-			GL.RasterPos3(position.x, position.y, position.z);
-			BillBoardSize dims = printString(s, halign, valign);
+			GL.RasterPos3(position.X, position.Y, position.Z);
+			BillBoardSize dims = PrintString(s, halign, valign);
 			Coord3d posScreen = cam.ModelToScreen(position);
 			Coord3d botLeft = new Coord3d();
 			Coord3d topRight = new Coord3d();
-			botLeft.x = posScreen.x + dims.xoffset;
-			botLeft.y = posScreen.y + dims.yoffset;
-			botLeft.z = posScreen.z;
-			topRight.x = botLeft.x + dims.xoffset;
-			topRight.y = botLeft.y + dims.yoffset;
-			topRight.z = botLeft.z;
+			botLeft.X = posScreen.X + dims.xoffset;
+			botLeft.Y = posScreen.Y + dims.yoffset;
+			botLeft.Z = posScreen.Z;
+			topRight.X = botLeft.X + dims.xoffset;
+			topRight.Y = botLeft.Y + dims.yoffset;
+			topRight.Z = botLeft.Z;
 			BoundingBox3d txtBounds = new BoundingBox3d();
-			txtBounds.@add(cam.ScreenToModel(botLeft));
-			txtBounds.@add(cam.ScreenToModel(topRight));
+			txtBounds.Add(cam.ScreenToModel(botLeft));
+			txtBounds.Add(cam.ScreenToModel(topRight));
 			return txtBounds;
 		}
 
-		private BillBoardSize printString(string s, Halign halign, Valign valign)
+		private BillBoardSize PrintString(string s, Halign halign, Valign valign)
 		{
 			char[] acodes = s.ToCharArray();
 			int nchar = s.Length;
@@ -86,21 +88,26 @@ namespace Nzy3d.Plot3D.Text.Renderers
 			float yorig = 2;
 			float xmove = charWidth + charOffset;
 			float ymove = 0;
+
 			// Compute horizontal alignment
 			switch (halign)
 			{
 				case Halign.RIGHT:
-					xorig = xorig;
+					//xorig = xorig;
 					break;
+
 				case Halign.CENTER:
 					xorig = nchar * xmove / 2;
 					break;
+
 				case Halign.LEFT:
 					xorig = nchar * xmove;
 					break;
+
 				default:
 					throw new Exception("Horizontal alignement constant unknown: " + halign);
 			}
+
 			// Compute vertical alignment
 			switch (valign)
 			{
@@ -119,13 +126,13 @@ namespace Nzy3d.Plot3D.Text.Renderers
 				default:
 					throw new Exception("Vertical alignement constant unknown: " + valign);
 			}
+
 			// Draw the bitmaps
 			GL.PixelStore(PixelStoreParameter.UnpackAlignment, 1);
-			int idx = 0;
-			for (int c = 0; c <= acodes.Length - 1; c++)
+            for (int c = 0; c <= acodes.Length - 1; c++)
 			{
-				idx = (int)(acodes[c]) - 32;
-				if (idx < 0 | idx >= ascii.Length)
+                int idx = acodes[c] - 32;
+                if (idx < 0 || idx >= ascii.Length)
 				{
 					GL.Bitmap(charWidth, charHeight, xorig, yorig, xmove, ymove, nonascii);
 				}
@@ -154,7 +161,7 @@ namespace Nzy3d.Plot3D.Text.Renderers
 		}
 
 		// each of the 95 line is a letter, each of the (charHeight) byte of a line represent a raw of (charWidth) pixels
-		private static byte[][] ascii = {
+		private static readonly byte[][] ascii = {
 			new byte[] {
 				0x0,
 				0x0,
@@ -1582,7 +1589,7 @@ namespace Nzy3d.Plot3D.Text.Renderers
 			}
 		};
 
-		private static byte[] nonascii = {
+		private static readonly byte[] nonascii = {
 			0xff,
 			0xff,
 			0xff,

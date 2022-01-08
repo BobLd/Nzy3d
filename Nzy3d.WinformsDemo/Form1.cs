@@ -50,7 +50,7 @@ namespace Nzy3d.WinformsDemo
             // Create a mouse control
             CameraMouseController mouse = new CameraMouseController();
             mouse.addControllerEventListener(myRenderer3D);
-            chart.addController(mouse);
+            chart.AddController(mouse);
 
             // This is just to ensure code is reentrant (used when code is not called in Form_Load but another reentrant event)
             DisposeBackgroundThread();
@@ -59,28 +59,24 @@ namespace Nzy3d.WinformsDemo
             t = new CameraThreadController();
             t.addControllerEventListener(myRenderer3D);
             mouse.addSlaveThreadController(t);
-            chart.addController(t);
+            chart.AddController(t);
             t.Start();
 
             // Associate the chart with current control
-            myRenderer3D.setView(chart.View);
+            myRenderer3D.SetView(chart.View);
 
             this.Refresh();
         }
 
         private void DisposeBackgroundThread()
         {
-            if ((t != null))
-            {
-                t.Dispose();
-            }
+            t?.Dispose();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DisposeBackgroundThread();
         }
-
 
         private bool _DisplayTickLines;
         public bool DisplayTickLines
@@ -201,7 +197,7 @@ namespace Nzy3d.WinformsDemo
             }
         }
 
-        private void checkBoxes_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxes_CheckedChanged(object sender, EventArgs e)
         {
             /*
             if (chkDisplayXTicks.Checked != DisplayXTicks)

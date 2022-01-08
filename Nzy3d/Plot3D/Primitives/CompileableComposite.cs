@@ -47,7 +47,7 @@ namespace Nzy3d.Plot3D.Primitives
 		}
 
 		/// <summary>
-		/// Force the object to be rebuilt and stored as a display list at the next call to draw(). 
+		/// Force the object to be rebuilt and stored as a display list at the next call to draw().
 		/// </summary>
 		/// <remarks>This operation does not rebuilt the object, but only marks it as "to be rebuilt" for new call to draw().</remarks>
 		public void Recompile()
@@ -337,7 +337,7 @@ namespace Nzy3d.Plot3D.Primitives
 						}
 					}
 				}
-				fireDrawableChanged(new DrawableChangedEventArgs(this, DrawableChangedEventArgs.FieldChanged.Color));
+				FireDrawableChanged(new DrawableChangedEventArgs(this, DrawableChangedEventArgs.FieldChanged.Color));
 				Recompile();
 			}
 		}
@@ -358,7 +358,7 @@ namespace Nzy3d.Plot3D.Primitives
 						}
 					}
 				}
-				fireDrawableChanged(new DrawableChangedEventArgs(this, DrawableChangedEventArgs.FieldChanged.Color));
+				FireDrawableChanged(new DrawableChangedEventArgs(this, DrawableChangedEventArgs.FieldChanged.Color));
 				Recompile();
 			}
 		}
@@ -368,10 +368,10 @@ namespace Nzy3d.Plot3D.Primitives
 		/// </summary>
 		public override string ToString()
 		{
-			return toString(0);
+			return base.ToString(0);
 		}
 
-		public string ToString(int depth)
+		public override string ToString(int depth)
 		{
 			string output = Utils.blanks(depth) + "(Composite3d) #elements:" + _components.Count + " | isDisplayed=" + this.Displayed;
 			if (_detailedToString)
@@ -383,7 +383,7 @@ namespace Nzy3d.Plot3D.Primitives
 					{
 						if (c is AbstractComposite cAc)
 						{
-							output += "\r\n" + cAc.toString(depth + 1);
+							output += "\r\n" + cAc.ToString(depth + 1);
 						}
 						else if (c != null)
 						{

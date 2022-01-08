@@ -32,7 +32,7 @@ namespace Nzy3d.Plot3D.Primitives
 		{
 			_bbox = new BoundingBox3d();
 			_quads = new List<Polygon>();
-			setData(b);
+			SetData(b);
 		}
 
 		public override void Draw(Rendering.View.Camera cam)
@@ -56,7 +56,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (Polygon s in _quads)
 					{
-						if ((s != null))
+						if (s != null)
 						{
 							s.Transform = value;
 						}
@@ -75,7 +75,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (Polygon s in _quads)
 					{
-						if ((s != null))
+						if (s != null)
 						{
 							s.WireframeColor = value;
 						}
@@ -94,7 +94,7 @@ namespace Nzy3d.Plot3D.Primitives
 				{
 					foreach (Polygon s in _quads)
 					{
-						if ((s != null))
+						if (s != null)
 						{
 							s.WireframeDisplayed = value;
 						}
@@ -141,40 +141,47 @@ namespace Nzy3d.Plot3D.Primitives
 			}
 		}
 
-		public void setData(BoundingBox3d box)
+		public void SetData(BoundingBox3d box)
 		{
-			_bbox.reset();
+			_bbox.Reset();
 			_bbox.Add(box);
 			_quads = new List<Polygon>(6);
+
 			// Add 6 polygons to list
 			for (int i = 0; i <= 5; i++)
 			{
 				_quads.Add(new Polygon());
 			}
-			_quads[0].Add(new Point(new Coord3d(_bbox.xmax, _bbox.ymin, _bbox.zmax)));
-			_quads[0].Add(new Point(new Coord3d(_bbox.xmax, _bbox.ymin, _bbox.zmin)));
-			_quads[0].Add(new Point(new Coord3d(_bbox.xmax, _bbox.ymax, _bbox.zmin)));
-			_quads[0].Add(new Point(new Coord3d(_bbox.xmax, _bbox.ymax, _bbox.zmax)));
-			_quads[1].Add(new Point(new Coord3d(_bbox.xmin, _bbox.ymax, _bbox.zmax)));
-			_quads[1].Add(new Point(new Coord3d(_bbox.xmin, _bbox.ymax, _bbox.zmin)));
-			_quads[1].Add(new Point(new Coord3d(_bbox.xmin, _bbox.ymin, _bbox.zmin)));
-			_quads[1].Add(new Point(new Coord3d(_bbox.xmin, _bbox.ymin, _bbox.zmax)));
-			_quads[2].Add(new Point(new Coord3d(_bbox.xmax, _bbox.ymax, _bbox.zmax)));
-			_quads[2].Add(new Point(new Coord3d(_bbox.xmax, _bbox.ymax, _bbox.zmin)));
-			_quads[2].Add(new Point(new Coord3d(_bbox.xmin, _bbox.ymax, _bbox.zmin)));
-			_quads[2].Add(new Point(new Coord3d(_bbox.xmin, _bbox.ymax, _bbox.zmax)));
-			_quads[3].Add(new Point(new Coord3d(_bbox.xmin, _bbox.ymin, _bbox.zmax)));
-			_quads[3].Add(new Point(new Coord3d(_bbox.xmin, _bbox.ymin, _bbox.zmin)));
-			_quads[3].Add(new Point(new Coord3d(_bbox.xmax, _bbox.ymin, _bbox.zmin)));
-			_quads[3].Add(new Point(new Coord3d(_bbox.xmax, _bbox.ymin, _bbox.zmax)));
-			_quads[4].Add(new Point(new Coord3d(_bbox.xmin, _bbox.ymin, _bbox.zmax)));
-			_quads[4].Add(new Point(new Coord3d(_bbox.xmax, _bbox.ymin, _bbox.zmax)));
-			_quads[4].Add(new Point(new Coord3d(_bbox.xmax, _bbox.ymax, _bbox.zmax)));
-			_quads[4].Add(new Point(new Coord3d(_bbox.xmin, _bbox.ymax, _bbox.zmax)));
-			_quads[5].Add(new Point(new Coord3d(_bbox.xmax, _bbox.ymin, _bbox.zmin)));
-			_quads[5].Add(new Point(new Coord3d(_bbox.xmin, _bbox.ymin, _bbox.zmin)));
-			_quads[5].Add(new Point(new Coord3d(_bbox.xmin, _bbox.ymax, _bbox.zmin)));
-			_quads[5].Add(new Point(new Coord3d(_bbox.xmax, _bbox.ymax, _bbox.zmin)));
+
+			_quads[0].Add(new Point(new Coord3d(_bbox.XMax, _bbox.YMin, _bbox.ZMax)));
+			_quads[0].Add(new Point(new Coord3d(_bbox.XMax, _bbox.YMin, _bbox.ZMin)));
+			_quads[0].Add(new Point(new Coord3d(_bbox.XMax, _bbox.YMax, _bbox.ZMin)));
+			_quads[0].Add(new Point(new Coord3d(_bbox.XMax, _bbox.YMax, _bbox.ZMax)));
+
+			_quads[1].Add(new Point(new Coord3d(_bbox.XMin, _bbox.YMax, _bbox.ZMax)));
+			_quads[1].Add(new Point(new Coord3d(_bbox.XMin, _bbox.YMax, _bbox.ZMin)));
+			_quads[1].Add(new Point(new Coord3d(_bbox.XMin, _bbox.YMin, _bbox.ZMin)));
+			_quads[1].Add(new Point(new Coord3d(_bbox.XMin, _bbox.YMin, _bbox.ZMax)));
+
+			_quads[2].Add(new Point(new Coord3d(_bbox.XMax, _bbox.YMax, _bbox.ZMax)));
+			_quads[2].Add(new Point(new Coord3d(_bbox.XMax, _bbox.YMax, _bbox.ZMin)));
+			_quads[2].Add(new Point(new Coord3d(_bbox.XMin, _bbox.YMax, _bbox.ZMin)));
+			_quads[2].Add(new Point(new Coord3d(_bbox.XMin, _bbox.YMax, _bbox.ZMax)));
+
+			_quads[3].Add(new Point(new Coord3d(_bbox.XMin, _bbox.YMin, _bbox.ZMax)));
+			_quads[3].Add(new Point(new Coord3d(_bbox.XMin, _bbox.YMin, _bbox.ZMin)));
+			_quads[3].Add(new Point(new Coord3d(_bbox.XMax, _bbox.YMin, _bbox.ZMin)));
+			_quads[3].Add(new Point(new Coord3d(_bbox.XMax, _bbox.YMin, _bbox.ZMax)));
+
+			_quads[4].Add(new Point(new Coord3d(_bbox.XMin, _bbox.YMin, _bbox.ZMax)));
+			_quads[4].Add(new Point(new Coord3d(_bbox.XMax, _bbox.YMin, _bbox.ZMax)));
+			_quads[4].Add(new Point(new Coord3d(_bbox.XMax, _bbox.YMax, _bbox.ZMax)));
+			_quads[4].Add(new Point(new Coord3d(_bbox.XMin, _bbox.YMax, _bbox.ZMax)));
+
+			_quads[5].Add(new Point(new Coord3d(_bbox.XMax, _bbox.YMin, _bbox.ZMin)));
+			_quads[5].Add(new Point(new Coord3d(_bbox.XMin, _bbox.YMin, _bbox.ZMin)));
+			_quads[5].Add(new Point(new Coord3d(_bbox.XMin, _bbox.YMax, _bbox.ZMin)));
+			_quads[5].Add(new Point(new Coord3d(_bbox.XMax, _bbox.YMax, _bbox.ZMin)));
 		}
 
 		public ColorMapper ColorMapper
@@ -216,10 +223,3 @@ namespace Nzy3d.Plot3D.Primitives
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

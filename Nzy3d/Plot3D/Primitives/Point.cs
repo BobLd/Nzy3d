@@ -76,7 +76,7 @@ namespace Nzy3d.Plot3D.Primitives
 			GL.PointSize(_width);
 			GL.Begin(PrimitiveType.Points);
 			GL.Color4(_rgb.r, _rgb.g, _rgb.b, _rgb.a);
-			GL.Vertex3(_xyz.x, _xyz.y, _xyz.z);
+			GL.Vertex3(_xyz.X, _xyz.Y, _xyz.Z);
 			GL.End();
 		}
 
@@ -92,8 +92,8 @@ namespace Nzy3d.Plot3D.Primitives
 
 		private void UpdateBounds()
 		{
-			_bbox.reset();
-			_bbox.@add(_xyz);
+			_bbox.Reset();
+			_bbox.Add(_xyz);
 		}
 
 		public Color Color
@@ -102,11 +102,11 @@ namespace Nzy3d.Plot3D.Primitives
 			set
 			{
 				_rgb = value;
-				fireDrawableChanged(new DrawableChangedEventArgs(this, DrawableChangedEventArgs.FieldChanged.Color));
+				FireDrawableChanged(new DrawableChangedEventArgs(this, DrawableChangedEventArgs.FieldChanged.Color));
 			}
 		}
 
-		public Color rgb
+		public Color Rgb
 		{
 			get { return _rgb; }
 			set { _rgb = value; }
@@ -118,37 +118,30 @@ namespace Nzy3d.Plot3D.Primitives
 			set { _width = value; }
 		}
 
-		public Coord3d xyz
+		public Coord3d XYZ
 		{
 			get { return this.Data; }
 			set { this.Data = value; }
 		}
 
-		public override double getDistance(Rendering.View.Camera camera)
+		public override double GetDistance(Rendering.View.Camera camera)
 		{
-			return _xyz.distance(camera.Eye);
+			return _xyz.Distance(camera.Eye);
 		}
 
-		public override double getLongestDistance(Rendering.View.Camera camera)
+		public override double GetLongestDistance(Rendering.View.Camera camera)
 		{
-			return getDistance(camera);
+			return GetDistance(camera);
 		}
 
-		public override double getShortestDistance(Rendering.View.Camera camera)
+		public override double GetShortestDistance(Rendering.View.Camera camera)
 		{
-			return getDistance(camera);
+			return GetDistance(camera);
 		}
 
-		public string toString(int depth)
+		public string ToString(int depth)
 		{
 			return Utils.blanks(depth) + "(Point) coord={" + _xyz.ToString() + "}, color={" + _rgb.ToString() + "}";
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

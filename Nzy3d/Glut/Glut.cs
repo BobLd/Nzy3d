@@ -89,7 +89,7 @@ namespace Nzy3d.Glut
 				3
 			}
 		};
-		private static void drawBox(float size, PrimitiveType type)
+		private static void DrawBox(float size, PrimitiveType type)
 		{
 			if (boxVertices == null)
 			{
@@ -124,9 +124,8 @@ namespace Nzy3d.Glut
 			{
 				GL.Begin(type);
 				GL.Normal3(boxVertices[i, 0], boxVertices[i, 1], boxVertices[i, 2]);
-				int faceN = 0;
-				faceN = boxFaces[i, 0];
-				GL.Vertex3(boxVertices[faceN, 0] * size, boxVertices[faceN, 1] * size, boxVertices[faceN, 2] * size);
+                int faceN = boxFaces[i, 0];
+                GL.Vertex3(boxVertices[faceN, 0] * size, boxVertices[faceN, 1] * size, boxVertices[faceN, 2] * size);
 				faceN = boxFaces[i, 1];
 				GL.Vertex3(boxVertices[faceN, 0] * size, boxVertices[faceN, 1] * size, boxVertices[faceN, 2] * size);
 				faceN = boxFaces[i, 2];
@@ -139,12 +138,12 @@ namespace Nzy3d.Glut
 
 		public static void SolidCube(float size)
 		{
-			drawBox(size, PrimitiveType.Quads);
+			DrawBox(size, PrimitiveType.Quads);
 		}
 
 		public static void WireCube(float size)
 		{
-			drawBox(size, PrimitiveType.LineLoop);
+			DrawBox(size, PrimitiveType.LineLoop);
 		}
 
 		public static bool UnProject(Vector4d winPos, Matrix4d modelMatrix, Matrix4d projMatrix, double[] viewport, ref Vector4d objPos)
@@ -197,13 +196,15 @@ namespace Nzy3d.Glut
 			_out.Y = _out.Y * _out.W + 0.5;
 			_out.Z = _out.Z * _out.W + 0.5;
 
-			// Map x, y to viewport
-			winPos = new Vector4d();
-			winPos.X = _out.X * viewport[2] + viewport[0];
-			winPos.Y = _out.Y * viewport[3] + viewport[1];
-			winPos.Z = _out.Z;
+            // Map x, y to viewport
+            winPos = new Vector4d
+            {
+                X = _out.X * viewport[2] + viewport[0],
+                Y = _out.Y * viewport[3] + viewport[1],
+                Z = _out.Z
+            };
 
-			return true;
+            return true;
 		}
 
 		public static void Perspective(double fovy, double aspect, double zNear, double zFar)
@@ -213,7 +214,7 @@ namespace Nzy3d.Glut
 			double deltaZ = zFar - zNear;
 			double sine = Math.Sin(radians);
 
-			if ((deltaZ == 0) | (sine == 0) | (aspect == 0))
+            if ((deltaZ == 0) || (sine == 0) || (aspect == 0))
 			{
 				return;
 			}
@@ -237,9 +238,7 @@ namespace Nzy3d.Glut
 			1, 0, 0, 0, 0, 1);
 		}
 
-		public static Matrix4d IDENTITY = new Matrix4d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0,
-
-		1, 0, 0, 0, 0, 1);
+		public static Matrix4d IDENTITY = new Matrix4d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 
 		public static void LookAt(double eyeX, double eyeY, double eyeZ, double centerX, double centerY, double centerZ, double upX, double upY, double upZ)
 		{
@@ -282,16 +281,16 @@ namespace Nzy3d.Glut
 			int skiprows = 0;
 			int skippixels = 0;
 			int alignment = 0;
-			beginBitmap(ref swapbytes, ref lsbfirst, ref rowlength, ref skiprows, ref skippixels, ref alignment);
+			BeginBitmap(ref swapbytes, ref lsbfirst, ref rowlength, ref skiprows, ref skippixels, ref alignment);
 			int len = text.Length;
 			for (int i = 0; i <= len - 1; i++)
 			{
-				bitmapCharacterImpl(font, text[i]);
+				BitmapCharacterImpl(font, text[i]);
 			}
-			endBitmap(swapbytes, lsbfirst, rowlength, skiprows, skippixels, alignment);
+			EndBitmap(swapbytes, lsbfirst, rowlength, skiprows, skippixels, alignment);
 		}
 
-		private static void beginBitmap(ref int swapbytes, ref int lsbfirst, ref int rowlength, ref int skiprows, ref int skippixels, ref int alignment)
+		private static void BeginBitmap(ref int swapbytes, ref int lsbfirst, ref int rowlength, ref int skiprows, ref int skippixels, ref int alignment)
 		{
 			GL.GetInteger(GetPName.UnpackSwapBytes, out swapbytes);
 			GL.GetInteger(GetPName.UnpackLsbFirst, out lsbfirst);
@@ -313,7 +312,7 @@ namespace Nzy3d.Glut
 			GL.PixelStore(PixelStoreParameter.UnpackAlignment, 1);
 		}
 
-		private static void endBitmap(int swapbytes, int lsbfirst, int rowlength, int skiprows, int skippixels, int alignment)
+		private static void EndBitmap(int swapbytes, int lsbfirst, int rowlength, int skiprows, int skippixels, int alignment)
 		{
 			GL.PixelStore(PixelStoreParameter.UnpackSwapBytes, swapbytes);
 			GL.PixelStore(PixelStoreParameter.UnpackLsbFirst, lsbfirst);
@@ -323,12 +322,12 @@ namespace Nzy3d.Glut
 			GL.PixelStore(PixelStoreParameter.UnpackAlignment, alignment);
 		}
 
-		private static void bitmapCharacterImpl(int font, char cin)
+		private static void BitmapCharacterImpl(int font, char cin)
 		{
-			BitmapFontRec fontinfo = getBitmapFont(font);
-			int c = (int)cin & 0xffff;
+			BitmapFontRec fontinfo = GetBitmapFont(font);
+			int c = cin & 0xffff;
 
-			if (c < fontinfo.first | c >= fontinfo.first + fontinfo.num_chars)
+			if (c < fontinfo.first || c >= fontinfo.first + fontinfo.num_chars)
 			{
 				return;
 			}
@@ -345,7 +344,7 @@ namespace Nzy3d.Glut
 
 		private static readonly StrokeFontRec[] strokeFonts = new StrokeFontRec[9];
 
-		private static BitmapFontRec getBitmapFont(int font)
+		private static BitmapFontRec GetBitmapFont(int font)
 		{
 			BitmapFontRec rec = bitmapFonts[font];
 			if (rec == null)
@@ -355,24 +354,31 @@ namespace Nzy3d.Glut
 					case BITMAP_9_BY_15:
 						rec = GLUTBitmap9x15.glutBitmap9By15;
 						break;
+
 					case BITMAP_8_BY_13:
 						rec = GLUTBitmap8x13.glutBitmap8By13;
 						break;
+
 					case BITMAP_TIMES_ROMAN_10:
 						rec = GLUTBitmapTimesRoman10.glutBitmapTimesRoman10;
 						break;
+
 					case BITMAP_TIMES_ROMAN_24:
 						rec = GLUTBitmapTimesRoman24.glutBitmapTimesRoman24;
 						break;
+
 					case BITMAP_HELVETICA_10:
 						rec = GLUTBitmapHelvetica10.glutBitmapHelvetica10;
 						break;
+
 					case BITMAP_HELVETICA_12:
 						rec = GLUTBitmapHelvetica12.glutBitmapHelvetica12;
 						break;
+
 					case BITMAP_HELVETICA_18:
 						rec = GLUTBitmapHelvetica18.glutBitmapHelvetica18;
 						break;
+
 					default:
 						throw new Exception("Unknown bitmap font number :" + font);
 				}
@@ -383,16 +389,16 @@ namespace Nzy3d.Glut
 
 		public static int BitmapLength(int font, string s)
 		{
-			BitmapFontRec fontinfo = getBitmapFont(font);
+			BitmapFontRec fontinfo = GetBitmapFont(font);
 			float length = 0;
 			int len = s.Length;
 			for (int pos = 0; pos <= len - 1; pos++)
 			{
-				int c = (int)s.ToCharArray(pos, 1)[0] & 0xffff;
-				if ((c >= fontinfo.first & c < fontinfo.first + fontinfo.num_chars))
+				int c = s.ToCharArray(pos, 1)[0] & 0xffff;
+				if (c >= fontinfo.first && c < fontinfo.first + fontinfo.num_chars)
 				{
 					BitmapCharRec ch = fontinfo.ch[c - fontinfo.first];
-					if ((ch != null))
+					if (ch != null)
 					{
 						length += ch.advance;
 					}
@@ -402,10 +408,3 @@ namespace Nzy3d.Glut
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

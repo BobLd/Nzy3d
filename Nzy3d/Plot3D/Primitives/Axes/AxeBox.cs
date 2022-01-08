@@ -64,13 +64,13 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 		public AxeBox(BoundingBox3d bbox, IAxeLayout layout)
 		{
 			_layout = layout;
-			if (bbox.valid())
+			if (bbox.IsValid())
 			{
-				setAxe(bbox);
+				SetAxe(bbox);
 			}
 			else
 			{
-				setAxe(new BoundingBox3d(-1, 1, -1, 1, -1, 1));
+				SetAxe(new BoundingBox3d(-1, 1, -1, 1, -1, 1));
 			}
 			_wholeBounds = new BoundingBox3d();
 			Init();
@@ -109,7 +109,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 		{
 			// Set scaling
 			GL.LoadIdentity();
-			GL.Scale(_scale.x, _scale.y, _scale.z);
+			GL.Scale(_scale.X, _scale.Y, _scale.Z);
 
 			// Set culling
 			GL.Enable(EnableCap.CullFace);
@@ -117,7 +117,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			GL.CullFace(CullFaceMode.Front);
 
 			// Draw cube in feedback buffer for computing hidden quads
-			_quadIsHidden = getHiddenQuads(camera);
+			_quadIsHidden = GetHiddenQuads(camera);
 
 			// Plain part of quad making the surrounding box
 			if (_layout.FaceDisplayed)
@@ -130,7 +130,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 				GL.PolygonOffset(1, 1);
 
 				// handle stippling
-				drawCube(RenderingMode.Render);
+				DrawCube(RenderingMode.Render);
 				GL.Disable(EnableCap.PolygonOffsetFill);
 			}
 
@@ -139,7 +139,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			GL.PolygonMode(MaterialFace.Back, PolygonMode.Line);
 			GL.Color4(gridcolor.r, gridcolor.g, gridcolor.b, gridcolor.a);
 			GL.LineWidth(1);
-			drawCube(RenderingMode.Render);
+			DrawCube(RenderingMode.Render);
 
 			// Draw grids on non hidden quads
 			GL.PolygonMode(MaterialFace.Back, PolygonMode.Line);
@@ -152,84 +152,86 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			{
 				if (!_quadIsHidden[quad])
 				{
-					drawGridOnQuad(quad);
+					DrawGridOnQuad(quad);
 				}
 			}
+
 			GL.Disable(EnableCap.LineStipple);
 
 			// Draw ticks on the closest axes
-			_wholeBounds.reset();
+			_wholeBounds.Reset();
 			_wholeBounds.Add(_boxBounds);
 			//gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_LINE);
 
 			// Display x axis ticks
-			if (_xrange > 0 & _layout.XTickLabelDisplayed)
+			if (_xrange > 0 && _layout.XTickLabelDisplayed)
 			{
 				// If we are on top, we make direct axe placement
-				if ((_view != null) && _view.ViewMode == ViewPositionMode.TOP)
+				if (_view?.ViewMode == ViewPositionMode.TOP)
 				{
-					BoundingBox3d bbox = drawTicks(camera, 1, AxeDirection.AxeX, _layout.XTickColor, Halign.LEFT, Valign.TOP);
+					BoundingBox3d bbox = DrawTicks(camera, 1, AxeDirection.AxeX, _layout.XTickColor, Halign.LEFT, Valign.TOP);
 					// setup tick labels for X on the bottom
 					_wholeBounds.Add(bbox);
 				}
 				else
 				{
 					// otherwise computed placement
-					int xselect = findClosestXaxe(camera);
+					int xselect = FindClosestXaxe(camera);
 					if (xselect >= 0)
 					{
-						BoundingBox3d bbox = drawTicks(camera, xselect, AxeDirection.AxeX, _layout.XTickColor);
+						BoundingBox3d bbox = DrawTicks(camera, xselect, AxeDirection.AxeX, _layout.XTickColor);
 						_wholeBounds.Add(bbox);
 					}
 					else
 					{
 						//System.err.println("no x axe selected: " + Arrays.toString(quadIsHidden));
 						// HACK: handles "on top" view, when all face of cube are drawn, which forbid to select an axe automatically
-						BoundingBox3d bbox = drawTicks(camera, 2, AxeDirection.AxeX, _layout.XTickColor, Halign.CENTER, Valign.TOP);
+						BoundingBox3d bbox = DrawTicks(camera, 2, AxeDirection.AxeX, _layout.XTickColor, Halign.CENTER, Valign.TOP);
 						_wholeBounds.Add(bbox);
 					}
 				}
 			}
 
 			// Display y axis ticks
-			if (_yrange > 0 & _layout.YTickLabelDisplayed)
+			if (_yrange > 0 && _layout.YTickLabelDisplayed)
 			{
 				if (_view?.ViewMode == ViewPositionMode.TOP)
 				{
-					BoundingBox3d bbox = drawTicks(camera, 2, AxeDirection.AxeY, _layout.YTickColor, Halign.LEFT, Valign.GROUND);
+					BoundingBox3d bbox = DrawTicks(camera, 2, AxeDirection.AxeY, _layout.YTickColor, Halign.LEFT, Valign.GROUND);
 					// setup tick labels for Y on the left
 					_wholeBounds.Add(bbox);
 				}
 				else
 				{
-					int yselect = findClosestYaxe(camera);
-					if ((yselect >= 0))
+					int yselect = FindClosestYaxe(camera);
+					if (yselect >= 0)
 					{
-						BoundingBox3d bbox = drawTicks(camera, yselect, AxeDirection.AxeY, _layout.YTickColor);
+						BoundingBox3d bbox = DrawTicks(camera, yselect, AxeDirection.AxeY, _layout.YTickColor);
 						_wholeBounds.Add(bbox);
 					}
 					else
 					{
 						//System.err.println("no y axe selected: " + Arrays.toString(quadIsHidden));
 						// HACK: handles "on top" view, when all face of cube are drawn, which forbid to select an axe automatically
-						BoundingBox3d bbox = drawTicks(camera, 1, AxeDirection.AxeY, _layout.YTickColor, Halign.RIGHT, Valign.GROUND);
+						BoundingBox3d bbox = DrawTicks(camera, 1, AxeDirection.AxeY, _layout.YTickColor, Halign.RIGHT, Valign.GROUND);
 						_wholeBounds.Add(bbox);
 					}
 				}
 			}
 
 			// Display z axis ticks
-			if (_zrange > 0 & _layout.ZTickLabelDisplayed)
+			if (_zrange > 0 && _layout.ZTickLabelDisplayed)
 			{
 				if (_view?.ViewMode == ViewPositionMode.TOP)
 				{
+					// ?
 				}
 				else
 				{
-					int zselect = findClosestZaxe(camera);
-					if ((zselect >= 0))
+					int zselect = FindClosestZaxe(camera);
+					if (zselect >= 0)
 					{
-						BoundingBox3d bbox = drawTicks(camera, zselect, AxeDirection.AxeZ, _layout.ZTickColor);
+						BoundingBox3d bbox = DrawTicks(camera, zselect, AxeDirection.AxeZ, _layout.ZTickColor);
 						_wholeBounds.Add(bbox);
 					}
 				}
@@ -239,7 +241,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			GL.Disable(EnableCap.CullFace);
 		}
 
-		internal void setAxeBox(float xmin, float xmax, float ymin, float ymax, float zmin, float zmax)
+		internal void SetAxeBox(float xmin, float xmax, float ymin, float ymax, float zmin, float zmax)
 		{
 			// Compute center
 			_center = new Coord3d((xmax + xmin) / 2, (ymax + ymin) / 2, (zmax + zmin) / 2);
@@ -388,20 +390,21 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			// A = axe direction (X, Y, or Z)
 			// i = axe id (0 to 4)
 			// q = quad id (0 to 1: an intersection is made of two quads)
+			const int na = 4;
 
-			int na = 4;
 			// n axes per dimension
-			int np = 2;
+			const int np = 2;
+
 			// n points for an axe
-			int nq = 2;
-			int i = 0;
+			const int nq = 2;
+
 			// axe id
 			_axeXquads = new int[na, nq];
 			_axeYquads = new int[na, nq];
 			_axeZquads = new int[na, nq];
 
 			// quads making axe x0
-			i = 0;
+			int i = 0;
 			_axeXquads[i, 0] = 4;
 			_axeXquads[i, 1] = 3;
 
@@ -602,7 +605,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 		/// Each quad is indexed from 0.0f to 5.0f using glPassThrough,
 		/// and may be traced in feedback mode when mode=<see cref="RenderingMode.Feedback"/>
 		/// </summary>
-		public void drawCube(RenderingMode mode)
+		public void DrawCube(RenderingMode mode)
 		{
 			for (int q = 0; q <= 5; q++)
 			{
@@ -624,10 +627,10 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 		/// Draw a grid on the desired quad.
 		/// </summary>
 		/// <param name="quad">Quad number, from 0 to 5</param>
-		internal void drawGridOnQuad(int quad)
+		internal void DrawGridOnQuad(int quad)
 		{
 			// Draw X grid along X axis
-			if ((quad != 0) & (quad != 1))
+			if ((quad != 0) && (quad != 1))
 			{
 				float[] xticks = _layout.XTicks();
 				for (int t = 0; t <= xticks.Length - 1; t++)
@@ -640,7 +643,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			}
 
 			// Draw Y grid along Y axis
-			if ((quad != 2) & (quad != 3))
+			if ((quad != 2) && (quad != 3))
 			{
 				float[] yticks = _layout.YTicks();
 				for (int t = 0; t <= yticks.Length - 1; t++)
@@ -653,7 +656,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			}
 
 			// Draw Z grid along Z axis
-			if ((quad != 4) & (quad != 5))
+			if ((quad != 4) && (quad != 5))
 			{
 				float[] zticks = _layout.ZTicks();
 				if (zticks != null)
@@ -669,16 +672,17 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			}
 		}
 
-		internal BoundingBox3d drawTicks(Camera cam, int axis, AxeDirection direction, Color color)
+		internal BoundingBox3d DrawTicks(Camera cam, int axis, AxeDirection direction, Color color)
 		{
-			return drawTicks(cam, axis, direction, color, Halign.DEFAULT, Valign.DEFAULT);
+			return DrawTicks(cam, axis, direction, color, Halign.DEFAULT, Valign.DEFAULT);
 		}
 
-		internal BoundingBox3d drawTicks(Camera cam, int axis, AxeDirection direction, Color color, Halign hal, Valign val)
+		internal BoundingBox3d DrawTicks(Camera cam, int axis, AxeDirection direction, Color color, Halign hal, Valign val)
 		{
-			float tickLength = 20.0f; // with respect to range
-			float axeLabelDist = 2.5f;
-			BoundingBox3d ticksTxtBounds = new BoundingBox3d();
+			const float tickLength = 20.0f; // with respect to range
+			const float axeLabelDist = 2.5f;
+
+			var ticksTxtBounds = new BoundingBox3d();
 
 			int quad_0;
 			int quad_1;
@@ -709,65 +713,68 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 
 			// Computes the DIRection of the ticks
 			// assuming initial vector point is the center
-			float xdir = (float)((_normx[quad_0] + _normx[quad_1]) - _center.x);
-			float ydir = (float)((_normy[quad_0] + _normy[quad_1]) - _center.y);
-			float zdir = (float)((_normz[quad_0] + _normz[quad_1]) - _center.z);
-			xdir = (xdir == 0 ? 0 : xdir / Math.Abs(xdir)); // so that direction as length 1
-			ydir = (ydir == 0 ? 0 : ydir / Math.Abs(ydir));
-			zdir = (zdir == 0 ? 0 : zdir / Math.Abs(zdir));
+			float xdir = (float)(_normx[quad_0] + _normx[quad_1] - _center.X);
+			float ydir = (float)(_normy[quad_0] + _normy[quad_1] - _center.Y);
+			float zdir = (float)(_normz[quad_0] + _normz[quad_1] - _center.Z);
+			xdir = xdir == 0 ? 0 : xdir / Math.Abs(xdir); // so that direction as length 1
+			ydir = ydir == 0 ? 0 : ydir / Math.Abs(ydir);
+			zdir = zdir == 0 ? 0 : zdir / Math.Abs(zdir);
+			const int dist = 1;
+
+			// Draw the label for axis
+			string axeLabel;
+			float zlab;
+			float ylab;
+			float xlab;
 
 			// Variables for storing the position of the Label position
 			// (2nd point on the tick line)
-			float xlab = 0;
-			float ylab = 0;
-			float zlab = 0;
-
-			// Draw the label for axis
-			string axeLabel = null;
-			int dist = 1;
 			switch (direction)
 			{
 				case AxeDirection.AxeX:
-					xlab = (float)_center.x;
+					xlab = (float)_center.X;
 					ylab = axeLabelDist * (_yrange / tickLength) * dist * ydir + ypos;
 					zlab = axeLabelDist * (_zrange / tickLength) * dist * zdir + zpos;
 					axeLabel = _layout.XAxeLabel;
 					break;
+
 				case AxeDirection.AxeY:
 					xlab = axeLabelDist * (_xrange / tickLength) * dist * xdir + xpos;
-					ylab = (float)_center.y;
+					ylab = (float)_center.Y;
 					zlab = axeLabelDist * (_zrange / tickLength) * dist * zdir + zpos;
 					axeLabel = _layout.YAxeLabel;
 					break;
+
 				case AxeDirection.AxeZ:
 					xlab = axeLabelDist * (_xrange / tickLength) * dist * xdir + xpos;
 					ylab = axeLabelDist * (_yrange / tickLength) * dist * ydir + ypos;
-					zlab = (float)_center.z;
+					zlab = (float)_center.Z;
 					axeLabel = _layout.ZAxeLabel;
 					break;
+
 				default:
 					throw new Exception("Unsupported axe direction");
 			}
 
-			drawAxisLabel(cam, direction, color, ticksTxtBounds, xlab, ylab, zlab, axeLabel);
-			drawAxisTicks(cam, direction, color, hal, val, tickLength, ticksTxtBounds, xpos, ypos, zpos, xdir, ydir, zdir, getAxisTicks(direction));
+			DrawAxisLabel(cam, direction, color, ticksTxtBounds, xlab, ylab, zlab, axeLabel);
+			DrawAxisTicks(cam, direction, color, hal, val, tickLength, ticksTxtBounds, xpos, ypos, zpos, xdir, ydir, zdir, GetAxisTicks(direction));
 			return ticksTxtBounds;
 		}
 
-		public void drawAxisLabel(Camera cam, AxeDirection direction, Color color, BoundingBox3d ticksTxtBounds, double xlab, double ylab, double zlab, String axeLabel)
+		public void DrawAxisLabel(Camera cam, AxeDirection direction, Color color, BoundingBox3d ticksTxtBounds, double xlab, double ylab, double zlab, String axeLabel)
 		{
 			if ((direction == AxeDirection.AxeX && _layout.XAxeLabelDisplayed)
 			 || (direction == AxeDirection.AxeY && _layout.YAxeLabelDisplayed)
 			 || (direction == AxeDirection.AxeZ && _layout.ZAxeLabelDisplayed))
 			{
 				var labelPosition = new Coord3d(xlab, ylab, zlab);
-				BoundingBox3d labelBounds = _txt.drawText(cam, axeLabel, labelPosition, Halign.CENTER, Valign.CENTER, color);
+				BoundingBox3d labelBounds = _txt.DrawText(cam, axeLabel, labelPosition, Halign.CENTER, Valign.CENTER, color);
 				if (labelBounds != null)
 					ticksTxtBounds.Add(labelBounds);
 			}
 		}
 
-		public float[] getAxisTicks(AxeDirection direction)
+		public float[] GetAxisTicks(AxeDirection direction)
 		{
 			float[] ticks;
 			switch (direction)
@@ -790,7 +797,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			return ticks;
 		}
 
-		public void drawAxisTicks(Camera cam, AxeDirection direction, Color color, Halign hal, Valign val, float tickLength, BoundingBox3d ticksTxtBounds, float xpos,
+		public void DrawAxisTicks(Camera cam, AxeDirection direction, Color color, Halign hal, Valign val, float tickLength, BoundingBox3d ticksTxtBounds, float xpos,
 			float ypos, float zpos, float xdir, float ydir, float zdir, float[] ticks)
 		{
 			double xlab;
@@ -806,21 +813,21 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 					case AxeDirection.AxeX:
 						xpos = ticks[t];
 						xlab = xpos;
-						ylab = (_yrange / tickLength) * ydir + ypos;
-						zlab = (_zrange / tickLength) * zdir + zpos;
+						ylab = _yrange / tickLength * ydir + ypos;
+						zlab = _zrange / tickLength * zdir + zpos;
 						tickLabel = _layout.XTickRenderer.Format(xpos);
 						break;
 					case AxeDirection.AxeY:
 						ypos = ticks[t];
-						xlab = (_xrange / tickLength) * xdir + xpos;
+						xlab = _xrange / tickLength * xdir + xpos;
 						ylab = ypos;
-						zlab = (_zrange / tickLength) * zdir + zpos;
+						zlab = _zrange / tickLength * zdir + zpos;
 						tickLabel = _layout.YTickRenderer.Format(ypos);
 						break;
 					case AxeDirection.AxeZ:
 						zpos = ticks[t];
-						xlab = (_xrange / tickLength) * xdir + xpos;
-						ylab = (_yrange / tickLength) * ydir + ypos;
+						xlab = _xrange / tickLength * xdir + xpos;
+						ylab = _yrange / tickLength * ydir + ypos;
 						zlab = zpos;
 						tickLabel = _layout.ZTickRenderer.Format(zpos);
 						break;
@@ -832,32 +839,32 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 
 				if (_layout.TickLineDisplayed)
 				{
-					drawTickLine(color, xpos, ypos, zpos, xlab, ylab, zlab);
+					DrawTickLine(color, xpos, ypos, zpos, xlab, ylab, zlab);
 				}
 
 				// Select the alignement of the tick label
-				Halign hAlign = layoutHorizontal(direction, cam, hal, tickPosition);
-				Valign vAlign = layoutVertical(direction, val, zdir);
+				Halign hAlign = LayoutHorizontal(direction, cam, hal, tickPosition);
+				Valign vAlign = LayoutVertical(direction, val, zdir);
 
 				// Draw the text label of the current tick
-				drawAxisTickNumericLabel(direction, cam, color, hAlign, vAlign, ticksTxtBounds, tickLabel, tickPosition);
+				DrawAxisTickNumericLabel(direction, cam, color, hAlign, vAlign, ticksTxtBounds, tickLabel, tickPosition);
 			}
 		}
 
-		public void drawAxisTickNumericLabel(AxeDirection direction, Camera cam, Color color, Halign hAlign, Valign vAlign, BoundingBox3d ticksTxtBounds, String tickLabel,
-				Coord3d tickPosition)
+		public void DrawAxisTickNumericLabel(AxeDirection direction, Camera cam, Color color,
+			Halign hAlign, Valign vAlign, BoundingBox3d ticksTxtBounds, String tickLabel, Coord3d tickPosition)
 		{
 			GL.LoadIdentity();
-			GL.Scale(_scale.x, _scale.y, _scale.z);
+			GL.Scale(_scale.X, _scale.Y, _scale.Z);
 
-			BoundingBox3d tickBounds = _txt.drawText(cam, tickLabel, tickPosition, hAlign, vAlign, color);
+			BoundingBox3d tickBounds = _txt.DrawText(cam, tickLabel, tickPosition, hAlign, vAlign, color);
 			if (tickBounds != null)
 			{
 				ticksTxtBounds.Add(tickBounds);
 			}
 		}
 
-		public Valign layoutVertical(AxeDirection direction, Valign val, float zdir)
+		public Valign LayoutVertical(AxeDirection direction, Valign val, float zdir)
 		{
 			Valign vAlign;
 			if (val == null || val == Valign.DEFAULT)
@@ -886,11 +893,11 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			return vAlign;
 		}
 
-		public Halign layoutHorizontal(AxeDirection direction, Camera cam, Halign hal, Coord3d tickPosition)
+		public Halign LayoutHorizontal(AxeDirection direction, Camera cam, Halign hal, Coord3d tickPosition)
 		{
 			if (hal == null || hal == Halign.DEFAULT)
 			{
-				return cam.side(tickPosition) ? Halign.LEFT : Halign.RIGHT;
+				return cam.Side(tickPosition) ? Halign.LEFT : Halign.RIGHT;
 			}
 			else
 			{
@@ -898,7 +905,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			}
 		}
 
-		public void drawTickLine(Color color, double xpos, double ypos, double zpos, double xlab, double ylab, double zlab)
+		public void DrawTickLine(Color color, double xpos, double ypos, double zpos, double xlab, double ylab, double zlab)
 		{
 			GL.Color3(color.r, color.g, color.b);
 			GL.LineWidth(1);
@@ -913,9 +920,9 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 		/// <summary>
 		/// Selects the closest displayable X axe from camera
 		/// </summary>
-		internal int findClosestXaxe(Camera cam)
+		internal int FindClosestXaxe(Camera cam)
 		{
-			int na = 4;
+			const int na = 4;
 			double[] distAxeX = new double[na];
 
 			// keeps axes that are not at intersection of 2 quads
@@ -923,7 +930,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			{
 				if (_quadIsHidden[_axeXquads[a, 0]] ^ _quadIsHidden[_axeXquads[a, 1]])
 				{
-					distAxeX[a] = new Vector3d(_axeXx[a, 0], _axeXy[a, 0], _axeXz[a, 0], _axeXx[a, 1], _axeXy[a, 1], _axeXz[a, 1]).distance(cam.Eye);
+					distAxeX[a] = new Vector3d(_axeXx[a, 0], _axeXy[a, 0], _axeXz[a, 0], _axeXx[a, 1], _axeXy[a, 1], _axeXz[a, 1]).Distance(cam.Eye);
 				}
 				else
 				{
@@ -934,21 +941,21 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			// prefers the lower one
 			for (int a = 0; a <= na - 1; a++)
 			{
-				if (distAxeX[a] < double.MaxValue && (Center.z > (_axeXz[a, 0] + _axeXz[a, 1]) / 2))
+				if (distAxeX[a] < double.MaxValue && (Center.Z > (_axeXz[a, 0] + _axeXz[a, 1]) / 2))
 				{
 					distAxeX[a] *= -1;
 				}
 			}
 
-			return min(distAxeX);
+			return Min(distAxeX);
 		}
 
 		/// <summary>
 		/// Selects the closest displayable Y axe from camera
 		/// </summary>
-		internal int findClosestYaxe(Camera cam)
+		internal int FindClosestYaxe(Camera cam)
 		{
-			int na = 4;
+			const int na = 4;
 			double[] distAxeY = new double[na];
 
 			// keeps axes that are not at intersection of 2 quads
@@ -956,7 +963,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			{
 				if (_quadIsHidden[_axeYquads[a, 0]] ^ _quadIsHidden[_axeYquads[a, 1]])
 				{
-					distAxeY[a] = new Vector3d(_axeYx[a, 0], _axeYy[a, 0], _axeYz[a, 0], _axeYx[a, 1], _axeYy[a, 1], _axeYz[a, 1]).distance(cam.Eye);
+					distAxeY[a] = new Vector3d(_axeYx[a, 0], _axeYy[a, 0], _axeYz[a, 0], _axeYx[a, 1], _axeYy[a, 1], _axeYz[a, 1]).Distance(cam.Eye);
 				}
 				else
 				{
@@ -967,21 +974,21 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			// prefers the lower one
 			for (int a = 0; a <= na - 1; a++)
 			{
-				if (distAxeY[a] < double.MaxValue && Center.z > (_axeYz[a, 0] + _axeYz[a, 1]) / 2)
+				if (distAxeY[a] < double.MaxValue && Center.Z > (_axeYz[a, 0] + _axeYz[a, 1]) / 2)
 				{
 					distAxeY[a] *= -1;
 				}
 			}
 
-			return min(distAxeY);
+			return Min(distAxeY);
 		}
 
 		/// <summary>
 		/// Selects the closest displayable Z axe from camera
 		/// </summary>
-		internal int findClosestZaxe(Camera cam)
+		internal int FindClosestZaxe(Camera cam)
 		{
-			int na = 4;
+			const int na = 4;
 			double[] distAxeZ = new double[na];
 
 			// keeps axes that are not at intersection of 2 quads
@@ -989,7 +996,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			{
 				if (_quadIsHidden[_axeZquads[a, 0]] ^ _quadIsHidden[_axeZquads[a, 1]])
 				{
-					distAxeZ[a] = new Vector3d(_axeZx[a, 0], _axeZy[a, 0], _axeZz[a, 0], _axeZx[a, 1], _axeZy[a, 1], _axeZz[a, 1]).distance(cam.Eye);
+					distAxeZ[a] = new Vector3d(_axeZx[a, 0], _axeZy[a, 0], _axeZz[a, 0], _axeZx[a, 1], _axeZy[a, 1], _axeZz[a, 1]).Distance(cam.Eye);
 				}
 				else
 				{
@@ -1003,17 +1010,17 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 				if (distAxeZ[a] < double.MaxValue)
 				{
 					var axeCEnter = new Coord3d((_axeZx[a, 0] + _axeZx[a, 1]) / 2, (_axeZy[a, 0] + _axeZy[a, 1]) / 2, (_axeZz[a, 0] + _axeZz[a, 1]) / 2);
-					if (!cam.side(axeCEnter))
+					if (!cam.Side(axeCEnter))
 					{
 						distAxeZ[a] *= -1;
 					}
 				}
 			}
 
-			return min(distAxeZ);
+			return Min(distAxeZ);
 		}
 
-		protected int min(double[] values)
+		protected static int Min(double[] values)
 		{
 			double minv = double.MaxValue;
 			int index = -1;
@@ -1031,12 +1038,12 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 		/// <summary>
 		/// Computes the visibility of each cube face.
 		/// </summary>
-		internal bool[] getHiddenQuads(Camera cam)
+		internal bool[] GetHiddenQuads(Camera cam)
 		{
 			bool[] status = new bool[6];
-			Coord3d se = cam.Eye.divide(_scale);
+			Coord3d se = cam.Eye.Divide(_scale);
 
-			if (se.x <= _center.x)
+			if (se.X <= _center.X)
 			{
 				status[0] = false;
 				status[1] = true;
@@ -1047,7 +1054,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 				status[1] = false;
 			}
 
-			if (se.y <= _center.y)
+			if (se.Y <= _center.Y)
 			{
 				status[2] = false;
 				status[3] = true;
@@ -1058,7 +1065,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 				status[3] = false;
 			}
 
-			if (se.z <= _center.z)
+			if (se.Z <= _center.Z)
 			{
 				status[4] = false;
 				status[5] = true;
@@ -1075,10 +1082,10 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 		/// <summary>
 		/// Print out parameters of a gl call in 3dColor mode
 		/// </summary>
-		internal int print3DcolorVertex(int size, int count, float[] buffer)
+		internal static int Print3DcolorVertex(int size, int count, float[] buffer)
 		{
 			int id = size - count;
-			int veclength = 7;
+			const int veclength = 7;
 			System.Diagnostics.Debug.WriteLine("  [" + id + "]");
 			for (int i = 0; i <= veclength - 1; i++)
 			{
@@ -1089,7 +1096,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			return count;
 		}
 
-		internal void printHiddenQuads()
+		internal void PrintHiddenQuads()
 		{
 			for (int t = 0; t <= _quadIsHidden.Length - 1; t++)
 			{
@@ -1104,25 +1111,25 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			}
 		}
 
-		public BoundingBox3d getBoxBounds()
+		public BoundingBox3d GetBoxBounds()
 		{
 			return _boxBounds;
 		}
 
-		public Coord3d getCenter()
+		public Coord3d GetCenter()
 		{
 			return this.Center;
 		}
 
-		public Layout.IAxeLayout getLayout()
+		public IAxeLayout GetLayout()
 		{
 			return _layout;
 		}
 
-		public void setAxe(BoundingBox3d box)
+		public void SetAxe(BoundingBox3d box)
 		{
 			_boxBounds = box;
-			setAxeBox((float)box.xmin, (float)box.xmax, (float)box.ymin, (float)box.ymax, (float)box.zmin, (float)box.zmax);
+			SetAxeBox((float)box.XMin, (float)box.XMax, (float)box.YMin, (float)box.YMax, (float)box.ZMin, (float)box.ZMax);
 		}
 
 		public BoundingBox3d WholeBounds
@@ -1140,16 +1147,9 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			set { _scale = value; }
 		}
 
-		public void setScale(Coord3d scale)
+		public void SetScale(Coord3d scale)
 		{
 			this.Scale = scale;
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

@@ -11,28 +11,29 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 		protected float[,] _z_as_fxy;
 
 		protected ITriangulation _triangulator;
+
 		public DelaunayTriangulationManager(ICoordinateValidator cv, ITriangulation triangulator)
 		{
 			_triangulator = triangulator;
-			this.x = cv.getX();
-			this.y = cv.getY();
-			this.z_as_fxy = cv.get_Z_as_fxy();
+			this.X = cv.GetX();
+			this.Y = cv.GetY();
+			this.Z_as_fxy = cv.Get_Z_as_fxy();
 		}
 
-		public AbstractDrawable buildDrawable()
+		public AbstractDrawable BuildDrawable()
 		{
 			Shape s = new Shape();
-			s.Add(getFacets());
+			s.Add(GetFacets());
 			return s;
 		}
 
 		// TODO: three different point classes coord3d, point_dt !!
-		private List<Polygon> getFacets()
+		private List<Polygon> GetFacets()
 		{
 			int xlen = _x.Length;
 			for (int i = 0; i <= xlen - 1; i++)
 			{
-				Point_dt point_dt = new Point_dt(x[i], y[i], z_as_fxy[i, i]);
+				Point_dt point_dt = new Point_dt(X[i], Y[i], Z_as_fxy[i, i]);
 				_triangulator.insertPoint(point_dt);
 			}
 
@@ -48,13 +49,13 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 					continue;
 				}
 
-				Polygon newPolygon = buildPolygonFrom(triangle);
+				Polygon newPolygon = BuildPolygonFrom(triangle);
 				polygons.Add(newPolygon);
 			}
 			return polygons;
 		}
 
-		private Polygon buildPolygonFrom(Triangle_dt triangle)
+		private static Polygon BuildPolygonFrom(Triangle_dt triangle)
 		{
 			Coord3d c1 = triangle.p1.Coord3d;
 			Coord3d c2 = triangle.p2.Coord3d;
@@ -66,29 +67,22 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 			return polygon;
 		}
 
-		public float[] x
+		public float[] X
 		{
 			get { return _x; }
 			set { _x = value; }
 		}
 
-		public float[] y
+		public float[] Y
 		{
 			get { return _y; }
 			set { _y = value; }
 		}
 
-		public float[,] z_as_fxy
+		public float[,] Z_as_fxy
 		{
 			get { return _z_as_fxy; }
 			set { _z_as_fxy = value; }
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

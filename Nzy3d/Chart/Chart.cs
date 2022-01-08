@@ -8,7 +8,7 @@ using Nzy3d.Plot3D.Rendering.View.Modes;
 
 namespace Nzy3d.Chart
 {
-    public class Chart
+	public class Chart
 	{
 		protected ChartScene _scene;
 		protected View _view;
@@ -19,7 +19,8 @@ namespace Nzy3d.Chart
 		protected List<AbstractCameraController> _controllers;
 		//protected  capabilities As GLCapabilities
 
-		public static Quality DEFAULT_QUALITY = Quality.Intermediate;
+		public static readonly Quality DEFAULT_QUALITY = Quality.Intermediate;
+
 		public Chart(ICanvas canvas) : this(canvas, DEFAULT_QUALITY)
 		{
 		}
@@ -28,12 +29,16 @@ namespace Nzy3d.Chart
 		{
 			// Store canvas
 			this._canvas = canvas;
+
 			// Set up controllers
 			_controllers = new List<AbstractCameraController>();
+
 			// Set up scene 
-			_scene = initializeScene(quality.AlphaActivated);
+			_scene = InitializeScene(quality.AlphaActivated);
+
 			// Set up view
-			_view = _scene.newView(canvas, quality);
+			_view = _scene.NewView(canvas, quality);
+
 			// create view with links in scene and canvas
 			_view.BackgroundColor = Colors.Color.WHITE;
 		}
@@ -42,7 +47,7 @@ namespace Nzy3d.Chart
 		/// Provides a concrete scene. This method shoud be overriden to inject a custom scene,
 		/// which may rely on several views, and could enhance manipulation of scene graph.
 		/// </summary>
-		protected virtual ChartScene initializeScene(bool graphsort)
+		protected virtual ChartScene InitializeScene(bool graphsort)
 		{
 			return Factories.SceneFactory.getInstance(graphsort);
 		}
@@ -55,7 +60,7 @@ namespace Nzy3d.Chart
 
 		public void Dispose()
 		{
-			clearControllerList();
+			ClearControllerList();
 			_scene.Dispose();
 			_canvas = null;
 			_scene = null;
@@ -71,7 +76,7 @@ namespace Nzy3d.Chart
 		//          return _canvas.Screenshot();
 		//}
 
-		public void updateProjectionsAndRender()
+		public void UpdateProjectionsAndRender()
 		{
 			_view.Shoot();
 			_view.Project();
@@ -84,19 +89,19 @@ namespace Nzy3d.Chart
 		/// the chart thus just unregisters the controllers, but does not handle
 		/// stopping and disposing controllers.
 		/// </summary>
-		public void addController(AbstractCameraController controller)
+		public void AddController(AbstractCameraController controller)
 		{
 			controller.Register(this);
 			_controllers.Add(controller);
 		}
 
-		public void removeController(AbstractCameraController controller)
+		public void RemoveController(AbstractCameraController controller)
 		{
 			controller.Unregister(this);
 			_controllers.Remove(controller);
 		}
 
-		public void clearControllerList()
+		public void ClearControllerList()
 		{
 			foreach (AbstractCameraController controller in _controllers)
 			{
@@ -105,49 +110,49 @@ namespace Nzy3d.Chart
 			_controllers.Clear();
 		}
 
-		public IEnumerable<AbstractCameraController> getControllers()
+		public IEnumerable<AbstractCameraController> GetControllers()
 		{
 			return _controllers;
 		}
 
-		public void addDrawable(AbstractDrawable drawable)
+		public void AddDrawable(AbstractDrawable drawable)
 		{
 			_scene.Graph.Add(drawable);
 		}
 
-		public void addDrawable(AbstractDrawable drawable, bool updateViews)
+		public void AddDrawable(AbstractDrawable drawable, bool updateViews)
 		{
 			_scene.Graph.Add(drawable, updateViews);
 		}
 
-		public void addDrawable(IEnumerable<AbstractDrawable> drawables, bool updateViews)
+		public void AddDrawable(IEnumerable<AbstractDrawable> drawables, bool updateViews)
 		{
 			_scene.Graph.Add(drawables, updateViews);
 		}
 
-		public void addDrawable(IEnumerable<AbstractDrawable> drawables)
+		public void AddDrawable(IEnumerable<AbstractDrawable> drawables)
 		{
 			_scene.Graph.Add(drawables);
 		}
 
-		public void removeDrawable(AbstractDrawable drawable)
+		public void RemoveDrawable(AbstractDrawable drawable)
 		{
 			_scene.Graph.Remove(drawable);
 		}
 
-		public void removeDrawable(AbstractDrawable drawable, bool updateViews)
+		public void RemoveDrawable(AbstractDrawable drawable, bool updateViews)
 		{
 			_scene.Graph.Remove(drawable, updateViews);
 		}
 
-		public void addRenderer(IBaseRenderer2D renderer2d)
+		public void AddRenderer(IBaseRenderer2D renderer2d)
 		{
-			_view.addRenderer2d(renderer2d);
+			_view.AddRenderer2d(renderer2d);
 		}
 
-		public void removeRenderer(IBaseRenderer2D renderer2d)
+		public void RemoveRenderer(IBaseRenderer2D renderer2d)
 		{
-			_view.removeRenderer2d(renderer2d);
+			_view.RemoveRenderer2d(renderer2d);
 		}
 
 		public View View
@@ -167,7 +172,7 @@ namespace Nzy3d.Chart
 
 		public IAxeLayout AxeLayout
 		{
-			get { return _view.Axe.getLayout(); }
+			get { return _view.Axe.GetLayout(); }
 		}
 
 		public bool AxeDisplayed
@@ -201,28 +206,35 @@ namespace Nzy3d.Chart
 					case ViewPositionMode.FREE:
 						_previousViewPointFree = View.ViewPoint;
 						break;
+
 					case ViewPositionMode.PROFILE:
 						_previousViewPointTop = View.ViewPoint;
 						break;
+
 					case ViewPositionMode.TOP:
 						_previousViewPointProfile = View.ViewPoint;
 						break;
+
 					default:
 						throw new Exception("Unsupported ViewPositionMode :" + previous);
 				}
+
 				// Set new view mode and former view point
 				_view.ViewMode = value;
 				switch (previous)
 				{
 					case ViewPositionMode.FREE:
-						_view.ViewPoint = ((_previousViewPointFree == null) ? View.DEFAULT_VIEW.Clone() : _previousViewPointFree);
+						_view.ViewPoint = _previousViewPointFree ?? View.DEFAULT_VIEW.Clone();
 						break;
+
 					case ViewPositionMode.PROFILE:
-						_view.ViewPoint = ((_previousViewPointTop == null) ? View.DEFAULT_VIEW.Clone() : _previousViewPointTop);
+						_view.ViewPoint = _previousViewPointTop ?? View.DEFAULT_VIEW.Clone();
 						break;
+
 					case ViewPositionMode.TOP:
-						_view.ViewPoint = ((_previousViewPointProfile == null) ? View.DEFAULT_VIEW.Clone() : _previousViewPointProfile);
+						_view.ViewPoint = _previousViewPointProfile ?? View.DEFAULT_VIEW.Clone();
 						break;
+
 					default:
 						throw new Exception("Unsupported ViewPositionMode :" + previous);
 				}
@@ -232,13 +244,13 @@ namespace Nzy3d.Chart
 
 		public Scale Scale
 		{
-			get { return new Scale(_view.Bounds.zmin, _view.Bounds.zmax); }
-			set { _view.setScale(value, true); }
+			get { return new Scale(_view.Bounds.ZMin, _view.Bounds.ZMax); }
+			set { _view.SetScale(value, true); }
 		}
 
-		public void setScale(Scale scale, bool notify)
+		public void SetScale(Scale scale, bool notify)
 		{
-			_view.setScale(scale, notify);
+			_view.SetScale(scale, notify);
 		}
 
 		public float Flip(float y)

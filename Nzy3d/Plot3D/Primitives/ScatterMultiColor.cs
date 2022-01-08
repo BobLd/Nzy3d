@@ -20,7 +20,7 @@ namespace Nzy3d.Plot3D.Primitives
         public void Clear()
         {
             _coordinates = null;
-            _bbox.reset();
+            _bbox.Reset();
         }
 
         public override void Draw(Camera cam)
@@ -36,7 +36,7 @@ namespace Nzy3d.Plot3D.Primitives
                 {
                     var color = ColorMapper.Color(c); // TODO: should store result in the point color
                     GL.Color4(color.r, color.g, color.b, color.a);
-                    GL.Vertex3(c.x, c.y, c.z);
+                    GL.Vertex3(c.X, c.Y, c.Z);
                 }
             }
             GL.End();
@@ -46,10 +46,10 @@ namespace Nzy3d.Plot3D.Primitives
 
         private void UpdateBounds()
         {
-            _bbox.reset();
+            _bbox.Reset();
             foreach (var c in _coordinates)
             {
-                _bbox.add(c);
+                _bbox.Add(c);
             }
         }
 

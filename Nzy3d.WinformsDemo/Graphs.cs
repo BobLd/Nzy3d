@@ -21,8 +21,8 @@ namespace Nzy3d.WinformsDemo
 
             // Build a nice surface to display with cool alpha colors 
             // (alpha 0.8 for surface color and 0.5 for wireframe)
-            var surface = Plot3D.Builder.Builder.buildOrthonomal(new OrthonormalGrid(range, steps, range, steps), new MyMapper());
-            surface.ColorMapper = new ColorMapper(new ColorMapRainbow(), surface.Bounds.zmin, surface.Bounds.zmax, new Color(1, 1, 1, 0.8));
+            var surface = Plot3D.Builder.Builder.BuildOrthonomal(new OrthonormalGrid(range, steps, range, steps), new MyMapper());
+            surface.ColorMapper = new ColorMapper(new ColorMapRainbow(), surface.Bounds.ZMin, surface.Bounds.ZMax, new Color(1, 1, 1, 0.8));
             surface.FaceDisplayed = true;
             surface.WireframeDisplayed = true;
             surface.WireframeColor = Color.CYAN;
@@ -30,13 +30,17 @@ namespace Nzy3d.WinformsDemo
             return surface;
         }
 
+        public static Scatter GetScatterGraph()
+        {
+            return GetScatterGraph(500_000);
+        }
+
         /// <summary>
         /// Build a nice scatter to display with cool alpha colors
         /// (alpha 0.25).
         /// </summary>
-        public static Scatter GetScatterGraph()
+        public static Scatter GetScatterGraph(int size)
         {
-            int size = 500_000;
             var points = new Coord3d[size];
             var colors = new Color[size];
 

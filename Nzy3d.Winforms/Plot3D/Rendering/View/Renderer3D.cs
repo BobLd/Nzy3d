@@ -3,7 +3,6 @@ using Nzy3d.Events.Keyboard;
 using Nzy3d.Events.Mouse;
 using Nzy3d.Plot3D.Rendering.Canvas;
 using OpenTK.Graphics.OpenGL;
-using OpenTK.Mathematics;
 using OpenTK.WinForms;
 using System.Drawing.Imaging;
 using BaseView = Nzy3d.Plot3D.Rendering.View.View;
@@ -11,7 +10,7 @@ using BaseView = Nzy3d.Plot3D.Rendering.View.View;
 namespace Nzy3d.Winforms
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public class Renderer3D : GLControl, ICanvas, IControllerEventListener
 	{
@@ -40,9 +39,8 @@ namespace Nzy3d.Winforms
 
 		private void Renderer3D_Paint(object sender, PaintEventArgs e)
 		{
-			if ((_view != null))
+			if (_view != null)
 			{
-				this.MakeCurrent(); // BobLd
 				_view.Clear();
 				_view.Render();
 				this.SwapBuffers();
@@ -56,13 +54,10 @@ namespace Nzy3d.Winforms
 
 		private void Renderer3D_Resize(object sender, EventArgs e)
 		{
-			//this.MakeCurrent(); // BobLd
-
-			//https://github.com/opentk/GLControl/blob/master/OpenTK.WinForms.MultiControlTest/Form1.cs
 			_width = this.ClientSize.Width;
 			_height = this.ClientSize.Height;
 
-			if ((_view != null))
+			if (_view != null)
 			{
 				_view.DimensionDirty = true;
 			}
@@ -77,15 +72,15 @@ namespace Nzy3d.Winforms
 
 			BitmapData data = _image.LockBits(this.ClientRectangle, ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 			//OpenTK.Graphics.OpenGL.GL.ReadPixels(0, 0, ClientSize.Width, ClientSize.Height, OpenTK.Graphics.PixelFormat.Bgr, OpenTK.Graphics.PixelType.UnsignedByte, data.Scan0)
-			OpenTK.Graphics.OpenGL.PixelFormat pxFormat = OpenTK.Graphics.OpenGL.PixelFormat.Bgr;
-			OpenTK.Graphics.OpenGL.PixelType pxType = OpenTK.Graphics.OpenGL.PixelType.UnsignedByte;
+			var pxFormat = OpenTK.Graphics.OpenGL.PixelFormat.Bgr;
+			var pxType = PixelType.UnsignedByte;
 
-			OpenTK.Graphics.OpenGL.GL.ReadPixels(0, 0, ClientSize.Width, ClientSize.Height, pxFormat, pxType, data.Scan0);
+			GL.ReadPixels(0, 0, ClientSize.Width, ClientSize.Height, pxFormat, pxType, data.Scan0);
 			_image.UnlockBits(data);
 			_image.RotateFlip(RotateFlipType.RotateNoneFlipY);
 		}
 
-		public void nextDisplayUpdateScreenshot()
+		public void NextDisplayUpdateScreenshot()
 		{
 			_doScreenshotAtNextDisplay = true;
 		}
@@ -237,7 +232,7 @@ namespace Nzy3d.Winforms
 			get { return _view; }
 		}
 
-		public void setView(BaseView value)
+		public void SetView(BaseView value)
 		{
 			_view = value;
 			_view.Init();

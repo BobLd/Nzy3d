@@ -142,7 +142,7 @@ namespace Nzy3d.Plot3D.Primitives
 		{
 			get
 			{
-				BoundingBox3d box = new BoundingBox3d();
+				var box = new BoundingBox3d();
 				lock (_components)
 				{
 					foreach (AbstractDrawable c in _components)
@@ -272,7 +272,7 @@ namespace Nzy3d.Plot3D.Primitives
 						}
 					}
 				}
-				fireDrawableChanged(new DrawableChangedEventArgs(this, DrawableChangedEventArgs.FieldChanged.Color));
+				FireDrawableChanged(new DrawableChangedEventArgs(this, DrawableChangedEventArgs.FieldChanged.Color));
 			}
 		}
 
@@ -292,7 +292,7 @@ namespace Nzy3d.Plot3D.Primitives
 						}
 					}
 				}
-				fireDrawableChanged(new DrawableChangedEventArgs(this, DrawableChangedEventArgs.FieldChanged.Color));
+				FireDrawableChanged(new DrawableChangedEventArgs(this, DrawableChangedEventArgs.FieldChanged.Color));
 			}
 		}
 
@@ -301,10 +301,10 @@ namespace Nzy3d.Plot3D.Primitives
 		/// </summary>
 		public override string ToString()
 		{
-			return toString(0);
+			return ToString(0);
 		}
 
-		public override string toString(int depth)
+		public override string ToString(int depth)
 		{
 			string output = Utils.blanks(depth) + "(Composite3d) #elements:" + _components.Count + " | isDisplayed=" + this.Displayed;
 			if (_detailedToString)
@@ -316,7 +316,7 @@ namespace Nzy3d.Plot3D.Primitives
 					{
 						if (c is AbstractComposite cAC)
 						{
-							output += "\r\n" + ((AbstractComposite)c).toString(depth + 1);
+							output += "\r\n" + ((AbstractComposite)c).ToString(depth + 1);
 						}
 						else if (c != null)
 						{

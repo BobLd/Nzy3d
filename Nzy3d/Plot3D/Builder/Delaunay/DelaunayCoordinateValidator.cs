@@ -6,45 +6,46 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 	{
 		private readonly float[] _x;
 		private readonly float[] _y;
+		private readonly float[,] _z_as_fxy;
 
-		private float[,] _z_as_fxy;
 		public DelaunayCoordinateValidator(Coordinates coords)
 		{
 			if (coords == null)
 			{
-				throw new ArgumentException("Function call with illegal value 'Nothing' for parameter coords.", "coords");
+				throw new ArgumentException("Function call with illegal value 'Nothing' for parameter coords.", nameof(coords));
 			}
 
-			if (coords.x == null)
+			if (coords.X == null)
 			{
-				throw new ArgumentException("Illegal result value 'Nothing' on x property of parameter coords.", "coords");
+				throw new ArgumentException("Illegal result value 'Nothing' on x property of parameter coords.", nameof(coords));
 			}
 
-			if (coords.y == null)
+			if (coords.Y == null)
 			{
-				throw new ArgumentException("Illegal result value 'Nothing' on y property of parameter coords.", "coords");
+				throw new ArgumentException("Illegal result value 'Nothing' on y property of parameter coords.", nameof(coords));
 			}
 
-			if (coords.z == null)
+			if (coords.Z == null)
 			{
-				throw new ArgumentException("Illegal result value 'Nothing' on z property of parameter coords.", "coords");
+				throw new ArgumentException("Illegal result value 'Nothing' on z property of parameter coords.", nameof(coords));
 			}
 
-			if (coords.x.Length != coords.y.Length)
+			if (coords.X.Length != coords.Y.Length)
 			{
-				throw new ArgumentException("Parameter coords has different x size (" + coords.x.Length + ") than y size (" + coords.y.Length + ")", "coords");
+				throw new ArgumentException("Parameter coords has different x size (" + coords.X.Length + ") than y size (" + coords.Y.Length + ")", nameof(coords));
 			}
 
-			if (coords.x.Length != coords.z.Length)
+			if (coords.X.Length != coords.Z.Length)
 			{
-				throw new ArgumentException("Parameter coords has different x size (" + coords.x.Length + ") than z size (" + coords.z.Length + ")", "coords");
+				throw new ArgumentException("Parameter coords has different x size (" + coords.X.Length + ") than z size (" + coords.Z.Length + ")", nameof(coords));
 			}
-			_x = coords.x;
-			_y = coords.y;
-			_z_as_fxy = setData(coords.z);
+
+			_x = coords.X;
+			_y = coords.Y;
+			_z_as_fxy = SetData(coords.Z);
 		}
 
-		internal float[,] setData(float[] z)
+		internal static float[,] SetData(float[] z)
 		{
 			int length = z.Length;
 			float[,] z_as_fxy = new float[length, length];
@@ -55,26 +56,19 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 			return z_as_fxy;
 		}
 
-		public float[,] get_Z_as_fxy()
+		public float[,] Get_Z_as_fxy()
 		{
 			return _z_as_fxy;
 		}
 
-		public float[] getX()
+		public float[] GetX()
 		{
 			return _x;
 		}
 
-		public float[] getY()
+		public float[] GetY()
 		{
 			return _y;
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

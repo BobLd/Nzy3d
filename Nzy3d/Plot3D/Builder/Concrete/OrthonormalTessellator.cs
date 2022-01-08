@@ -5,12 +5,15 @@ using Nzy3d.Plot3D.Primitives;
 namespace Nzy3d.Plot3D.Builder.Concrete
 {
 	/// <summary>
+	/// <para>
 	/// The <see cref="OrthonormalTessellator"/> checks that coordinates are lying on an orthormal grid,
 	/// and is able to provide a <see cref="AbstractComposite"/> made of <see cref="Polygon"/>s built according to this grid
-	///
+	/// </para>
+	/// <para>
 	/// On this model, one input coordinate is represented by one <see cref="Polygon"/>, for which each point is
 	/// a mean point between two grid ticks:
-	///
+	/// </para>
+	/// <para>
 	///  ^                           ^
 	///  |                           |
 	///  -   +   +   +               -   +   +   +
@@ -20,54 +23,54 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 	///  -   +   +   +               -   +   +   +
 	///  |                           |
 	///  |---|---|---|-->            |---|---|---|-->
-	///
-	///
+	/// </para>
+	/// <para>
 	///  In this figure, the representation of a coordinate ("o" on the left) is a polygon
 	///  made of mean points ("*" on the right) that require the existence of four surrounding
 	///  points (the "o" and the three "+")
-	///
-	/// @author Martin Pernollet
+	/// </para>
+	/// <para>@author Martin Pernollet</para>
 	/// </summary>
 	public class OrthonormalTessellator : Tessellator
 	{
-		protected internal float[] x;
-		protected internal float[] y;
-		protected internal float[,] z;
-		protected internal int findxi;
+		protected internal float[] X;
+		protected internal float[] Y;
+		protected internal float[,] Z;
+		protected internal int FindXi;
+		protected internal int FindYj;
 
-		protected internal int findyj;
-		protected internal void setData(float[] x, float[] y, float[] z)
+		protected internal void SetData(float[] x, float[] y, float[] z)
 		{
-			if (x.Length != y.Length | x.Length != z.Length)
+			if (x.Length != y.Length || x.Length != z.Length)
 			{
 				throw new Exception("x, y, and z arrays must agree in length.");
 			}
 
 			// Initialize loading
-			this.x = unique(x);
-			this.y = unique(y);
-			this.z = new float[this.x.Length + 1, this.y.Length + 1];
-			for (int i = 0; i <= this.x.Length - 1; i++)
+			this.X = Unique(x);
+			this.Y = Unique(y);
+			this.Z = new float[this.X.Length + 1, this.Y.Length + 1];
+			for (int i = 0; i <= this.X.Length - 1; i++)
 			{
-				for (int j = 0; j <= this.y.Length - 1; j++)
+				for (int j = 0; j <= this.Y.Length - 1; j++)
 				{
-					this.z[i, j] = float.NaN;
+					this.Z[i, j] = float.NaN;
 				}
 			}
-			// Fill Z matrix and set surface minimum and maximum
-			bool found = false;
-			for (int p = 0; p <= z.Length - 1; p++)
+
+            for (int p = 0; p <= z.Length - 1; p++)
 			{
-				found = find(this.x, this.y, x[p], y[p]);
-				if (!found)
+                // Fill Z matrix and set surface minimum and maximum
+                bool found = Find(this.X, this.Y, x[p], y[p]);
+                if (!found)
 				{
 					throw new Exception("it seems (x[p],y[p]) has not been properly stored into (this.x,this.y)");
 				}
-				this.z[findxi, findyj] = z[p];
+				this.Z[FindXi, FindYj] = z[p];
 			}
 		}
 
-		internal float[] unique(float[] data)
+		internal static float[] Unique(float[] data)
 		{
 			float[] copy = (float[])data.Clone();
 			System.Array.Sort(copy);
@@ -80,7 +83,7 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 			{
 				if (float.IsNaN(copy[i]))
 				{
-					//         /System.out.println("Ignoring NaN value at " + i);
+					// System.out.println("Ignoring NaN value at " + i);
 				}
 				else if (copy[i] != last)
 				{
@@ -115,7 +118,7 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 		/// Function returns true if the couple of data may be retrieved,
 		/// false otherwise (in this case, findxi and findyj remain unchanged).
 		/// </summary>
-		internal bool find(float[] x, float[] y, float vx, float vy)
+		internal bool Find(float[] x, float[] y, float vx, float vy)
 		{
 			int xi = -1;
 			int yj = -1;
@@ -145,26 +148,26 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 				return false;
 			}
 
-			findxi = xi;
-			findyj = yj;
+			FindXi = xi;
+			FindYj = yj;
 			return true;
 		}
 
-		public List<Polygon> getSquarePolygonsOnCoordinates()
+		public List<Polygon> GetSquarePolygonsOnCoordinates()
 		{
-			return getSquarePolygonsOnCoordinates(null, null);
+			return GetSquarePolygonsOnCoordinates(null, null);
 		}
 
-		public List<Polygon> getSquarePolygonsOnCoordinates(ColorMapper cmap, Color colorFactor)
+		public List<Polygon> GetSquarePolygonsOnCoordinates(ColorMapper cmap, Color colorFactor)
 		{
 			List<Polygon> polygons = new List<Polygon>();
-			for (int xi = 0; xi <= x.Length - 2; xi++)
+			for (int xi = 0; xi <= X.Length - 2; xi++)
 			{
-				for (int yi = 0; yi <= y.Length - 2; yi++)
+				for (int yi = 0; yi <= Y.Length - 2; yi++)
 				{
 					// Compute quad making a polygon
-					Point[] p = getRealQuadStandingOnPoint(xi, yi);
-					if (!validZ(p))
+					Point[] p = GetRealQuadStandingOnPoint(xi, yi);
+					if (!ValidZ(p))
 					{
 						continue;
 						// ignore non valid set of points
@@ -172,18 +175,18 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 
                     if (cmap != null)
 					{
-						p[0].Color = cmap.Color(p[0].xyz);
-						p[1].Color = cmap.Color(p[1].xyz);
-						p[2].Color = cmap.Color(p[2].xyz);
-						p[3].Color = cmap.Color(p[3].xyz);
+						p[0].Color = cmap.Color(p[0].XYZ);
+						p[1].Color = cmap.Color(p[1].XYZ);
+						p[2].Color = cmap.Color(p[2].XYZ);
+						p[3].Color = cmap.Color(p[3].XYZ);
 					}
 
 					if (colorFactor != null)
 					{
-						p[0].rgb.mul(colorFactor);
-						p[1].rgb.mul(colorFactor);
-						p[2].rgb.mul(colorFactor);
-						p[3].rgb.mul(colorFactor);
+						p[0].Rgb.mul(colorFactor);
+						p[1].Rgb.mul(colorFactor);
+						p[2].Rgb.mul(colorFactor);
+						p[3].Rgb.mul(colorFactor);
 					}
 
 					// Store quad
@@ -198,22 +201,22 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 			return polygons;
 		}
 
-		public object getSquarePolygonsAroundCoordinates()
+		public object GetSquarePolygonsAroundCoordinates()
 		{
-			return getSquarePolygonsAroundCoordinates(null, null);
+			return GetSquarePolygonsAroundCoordinates(null, null);
 		}
 
-		public object getSquarePolygonsAroundCoordinates(ColorMapper cmap, Color colorFactor)
+		public object GetSquarePolygonsAroundCoordinates(ColorMapper cmap, Color colorFactor)
 		{
 			var polygons = new List<Polygon>();
 
-			for (int xi = 0; xi <= x.Length - 2; xi++)
+			for (int xi = 0; xi <= X.Length - 2; xi++)
 			{
-				for (int yi = 0; yi <= y.Length - 2; yi++)
+				for (int yi = 0; yi <= Y.Length - 2; yi++)
 				{
 					// Compute quad making a polygon
-					Point[] p = getEstimatedQuadSurroundingPoint(xi, yi);
-					if (!validZ(p))
+					Point[] p = GetEstimatedQuadSurroundingPoint(xi, yi);
+					if (!ValidZ(p))
 					{
 						continue;
 						// ignore non valid set of points
@@ -221,18 +224,18 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 
                     if (cmap != null)
 					{
-						p[0].Color = cmap.Color(p[0].xyz);
-						p[1].Color = cmap.Color(p[1].xyz);
-						p[2].Color = cmap.Color(p[2].xyz);
-						p[3].Color = cmap.Color(p[3].xyz);
+						p[0].Color = cmap.Color(p[0].XYZ);
+						p[1].Color = cmap.Color(p[1].XYZ);
+						p[2].Color = cmap.Color(p[2].XYZ);
+						p[3].Color = cmap.Color(p[3].XYZ);
 					}
 
                     if (colorFactor != null)
 					{
-						p[0].rgb.mul(colorFactor);
-						p[1].rgb.mul(colorFactor);
-						p[2].rgb.mul(colorFactor);
-						p[3].rgb.mul(colorFactor);
+						p[0].Rgb.mul(colorFactor);
+						p[1].Rgb.mul(colorFactor);
+						p[2].Rgb.mul(colorFactor);
+						p[3].Rgb.mul(colorFactor);
 					}
 					// Store quad
 					Polygon quad = new Polygon();
@@ -246,31 +249,31 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 			return polygons;
 		}
 
-		protected internal Point[] getRealQuadStandingOnPoint(int xi, int yi)
+		protected internal Point[] GetRealQuadStandingOnPoint(int xi, int yi)
 		{
 			Point[] p = new Point[4];
-			p[0] = new Point(new Coord3d(x[xi], y[yi], z[xi, yi]));
-			p[1] = new Point(new Coord3d(x[xi + 1], y[yi], z[xi + 1, yi]));
-			p[2] = new Point(new Coord3d(x[xi + 1], y[yi + 1], z[xi + 1, yi + 1]));
-			p[3] = new Point(new Coord3d(x[xi], y[yi + 1], z[xi, yi + 1]));
+			p[0] = new Point(new Coord3d(X[xi], Y[yi], Z[xi, yi]));
+			p[1] = new Point(new Coord3d(X[xi + 1], Y[yi], Z[xi + 1, yi]));
+			p[2] = new Point(new Coord3d(X[xi + 1], Y[yi + 1], Z[xi + 1, yi + 1]));
+			p[3] = new Point(new Coord3d(X[xi], Y[yi + 1], Z[xi, yi + 1]));
 			return p;
 		}
 
-		internal Point[] getEstimatedQuadSurroundingPoint(int xi, int yi)
+		internal Point[] GetEstimatedQuadSurroundingPoint(int xi, int yi)
 		{
 			Point[] p = new Point[4];
-			p[0] = new Point(new Coord3d((x[xi - 1] + x[xi]) / 2, (y[yi + 1] + y[yi]) / 2, (z[xi - 1, yi + 1] + z[xi - 1, yi] + z[xi, yi] + z[xi, yi + 1]) / 4));
-			p[1] = new Point(new Coord3d((x[xi - 1] + x[xi]) / 2, (y[yi - 1] + y[yi]) / 2, (z[xi - 1, yi] + z[xi - 1, yi - 1] + z[xi, yi - 1] + z[xi, yi]) / 4));
-			p[2] = new Point(new Coord3d((x[xi + 1] + x[xi]) / 2, (y[yi - 1] + y[yi]) / 2, (z[xi, yi] + z[xi, yi - 1] + z[xi + 1, yi - 1] + z[xi + 1, yi]) / 4));
-			p[3] = new Point(new Coord3d((x[xi + 1] + x[xi]) / 2, (y[yi + 1] + y[yi]) / 2, (z[xi, yi + 1] + z[xi, yi] + z[xi + 1, yi] + z[xi + 1, yi + 1]) / 4));
+			p[0] = new Point(new Coord3d((X[xi - 1] + X[xi]) / 2, (Y[yi + 1] + Y[yi]) / 2, (Z[xi - 1, yi + 1] + Z[xi - 1, yi] + Z[xi, yi] + Z[xi, yi + 1]) / 4));
+			p[1] = new Point(new Coord3d((X[xi - 1] + X[xi]) / 2, (Y[yi - 1] + Y[yi]) / 2, (Z[xi - 1, yi] + Z[xi - 1, yi - 1] + Z[xi, yi - 1] + Z[xi, yi]) / 4));
+			p[2] = new Point(new Coord3d((X[xi + 1] + X[xi]) / 2, (Y[yi - 1] + Y[yi]) / 2, (Z[xi, yi] + Z[xi, yi - 1] + Z[xi + 1, yi - 1] + Z[xi + 1, yi]) / 4));
+			p[3] = new Point(new Coord3d((X[xi + 1] + X[xi]) / 2, (Y[yi + 1] + Y[yi]) / 2, (Z[xi, yi + 1] + Z[xi, yi] + Z[xi + 1, yi] + Z[xi + 1, yi + 1]) / 4));
 			return p;
 		}
 
-		internal bool validZ(Point[] points)
+		internal static bool ValidZ(Point[] points)
 		{
 			foreach (Point p in points)
 			{
-				if (!validZ(p))
+				if (!ValidZ(p))
 				{
 					return false;
 				}
@@ -278,24 +281,17 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 			return true;
 		}
 
-		internal bool validZ(Point p)
+		internal static bool ValidZ(Point p)
 		{
-			return !double.IsNaN(p.xyz.z);
+			return !double.IsNaN(p.XYZ.Z);
 		}
 
-		public override AbstractComposite build(float[] x, float[] y, float[] z)
+		public override AbstractComposite Build(float[] x, float[] y, float[] z)
 		{
-			setData(x, y, z);
+			SetData(x, y, z);
 			Shape s = new Shape();
-			s.Add(getSquarePolygonsOnCoordinates());
+			s.Add(GetSquarePolygonsOnCoordinates());
 			return s;
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

@@ -15,12 +15,12 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 				double j = 0;
 				while (j < (jrat * Math.PI))
 				{
-					var c = new Coord3d(i, j, radius).cartesian();
+					var c = new Coord3d(i, j, radius).Cartesian();
 					if (center != null)
 					{
-						c.x += center.x;
-						c.y += center.y;
-						c.z += center.z;
+						c.X += center.X;
+						c.Y += center.Y;
+						c.Z += center.Z;
 					}
 					coords.Add(c);
 					j += inc;

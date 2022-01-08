@@ -3,21 +3,21 @@ using Nzy3d.Plot3D.Primitives;
 
 namespace Nzy3d.Plot3D.Builder
 {
-    public abstract class Tessellator
+	public abstract class Tessellator
 	{
 		public Tessellator()
 		{
 		}
 
-		public AbstractComposite build(List<Coord3d> coordinates)
+		public AbstractComposite Build(List<Coord3d> coordinates)
 		{
 			Coordinates coords = new Coordinates(coordinates);
-			return build(coords.x, coords.y, coords.z);
+			return Build(coords.X, coords.Y, coords.Z);
 		}
 
-		public abstract AbstractComposite build(float[] x, float[] y, float[] z);
+		public abstract AbstractComposite Build(float[] x, float[] y, float[] z);
 
-		public AbstractComposite build(double[] x, double[] y, double[] z)
+		public AbstractComposite Build(double[] x, double[] y, double[] z)
 		{
 			float[] xs = new float[x.Length];
 			System.Array.Copy(x, xs, x.Length);
@@ -25,14 +25,7 @@ namespace Nzy3d.Plot3D.Builder
 			System.Array.Copy(y, ys, y.Length);
 			float[] zs = new float[z.Length];
 			System.Array.Copy(z, zs, z.Length);
-			return build(xs, ys, zs);
+			return Build(xs, ys, zs);
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

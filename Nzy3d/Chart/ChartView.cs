@@ -18,7 +18,7 @@ namespace Nzy3d.Chart
 		internal System.Drawing.Rectangle _zone2;
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <param name="scene"></param>
 		/// <param name="canvas"></param>
@@ -60,7 +60,7 @@ namespace Nzy3d.Chart
 
 			if (hasMeta)
 			{
-				renderFaces(screenSeparator, 1);
+				RenderFaces(screenSeparator, 1);
 			}
 
 			// fix overlay on top of chart
@@ -73,7 +73,7 @@ namespace Nzy3d.Chart
 			}
 		}
 
-		internal void renderFaces(float left, float right)
+		internal void RenderFaces(float left, float right)
 		{
 			List<Legend> data = _scene.Graph.Legends;
 			float slice = (right - left) / data.Count;

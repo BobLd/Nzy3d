@@ -7,10 +7,3 @@ namespace Nzy3d.Plot3D.Primitives
 		void Draw(Camera cam);
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================
