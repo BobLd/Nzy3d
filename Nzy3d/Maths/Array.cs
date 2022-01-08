@@ -1,20 +1,20 @@
 namespace Nzy3d.Maths
 {
-	public class Array
+	public static class Array
 	{
 		public static int[] Clone(int[] input)
 		{
-			return Array.Clone(input, input.Length);
+			return Clone(input, input.Length);
 		}
 
 		public static float[] Clone(float[] input)
 		{
-			return Array.Clone(input, input.Length);
+			return Clone(input, input.Length);
 		}
 
 		public static double[] Clone(double[] input)
 		{
-			return Array.Clone(input, input.Length);
+			return Clone(input, input.Length);
 		}
 
 		public static int[] Clone(int[] input, int length)
@@ -52,7 +52,7 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// output(i, 0) = input(i)
 		/// </summary>
-		public static double[,] toColumnMatrix(double[] input)
+		public static double[,] ToColumnMatrix(double[] input)
 		{
 			double[,] output = new double[input.Length, 1];
 			for (int i = 0; i < input.Length; i++)
@@ -65,7 +65,7 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// output(i, 0) = input(i)
 		/// </summary>
-		public static float[,] toColumnMatrix(float[] input)
+		public static float[,] ToColumnMatrix(float[] input)
 		{
 			float[,] output = new float[input.Length, 1];
 			for (int i = 0; i < input.Length; i++)
@@ -78,7 +78,7 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// output(i, 0) = input(i)
 		/// </summary>
-		public static double[,] toColumnMatrixAsDouble(float[] input)
+		public static double[,] ToColumnMatrixAsDouble(float[] input)
 		{
 			double[,] output = new double[input.Length, 1];
 			for (int i = 0; i <= input.Length - 1; i++)
@@ -101,7 +101,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public static bool Find(int[] values, double value)
 		{
-			return (System.Array.Find(values, x => (x == value)) >= 0);
+			return System.Array.Find(values, x => x == value) >= 0;
 		}
 
 		public static double[] Merge(double[] array1, double[] array2)
@@ -114,17 +114,19 @@ namespace Nzy3d.Maths
 
 		public static double[] Flatten(double[,] matrix)
 		{
-			return Array.Flatten(matrix, false);
+			return Flatten(matrix, false);
 		}
 
 		public static double[] Flatten(double[,] matrix, bool ignoreNaN)
 		{
 			if (matrix.Length == 0)
 			{
-				return new double[0];
+				return System.Array.Empty<double>();
 			}
+
 			double[] vector = new double[matrix.Length];
 			int k = 0;
+
 			for (int i = 0; i <= matrix.GetLength(0) - 1; i++)
 			{
 				for (int j = 0; j <= matrix.GetLength(1) - 1; j++)
@@ -132,27 +134,29 @@ namespace Nzy3d.Maths
 					if (!(ignoreNaN && double.IsNaN(matrix[i, j])))
 					{
 						vector[k] = matrix[i, j];
-						k += 1;
+						k++;
 					}
 				}
 			}
 			// reduce length of output to forbid elements not initialized due to NaN
-			return Array.Clone(vector, k);
+			return Clone(vector, k);
 		}
 
 		public static float[] Flatten(float[,] matrix)
 		{
-			return Array.Flatten(matrix, false);
+			return Flatten(matrix, false);
 		}
 
 		public static float[] Flatten(float[,] matrix, bool ignoreNaN)
 		{
 			if (matrix.Length == 0)
 			{
-				return new float[0];
+				return System.Array.Empty<float>();
 			}
+
 			float[] vector = new float[matrix.Length];
 			int k = 0;
+
 			for (int i = 0; i <= matrix.GetLength(0) - 1; i++)
 			{
 				for (int j = 0; j <= matrix.GetLength(1) - 1; j++)
@@ -160,32 +164,34 @@ namespace Nzy3d.Maths
 					if (!(ignoreNaN && double.IsNaN(matrix[i, j])))
 					{
 						vector[k] = matrix[i, j];
-						k += 1;
+						k++;
 					}
 				}
 			}
 			// reduce length of output to forbid elements not initialized due to NaN
-			return Array.Clone(vector, k);
+			return Clone(vector, k);
 		}
 
 		public static double[] FilterNaNs(double[] input)
 		{
 			if (input.Length == 0)
 			{
-				return new double[0];
+				return System.Array.Empty<double>();
 			}
+
 			double[] vector = new double[input.Length];
 			int k = 0;
+
 			for (int i = 0; i <= input.GetLength(0) - 1; i++)
 			{
-				if (!(double.IsNaN(input[i])))
+				if (!double.IsNaN(input[i]))
 				{
 					vector[k] = input[i];
-					k += 1;
+					k++;
 				}
 			}
 			// reduce length of output to forbid elements not initialized due to NaN
-			return Array.Clone(vector, k);
+			return Clone(vector, k);
 		}
 
 		public static int CountNaNs(double[] input)
@@ -195,13 +201,13 @@ namespace Nzy3d.Maths
 			{
 				if (double.IsNaN(input[i]))
 				{
-					k += 1;
+					k++;
 				}
 			}
 			return k;
 		}
 
-		public static bool atLeastOneNonNan(double[] input)
+		public static bool AtLeastOneNonNan(double[] input)
 		{
 			for (int i = 0; i <= input.GetLength(0) - 1; i++)
 			{
@@ -218,7 +224,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="input"></param>
 		/// <remarks>Input array is modified and sorted after call to this method.</remarks>
-		public static int[] sortAscending(int[] input)
+		public static int[] SortAscending(int[] input)
 		{
 			int[] ordered = new int[input.Length];
 			for (int i = 0; i <= ordered.Length - 1; i++)
@@ -234,7 +240,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="input"></param>
 		/// <remarks>Input array is modified and sorted after call to this method.</remarks>
-		public static int[] sortAscending(float[] input)
+		public static int[] SortAscending(float[] input)
 		{
 			int[] ordered = new int[input.Length];
 			for (int i = 0; i <= ordered.Length - 1; i++)
@@ -250,7 +256,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="input"></param>
 		/// <remarks>Input array is modified and sorted after call to this method.</remarks>
-		public static int[] sortAscending(double[] input)
+		public static int[] SortAscending(double[] input)
 		{
 			int[] ordered = new int[input.Length];
 			for (int i = 0; i <= ordered.Length - 1; i++)
@@ -266,7 +272,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="input"></param>
 		/// <remarks>Input array is modified and sorted after call to this method.</remarks>
-		public static int[] sortAscending(System.DateTime[] input)
+		public static int[] SortAscending(DateTime[] input)
 		{
 			int[] ordered = new int[input.Length];
 			for (int i = 0; i <= ordered.Length - 1; i++)
@@ -282,9 +288,9 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="input"></param>
 		/// <remarks>Input array is modified and sorted after call to this method.</remarks>
-		public static int[] sortDescending(int[] input)
+		public static int[] SortDescending(int[] input)
 		{
-			int[] ordered = sortAscending(input);
+			int[] ordered = SortAscending(input);
 			System.Array.Reverse(ordered);
 			System.Array.Reverse(input);
 			return ordered;
@@ -295,9 +301,9 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="input"></param>
 		/// <remarks>Input array is modified and sorted after call to this method.</remarks>
-		public static int[] sortDescending(float[] input)
+		public static int[] SortDescending(float[] input)
 		{
-			int[] ordered = sortAscending(input);
+			int[] ordered = SortAscending(input);
 			System.Array.Reverse(ordered);
 			System.Array.Reverse(input);
 			return ordered;
@@ -308,9 +314,9 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="input"></param>
 		/// <remarks>Input array is modified and sorted after call to this method.</remarks>
-		public static int[] sortDescending(double[] input)
+		public static int[] SortDescending(double[] input)
 		{
-			int[] ordered = sortAscending(input);
+			int[] ordered = SortAscending(input);
 			System.Array.Reverse(ordered);
 			System.Array.Reverse(input);
 			return ordered;
@@ -321,9 +327,9 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="input"></param>
 		/// <remarks>Input array is modified and sorted after call to this method.</remarks>
-		public static int[] sortDescending(System.DateTime[] input)
+		public static int[] SortDescending(DateTime[] input)
 		{
-			int[] ordered = sortAscending(input);
+			int[] ordered = SortAscending(input);
 			System.Array.Reverse(ordered);
 			System.Array.Reverse(input);
 			return ordered;
@@ -414,10 +420,3 @@ namespace Nzy3d.Maths
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================
