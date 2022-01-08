@@ -278,7 +278,7 @@ namespace Nzy3d.Plot3D.Primitives
 
 		public override string ToString(int depth)
 		{
-			return Utils.blanks(depth) + "(Polygon) #points=" + this.Size;
+			return Utils.Blanks(depth) + "(Polygon) #points=" + this.Size;
 		}
 	}
 }

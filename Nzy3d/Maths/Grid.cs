@@ -30,20 +30,20 @@ namespace Nzy3d.Maths
 
 		public void SetData(int[] x, int[] y, int[,] z)
 		{
-			this.SetData(toDoubleArray(x), toDoubleArray(y), toDoubleArray(z));
+			this.SetData(ToDoubleArray(x), ToDoubleArray(y), ToDoubleArray(z));
 		}
 
-		public double[] x
+		public double[] X
 		{
 			get { return m_x; }
 		}
 
-		public double[] y
+		public double[] Y
 		{
 			get { return m_y; }
 		}
 
-		public double[,] z
+		public double[,] Z
 		{
 			get { return m_z; }
 		}
@@ -52,12 +52,14 @@ namespace Nzy3d.Maths
 		/// Computed and returns the bound of datas in the grid (x,y,z)
 		/// </summary>
 		/// <remarks>BoundingBox is recomputed each time the function is called, in contrary to nzy3D where it is kept in a dangerous cache.</remarks>
-		public BoundingBox3d getBounds()
+		public BoundingBox3d GetBounds()
 		{
-			return new BoundingBox3d(Statistics.Min(x), Statistics.Max(x), Statistics.Min(y), Statistics.Max(y), Statistics.Min(z), Statistics.Max(z));
+			return new BoundingBox3d(Statistics.Min(X), Statistics.Max(X),
+									 Statistics.Min(Y), Statistics.Max(Y),
+									 Statistics.Min(Z), Statistics.Max(Z));
 		}
 
-		internal double[] toDoubleArray(int[] input)
+		internal double[] ToDoubleArray(int[] input)
 		{
 			double[] @out = new double[input.Length];
 			for (int i = 0; i <= input.Length - 1; i++)
@@ -67,7 +69,7 @@ namespace Nzy3d.Maths
 			return @out;
 		}
 
-		internal double[,] toDoubleArray(int[,] input)
+		internal double[,] ToDoubleArray(int[,] input)
 		{
 			double[,] @out = new double[input.GetLength(0), input.GetLength(1)];
 			for (int i = 0; i <= input.GetLength(0) - 1; i++)
@@ -81,10 +83,3 @@ namespace Nzy3d.Maths
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

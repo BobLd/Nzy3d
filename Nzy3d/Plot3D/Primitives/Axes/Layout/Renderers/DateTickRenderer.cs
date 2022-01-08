@@ -19,8 +19,8 @@ namespace Nzy3d.Plot3D.Primitives.Axes.Layout.Renderers
 
 		public string Format(float value)
 		{
-			DateTime ldate = Utils.num2date(Convert.ToInt64(value));
-			return Utils.dat2str(ldate, _format);
+			DateTime ldate = Utils.Num2date(Convert.ToInt64(value));
+			return Utils.Dat2str(ldate, _format);
 		}
 	}
 }

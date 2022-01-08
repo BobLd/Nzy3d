@@ -2,7 +2,8 @@ namespace Nzy3d.Maths
 {
 	public class Range : Scale
 	{
-		public Range(double min, double max) : base(min, max)
+		public Range(double min, double max)
+			: base(min, max)
 		{
 		}
 

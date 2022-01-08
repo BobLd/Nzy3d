@@ -19,8 +19,8 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 			{
 				return;
 			}
-			_prevMouse.x = e.X;
-			_prevMouse.y = e.Y;
+			_prevMouse.X = e.X;
+			_prevMouse.Y = e.Y;
 		}
 
 		/// <summary>
@@ -33,8 +33,8 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 			{
 				return;
 			}
-			_prevMouse.x = e.X;
-			_prevMouse.y = e.Y;
+			_prevMouse.X = e.X;
+			_prevMouse.Y = e.Y;
 		}
 
 		public void MouseReleased(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -55,9 +55,9 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 				if (e.Button == MouseButtons.Right)
 				{
 					Coord2d move = mouse.substract(_prevMouse);
-					if (move.y != 0)
+					if (move.Y != 0)
 					{
-						Shift((float)(move.y / 250));
+						Shift((float)(move.Y / 250));
 					}
 				}
 				_prevMouse = mouse;

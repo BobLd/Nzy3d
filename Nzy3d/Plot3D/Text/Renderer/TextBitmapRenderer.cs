@@ -67,7 +67,7 @@ namespace Nzy3d.Plot3D.Text.Renderers
                 default:
                     throw new Exception("Unsupported valign value");
             }
-            Coord3d posScreenShifted = new Coord3d(x + screenOffset.x, y + screenOffset.y, posScreen.Z);
+            Coord3d posScreenShifted = new Coord3d(x + screenOffset.X, y + screenOffset.Y, posScreen.Z);
 
 			Coord3d posReal;
 			try

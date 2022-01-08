@@ -16,63 +16,63 @@ namespace Nzy3d.Maths
 		/// </param>
 		/// <param name="num">Number to convert to string</param>
 		/// <param name="precision">Number of digits (meaning depends on <paramref name="parseMode"/> value)</param>
-		public static string num2str(char parseMode, double num, int precision)
+		public static string Num2str(char parseMode, double num, int precision)
 		{
 			return string.Format("{0:" + parseMode + precision + "}", num);
 		}
 
 		/// <summary>
-		/// Same as other <see cref="Utils.num2str"/> but without precision.
+		/// Same as other <see cref="Utils.Num2str"/> but without precision.
 		/// </summary>
 		/// <param name="parseMode"></param>
 		/// <param name="num"></param>
-		public static string num2str(char parseMode, double num)
+		public static string Num2str(char parseMode, double num)
 		{
 			return string.Format("{0:" + parseMode + "}", num);
 		}
 
 		/// <summary>
-		/// Same as other <see cref="Utils.num2str"/> but without parseMode (g by default).
+		/// Same as other <see cref="Utils.Num2str"/> but without parseMode (g by default).
 		/// </summary>
 		/// <param name="num"></param>
 		/// <param name="precision"></param>
-		public static string num2str(double num, int precision)
+		public static string Num2str(double num, int precision)
 		{
-			return num2str('g', num, precision);
+			return Num2str('g', num, precision);
 		}
 
 		/// <summary>
-		/// Same as other <see cref="Utils.num2str"/> but without parseMode (g by default) nor precision.
+		/// Same as other <see cref="Utils.Num2str"/> but without parseMode (g by default) nor precision.
 		/// </summary>
 		/// <param name="num"></param>
 		public static string num2str(double num)
 		{
-			return num2str(Convert.ToChar("g"), num);
+			return Num2str(Convert.ToChar("g"), num);
 		}
 
-		public static string dat2str(DateTime m_date, string format)
+		public static string Dat2str(DateTime m_date, string format)
 		{
 			return m_date.ToString(format);
 		}
 
-		public static string dat2str(DateTime m_date)
+		public static string Dat2str(DateTime m_date)
 		{
-			return dat2str(m_date, "dd/MM/yyyy HH:mm:ss");
+			return Dat2str(m_date, "dd/MM/yyyy HH:mm:ss");
 		}
 
-		public static long dat2num(DateTime m_date)
+		public static long Dat2num(DateTime m_date)
 		{
 			return m_date.Ticks;
 		}
 
-		public static DateTime num2date(long m_ticks)
+		public static DateTime Num2date(long m_ticks)
 		{
 			return new DateTime(m_ticks);
 		}
 
-		public static string blanks(int length)
+		public static string Blanks(int length)
 		{
-			string b = "";
+			string b = string.Empty;
 			for (int i = 0; i <= length - 1; i++)
 			{
 				b += " ";
@@ -84,7 +84,7 @@ namespace Nzy3d.Maths
 		/// Return the absolute values of an array of doubles
 		/// </summary>
 		/// <remarks>Current array is not modified</remarks>
-		public static double[] abs(double[] values)
+		public static double[] Abs(double[] values)
 		{
 			double[] output = new double[values.Length];
 			for (int i = 0; i <= values.Length - 1; i++)
@@ -97,12 +97,13 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Computes the sum of an array of doubles. NaN values are ignored during the computation
 		/// </summary>
-		public static double sum(double[] values)
+		public static double Sum(double[] values)
 		{
 			if (values.Length == 0)
 			{
-				throw new ArgumentException("Input array must have a length greater than 0", "values");
+				throw new ArgumentException("Input array must have a length greater than 0", nameof(values));
 			}
+
 			double total = 0;
 			for (int i = 0; i <= values.Length - 1; i++)
 			{
@@ -117,12 +118,13 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Computes the sum of an array of integers.
 		/// </summary>
-		public static int sum(int[] values)
+		public static int Sum(int[] values)
 		{
 			if (values.Length == 0)
 			{
-				throw new ArgumentException("Input array must have a length greater than 0", "values");
+				throw new ArgumentException("Input array must have a length greater than 0", nameof(values));
 			}
+
 			int total = 0;
 			for (int i = 0; i <= values.Length - 1; i++)
 			{
@@ -139,12 +141,13 @@ namespace Nzy3d.Maths
 		/// <param name="max">Max value</param>
 		/// <param name="nstep">Number of steps (including min and max values)</param>
 		/// <remarks>Algorithm ensure first and last values of array are equal to min and max value without any rounding error.</remarks>
-		public static double[] vector(double min, double max, int nstep)
+		public static double[] Vector(double min, double max, int nstep)
 		{
 			if (nstep <= 1)
 			{
-				throw new ArgumentException("Number of step must be at least 2", "nstep");
+				throw new ArgumentException("Number of step must be at least 2", nameof(nstep));
 			}
+
 			double dstep = (max - min) / (nstep - 1);
 			double[] grid = new double[nstep];
 			for (int i = 0; i <= nstep - 2; i++)
@@ -162,9 +165,9 @@ namespace Nzy3d.Maths
 		/// <param name="min">Min value</param>
 		/// <param name="max">Max value</param>
 		/// <remarks>Algorithm ensure first and last values of array are equal to min and max value without any rounding error.</remarks>
-		public static double[] vector(double min, double max)
+		public static double[] Vector(double min, double max)
 		{
-			return vector(min, max, Convert.ToInt32(Math.Abs(max - min) + 1));
+			return Vector(min, max, Convert.ToInt32(Math.Abs(max - min) + 1));
 		}
 
 		/// <summary>
@@ -175,12 +178,13 @@ namespace Nzy3d.Maths
 		/// <param name="max">Max value</param>
 		/// <param name="nstep">Number of steps (including min and max values)</param>
 		/// <remarks>Algorithm ensure first and last values of array are equal to min and max value without any rounding error.</remarks>
-		public static int[] vector(int min, int max, int nstep)
+		public static int[] Vector(int min, int max, int nstep)
 		{
 			if (nstep <= 1)
 			{
-				throw new ArgumentException("Number of step must be at least 2", "nstep");
+				throw new ArgumentException("Number of step must be at least 2", nameof(nstep));
 			}
+
 			int dstep = (max - min) / (nstep - 1);
 			int[] grid = new int[nstep];
 			for (int i = 0; i <= nstep - 2; i++)
@@ -198,26 +202,39 @@ namespace Nzy3d.Maths
 		/// <param name="min">Min value</param>
 		/// <param name="max">Max value</param>
 		/// <remarks>Algorithm ensure first and last values of array are equal to min and max value without any rounding error.</remarks>
-		public static int[] vector(int min, int max)
+		public static int[] Vector(int min, int max)
 		{
-			return vector(min, max, Math.Abs(max - min) + 1);
+			return Vector(min, max, Math.Abs(max - min) + 1);
 		}
 
-		public static DateTime min(DateTime[] dates)
+		/// <summary>
+		/// Return the minimal date of an array.
+		/// </summary>
+		/// <param name="dates"></param>
+		/// <exception cref="ArgumentException"></exception>
+		public static DateTime Min(DateTime[] dates)
 		{
-			return DateTime.MinValue;
+			if (dates.Length == 0)
+			{
+				throw new ArgumentException("input array is empty", nameof(dates));
+			}
+
+			return dates.Min();
 		}
 
-		public static DateTime max(DateTime[] dates)
+		/// <summary>
+		/// Return the maximal date of an array.
+		/// </summary>
+		/// <param name="dates"></param>
+		/// <exception cref="ArgumentException"></exception>
+		public static DateTime Max(DateTime[] dates)
 		{
-			return DateTime.MaxValue;
+			if (dates.Length == 0)
+			{
+				throw new ArgumentException("input array is empty", nameof(dates));
+			}
+
+			return dates.Max();
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

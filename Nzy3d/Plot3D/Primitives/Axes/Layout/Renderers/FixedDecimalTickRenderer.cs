@@ -19,7 +19,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes.Layout.Renderers
 
 		public string Format(float value)
 		{
-			return Utils.num2str('f', value, _precision);
+			return Utils.Num2str('f', value, _precision);
 		}
 	}
 }

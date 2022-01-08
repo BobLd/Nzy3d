@@ -12,32 +12,32 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 		{
 			if (coords == null)
 			{
-				throw new ArgumentException("Function call with illegal value 'Nothing' for parameter coords.", nameof(coords));
+				throw new ArgumentNullException(nameof(coords), "Function call with illegal value 'null' for parameter coords.");
 			}
 
 			if (coords.X == null)
 			{
-				throw new ArgumentException("Illegal result value 'Nothing' on x property of parameter coords.", nameof(coords));
+				throw new ArgumentNullException(nameof(coords), "Illegal result value 'null' on x property of parameter coords.");
 			}
 
 			if (coords.Y == null)
 			{
-				throw new ArgumentException("Illegal result value 'Nothing' on y property of parameter coords.", nameof(coords));
+				throw new ArgumentNullException(nameof(coords), "Illegal result value 'null' on y property of parameter coords.");
 			}
 
 			if (coords.Z == null)
 			{
-				throw new ArgumentException("Illegal result value 'Nothing' on z property of parameter coords.", nameof(coords));
+				throw new ArgumentNullException(nameof(coords), "Illegal result value 'null' on z property of parameter coords.");
 			}
 
 			if (coords.X.Length != coords.Y.Length)
 			{
-				throw new ArgumentException("Parameter coords has different x size (" + coords.X.Length + ") than y size (" + coords.Y.Length + ")", nameof(coords));
+				throw new ArgumentNullException(nameof(coords), $"Parameter coords has different x size ({coords.X.Length}) than y size ({coords.Y.Length})");
 			}
 
 			if (coords.X.Length != coords.Z.Length)
 			{
-				throw new ArgumentException("Parameter coords has different x size (" + coords.X.Length + ") than z size (" + coords.Z.Length + ")", nameof(coords));
+				throw new ArgumentNullException(nameof(coords), $"Parameter coords has different x size ({coords.X.Length}) than z size ({coords.Z.Length})");
 			}
 
 			_x = coords.X;

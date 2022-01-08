@@ -1,9 +1,4 @@
 ﻿using Nzy3d.Plot3D.Builder;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Nzy3d.WinformsDemo
 {

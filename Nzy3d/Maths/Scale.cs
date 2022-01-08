@@ -33,7 +33,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public bool Contains(double value)
 		{
-			return Min <= value & value <= Max;
+			return Min <= value && value <= Max;
 		}
 
 		public bool IsMaxNan()
@@ -76,7 +76,7 @@ namespace Nzy3d.Maths
 
 		public override string ToString()
 		{
-			return "min=" + Min + " max=" + Max;
+			return $"min={Min} max={Max}";
 		}
 	}
 }

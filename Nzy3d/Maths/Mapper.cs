@@ -1,13 +1,18 @@
 namespace Nzy3d.Maths
 {
 	/// <summary>
+	/// <para>
 	/// A Mapper provides an abstract definition of a function that allows
 	/// getting a Z value according to a pair of (X,Y) coordinates.
+	/// </para>
+	/// <para>
 	/// It moreover provide the service of gathering input and computed output
 	/// into a  <see cref="Coordinates"/> object, that provides arrays of
 	/// X,Y, and Z coordinates as float values.
-	/// <see cref="Mapper"/> is deprecated. One should use <see cref="Mapper"/> instead
+	/// <see cref="Mapper"/> is deprecated. One should use <see cref="Plot3D.Builder.Mapper"/> instead.
+	/// </para>
 	/// </summary>
+	[Obsolete("Use Plot3D.Builder.Mapper instead.")]
 	public abstract class Mapper
 	{
 		/// <summary>
@@ -36,11 +41,13 @@ namespace Nzy3d.Maths
 			{
 				throw new ArgumentException("Input array must have a length of 2 in second dimension", "xy");
 			}
+
 			double[] zd = getZ(xy);
 			int nbCoordinates = xy.GetLength(0);
 			float[] x = new float[nbCoordinates];
 			float[] y = new float[nbCoordinates];
 			float[] z = new float[nbCoordinates];
+
 			for (int m = 0; m <= nbCoordinates - 1; m++)
 			{
 				x[m] = (float)xy[m, 0];
@@ -60,7 +67,9 @@ namespace Nzy3d.Maths
 			{
 				throw new ArgumentException("Input array must have a length of 2 in second dimension", "xy");
 			}
+
 			double[,] xyDouble = new double[xy.GetLength(0), xy.GetLength(1)];
+
 			for (int p = 0; p <= xy.GetLength(0) - 1; p++)
 			{
 				for (int d = 0; d <= xy.GetLength(1) - 1; d++)
@@ -81,6 +90,7 @@ namespace Nzy3d.Maths
 			{
 				throw new ArgumentException("Input array must have a length of 2", "xy");
 			}
+
 			int nbCoordinates = xy.GetLength(0);
 			float[] x = new float[1];
 			float[] y = new float[1];
@@ -101,6 +111,7 @@ namespace Nzy3d.Maths
 			{
 				throw new ArgumentException("Input array must have a length of 2", "xy");
 			}
+
 			double[] xyd = new double[2];
 			xyd[0] = xy[0];
 			xyd[1] = xy[1];
@@ -108,10 +119,3 @@ namespace Nzy3d.Maths
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

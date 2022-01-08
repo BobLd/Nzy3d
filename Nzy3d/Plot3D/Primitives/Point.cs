@@ -141,7 +141,7 @@ namespace Nzy3d.Plot3D.Primitives
 
 		public string ToString(int depth)
 		{
-			return Utils.blanks(depth) + "(Point) coord={" + _xyz.ToString() + "}, color={" + _rgb.ToString() + "}";
+			return Utils.Blanks(depth) + "(Point) coord={" + _xyz.ToString() + "}, color={" + _rgb.ToString() + "}";
 		}
 	}
 }

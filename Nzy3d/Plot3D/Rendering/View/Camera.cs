@@ -267,8 +267,8 @@ namespace Nzy3d.Plot3D.Rendering.View
 		public Grid ModelToScreen(Grid grid)
 		{
 			//List<Coord3d> screenCoords = new List<Coord3d>();
-			int xlen = grid.x.Length;
-			int ylen = grid.y.Length;
+			int xlen = grid.X.Length;
+			int ylen = grid.Y.Length;
 			double[] x = new double[xlen];
 			double[] y = new double[ylen];
 			double[,] z = new double[xlen, ylen];
@@ -280,7 +280,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			{
 				for (int j = 0; j <= ylen - 1; j++)
 				{
-					if (!Glut.Glut.Project(new Vector4d(grid.x[i], grid.y[j], grid.z[i, j], 0), modelMatrix, projectionMatrix, viewport, ref screenCoord))
+					if (!Glut.Glut.Project(new Vector4d(grid.X[i], grid.Y[j], grid.Z[i, j], 0), modelMatrix, projectionMatrix, viewport, ref screenCoord))
 					{
 						FailedProjection("Could not retrieve model coordinates in screen for point #" + i + ".");
 					}

@@ -18,9 +18,8 @@ namespace Nzy3d.Maths
 		#region "Constants"
 		public readonly static Coord3d ORIGIN = new Coord3d(0, 0, 0);
 		public readonly static Coord3d INVALID = new Coord3d(double.NaN, double.NaN, double.NaN);
-		#endregion
-
 		public readonly static Coord3d IDENTITY = new Coord3d(1, 1, 1);
+		#endregion
 
 		#region "Constructors"
 		public Coord3d() : this(0, 0, 0)
@@ -34,11 +33,13 @@ namespace Nzy3d.Maths
 			this.Z = zi;
 		}
 
-		public Coord3d(Coord3d c, double zi) : this(c.X, c.Y, zi)
+		public Coord3d(Coord3d c, double zi)
+			: this(c.X, c.Y, zi)
 		{
 		}
 
-		public Coord3d(double[] values) : this(values[0], values[1], values[2])
+		public Coord3d(double[] values)
+			: this(values[0], values[1], values[2])
 		{
 			if (values.Length != 3)
 			{
@@ -480,6 +481,7 @@ namespace Nzy3d.Maths
 			return new Coord3d(X + (coord.X - X) * f, Y + (coord.Y - Y) * f, Z + (coord.Z - Z) * f);
 		}
 
+		/// <inheritdoc/>
 		public override string ToString()
 		{
 			return "x=" + X + " y=" + Y + " z=" + Z;
@@ -523,6 +525,7 @@ namespace Nzy3d.Maths
 			}
 		}
 
+		/// <inheritdoc/>
 		public static bool operator !=(Coord3d coord1, Coord3d coord2)
 		{
 			if (coord1 == null && coord2 == null)

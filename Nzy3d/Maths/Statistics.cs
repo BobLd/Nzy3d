@@ -1,12 +1,12 @@
 namespace Nzy3d.Maths
 {
-	public class Statistics
+	public static class Statistics
 	{
 		public static double Sum(double[] values)
 		{
 			if (values.Length == 0)
 			{
-				throw new ArgumentException("Input array must have a length greater than 0", "values");
+				throw new ArgumentException("Input array must have a length greater than 0", nameof(values));
 			}
 
 			double vsum = 0;
@@ -24,7 +24,7 @@ namespace Nzy3d.Maths
 		{
 			if (values.Length == 0)
 			{
-				throw new ArgumentException("Input array must have a length greater than 0", "values");
+				throw new ArgumentException("Input array must have a length greater than 0", nameof(values));
 			}
 
 			float vsum = 0;
@@ -52,8 +52,9 @@ namespace Nzy3d.Maths
 		{
 			if (values.Length == 0)
 			{
-				throw new ArgumentException("Input array must have a length greater than 0", "values");
+				throw new ArgumentException("Input array must have a length greater than 0", nameof(values));
 			}
+
 			double vmin = double.PositiveInfinity;
 			for (int i = 0; i <= values.Length - 1; i++)
 			{
@@ -72,19 +73,17 @@ namespace Nzy3d.Maths
 		{
 			if (values.Length == 0)
 			{
-				throw new ArgumentException("Input array must have a length greater than 0", "values");
+				throw new ArgumentException("Input array must have a length greater than 0", nameof(values));
 			}
+
 			double vmin = double.PositiveInfinity;
 			for (int i = 0; i <= values.GetLength(0) - 1; i++)
 			{
 				for (int j = 0; j <= values.GetLength(1) - 1; j++)
 				{
-					if (!double.IsNaN(values[i, j]))
+					if (!double.IsNaN(values[i, j]) && values[i, j] < vmin)
 					{
-						if (values[i, j] < vmin)
-						{
-							vmin = values[i, j];
-						}
+						vmin = values[i, j];
 					}
 				}
 			}
@@ -95,8 +94,9 @@ namespace Nzy3d.Maths
 		{
 			if (values.Length == 0)
 			{
-				throw new ArgumentException("Input array must have a length greater than 0", "values");
+				throw new ArgumentException("Input array must have a length greater than 0", nameof(values));
 			}
+
 			float vmin = float.PositiveInfinity;
 			for (int i = 0; i <= values.Length - 1; i++)
 			{
@@ -112,8 +112,9 @@ namespace Nzy3d.Maths
 		{
 			if (values.Length == 0)
 			{
-				throw new ArgumentException("Input array must have a length greater than 0", "values");
+				throw new ArgumentException("Input array must have a length greater than 0", nameof(values));
 			}
+
 			float vmin = float.PositiveInfinity;
 			for (int i = 0; i <= values.GetLength(0) - 1; i++)
 			{
@@ -132,8 +133,9 @@ namespace Nzy3d.Maths
 		{
 			if (values.Length == 0)
 			{
-				throw new ArgumentException("Input array must have a length greater than 0", "values");
+				throw new ArgumentException("Input array must have a length greater than 0", nameof(values));
 			}
+
 			int vmin = int.MaxValue;
 			for (int i = 0; i <= values.GetLength(0) - 1; i++)
 			{
@@ -155,8 +157,9 @@ namespace Nzy3d.Maths
 		{
 			if (values.Length == 0)
 			{
-				throw new ArgumentException("Input array must have a length greater than 0", "values");
+				throw new ArgumentException("Input array must have a length greater than 0", nameof(values));
 			}
+
 			double vmin = double.PositiveInfinity;
 			int index = -1;
 			for (int i = 0; i <= values.Length - 1; i++)
@@ -177,8 +180,9 @@ namespace Nzy3d.Maths
 		{
 			if (values.Length == 0)
 			{
-				throw new ArgumentException("Input array must have a length greater than 0", "values");
+				throw new ArgumentException("Input array must have a length greater than 0", nameof(values));
 			}
+
 			float vmin = float.PositiveInfinity;
 			int index = -1;
 			for (int i = 0; i <= values.Length - 1; i++)
@@ -199,8 +203,9 @@ namespace Nzy3d.Maths
 		{
 			if (values.Length == 0)
 			{
-				throw new ArgumentException("Input array must have a length greater than 0", "values");
+				throw new ArgumentException("Input array must have a length greater than 0", nameof(values));
 			}
+
 			int vmin = int.MaxValue;
 			int index = -1;
 			for (int i = 0; i <= values.Length - 1; i++)
@@ -218,8 +223,9 @@ namespace Nzy3d.Maths
 		{
 			if (values.Length == 0)
 			{
-				throw new ArgumentException("Input array must have a length greater than 0", "values");
+				throw new ArgumentException("Input array must have a length greater than 0", nameof(values));
 			}
+
 			double vmin = double.NegativeInfinity;
 			for (int i = 0; i <= values.Length - 1; i++)
 			{
@@ -235,8 +241,9 @@ namespace Nzy3d.Maths
 		{
 			if (values.Length == 0)
 			{
-				throw new ArgumentException("Input array must have a length greater than 0", "values");
+				throw new ArgumentException("Input array must have a length greater than 0", nameof(values));
 			}
+
 			double vmax = double.PositiveInfinity;
 			for (int i = 0; i <= values.GetLength(0) - 1; i++)
 			{
@@ -255,8 +262,9 @@ namespace Nzy3d.Maths
 		{
 			if (values.Length == 0)
 			{
-				throw new ArgumentException("Input array must have a length greater than 0", "values");
+				throw new ArgumentException("Input array must have a length greater than 0", nameof(values));
 			}
+
 			float vmax = float.NegativeInfinity;
 			for (int i = 0; i <= values.Length - 1; i++)
 			{
@@ -272,8 +280,9 @@ namespace Nzy3d.Maths
 		{
 			if (values.Length == 0)
 			{
-				throw new ArgumentException("Input array must have a length greater than 0", "values");
+				throw new ArgumentException("Input array must have a length greater than 0", nameof(values));
 			}
+
 			float vmax = float.PositiveInfinity;
 			for (int i = 0; i <= values.GetLength(0) - 1; i++)
 			{
@@ -292,8 +301,9 @@ namespace Nzy3d.Maths
 		{
 			if (values.Length == 0)
 			{
-				throw new ArgumentException("Input array must have a length greater than 0", "values");
+				throw new ArgumentException("Input array must have a length greater than 0", nameof(values));
 			}
+
 			int vmax = int.MaxValue;
 			for (int i = 0; i <= values.GetLength(0) - 1; i++)
 			{
@@ -315,8 +325,9 @@ namespace Nzy3d.Maths
 		{
 			if (values.Length == 0)
 			{
-				throw new ArgumentException("Input array must have a length greater than 0", "values");
+				throw new ArgumentException("Input array must have a length greater than 0", nameof(values));
 			}
+
 			int vmax = int.MinValue;
 			int index = -1;
 			for (int i = 0; i <= values.Length - 1; i++)
@@ -329,7 +340,6 @@ namespace Nzy3d.Maths
 			}
 			return index;
 		}
-
 
 		/// <summary>
 		/// Computes the mad statistic, that is the median of all distances to the median of input
@@ -379,6 +389,7 @@ namespace Nzy3d.Maths
 			{
 				return double.NaN;
 			}
+
 			double mean = Mean(values);
 			double sum = 0;
 			int count = 0;
@@ -390,6 +401,7 @@ namespace Nzy3d.Maths
 					count += 1;
 				}
 			}
+
 			if (count == 0)
 			{
 				return double.NaN;
@@ -428,10 +440,11 @@ namespace Nzy3d.Maths
 
 			for (int i = 0; i <= levels.Length - 1; i++)
 			{
-				if (levels[i] > 100 | levels[i] < 0)
+				if (levels[i] > 100 || levels[i] < 0)
 				{
-					throw new ArgumentException("Input level [" + i + "]=" + levels[i] + "is out of bounds [0;100]", "levels");
+					throw new ArgumentException($"Input level [{i}]={levels[i]} is out of bounds [0;100]", nameof(levels));
 				}
+
 				double quantileIdx = (sorted.Length - 1) * levels[i] / 100;
 				if (quantileIdx == Convert.ToInt32(quantileIdx))
 				{
@@ -442,6 +455,7 @@ namespace Nzy3d.Maths
 				{
 					double quantileIdxCeil = Math.Ceiling(quantileIdx);
 					double quantileIdxFloor = Math.Floor(quantileIdx);
+
 					if (interpolated)
 					{
 						quantiles[i] = sorted[Convert.ToInt32(quantileIdxFloor)] * (quantileIdxCeil - quantileIdx) + sorted[Convert.ToInt32(quantileIdxCeil)] * (quantileIdx - quantileIdxFloor);
@@ -482,7 +496,7 @@ namespace Nzy3d.Maths
 		{
 			if (values.Length == 0)
 			{
-				throw new ArgumentException("Input array must have a length greater than 0", "values");
+				throw new ArgumentException("Input array must have a length greater than 0", nameof(values));
 			}
 			double[] med = { 50 };
 			double[] @out = Quantile(values, med, interpolated);
@@ -490,10 +504,3 @@ namespace Nzy3d.Maths
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

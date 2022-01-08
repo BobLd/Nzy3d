@@ -1,19 +1,20 @@
 namespace Nzy3d.Maths
 {
 	/// <summary>
-	/// Storage for a 2 dimensional vector defined by two points.
+	/// <para>Storage for a 2 dimensional vector defined by two points.</para>
+	/// <para>
 	/// Provide the vector function that returns the vector
 	/// as a Coord3d, as well as dot product and norm.
+	/// </para>
 	/// </summary>
 	public class Vector2d
 	{
 		#region "Members"
-		private double x1;
-		private double x2;
-		private double y1;
+		private readonly double x1;
+		private readonly double x2;
+		private readonly double y1;
+		private readonly double y2;
 		#endregion
-
-		private double y2;
 
 		#region "Constructors"
 		public Vector2d(double x1, double x2, double y1, double y2)
@@ -24,7 +25,8 @@ namespace Nzy3d.Maths
 			this.y2 = y2;
 		}
 
-		public Vector2d(Coord2d p1, Coord2d p2) : this(p1.x, p2.x, p1.y, p2.y)
+		public Vector2d(Coord2d p1, Coord2d p2)
+			: this(p1.X, p2.X, p1.Y, p2.Y)
 		{
 		}
 		#endregion
@@ -33,7 +35,7 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Return the vector (sizes) induced by this set of coordinates
 		/// </summary>
-		public Coord2d vector()
+		public Coord2d Vector()
 		{
 			return new Coord2d(x2 - x1, y2 - y1);
 		}
@@ -41,24 +43,17 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Compute the dot product between the current and given vector
 		/// </summary>
-		public double dot(Vector2d v)
+		public double Dot(Vector2d v)
 		{
-			Coord2d v1 = this.vector();
-			Coord2d v2 = v.vector();
-			return v1.x * v2.x + v1.y * v2.y;
+			Coord2d v1 = this.Vector();
+			Coord2d v2 = v.Vector();
+			return v1.X * v2.X + v1.Y * v2.Y;
 		}
 
-		public double norm()
+		public double Norm()
 		{
 			return Math.Sqrt(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2));
 		}
 		#endregion
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

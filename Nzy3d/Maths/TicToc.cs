@@ -3,39 +3,32 @@ namespace Nzy3d.Maths
 	public class TicToc
 	{
 		internal DateTime tstart;
-
 		internal DateTime tstop;
-		public void tic()
+
+		public void Tic()
 		{
 			tstart = DateTime.Now;
 		}
 
-		public double toc()
+		public double Toc()
 		{
 			tstop = DateTime.Now;
-			return elapsedSecond;
+			return ElapsedSecond;
 		}
 
-		public TimeSpan elapsedTimeSpan
+		public TimeSpan ElapsedTimeSpan
 		{
 			get { return tstop - tstart; }
 		}
 
-		public double elapsedMillisecond
+		public double ElapsedMillisecond
 		{
-			get { return this.elapsedTimeSpan.TotalMilliseconds; }
+			get { return this.ElapsedTimeSpan.TotalMilliseconds; }
 		}
 
-		public double elapsedSecond
+		public double ElapsedSecond
 		{
-			get { return this.elapsedTimeSpan.TotalSeconds; }
+			get { return this.ElapsedTimeSpan.TotalSeconds; }
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

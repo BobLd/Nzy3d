@@ -110,8 +110,8 @@ namespace Nzy3d.Plot3D.Rendering.View
 		public void Rotate(Coord2d move, bool updateView)
 		{
 			Coord3d eye = this.ViewPoint;
-			eye.X -= move.x;
-			eye.Y += move.y;
+			eye.X -= move.X;
+			eye.Y += move.Y;
 			SetViewPoint(eye, updateView);
 			//fireControllerEvent(ControllerType.ROTATE, eye);
 		}
@@ -861,11 +861,11 @@ namespace Nzy3d.Plot3D.Rendering.View
 				if (_viewpoint.Y > 0)
 				{
 					// on top
-					up = new Coord3d(-direction.x, -direction.y, 0);
+					up = new Coord3d(-direction.X, -direction.Y, 0);
 				}
 				else
 				{
-					up = new Coord3d(direction.x, direction.y, 0);
+					up = new Coord3d(direction.X, direction.Y, 0);
 				}
 
 				// handle "on-top" events

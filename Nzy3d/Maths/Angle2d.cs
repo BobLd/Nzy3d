@@ -26,7 +26,7 @@ namespace Nzy3d.Maths
 			this.Y3 = y3;
 		}
 
-		public Angle2d(Coord2d p1, Coord2d p2, Coord2d p3) : this(p1.x, p2.x, p3.x, p1.y, p2.y, p3.y)
+		public Angle2d(Coord2d p1, Coord2d p2, Coord2d p3) : this(p1.X, p2.X, p3.X, p1.Y, p2.Y, p3.Y)
 		{
 		}
 		#endregion
@@ -57,7 +57,7 @@ namespace Nzy3d.Maths
 		{
 			var v1 = new Vector2d(X1, Y1, X2, Y2);
 			var v3 = new Vector2d(X3, Y3, X2, Y2);
-			return v1.dot(v3) / (v1.norm() * v3.norm());
+			return v1.Dot(v3) / (v1.Norm() * v3.Norm());
 		}
 
 		/// <summary>
@@ -67,7 +67,7 @@ namespace Nzy3d.Maths
 		{
 			var v1 = new Vector2d(X1, Y1, X2, Y2);
 			var v3 = new Vector2d(X3, Y3, X2, Y2);
-			return Math.Acos(v1.dot(v3));
+			return Math.Acos(v1.Dot(v3));
 		}
 		#endregion
 	}

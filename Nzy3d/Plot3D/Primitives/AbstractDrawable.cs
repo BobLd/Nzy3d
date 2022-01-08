@@ -184,7 +184,7 @@ namespace Nzy3d.Plot3D.Primitives
 
 		public virtual string ToString(int depth)
 		{
-			return Utils.blanks(depth) + "(" + this.GetType().Name + ")";
+			return Utils.Blanks(depth) + "(" + this.GetType().Name + ")";
 		}
 	}
 }

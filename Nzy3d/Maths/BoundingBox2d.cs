@@ -79,7 +79,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public void @add(Coord2d p)
 		{
-			this.@add(p.x, p.y);
+			this.@add(p.X, p.Y);
 		}
 
 		/// <summary>
@@ -117,10 +117,10 @@ namespace Nzy3d.Maths
 		public BoundingBox2d scale(Coord2d factors)
 		{
 			var b = new BoundingBox2d();
-			b.m_xmax = m_xmax * factors.x;
-			b.m_xmin = m_xmin * factors.x;
-			b.m_ymax = m_ymax * factors.y;
-			b.m_ymin = m_ymin * factors.y;
+			b.m_xmax = m_xmax * factors.X;
+			b.m_xmin = m_xmin * factors.X;
+			b.m_ymax = m_ymax * factors.Y;
+			b.m_ymin = m_ymin * factors.Y;
 			return b;
 		}
 
@@ -138,7 +138,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public bool contains(Coord2d aPoint)
 		{
-			return m_xmin <= aPoint.x & aPoint.x <= m_xmax & m_ymin <= aPoint.y & aPoint.y <= m_ymax;
+			return m_xmin <= aPoint.X & aPoint.X <= m_xmax & m_ymin <= aPoint.Y & aPoint.Y <= m_ymax;
 		}
 
 		/// <summary>

@@ -306,7 +306,7 @@ namespace Nzy3d.Plot3D.Primitives
 
 		public override string ToString(int depth)
 		{
-			string output = Utils.blanks(depth) + "(Composite3d) #elements:" + _components.Count + " | isDisplayed=" + this.Displayed;
+			string output = Utils.Blanks(depth) + "(Composite3d) #elements:" + _components.Count + " | isDisplayed=" + this.Displayed;
 			if (_detailedToString)
 			{
 				int k = 0;
@@ -320,11 +320,11 @@ namespace Nzy3d.Plot3D.Primitives
 						}
 						else if (c != null)
 						{
-							output += "\r\n" + Utils.blanks(depth + 1) + "Composite element[" + k + "]:" + c.ToString();
+							output += "\r\n" + Utils.Blanks(depth + 1) + "Composite element[" + k + "]:" + c.ToString();
 						}
 						else
 						{
-							output += "\r\n" + Utils.blanks(depth + 1) + "(null)";
+							output += "\r\n" + Utils.Blanks(depth + 1) + "(null)";
 						}
 						k++;
 					}
