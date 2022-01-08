@@ -30,6 +30,38 @@ namespace Nzy3d.WinformsDemo
             return surface;
         }
 
+        public static GroupedLineScatter GetGroupedLineScatter()
+        {
+            return GetGroupedLineScatter(10, 50);
+        }
+
+        public static GroupedLineScatter GetGroupedLineScatter(int size, int size2)
+        {
+            var points = new List<Coord3d[]>(size);
+            var colors = new Color[size];
+
+            float x = 0;
+            float y = 0;
+            float z = 0;
+            const float a = 0.50f;
+
+            var r = new Random(0);
+            for (int i = 0; i < size; i++)
+            {
+                var points2 = new Coord3d[size2];
+                for (int j = 0; j < size2; j++)
+                {
+                    x = r.NextSingle() - 0.5f;
+                    y = r.NextSingle() - 0.5f;
+                    z = r.NextSingle() - 0.5f;
+                    points2[j] = new Coord3d(x, y, z);
+                }
+                points.Add(points2);
+                colors[i] = new Color(x, y, z, a);
+            }
+            return new GroupedLineScatter(points, colors);
+        }
+
         public static Scatter GetScatterGraph()
         {
             return GetScatterGraph(500_000);

@@ -25,7 +25,7 @@ namespace Nzy3d.WinformsDemo
             // Create the chart and embed the surface within
             Chart.Chart chart = new Chart.Chart(myRenderer3D, Quality.Nicest);
 
-            chart.Scene.Graph.Add(Graphs.GetScatterGraph());// .GetScatterGraph());
+            chart.Scene.Graph.Add(Graphs.GetGroupedLineScatter());// .GetScatterGraph());
             axeLayout = chart.AxeLayout;
 
             // All activated by default
