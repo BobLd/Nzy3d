@@ -5,10 +5,3 @@ namespace Nzy3d.Events
 		void ScaleChanged(ScaleChangedEventArgs e);
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

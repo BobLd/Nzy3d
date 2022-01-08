@@ -49,7 +49,7 @@ namespace Nzy3d.Chart
 		/// </summary>
 		protected virtual ChartScene InitializeScene(bool graphsort)
 		{
-			return Factories.SceneFactory.getInstance(graphsort);
+			return Factories.SceneFactory.GetInstance(graphsort);
 		}
 
 		public void Clear()

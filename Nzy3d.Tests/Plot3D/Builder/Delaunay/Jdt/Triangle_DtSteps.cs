@@ -31,9 +31,8 @@ Scenario: Point on the boundary of triangle
 	Then The point is on the boundary of the triangle
  */
 
-namespace Nzy3d.Tests
+namespace Nzy3d.Tests.Plot3D.Builder.Delaunay.Jdt
 {
-    //[Binding]
     public class Triangle_DtSteps
     {
         [Fact]

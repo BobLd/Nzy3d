@@ -1,6 +1,6 @@
 namespace Nzy3d.Events.Mouse
 {
-    public interface IBaseMouseWheelListener
+	public interface IBaseMouseWheelListener
 	{
 		/*
 		/// <summary>
@@ -10,10 +10,3 @@ namespace Nzy3d.Events.Mouse
 		*/
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

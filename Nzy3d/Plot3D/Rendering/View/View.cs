@@ -59,8 +59,8 @@ namespace Nzy3d.Plot3D.Rendering.View
 			_viewmode = ViewPositionMode.FREE;
 			_boundmode = ViewBoundMode.AUTO_FIT;
 			_cameraMode = CameraMode.ORTHOGONAL;
-			_axe = (IAxe)AxeFactory.getInstance(sceneBounds, this);
-			_cam = CameraFactory.getInstance(_center);
+			_axe = (IAxe)AxeFactory.GetInstance(sceneBounds, this);
+			_cam = CameraFactory.GetInstance(_center);
 			_scene = scene;
 			_canvas = canvas;
 			_quality = quality;

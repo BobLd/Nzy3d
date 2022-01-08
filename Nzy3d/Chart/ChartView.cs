@@ -13,9 +13,9 @@ namespace Nzy3d.Chart
 	/// </summary>
 	public class ChartView : View
 	{
-		internal System.Drawing.Rectangle _zone1;
+		internal Rectangle _zone1;
 
-		internal System.Drawing.Rectangle _zone2;
+		internal Rectangle _zone2;
 
 		/// <summary>
 		///
@@ -82,17 +82,10 @@ namespace Nzy3d.Chart
 			{
 				layer.StretchToFill = true;
 				layer.SetViewPort(_canvas.RendererWidth, _canvas.RendererHeight, left + slice * k, left + slice * (k + 1));
-                // correction par rapport à l'incrémentation des indices
-                k++;
+				// correction par rapport à l'incrémentation des indices
+				k++;
 				layer.Render();
 			}
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

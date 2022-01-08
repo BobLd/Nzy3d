@@ -492,16 +492,6 @@ namespace Nzy3d.Maths
 			return new double[] { X, Y, Z };
 		}
 
-        /// <inheritdoc/>
-        public override bool Equals(object? obj)
-        {
-            if (obj is Coord3d o)
-            {
-				return this == o;
-            }
-			return false;
-        }
-
 		/// <inheritdoc/>
 		public static bool operator ==(Coord3d coord1, Coord3d coord2)
 		{
@@ -541,5 +531,37 @@ namespace Nzy3d.Maths
 			return !(coord1 == coord2);
 		}
 		#endregion
+
+		/// <inheritdoc/>
+		public override int GetHashCode()
+		{
+			return (X, Y, Z).GetHashCode();
+		}
+
+		/// <inheritdoc/>
+		public override bool Equals(object? obj)
+		{
+			if (obj is not Coord3d other)
+			{
+				return false;
+			}
+
+			if (BitConverter.ToInt64(BitConverter.GetBytes(X)) != BitConverter.ToInt64(BitConverter.GetBytes(other.X)))
+			{
+				return false;
+			}
+
+			if (BitConverter.ToInt64(BitConverter.GetBytes(Y)) != BitConverter.ToInt64(BitConverter.GetBytes(other.Y)))
+			{
+				return false;
+			}
+
+			if (BitConverter.ToInt64(BitConverter.GetBytes(Z)) != BitConverter.ToInt64(BitConverter.GetBytes(other.Z)))
+			{
+				return false;
+			}
+
+			return true;
+		}
 	}
 }

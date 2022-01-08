@@ -141,6 +141,24 @@ namespace Nzy3d.Colors
 			return new Color(1 - R, 1 - G, 1 - B, A);
 		}
 
+		/// <summary>
+		/// Compute the distance between two colors.
+		/// </summary>
+		/// <remarks>See https://en.wikipedia.org/wiki/Color_difference</remarks>
+		public double Distance(Color c)
+		{
+			return Math.Sqrt(DistanceSq(c));
+		}
+
+		/// <summary>
+		/// Compute the square distance between two colors.
+		/// </summary>
+		/// <remarks>See https://en.wikipedia.org/wiki/Color_difference</remarks>
+		public double DistanceSq(Color c)
+		{
+			return Math.Pow(R - c.R, 2) + Math.Pow(G - c.G, 2) + Math.Pow(B - c.B, 2);
+		}
+
 		public static Color Random()
 		{
 			return new Color(randObj.NextDouble(), randObj.NextDouble(), randObj.NextDouble());

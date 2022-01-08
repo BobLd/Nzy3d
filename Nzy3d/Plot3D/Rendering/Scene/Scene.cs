@@ -35,7 +35,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 		public Scene(bool graphsort)
 		{
-			_graph = new Graph(this, Factories.OrderingStrategyFactory.getInstance(), graphsort);
+			_graph = new Graph(this, Factories.OrderingStrategyFactory.GetInstance(), graphsort);
 			_lighSet = new LightSet();
 			_views = new List<View>();
 		}

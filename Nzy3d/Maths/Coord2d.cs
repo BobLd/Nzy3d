@@ -387,12 +387,32 @@ namespace Nzy3d.Maths
 			};
 		}
 		#endregion
+
+		/// <inheritdoc/>
+		public override int GetHashCode()
+		{
+			return (X, Y).GetHashCode();
+		}
+
+		/// <inheritdoc/>
+		public override bool Equals(object? obj)
+		{
+			if (obj is not Coord2d other)
+			{
+				return false;
+			}
+
+			if (BitConverter.ToInt64(BitConverter.GetBytes(X)) != BitConverter.ToInt64(BitConverter.GetBytes(other.X)))
+			{
+				return false;
+			}
+
+			if (BitConverter.ToInt64(BitConverter.GetBytes(Y)) != BitConverter.ToInt64(BitConverter.GetBytes(other.Y)))
+			{
+				return false;
+			}
+
+			return true;
+		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

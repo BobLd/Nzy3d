@@ -1,6 +1,6 @@
 namespace Nzy3d.Factories
 {
-    public class NzyFactories
+	public class NzyFactories
 	{
 		public static OrderingStrategyFactory ordering = new OrderingStrategyFactory();
 		public static AxeFactory axe = new AxeFactory();
@@ -10,10 +10,3 @@ namespace Nzy3d.Factories
 		//Public Shared renderer3d As New Renderer3dFactory
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

@@ -3,9 +3,10 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Nzy3d.Plot3D.Transform
 {
-    public class Transform
+    public sealed class Transform
 	{
-		private List<ITransformer> _sequence;
+		private readonly List<ITransformer> _sequence;
+
 		public Transform()
 		{
 			_sequence = new List<ITransformer>();
@@ -20,13 +21,14 @@ namespace Nzy3d.Plot3D.Transform
 		public Transform(Transform transform)
 		{
 			_sequence = new List<ITransformer>();
-			foreach (ITransformer nextT in transform.Sequence) {
+			foreach (ITransformer nextT in transform.Sequence)
+			{
 				_sequence.Add(nextT);
 			}
 		}
 
-        public IEnumerable<ITransformer> Sequence
-        {
+		public IEnumerable<ITransformer> Sequence
+		{
 			get { return _sequence; }
 		}
 
@@ -37,21 +39,25 @@ namespace Nzy3d.Plot3D.Transform
 
 		public void Add(Transform transform)
 		{
-			foreach (ITransformer nextT in transform.Sequence) {
+			foreach (ITransformer nextT in transform.Sequence)
+			{
 				_sequence.Add(nextT);
 			}
 		}
 
 		public void Execute()
 		{
+			// Do nothing
 		}
 
 		public void Execute(bool loadIdentity)
 		{
-			if (loadIdentity) {
+			if (loadIdentity)
+			{
 				GL.LoadIdentity();
 			}
-			foreach (ITransformer nextT in _sequence) {
+			foreach (ITransformer nextT in _sequence)
+			{
 				nextT.Execute();
 			}
 		}
@@ -59,29 +65,22 @@ namespace Nzy3d.Plot3D.Transform
 		public Coord3d Compute(Coord3d input)
 		{
 			Coord3d output = input.Clone();
-			foreach (ITransformer nextT in _sequence) {
+			foreach (ITransformer nextT in _sequence)
+			{
 				output = nextT.Compute(output);
 			}
 			return output;
 		}
 
-		/// <summary>
-		/// Returns the string representation
-		/// </summary>
+		/// <inheritdoc/>
 		public override string ToString()
 		{
 			string txt = "";
-			foreach (ITransformer nextT in _sequence) {
+			foreach (ITransformer nextT in _sequence)
+			{
 				txt += " * " + nextT.ToString();
 			}
 			return txt;
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

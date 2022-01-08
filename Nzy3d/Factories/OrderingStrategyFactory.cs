@@ -4,7 +4,7 @@ namespace Nzy3d.Factories
 {
 	public class OrderingStrategyFactory
 	{
-		public static AbstractOrderingStrategy getInstance()
+		public static AbstractOrderingStrategy GetInstance()
 		{
 			return DEFAULTORDERING;
 		}
@@ -12,10 +12,3 @@ namespace Nzy3d.Factories
 		public static BarycentreOrderingStrategy DEFAULTORDERING = new BarycentreOrderingStrategy();
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

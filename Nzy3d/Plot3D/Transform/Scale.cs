@@ -3,7 +3,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Nzy3d.Plot3D.Transform
 {
-    public class Scale : ITransformer
+	public sealed class Scale : ITransformer
 	{
 		private readonly Coord3d _scale;
 		public Scale(Coord3d scale)
@@ -27,10 +27,3 @@ namespace Nzy3d.Plot3D.Transform
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

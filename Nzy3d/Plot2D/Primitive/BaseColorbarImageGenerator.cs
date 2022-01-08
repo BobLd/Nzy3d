@@ -15,6 +15,7 @@ namespace Nzy3d.Plot2D.Primitive
 		internal bool _hasBackground;
 		internal Color _backgroundColor;
 		internal Color _foregroundColor = Color.BLACK;
+
 		public static int MIN_BAR_WIDTH = 100;
 
 		public static int MIN_BAR_HEIGHT = 100;
@@ -105,10 +106,3 @@ namespace Nzy3d.Plot2D.Primitive
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

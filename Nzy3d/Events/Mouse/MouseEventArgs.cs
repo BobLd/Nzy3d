@@ -2,7 +2,7 @@ namespace Nzy3d.Events.Mouse
 {
 	public class MouseEventArgs
 	{
-        private MouseButton _button;
+		private MouseButton _button;
 		public MouseEventArgs(double x, double y, MouseButton button)
 		{
 			X = x;
@@ -10,20 +10,13 @@ namespace Nzy3d.Events.Mouse
 			_button = button;
 		}
 
-        public double X { get; }
+		public double X { get; }
 
-        public double Y { get; }
+		public double Y { get; }
 
-        public MouseButton Button
+		public MouseButton Button
 		{
 			get { return _button; }
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

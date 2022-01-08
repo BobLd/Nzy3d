@@ -239,6 +239,31 @@ namespace Nzy3d.Maths
 			};
 		}
 
+
+		/**
+         * Add a margin to max values and substract a margin to min values, where the margin is ratio of the current range of each dimension.
+         * 
+         * Adding a margin of 10% for each dimension is done with {@link #marginRatio(0.1)}
+         * 
+         * @return a new bounding box
+         */
+		public BoundingBox3d MarginRatio(float marginRatio)
+		{
+			float xMargin = (float)(XMax - XMin) * marginRatio;
+			float yMargin = (float)(YMax - YMin) * marginRatio;
+			float zMargin = (float)(ZMax - ZMin) * marginRatio;
+
+            return new BoundingBox3d
+            {
+                XMax = XMax + xMargin,
+                XMin = XMin - xMargin,
+                YMax = YMax + yMargin,
+                YMin = YMin - yMargin,
+                ZMax = ZMax + zMargin,
+                ZMin = ZMin - zMargin
+            };
+		}
+
 		/// <summary>
 		/// Return a copy of the current bounding box after adding a margin to all limits (positiv to max limits, negativ to min limits)
 		/// </summary>
@@ -251,6 +276,20 @@ namespace Nzy3d.Maths
 			YMin -= marg;
 			ZMax += marg;
 			ZMin -= marg;
+		}
+
+		public void SelfMarginRatio(float marginRatio)
+		{
+			float xMargin = (float)(XMax - XMin) * marginRatio;
+			float yMargin = (float)(YMax - YMin) * marginRatio;
+			float zMargin = (float)(ZMax - ZMin) * marginRatio;
+
+			XMax += xMargin;
+			XMin -= xMargin;
+			YMax += yMargin;
+			YMin -= yMargin;
+			ZMax += zMargin;
+			ZMin -= zMargin;
 		}
 
 		/// <summary>
@@ -275,8 +314,13 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public bool Intersect(BoundingBox3d anotherBox)
 		{
-			return (XMin <= anotherBox.XMin && anotherBox.XMin <= XMax) || XMin <= anotherBox.XMax && anotherBox.XMax <= XMax && YMin <= anotherBox.YMin && anotherBox.YMin <= YMax ||
-				    YMin <= anotherBox.YMax && anotherBox.YMax <= YMax && ZMin <= anotherBox.ZMin && anotherBox.ZMin <= ZMax || (ZMin <= anotherBox.ZMax && anotherBox.ZMax <= ZMax);
+			//return (XMin <= anotherBox.XMin && anotherBox.XMin <= XMax)
+			//|| XMin <= anotherBox.XMax && anotherBox.XMax <= XMax && YMin <= anotherBox.YMin && anotherBox.YMin <= YMax ||
+			//		YMin <= anotherBox.YMax && anotherBox.YMax <= YMax && ZMin <= anotherBox.ZMin && anotherBox.ZMin <= ZMax || (ZMin <= anotherBox.ZMax && anotherBox.ZMax <= ZMax);
+
+			return ((XMin <= anotherBox.XMin && anotherBox.XMin <= XMax) || (XMin <= anotherBox.XMax && anotherBox.XMax <= XMax)) &&
+				   ((YMin <= anotherBox.YMin && anotherBox.YMin <= YMax) || (YMin <= anotherBox.YMax && anotherBox.YMax <= YMax)) &&
+				   ((ZMin <= anotherBox.ZMin && anotherBox.ZMin <= ZMax) || (ZMin <= anotherBox.ZMax && anotherBox.ZMax <= ZMax));
 		}
 
 		/// <summary>

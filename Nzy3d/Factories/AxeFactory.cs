@@ -4,20 +4,13 @@ using Nzy3d.Plot3D.Rendering.View;
 
 namespace Nzy3d.Factories
 {
-    public class AxeFactory
+	public class AxeFactory
 	{
-		public static object getInstance(BoundingBox3d box, View view)
+		public static object GetInstance(BoundingBox3d box, View view)
 		{
-			AxeBox axe = new AxeBox(box);
+			var axe = new AxeBox(box);
 			axe.View = view;
 			return axe;
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

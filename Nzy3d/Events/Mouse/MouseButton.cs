@@ -13,10 +13,3 @@ namespace Nzy3d.Events.Mouse
 		XBUTTON2
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

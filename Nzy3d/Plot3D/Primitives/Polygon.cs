@@ -39,7 +39,7 @@ namespace Nzy3d.Plot3D.Primitives
 				ApplyPolygonModeFill();
 				if (_wfstatus && _polygonOffsetFillEnable)
 				{
-                    EnablePolygonOffsetFill();
+					EnablePolygonOffsetFill();
 				}
 
 				GL.Begin(PrimitiveType.Polygon);
@@ -56,7 +56,7 @@ namespace Nzy3d.Plot3D.Primitives
 				GL.End();
 				if (_wfstatus && _polygonOffsetFillEnable)
 				{
-                    DisablePolygonOffsetFill();
+					DisablePolygonOffsetFill();
 				}
 			}
 
@@ -65,7 +65,7 @@ namespace Nzy3d.Plot3D.Primitives
 				ApplyPolygonModeLine();
 				if (_polygonOffsetFillEnable)
 				{
-                    EnablePolygonOffsetFill();
+					EnablePolygonOffsetFill();
 				}
 
 				GL.Color4(_wfcolor.R, _wfcolor.G, _wfcolor.B, _wfcolor.A);
@@ -81,7 +81,7 @@ namespace Nzy3d.Plot3D.Primitives
 
 				if (_polygonOffsetFillEnable)
 				{
-                    DisablePolygonOffsetFill();
+					DisablePolygonOffsetFill();
 				}
 			}
 		}
@@ -241,15 +241,15 @@ namespace Nzy3d.Plot3D.Primitives
 		{
 			foreach (AbstractDrawable d in composite.GetDrawables)
 			{
-                if (d is Polygon dP)
-                {
-                    dP.PolygonOffsetFillEnable = polygonOffsetFillEnable;
-                }
-                else if (d is AbstractComposite dC)
-                {
-                    SetPolygonOffsetFillEnable(dC, polygonOffsetFillEnable);
-                }
-            }
+				if (d is Polygon dP)
+				{
+					dP.PolygonOffsetFillEnable = polygonOffsetFillEnable;
+				}
+				else if (d is AbstractComposite dC)
+				{
+					SetPolygonOffsetFillEnable(dC, polygonOffsetFillEnable);
+				}
+			}
 		}
 
 		public ColorMapper ColorMapper
@@ -278,14 +278,7 @@ namespace Nzy3d.Plot3D.Primitives
 
 		public override string ToString(int depth)
 		{
-			return Utils.Blanks(depth) + "(Polygon) #points=" + this.Size;
+			return $"{Utils.Blanks(depth)}(Polygon) #points={this.Size}";
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

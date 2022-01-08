@@ -4,16 +4,9 @@ namespace Nzy3d.Factories
 {
 	public class SceneFactory
 	{
-		public static ChartScene getInstance(bool sort)
+		public static ChartScene GetInstance(bool sort)
 		{
 			return new ChartScene(sort);
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================
