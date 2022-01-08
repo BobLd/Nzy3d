@@ -7,8 +7,9 @@ using Color = Nzy3d.Colors.Color;
 
 namespace Nzy3d.WinformsDemo
 {
-    internal static class Graphs
+    internal static class GraphsHelper
     {
+        #region Surface
         /// <summary>
         /// Build a nice surface to display with cool alpha colors
         /// (alpha 0.8 for surface color and 0.5 for wireframe).
@@ -29,25 +30,31 @@ namespace Nzy3d.WinformsDemo
             surface.WireframeColor.mul(new Color(1, 1, 1, 0.5));
             return surface;
         }
+        #endregion
 
+        #region GroupedLineScatter
         public static GroupedLineScatter GetGroupedLineScatter()
         {
-            return GetGroupedLineScatter(10, 50);
-        }
-
-        public static GroupedLineScatter GetGroupedLineScatter(int size, int size2)
-        {
-            var points = new List<Coord3d[]>(size);
-            var colors = new Color[size];
-
-            float x = 0;
-            float y = 0;
-            float z = 0;
             const float a = 0.50f;
+            int size = 4;
+            var points = new List<Coord3d[]>(size);
+            var colors = new Color[]
+            {
+                new Color(1.0, 0.0, 0.0, a), // RED
+                new Color(0.0, 1.0, 0.0, a), // GREEN
+                new Color(0.0, 0.0, 1.0, a), // BLUE
+                new Color(1.0, 1.0, 0.0, a), // YELLOW
+                //new Color(1.0, 0.0, 1.0), // MAGENTA
+                //new Color(0.0, 1.0, 1.0), // CYAN
+            };
 
+            float x, y, z;
             var r = new Random(0);
+
             for (int i = 0; i < size; i++)
             {
+                int size2 = r.Next(150);
+
                 var points2 = new Coord3d[size2];
                 for (int j = 0; j < size2; j++)
                 {
@@ -57,11 +64,13 @@ namespace Nzy3d.WinformsDemo
                     points2[j] = new Coord3d(x, y, z);
                 }
                 points.Add(points2);
-                colors[i] = new Color(x, y, z, a);
+                //colors[i] = new Color(x, y, z, a);
             }
             return new GroupedLineScatter(points, colors);
         }
+        #endregion
 
+        #region Scatter
         public static Scatter GetScatterGraph()
         {
             return GetScatterGraph(500_000);
@@ -90,5 +99,6 @@ namespace Nzy3d.WinformsDemo
             }
             return new Scatter(points, colors);
         }
+        #endregion
     }
 }
