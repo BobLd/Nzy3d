@@ -437,9 +437,15 @@ namespace Nzy3d.Plot3D.Rendering.View
 			if (projection == CameraMode.PERSPECTIVE)
 			{
 				Glut.Glut.Perspective(ComputeFieldOfView(RenderingSphereRadius * 2, Eye.Distance(Target)), StretchToFill ? _screenWidth / _screenHeight : 1, Near, Far);
+				//var near = 65536; //Math.Max(1, Near);
+				//var mat = Matrix4.CreatePerspectiveOffCenter(-RenderingSphereRadius, +RenderingSphereRadius, -RenderingSphereRadius, +RenderingSphereRadius, near, Far);
+				////mat = Matrix4.CreatePerspectiveFieldOfView(ComputeFieldOfView(RenderingSphereRadius * 2, Eye.Distance(Target)), StretchToFill ? _screenWidth / _screenHeight : 1, near, Far);
+				//GL.MultMatrix(ref mat);
 			}
 			else if (projection == CameraMode.ORTHOGONAL)
 			{
+				//var ortho = Matrix4.CreateOrthographicOffCenter(-RenderingSphereRadius, +RenderingSphereRadius, -RenderingSphereRadius, +RenderingSphereRadius, Near, Far);
+				//GL.MultMatrix(ref ortho);
 				GL.Ortho(-RenderingSphereRadius, +RenderingSphereRadius, -RenderingSphereRadius, +RenderingSphereRadius, Near, Far);
 			}
 			else
@@ -454,6 +460,8 @@ namespace Nzy3d.Plot3D.Rendering.View
 		internal static float ComputeFieldOfView(float size, float distance)
 		{
 			float radtheta = 2 * MathF.Atan2(size / 2, distance);
+			System.Diagnostics.Debug.WriteLine($"ComputeFieldOfView: {radtheta} (size={size}, distance={distance})");
+			return radtheta;
 			return 180 * radtheta / MathF.PI; // degtheta
 		}
 

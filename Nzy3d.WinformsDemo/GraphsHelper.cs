@@ -17,16 +17,17 @@ namespace Nzy3d.WinformsDemo
         public static Shape GetSurfaceGraph()
         {
             // Create a range for the graph generation
-            var range = new Maths.Range(-150, 150);
+            var xrange = new Maths.Range(-150, 150);
+            var yrange = new Maths.Range(-150, 150);
             const int steps = 50;
 
             // Build a nice surface to display with cool alpha colors 
             // (alpha 0.8 for surface color and 0.5 for wireframe)
-            var surface = Plot3D.Builder.Builder.BuildOrthonomal(new OrthonormalGrid(range, steps, range, steps), new MyMapper());
+            var surface = Plot3D.Builder.Builder.BuildOrthonomal(new OrthonormalGrid(xrange, steps, yrange, steps), new MyMapper());
             surface.ColorMapper = new ColorMapper(new ColorMapRainbow(), surface.Bounds.ZMin, surface.Bounds.ZMax, new Color(1f, 1f, 1f, 0.8f));
             surface.FaceDisplayed = true;
             surface.WireframeDisplayed = true;
-            surface.WireframeColor = Color.GRAY;
+            surface.WireframeColor = Color.GREEN;
             surface.WireframeColor.Mul(new Color(1f, 1f, 1f, 0.5f));
             return surface;
         }

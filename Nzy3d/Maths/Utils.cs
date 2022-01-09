@@ -65,6 +65,29 @@ namespace Nzy3d.Maths
 			return m_date.Ticks;
 		}
 
+		/// <summary>
+		/// Converts a number to a date.
+		/// </summary>
+		/// <param name="f">An OLE Automation date value.</param>
+		public static DateTime Num2date(float f)
+		{
+			return DateTime.FromOADate(f);
+		}
+
+		/// <summary>
+		/// Converts a number to a date.
+		/// </summary>
+		/// <param name="d">An OLE Automation date value.</param>
+		public static DateTime Num2date(double d)
+		{
+			return DateTime.FromOADate(d);
+		}
+
+		/// <summary>
+		/// Converts a number to a date.
+		/// </summary>
+		/// <param name="m_ticks">Ticks</param>
+		/// <returns>DateTime</returns>
 		public static DateTime Num2date(long m_ticks)
 		{
 			return new DateTime(m_ticks);

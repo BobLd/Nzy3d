@@ -65,7 +65,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			_scaling = Coord3d.IDENTITY.Clone();
 			_viewmode = ViewPositionMode.FREE;
 			_boundmode = ViewBoundMode.AUTO_FIT;
-			_cameraMode = CameraMode.ORTHOGONAL;
+			_cameraMode = CameraMode.PERSPECTIVE;
 			_axe = (IAxe)AxeFactory.GetInstance(sceneBounds, this);
 			_cam = CameraFactory.GetInstance(_center);
 			_scene = scene;
@@ -919,7 +919,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 				_scaling = (Coord3d)Coord3d.IDENTITY.Clone();
 			}
 
-			// Compute the bounds for computing cam distance, clipping planes, etc ...
+			// Compute the bounds for computing cam distance, clipping planes, etc...
 			if (_targetBox == null)
 			{
 				_targetBox = new BoundingBox3d(0, 1, 0, 1, 0, 1);

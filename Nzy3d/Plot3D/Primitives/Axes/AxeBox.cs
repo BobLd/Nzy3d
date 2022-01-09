@@ -693,14 +693,17 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 					quad_0 = _axeXquads[axis, 0];
 					quad_1 = _axeXquads[axis, 1];
 					break;
+
 				case AxeDirection.AxeY:
 					quad_0 = _axeYquads[axis, 0];
 					quad_1 = _axeYquads[axis, 1];
 					break;
+
 				case AxeDirection.AxeZ:
 					quad_0 = _axeZquads[axis, 0];
 					quad_1 = _axeZquads[axis, 1];
 					break;
+
 				default:
 					throw new Exception("Unsupported axe direction");
 			}
@@ -817,6 +820,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 						zlab = _zrange / tickLength * zdir + zpos;
 						tickLabel = _layout.XTickRenderer.Format(xpos);
 						break;
+
 					case AxeDirection.AxeY:
 						ypos = ticks[t];
 						xlab = _xrange / tickLength * xdir + xpos;
@@ -824,6 +828,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 						zlab = _zrange / tickLength * zdir + zpos;
 						tickLabel = _layout.YTickRenderer.Format(ypos);
 						break;
+
 					case AxeDirection.AxeZ:
 						zpos = ticks[t];
 						xlab = _xrange / tickLength * xdir + xpos;
@@ -831,6 +836,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 						zlab = zpos;
 						tickLabel = _layout.ZTickRenderer.Format(zpos);
 						break;
+
 					default:
 						throw new Exception("Unsupported axe direction");
 				}

@@ -19,15 +19,8 @@ namespace Nzy3d.Plot3D.Primitives.Axes.Layout.Renderers
 
 		public string Format(float value)
 		{
-			DateTime ldate = Utils.Num2date(Convert.ToInt64(value));
+			DateTime ldate = Utils.Num2date(value);
 			return Utils.Dat2str(ldate, _format);
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

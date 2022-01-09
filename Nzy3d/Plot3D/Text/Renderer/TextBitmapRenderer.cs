@@ -67,6 +67,7 @@ namespace Nzy3d.Plot3D.Text.Renderers
                 default:
                     throw new Exception("Unsupported valign value");
             }
+
             Coord3d posScreenShifted = new Coord3d(x + screenOffset.X, y + screenOffset.Y, posScreen.Z);
 
 			Coord3d posReal;
@@ -75,7 +76,7 @@ namespace Nzy3d.Plot3D.Text.Renderers
 				posReal = cam.ScreenToModel(posScreenShifted);
 				// TODO: really solve this bug due to a Camera.PERSPECTIVE mode
 			}
-			catch (Exception ex)
+			catch (InvalidOperationException ex)
 			{
 				System.Diagnostics.Debug.WriteLine("TextBitmap.drawText(): could not process text position: " + posScreen.ToString() + " " + posScreenShifted.ToString() + "\n" + ex.Message);
 				return new BoundingBox3d();

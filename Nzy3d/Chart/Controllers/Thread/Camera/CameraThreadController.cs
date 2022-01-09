@@ -8,7 +8,7 @@ namespace Nzy3d.Chart.Controllers.Thread.Camera
 		private Coord2d _move;
 		private System.Threading.Thread _process;
 		////1000/25; // nb milisecond wait between two frames
-		private int _sleep = 1;
+		private readonly int _sleep = 1;
 
 		private float _step = 0.0005f;
 		public CameraThreadController()

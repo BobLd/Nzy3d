@@ -1,6 +1,7 @@
 using Nzy3d.Chart.Controllers.Mouse.Camera;
 using Nzy3d.Chart.Controllers.Thread.Camera;
 using Nzy3d.Plot3D.Primitives.Axes.Layout;
+using Nzy3d.Plot3D.Primitives.Axes.Layout.Renderers;
 using Nzy3d.Plot3D.Rendering.Canvas;
 
 namespace Nzy3d.WinformsDemo
@@ -25,8 +26,9 @@ namespace Nzy3d.WinformsDemo
             // Create the chart and embed the surface within
             Chart.Chart chart = new Chart.Chart(myRenderer3D, Quality.Nicest);
             chart.View.BackgroundColor = Colors.Color.GRAY;
+            chart.View.Axe.GetLayout().XTickRenderer = new DateTickRenderer();
 
-            chart.Scene.Graph.Add(GraphsHelper.GetScatterGraph(1_000_000)); // .GetScatterGraph()); // .GetSurfaceGraph());
+            chart.Scene.Graph.Add(GraphsHelper.GetSurfaceGraph()); // .GetScatterGraph(1_000_000)); // .GetSurfaceGraph());
             axeLayout = chart.AxeLayout;
 
             // All activated by default

@@ -209,7 +209,29 @@ namespace Nzy3d.Glut
 
 		public static void Perspective(float fovy, float aspect, float zNear, float zFar)
 		{
-			float radians = fovy / 2 * MathF.PI / 180;
+			/*
+			    fovy is zero, less than zero or larger than Math.PI
+				aspect is negative or zero
+				zNear is negative or zero
+				zFar is negative or zero
+				zNear is larger than zFar
+			 */
+
+			System.Diagnostics.Debug.WriteLine($"Near={zNear}, Far={zFar}");
+			if (zNear < 1)
+            {
+				zNear = 1;
+			}
+
+			if (zFar < zNear)
+			{
+				throw new ArgumentException();
+			}
+			//var perspective = Matrix4d.CreatePerspectiveFieldOfView(fovy, aspect, zNear, zFar);
+			//GL.MultMatrix(ref perspective);
+			//return;
+
+			float radians = fovy / 2; // * MathF.PI / 180;
 
 			float deltaZ = zFar - zNear;
 			float sine = MathF.Sin(radians);
@@ -221,7 +243,7 @@ namespace Nzy3d.Glut
 
 			float cotangent = MathF.Cos(radians) / sine;
 
-			var matrix = MakeIdentityD();
+			var matrix = MakeIdentity();
 			matrix.M11 = cotangent / aspect;
 			matrix.M22 = cotangent;
 			matrix.M33 = -(zFar + zNear) / deltaZ;
@@ -232,32 +254,36 @@ namespace Nzy3d.Glut
 			GL.MultMatrix(ref matrix);
 		}
 
-		public static Matrix4d MakeIdentityD()
+		public static Matrix4 MakeIdentity()
 		{
-			return new Matrix4d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0,
-			1, 0, 0, 0, 0, 1);
+			return new Matrix4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 		}
 
-		public static Matrix4d IDENTITY = new Matrix4d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+		public static Matrix4d MakeIdentityD()
+		{
+			return new Matrix4d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+		}
+
+		public static readonly Matrix4d IDENTITY = new Matrix4d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 
 		public static void LookAt(float eyeX, float eyeY, float eyeZ,
 								  float centerX, float centerY, float centerZ,
 								  float upX, float upY, float upZ)
 		{
-			var forward = new Vector3d(centerX - eyeX, centerY - eyeY, centerZ - eyeZ);
+			var forward = new Vector3(centerX - eyeX, centerY - eyeY, centerZ - eyeZ);
 
-			var up = new Vector3d(upX, upY, upZ);
+			var up = new Vector3(upX, upY, upZ);
 
 			forward.Normalize();
 
 			//Side = forward x up
-			var side = Vector3d.Cross(forward, up);
+			var side = Vector3.Cross(forward, up);
 			side.Normalize();
 
 			//Recompute up as: up = side x forward 
-			up = Vector3d.Cross(side, forward);
+			up = Vector3.Cross(side, forward);
 
-			var matrix = MakeIdentityD();
+			var matrix = MakeIdentity();
 
 			matrix.M11 = side.X;
 			matrix.M21 = side.Y;

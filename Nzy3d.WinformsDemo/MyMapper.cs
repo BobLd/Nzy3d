@@ -8,7 +8,7 @@ namespace Nzy3d.WinformsDemo
     {
         public override float f(float x, float y)
         {
-            return Original(x, y);
+            return SquareCubicCurve(x, y);
         }
 
 #pragma warning disable IDE0051 // Remove unused private members
