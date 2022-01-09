@@ -81,7 +81,8 @@ namespace Nzy3d.Plot3D.Rendering.View
 			set
 			{
 				_radius = value;
-				_near = (float)_eye.Distance(_target) - _radius * 2;
+				// Set the 'Near' lower bound to 1 to avoid issue in perspective mode
+				_near = Math.Max((float)_eye.Distance(_target) - _radius * 2, 1);
 				_far = (float)_eye.Distance(_target) + _radius * 2;
 			}
 		}

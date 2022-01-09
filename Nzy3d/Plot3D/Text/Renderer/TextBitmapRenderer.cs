@@ -73,11 +73,11 @@ namespace Nzy3d.Plot3D.Text.Renderers
 			try
 			{
 				posReal = cam.ScreenToModel(posScreenShifted);
-				// TODO: really solve this bug due to a Camera.PERSPECTIVE mode
 			}
-			catch (Exception ex)
+			catch (InvalidOperationException ex)
 			{
-				System.Diagnostics.Debug.WriteLine("TextBitmap.drawText(): could not process text position: " + posScreen.ToString() + " " + posScreenShifted.ToString() + "\n" + ex.Message);
+				// The bug due to a Camera.PERSPECTIVE mode / 'Near' value < 1 should be fixe, this should not happen anymore
+				System.Diagnostics.Debug.WriteLine("TextBitmap.drawText(): Error - could not process text position: " + posScreen.ToString() + " " + posScreenShifted.ToString() + "\n" + ex.Message);
 				return new BoundingBox3d();
 			}
 
