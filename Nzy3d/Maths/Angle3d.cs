@@ -7,20 +7,19 @@ namespace Nzy3d.Maths
 	public class Angle3d
 	{
 		#region "Members"
-		private readonly double X1;
-		private readonly double X2;
-		private readonly double X3;
-		private readonly double Y1;
-		private readonly double Y2;
-		private readonly double Y3;
-		private readonly double Z1;
-		private readonly double Z2;
+		private readonly float X1;
+		private readonly float X2;
+		private readonly float X3;
+		private readonly float Y1;
+		private readonly float Y2;
+		private readonly float Y3;
+		private readonly float Z1;
+		private readonly float Z2;
+		private readonly float Z3;
 		#endregion
 
-		private readonly double Z3;
-
 		#region "Constructors"
-		public Angle3d(double x1, double x2, double x3, double y1, double y2, double y3, double z1, double z2, double z3)
+		public Angle3d(float x1, float x2, float x3, float y1, float y2, float y3, float z1, float z2, float z3)
 		{
 			this.X1 = x1;
 			this.X2 = x2;
@@ -46,7 +45,7 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Computes the sinus of the angle
 		/// </summary>
-		public double Sin()
+		public float Sin()
 		{
 			var c2 = new Coord3d(X2, Y2, Z2);
 			var v1 = new Vector3d(X1, Y1, Z1, X2, Y2, Z2);
@@ -59,7 +58,7 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Computes the cosinus of the angle
 		/// </summary>
-		public double Cos()
+		public float Cos()
 		{
 			var v1 = new Vector3d(X1, Y1, Z1, X2, Y2, Z2);
 			var v3 = new Vector3d(X3, Y3, Z3, X2, Y2, Z2);
@@ -69,16 +68,16 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Computes an angle between 0 and 2*PI
 		/// </summary>
-		public double Angle()
+		public float Angle()
 		{
 			// between 0 and PI: Math.acos(cos());
 			if (Sin() > 0)
 			{
-				return Math.Acos(Cos());
+				return MathF.Acos(Cos());
 			}
 			else
 			{
-				return Math.PI * 2 - Math.Acos(Cos());
+				return MathF.PI * 2 - MathF.Acos(Cos());
 			}
 		}
 		#endregion

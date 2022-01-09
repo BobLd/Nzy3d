@@ -27,11 +27,11 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <param name="x">x coordinates</param>
 		/// <param name="y">y coordinates</param>
 		/// <param name="z">z coordinates</param>
-		public Point_dt(double x, double y, double z)
+		public Point_dt(float x, float y, float z)
 		{
-			this.x = x;
-			this.y = y;
-			this.z = z;
+			this.X = x;
+			this.Y = y;
+			this.Z = z;
 		}
 
 		/// <summary>
@@ -39,7 +39,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// </summary>
 		/// <param name="x">x coordinates</param>
 		/// <param name="y">y coordinates</param>
-		public Point_dt(double x, double y) : this(x, y, 0)
+		public Point_dt(float x, float y) : this(x, y, 0)
 		{
 		}
 
@@ -47,54 +47,55 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// Simple copy constructor
 		/// </summary>
 		/// <param name="p">Another point</param>
-		public Point_dt(Point_dt p) : this(p.x, p.y, p.z)
+		public Point_dt(Point_dt p) : this(p.X, p.Y, p.Z)
 		{
 		}
 
-		public double x { get; set; }
+		public float X { get; set; }
 
-		public double y { get; set; }
+		public float Y { get; set; }
 
-		public double z { get; set; }
+		public float Z { get; set; }
 
 		public Coord3d Coord3d
 		{
-			get { return new Coord3d(x, y, z); }
+			get { return new Coord3d(X, Y, Z); }
 		}
 
-		public double distance2(Point_dt p)
+		public float Distance2(Point_dt p)
 		{
-			return (p.x - x) * (p.x - x) + (p.y - y) * (p.y - y);
+			return (p.X - X) * (p.X - X) + (p.Y - Y) * (p.Y - Y);
 		}
 
-		public double distance2(double px, double py)
+		public float Distance2(float px, float py)
 		{
-			return (px - x) * (px - x) + (py - y) * (py - y);
+			return (px - X) * (px - X) + (py - Y) * (py - Y);
 		}
 
-		public bool isLess(Point_dt p)
+		public bool IsLess(Point_dt p)
 		{
-			return x < p.x | (x == p.x & y < p.y);
+			return X < p.X || (X == p.X && Y < p.Y);
 		}
 
-		public bool isGreater(Point_dt p)
+		public bool IsGreater(Point_dt p)
 		{
-			return x > p.x | (x == p.x & y > p.y);
+			return X > p.X || (X == p.X && Y > p.Y);
 		}
 
+		/// <inheritdoc/>
 		public override string ToString()
 		{
-			return "(Point_dt) [" + x + "," + y + "," + z + "]";
+			return "(Point_dt) [" + X + "," + Y + "," + Z + "]";
 		}
 
-		public double distance(Point_dt p)
+		public float Distance(Point_dt p)
 		{
-			return Math.Sqrt((p.x - x) * (p.x - x) + (p.y - y) * (p.y - y));
+			return MathF.Sqrt((p.X - X) * (p.X - X) + (p.Y - Y) * (p.Y - Y));
 		}
 
-		public double distance3D(Point_dt p)
+		public float Distance3D(Point_dt p)
 		{
-			return Math.Sqrt((p.x - x) * (p.x - x) + (p.y - y) * (p.y - y) + (p.z - z) * (p.z - z));
+			return MathF.Sqrt((p.X - X) * (p.X - X) + (p.Y - Y) * (p.Y - Y) + (p.Z - Z) * (p.Z - Z));
 		}
 
 		/// <summary>
@@ -105,11 +106,11 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <param name="a">The first point of the segment</param>
 		/// <param name="b">The second point of the segment</param>
 		/// <returns>The value (flag) of the relation between this point and the a,b line-segment.</returns>
-		public int pointLineTest(Point_dt a, Point_dt b)
+		public int PointLineTest(Point_dt a, Point_dt b)
 		{
-			double dx = b.x - a.x;
-			double dy = b.y - a.y;
-			double res = dy * (x - a.x) - dx * (y - a.y);
+			float dx = b.X - a.X;
+			float dy = b.Y - a.Y;
+			float res = dy * (X - a.X) - dx * (Y - a.Y);
 
 			if (res < 0)
 			{
@@ -123,12 +124,12 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 
 			if (dx > 0)
 			{
-				if (x < a.x)
+				if (X < a.X)
 				{
 					return INFRONTOFA;
 				}
 
-				if (b.x < x)
+				if (b.X < X)
 				{
 					return BEHINDB;
 				}
@@ -137,12 +138,12 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 
 			if (dx < 0)
 			{
-				if (x > a.x)
+				if (X > a.X)
 				{
 					return INFRONTOFA;
 				}
 
-				if (b.x > x)
+				if (b.X > X)
 				{
 					return BEHINDB;
 				}
@@ -151,12 +152,12 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 
 			if (dy > 0)
 			{
-				if (y < a.y)
+				if (Y < a.Y)
 				{
 					return INFRONTOFA;
 				}
 
-				if (b.y < y)
+				if (b.Y < Y)
 				{
 					return BEHINDB;
 				}
@@ -165,12 +166,12 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 
 			if (dy < 0)
 			{
-				if (y > a.y)
+				if (Y > a.Y)
 				{
 					return INFRONTOFA;
 				}
 
-				if (b.y > y)
+				if (b.Y > Y)
 				{
 					return BEHINDB;
 				}
@@ -179,17 +180,17 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 			return ISERROR;
 		}
 
-		public Point_dt circumcenter(Point_dt a, Point_dt b)
+		public Point_dt Circumcenter(Point_dt a, Point_dt b)
 		{
-			double u = ((a.x - b.x) * (a.x + b.x) + (a.y - b.y) * (a.y + b.y)) / 2.0;
-			double v = ((b.x - x) * (b.x + x) + (b.y - y) * (b.y + y)) / 2.0;
-			double den = (a.x - b.x) * (b.y - y) - (b.x - x) * (a.y - b.y);
+			float u = ((a.X - b.X) * (a.X + b.X) + (a.Y - b.Y) * (a.Y + b.Y)) / 2.0f;
+			float v = ((b.X - X) * (b.X + X) + (b.Y - Y) * (b.Y + Y)) / 2.0f;
+			float den = (a.X - b.X) * (b.Y - Y) - (b.X - X) * (a.Y - b.Y);
 			if (den == 0)
 			{
 				// oops
 				System.Diagnostics.Debug.WriteLine("circumcenter, degenerate case");
 			}
-			return new Point_dt((u * (b.y - y) - v * (a.y - b.y)) / den, (v * (a.x - b.x) - u * (b.x - x)) / den);
+			return new Point_dt((u * (b.Y - Y) - v * (a.Y - b.Y)) / den, (v * (a.X - b.X) - u * (b.X - X)) / den);
 		}
 
 		public object Comparator(int flag)
@@ -205,7 +206,8 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 
 	public class Point_dt_Compare
 	{
-		private int m_flag;
+		private readonly int m_flag;
+
 		public Point_dt_Compare(int flag)
 		{
 			m_flag = flag;
@@ -213,96 +215,96 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 
 		public object Compare(Point_dt o1, Point_dt o2)
 		{
-			if (!(o1 == null | o2 == null))
+			if (!(o1 == null || o2 == null))
 			{
-				if ((m_flag == 0))
+				if (m_flag == 0)
 				{
-					if (o1.x > o2.x)
+					if (o1.X > o2.X)
 					{
 						return 1;
 					}
 
-					if (o1.x < o2.x)
+					if (o1.X < o2.X)
 					{
 						return -1;
 					}
 
 					// x1 == x2
-					if (o1.y > o2.y)
+					if (o1.Y > o2.Y)
 					{
 						return 1;
 					}
 
-					if (o1.y < o2.y)
+					if (o1.Y < o2.Y)
 					{
 						return -1;
 					}
 				}
-				else if ((m_flag == 1))
+				else if (m_flag == 1)
 				{
-					if (o1.x > o2.x)
+					if (o1.X > o2.X)
 					{
 						return -1;
 					}
 
-					if (o1.x < o2.x)
+					if (o1.X < o2.X)
 					{
 						return 1;
 					}
 
 					// x1 == x2
-					if (o1.y > o2.y)
+					if (o1.Y > o2.Y)
 					{
 						return -1;
 					}
 
-					if (o1.y < o2.y)
+					if (o1.Y < o2.Y)
 					{
 						return 1;
 					}
 				}
 				else if (m_flag == 2)
 				{
-					if (o1.y > o2.y)
+					if (o1.Y > o2.Y)
 					{
 						return 1;
 					}
 
-					if (o1.y < o2.y)
+					if (o1.Y < o2.Y)
 					{
 						return -1;
 					}
 
 					// y1 == y2
-					if (o1.x > o2.x)
+					if (o1.X > o2.X)
 					{
 						return 1;
 					}
 
-					if (o1.x < o2.x)
+					if (o1.X < o2.X)
 					{
 						return -1;
 					}
 				}
-				else if ((m_flag == 3))
+				else if (m_flag == 3)
 				{
-					if (o1.y > o2.y)
+					if (o1.Y > o2.Y)
 					{
 						return -1;
 					}
 
-					if (o1.y < o2.y)
+					if (o1.Y < o2.Y)
 					{
 						return 1;
 					}
 
 					// y1 == y2
-					if (o1.x > o2.x)
+					if (o1.X > o2.X)
 					{
 						return -1;
 					}
 
-					if (o1.x < o2.x)
+					if (o1.X < o2.X)
 					{
 						return 1;
 					}
@@ -310,17 +312,17 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 			}
 			else
 			{
-				if (o1 == null & o2 == null)
+				if (o1 == null && o2 == null)
 				{
 					return 0;
 				}
 
-				if (o1 == null & (o2 != null))
+				if (o1 == null && (o2 != null))
 				{
 					return 1;
 				}
 
-				if ((o1 != null) & o2 == null)
+				if ((o1 != null) && o2 == null)
 				{
 					return -1;
 				}
@@ -329,10 +331,3 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

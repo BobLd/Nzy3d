@@ -24,7 +24,7 @@ namespace Nzy3d.Plot3D.Text.Renderers
 			Glut.Glut.BitmapString(_font, s);
 		}
 
-		public override BoundingBox3d DrawText(Camera cam, string s, Coord3d position, Halign halign, Valign valign, Colors.Color color, Coord2d screenOffset, Coord3d sceneOffset)
+		public override BoundingBox3d DrawText(Camera cam, string s, Coord3d position, Halign halign, Valign valign, Color color, Coord2d screenOffset, Coord3d sceneOffset)
 		{
 			GL.Color3(color.R, color.G, color.B);
 			Coord3d posScreen = cam.ModelToScreen(position);

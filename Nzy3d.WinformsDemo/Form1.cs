@@ -24,8 +24,9 @@ namespace Nzy3d.WinformsDemo
 
             // Create the chart and embed the surface within
             Chart.Chart chart = new Chart.Chart(myRenderer3D, Quality.Nicest);
+            chart.View.BackgroundColor = Colors.Color.GRAY;
 
-            chart.Scene.Graph.Add(GraphsHelper.GetSurfaceGraph());// .GetScatterGraph());
+            chart.Scene.Graph.Add(GraphsHelper.GetSurfaceGraph()); // .GetScatterGraph()); // .GetSurfaceGraph());
             axeLayout = chart.AxeLayout;
 
             // All activated by default
@@ -54,6 +55,8 @@ namespace Nzy3d.WinformsDemo
 
             // Associate the chart with current control
             myRenderer3D.SetView(chart.View);
+
+            this.Text = $"Running on {myRenderer3D.GetGpuInfo()}";
 
             this.Refresh();
         }

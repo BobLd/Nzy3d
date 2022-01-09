@@ -347,17 +347,17 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <returns>Mad statistics</returns>
 		/// <remarks>If the input array is empty, the output value is Double.NaN</remarks>
-		public static double Mad(double[] values)
+		public static float Mad(float[] values)
 		{
 			if (values.Length == 0)
 			{
-				return double.NaN;
+				return float.NaN;
 			}
-			double[] dists = new double[values.Length];
-			double median = Median(values, true);
+			float[] dists = new float[values.Length];
+			float median = Median(values, true);
 			for (int i = 0; i <= values.Length - 1; i++)
 			{
-				dists[i] = Math.Abs(values[i] - median);
+				dists[i] = MathF.Abs(values[i] - median);
 			}
 			return Median(dists, true);
 		}
@@ -367,13 +367,13 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <returns>Standard deviation</returns>
 		/// <remarks>If the input array is empty, the output value is Double.NaN</remarks>
-		public static double Std(double[] values)
+		public static float Std(float[] values)
 		{
 			if (values.Length == 0)
 			{
-				return double.NaN;
+				return float.NaN;
 			}
-			return Math.Sqrt(Variance(values));
+			return MathF.Sqrt(Variance(values));
 		}
 
 		/// <summary>
@@ -383,28 +383,28 @@ namespace Nzy3d.Maths
 		/// For N=1, the output is 0.
 		/// </summary>
 		/// <remarks>If the input array is empty, the output value is Double.NaN</remarks>
-		public static double Variance(double[] values)
+		public static float Variance(float[] values)
 		{
 			if (values.Length == 0)
 			{
-				return double.NaN;
+				return float.NaN;
 			}
 
-			double mean = Mean(values);
-			double sum = 0;
+			float mean = Mean(values);
+			float sum = 0;
 			int count = 0;
 			for (int i = 0; i <= values.Length - 1; i++)
 			{
-				if (!double.IsNaN(values[i]))
+				if (!float.IsNaN(values[i]))
 				{
-					sum += Math.Pow(values[i] - mean, 2);
-					count += 1;
+					sum += MathF.Pow(values[i] - mean, 2);
+                    count++;
 				}
 			}
 
 			if (count == 0)
 			{
-				return double.NaN;
+				return float.NaN;
 			}
 			else if (count == 1)
 			{
@@ -426,14 +426,14 @@ namespace Nzy3d.Maths
 		/// If False, the quantile is not interpolated but nearest value is returned</param>
 		/// <returns>The quantiles</returns>
 		/// <remarks>Throws an IllegalArgumentException if a level is out of the [0;100] bounds. Return 0 if input array is empty.</remarks>
-		public static double[] Quantile(double[] values, double[] levels, bool interpolated)
+		public static float[] Quantile(float[] values, float[] levels, bool interpolated)
 		{
 			if (values.Length == 0)
 			{
-				return (double[])values.Clone();
+				return (float[])values.Clone();
 			}
-			double[] quantiles = new double[levels.Length];
-			double[] sorted = new double[values.Length];
+			float[] quantiles = new float[levels.Length];
+			float[] sorted = new float[values.Length];
 
 			System.Array.Copy(values, sorted, values.Length);
 			System.Array.Sort(sorted);
@@ -445,7 +445,7 @@ namespace Nzy3d.Maths
 					throw new ArgumentException($"Input level [{i}]={levels[i]} is out of bounds [0;100]", nameof(levels));
 				}
 
-				double quantileIdx = (sorted.Length - 1) * levels[i] / 100;
+				float quantileIdx = (sorted.Length - 1) * levels[i] / 100;
 				if (quantileIdx == Convert.ToInt32(quantileIdx))
 				{
 					// quantile exactly fond
@@ -453,8 +453,8 @@ namespace Nzy3d.Maths
 				}
 				else
 				{
-					double quantileIdxCeil = Math.Ceiling(quantileIdx);
-					double quantileIdxFloor = Math.Floor(quantileIdx);
+					float quantileIdxCeil = MathF.Ceiling(quantileIdx);
+					float quantileIdxFloor = MathF.Floor(quantileIdx);
 
 					if (interpolated)
 					{
@@ -481,7 +481,7 @@ namespace Nzy3d.Maths
 		/// <param name="levels">A list of levels that must belong to [0;100]</param>
 		/// <returns>The quantiles</returns>
 		/// <remarks>This is only a helper function for Statistics.Quantile(values, levels, True). Throws an IllegalArgumentException if a level is out of the [0;100] bounds. Return 0 if input array is empty.</remarks>
-		public static double[] Quantile(double[] values, double[] levels)
+		public static float[] Quantile(float[] values, float[] levels)
 		{
 			return Quantile(values, levels, true);
 		}
@@ -492,14 +492,14 @@ namespace Nzy3d.Maths
 		/// <param name="values">Input array</param>
 		/// <param name="interpolated">If True, computes an interpolation of median when required, i.e. if median is not an exact vector id.
 		/// If False, the median is not interpolated but nearest value is returned (either higher or lower value)</param>
-		public static double Median(double[] values, bool interpolated)
+		public static float Median(float[] values, bool interpolated)
 		{
 			if (values.Length == 0)
 			{
 				throw new ArgumentException("Input array must have a length greater than 0", nameof(values));
 			}
-			double[] med = { 50 };
-			double[] @out = Quantile(values, med, interpolated);
+			float[] med = { 50 };
+			float[] @out = Quantile(values, med, interpolated);
 			return @out[0];
 		}
 	}

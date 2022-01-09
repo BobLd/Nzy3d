@@ -716,9 +716,9 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			float xdir = (float)(_normx[quad_0] + _normx[quad_1] - _center.X);
 			float ydir = (float)(_normy[quad_0] + _normy[quad_1] - _center.Y);
 			float zdir = (float)(_normz[quad_0] + _normz[quad_1] - _center.Z);
-			xdir = xdir == 0 ? 0 : xdir / Math.Abs(xdir); // so that direction as length 1
-			ydir = ydir == 0 ? 0 : ydir / Math.Abs(ydir);
-			zdir = zdir == 0 ? 0 : zdir / Math.Abs(zdir);
+			xdir = xdir == 0 ? 0 : xdir / MathF.Abs(xdir); // so that direction as length 1
+			ydir = ydir == 0 ? 0 : ydir / MathF.Abs(ydir);
+			zdir = zdir == 0 ? 0 : zdir / MathF.Abs(zdir);
 			const int dist = 1;
 
 			// Draw the label for axis
@@ -761,7 +761,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			return ticksTxtBounds;
 		}
 
-		public void DrawAxisLabel(Camera cam, AxeDirection direction, Color color, BoundingBox3d ticksTxtBounds, double xlab, double ylab, double zlab, String axeLabel)
+		public void DrawAxisLabel(Camera cam, AxeDirection direction, Color color, BoundingBox3d ticksTxtBounds, float xlab, float ylab, float zlab, String axeLabel)
 		{
 			if ((direction == AxeDirection.AxeX && _layout.XAxeLabelDisplayed)
 			 || (direction == AxeDirection.AxeY && _layout.YAxeLabelDisplayed)
@@ -800,9 +800,9 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 		public void DrawAxisTicks(Camera cam, AxeDirection direction, Color color, Halign hal, Valign val, float tickLength, BoundingBox3d ticksTxtBounds, float xpos,
 			float ypos, float zpos, float xdir, float ydir, float zdir, float[] ticks)
 		{
-			double xlab;
-			double ylab;
-			double zlab;
+			float xlab;
+			float ylab;
+			float zlab;
 			for (int t = 0; t < ticks.Length; t++)
 			{
 				string tickLabel;

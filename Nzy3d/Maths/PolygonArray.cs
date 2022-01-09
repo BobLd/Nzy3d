@@ -2,11 +2,11 @@ namespace Nzy3d.Maths
 {
 	public class PolygonArray
 	{
-		internal double[] _x;
-		internal double[] _y;
+		internal float[] _x;
+		internal float[] _y;
+		internal float[] _z;
 
-		internal double[] _z;
-		public PolygonArray(double[] x, double[] y, double[] z)
+		public PolygonArray(float[] x, float[] y, float[] z)
 		{
 			_x = x;
 			_y = y;
@@ -23,17 +23,17 @@ namespace Nzy3d.Maths
 			get { return new Coord3d(Statistics.Mean(_x), Statistics.Mean(_y), Statistics.Mean(_z)); }
 		}
 
-		public double[] X
+		public float[] X
 		{
 			get { return _x; }
 		}
 
-		public double[] Y
+		public float[] Y
 		{
 			get { return _y; }
 		}
 
-		public double[] Z
+		public float[] Z
 		{
 			get { return _z; }
 		}

@@ -24,6 +24,11 @@ namespace Nzy3d.Winforms
 
 		internal Bitmap _image;
 
+		public string GetGpuInfo()
+		{
+			return $"{GL.GetString(StringName.Renderer)} - {GL.GetString(StringName.Vendor)}";
+		}
+
 		private void Renderer3D_Paint(object sender, PaintEventArgs e)
 		{
 			if (_view != null)
@@ -59,10 +64,10 @@ namespace Nzy3d.Winforms
 
 			BitmapData data = _image.LockBits(this.ClientRectangle, ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 			//OpenTK.Graphics.OpenGL.GL.ReadPixels(0, 0, ClientSize.Width, ClientSize.Height, OpenTK.Graphics.PixelFormat.Bgr, OpenTK.Graphics.PixelType.UnsignedByte, data.Scan0)
-			var pxFormat = OpenTK.Graphics.OpenGL.PixelFormat.Bgr;
-			var pxType = PixelType.UnsignedByte;
 
-			GL.ReadPixels(0, 0, ClientSize.Width, ClientSize.Height, pxFormat, pxType, data.Scan0);
+			GL.ReadPixels(0, 0, ClientSize.Width, ClientSize.Height,
+				OpenTK.Graphics.OpenGL.PixelFormat.Bgr, PixelType.UnsignedByte, data.Scan0);
+
 			_image.UnlockBits(data);
 			_image.RotateFlip(RotateFlipType.RotateNoneFlipY);
 		}

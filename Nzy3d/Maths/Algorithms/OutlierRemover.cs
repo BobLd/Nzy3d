@@ -2,54 +2,47 @@ namespace Nzy3d.Maths.Algorithms
 {
 	public class OutlierRemover
 	{
-		public static int[] getOutlierIndices(double[] values, int nVariance)
+		public static int[] GetOutlierIndices(float[] values, int nVariance)
 		{
 			throw new NotImplementedException();
 		}
 
-		public static int[] getInlierIndices(double[] values, int nVariance)
+		public static int[] GetInlierIndices(float[] values, int nVariance)
 		{
 			throw new NotImplementedException();
 		}
 
-		public static double[] getOutlierValues(double[] values, int nVariance)
+		public static float[] GetOutlierValues(float[] values, int nVariance)
 		{
-			Scale bounds = getInlierBounds(values, nVariance);
+			Scale bounds = GetInlierBounds(values, nVariance);
 			return System.Array.FindAll(values, x => !bounds.Contains(x));
 		}
 
-		public static double[] getInlierValues(double[] values, int nVariance)
+		public static float[] GetInlierValues(float[] values, int nVariance)
 		{
-			Scale bounds = getInlierBounds(values, nVariance);
+			Scale bounds = GetInlierBounds(values, nVariance);
 			return System.Array.FindAll(values, x => bounds.Contains(x));
 		}
 
-		public static Scale getInlierBounds(double[] values, int nVariance)
+		public static Scale GetInlierBounds(float[] values, int nVariance)
 		{
 			if (values.Length == 0)
 			{
-				return new Scale(double.NaN, double.NaN);
+				return new Scale(float.NaN, float.NaN);
 			}
 
-			double[] dists = new double[values.Length];
-			double med = Statistics.Median(values, true);
+			float[] dists = new float[values.Length];
+			float med = Statistics.Median(values, true);
 
 			for (int i = 0; i <= values.Length - 1; i++)
 			{
-				dists[i] = Math.Abs(values[i] - med);
+				dists[i] = MathF.Abs(values[i] - med);
 			}
 
-			double mad = Statistics.Median(dists, true);
-			double upperBound = med + mad * nVariance;
-			double lowerBound = med - mad * nVariance;
+			float mad = Statistics.Median(dists, true);
+			float upperBound = med + mad * nVariance;
+			float lowerBound = med - mad * nVariance;
 			return new Scale(lowerBound, upperBound);
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

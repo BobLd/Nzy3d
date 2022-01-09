@@ -2,17 +2,17 @@ namespace Nzy3d.Maths
 {
 	public class Scale
 	{
-		public Scale(double min, double max)
+		public Scale(float min, float max)
 		{
 			Min = min;
 			Max = max;
 		}
 
-		public double Min { get; set; }
+		public float Min { get; set; }
 
-		public double Max { get; set; }
+		public float Max { get; set; }
 
-		public double Range
+		public float Range
 		{
 			get { return Max - Min; }
 		}
@@ -23,7 +23,7 @@ namespace Nzy3d.Maths
 		/// <param name="value">Value to add</param>
 		/// <returns>New scale with added value to min &amp; max</returns>
 		/// <remarks>Current object is not modified</remarks>
-		public Scale Add(double value)
+		public Scale Add(float value)
 		{
 			return new Scale(Min + value, Max + value);
 		}
@@ -31,7 +31,7 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Return True if value is inside [Min;Max]
 		/// </summary>
-		public bool Contains(double value)
+		public bool Contains(float value)
 		{
 			return Min <= value && value <= Max;
 		}
@@ -56,17 +56,17 @@ namespace Nzy3d.Maths
 
 		public static Scale Widest(Scale scale1, Scale scale2)
 		{
-			return new Scale(Math.Min(scale1.Min, scale2.Min), Math.Max(scale1.Max, scale2.Max));
+			return new Scale(MathF.Min(scale1.Min, scale2.Min), MathF.Max(scale1.Max, scale2.Max));
 		}
 
 		public static Scale Thinest(Scale scale1, Scale scale2)
 		{
-			return new Scale(Math.Max(scale1.Min, scale2.Min), Math.Min(scale1.Max, scale2.Max));
+			return new Scale(MathF.Max(scale1.Min, scale2.Min), MathF.Min(scale1.Max, scale2.Max));
 		}
 
-		public static Scale Enlarge(Scale scale, double ratio)
+		public static Scale Enlarge(Scale scale, float ratio)
 		{
-			double offset = (scale.Max - scale.Min) * ratio;
+			float offset = (scale.Max - scale.Min) * ratio;
 			if (offset == 0)
 			{
 				offset = 1;

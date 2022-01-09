@@ -12,7 +12,8 @@ namespace Nzy3d.Plot3D.Rendering.View
 {
 	public class View
 	{
-		public static float STRETCH_RATIO = 0.25f;
+		public const float STRETCH_RATIO = 0.25f;
+
 		// force to have all object maintained in screen, meaning axebox won't always keep the same size.
 		internal bool MAINTAIN_ALL_OBJECTS_IN_VIEW = false;
 		// display a magenta parallelepiped (debug)
@@ -44,8 +45,8 @@ namespace Nzy3d.Plot3D.Rendering.View
 		internal List<IViewPointChangedListener> _viewPointChangedListeners;
 		internal List<IViewIsVerticalEventListener> _viewOnTopListeners;
 		internal bool _wasOnTopAtLastRendering;
-		static internal float PI_div2 = Convert.ToSingle(System.Math.PI / 2);
-		public static Coord3d DEFAULT_VIEW = new Coord3d(System.Math.PI / 3, System.Math.PI / 3, 2000);
+		static internal float PI_div2 = MathF.PI / 2f;
+		public static readonly Coord3d DEFAULT_VIEW = new Coord3d(MathF.PI / 3f, MathF.PI / 3f, 2000);
 		internal bool _dimensionDirty = false;
 		internal bool _viewDirty = false;
 
@@ -101,7 +102,6 @@ namespace Nzy3d.Plot3D.Rendering.View
 		}
 
 		#region "GENERAL DISPLAY CONTROLS"
-
 		public void Rotate(Coord2d move)
 		{
 			Rotate(move, true);
@@ -137,16 +137,16 @@ namespace Nzy3d.Plot3D.Rendering.View
 		public void Zoom(float factor, bool updateView)
 		{
 			Scale current = this.Scale;
-			double range = current.Max - current.Min;
+			float range = current.Max - current.Min;
 
 			if (range <= 0)
 			{
 				return;
 			}
 
-			double center = (current.Max + current.Min) / 2;
-			double zmin = center + (current.Min - center) * factor;
-			double zmax = center + (current.Max - center) * factor;
+			float center = (current.Max + current.Min) / 2;
+			float zmin = center + (current.Min - center) * factor;
+			float zmax = center + (current.Max - center) * factor;
 
 			// set min/max according to bounds
 			Scale scale = null;
@@ -177,14 +177,14 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 		public void ZoomX(float factor, bool updateView)
 		{
-			double range = this.Bounds.XMax - this.Bounds.XMin;
+			float range = this.Bounds.XMax - this.Bounds.XMin;
 			if (range <= 0)
 			{
 				return;
 			}
-			double center = (this.Bounds.XMax + this.Bounds.XMin) / 2;
-			double min = center + (this.Bounds.XMin - center) * factor;
-			double max = center + (this.Bounds.XMax - center) * factor;
+			float center = (this.Bounds.XMax + this.Bounds.XMin) / 2;
+			float min = center + (this.Bounds.XMin - center) * factor;
+			float max = center + (this.Bounds.XMax - center) * factor;
 
 			// set min/max according to bounds
 			Scale scale = null;
@@ -222,14 +222,14 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 		public void ZoomY(float factor, bool updateView)
 		{
-			double range = this.Bounds.YMax - this.Bounds.YMin;
+			float range = this.Bounds.YMax - this.Bounds.YMin;
 			if (range <= 0)
 			{
 				return;
 			}
-			double center = (this.Bounds.YMax + this.Bounds.YMin) / 2;
-			double min = center + (this.Bounds.YMin - center) * factor;
-			double max = center + (this.Bounds.YMax - center) * factor;
+			float center = (this.Bounds.YMax + this.Bounds.YMin) / 2;
+			float min = center + (this.Bounds.YMin - center) * factor;
+			float max = center + (this.Bounds.YMax - center) * factor;
 
 			// set min/max according to bounds
 			Scale scale = null;
@@ -267,14 +267,14 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 		public void ZoomZ(float factor, bool updateView)
 		{
-			double range = this.Bounds.ZMax - this.Bounds.ZMin;
+			float range = this.Bounds.ZMax - this.Bounds.ZMin;
 			if (range <= 0)
 			{
 				return;
 			}
-			double center = (this.Bounds.ZMax + this.Bounds.ZMin) / 2;
-			double min = center + (this.Bounds.ZMin - center) * factor;
-			double max = center + (this.Bounds.ZMax - center) * factor;
+			float center = (this.Bounds.ZMax + this.Bounds.ZMin) / 2;
+			float min = center + (this.Bounds.ZMin - center) * factor;
+			float max = center + (this.Bounds.ZMax - center) * factor;
 
 			// set min/max according to bounds
 			Scale scale = null;
@@ -606,7 +606,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			float xLen = (float)(bounds.XMax - bounds.XMin);
 			float yLen = (float)(bounds.YMax - bounds.YMin);
 			float zLen = (float)(bounds.ZMax - bounds.ZMin);
-			float lmax = Math.Max(Math.Max(xLen, yLen), zLen);
+			float lmax = MathF.Max(MathF.Max(xLen, yLen), zLen);
 			if (float.IsInfinity(xLen) || float.IsNaN(xLen) || xLen == 0)
 			{
 				xLen = 1;
@@ -854,10 +854,10 @@ namespace Nzy3d.Plot3D.Rendering.View
 			}
 
 			Coord3d up;
-			if (Math.Abs(_viewpoint.Y) == PI_div2)
+			if (MathF.Abs(_viewpoint.Y) == PI_div2)
 			{
 				// handle up vector
-				Coord2d direction = new Coord2d(_viewpoint.X, _viewpoint.Y).cartesian();
+				Coord2d direction = new Coord2d(_viewpoint.X, _viewpoint.Y).Cartesian();
 				if (_viewpoint.Y > 0)
 				{
 					// on top
@@ -895,7 +895,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			// Set rendering volume
 			if (_viewmode == ViewPositionMode.TOP)
 			{
-				_cam.RenderingSphereRadius = (float)(Math.Max(boundsScaled.XMax - boundsScaled.XMin, boundsScaled.YMax - boundsScaled.YMin) / 2);
+				_cam.RenderingSphereRadius = (MathF.Max(boundsScaled.XMax - boundsScaled.XMin, boundsScaled.YMax - boundsScaled.YMin) / 2);
 				// correctCameraPositionForIncludingTextLabels(viewport) ' quite experimental !
 			}
 			else
@@ -1006,7 +1006,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 			if (_viewmode == ViewPositionMode.TOP)
 			{
-				float radius = (float)Math.Max(newBounds.XMax - newBounds.XMin, newBounds.YMax - newBounds.YMin);
+				float radius = MathF.Max(newBounds.XMax - newBounds.XMin, newBounds.YMax - newBounds.YMin);
 				radius += radius * STRETCH_RATIO;
 				_cam.RenderingSphereRadius = radius;
 			}

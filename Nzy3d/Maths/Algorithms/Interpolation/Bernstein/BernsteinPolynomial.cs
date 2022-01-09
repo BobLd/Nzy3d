@@ -6,10 +6,10 @@ namespace Nzy3d.Maths.Algorithms.Interpolation.Bernstein
 	/// </summary>
 	public class BernsteinPolynomial
 	{
-		public double[] b0;
-		public double[] b1;
-		public double[] b2;
-		public double[] b3;
+		public float[] b0;
+		public float[] b1;
+		public float[] b2;
+		public float[] b3;
 
 		public int resolution;
 		/// <summary>
@@ -20,20 +20,20 @@ namespace Nzy3d.Maths.Algorithms.Interpolation.Bernstein
 		{
 			if (res < 2)
 			{
-				throw new ArgumentException("Resolution must be at least 2", "res");
+				throw new ArgumentException("Resolution must be at least 2", nameof(res));
 			}
 			resolution = res;
-			b0 = new double[res];
-			b1 = new double[res];
-			b2 = new double[res];
-			b3 = new double[res];
-			double t = 0;
-			double dt = 1 / (resolution - 1);
+			b0 = new float[res];
+			b1 = new float[res];
+			b2 = new float[res];
+			b3 = new float[res];
+			float t = 0;
+			float dt = 1 / (resolution - 1);
 			for (int i = 0; i <= resolution - 1; i++)
 			{
-				double t1 = 1 - t;
-				double t12 = t1 * t1;
-				double t2 = t * t;
+				float t1 = 1 - t;
+				float t12 = t1 * t1;
+				float t2 = t * t;
 				b0[i] = t1 * t12;
 				b1[i] = 3 * t * t12;
 				b2[i] = 3 * t2 * t1;
@@ -43,10 +43,3 @@ namespace Nzy3d.Maths.Algorithms.Interpolation.Bernstein
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

@@ -9,13 +9,13 @@ namespace Nzy3d.Maths
 	public class Coord2d
 	{
 		#region "Members"
-		public double X;
-		public double Y;
+		public float X;
+		public float Y;
 		#endregion
 
 		#region "Constants"
 		public static readonly Coord2d ORIGIN = new Coord2d(0, 0);
-		public static readonly Coord2d INVALID = new Coord2d(double.NaN, double.NaN);
+		public static readonly Coord2d INVALID = new Coord2d(float.NaN, float.NaN);
 		public static readonly Coord2d IDENTITY = new Coord2d(1, 1);
 		#endregion
 
@@ -24,7 +24,7 @@ namespace Nzy3d.Maths
 		{
 		}
 
-		public Coord2d(double xi, double yi)
+		public Coord2d(float xi, float yi)
 		{
 			this.X = xi;
 			this.Y = yi;
@@ -36,10 +36,10 @@ namespace Nzy3d.Maths
 		/// Set all values of Coord2d
 		/// </summary>
 		/// <returns>Self</returns>
-		public Coord2d setvalues(double xx, double yy)
+		public Coord2d Setvalues(float x, float y)
 		{
-			X = xx;
-			Y = yy;
+			X = x;
+			Y = y;
 			return this;
 		}
 
@@ -49,7 +49,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="value">Value to add to both coordinates (x and y)</param>
 		/// <remarks>Current object is not modified</remarks>
-		public Coord2d @add(double value)
+		public Coord2d Add(float value)
 		{
 			return new Coord2d(this.X + value, this.Y + value);
 		}
@@ -61,7 +61,7 @@ namespace Nzy3d.Maths
 		/// <param name="xi">x value to add</param>
 		/// <param name="yi">y value to add</param>
 		/// <remarks>Current object is not modified</remarks>
-		public Coord2d @add(double xi, double yi)
+		public Coord2d Add(float xi, float yi)
 		{
 			return new Coord2d(this.X + xi, this.Y + yi);
 		}
@@ -72,7 +72,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="coord">Coordinate with values to add</param>
 		/// <remarks>Current object is not modified</remarks>
-		public Coord2d @add(Coord2d coord)
+		public Coord2d Add(Coord2d coord)
 		{
 			return new Coord2d(this.X + coord.X, this.Y + coord.Y);
 		}
@@ -81,7 +81,7 @@ namespace Nzy3d.Maths
 		/// Add a value to all components of the current <see cref="Coord2d"/>.
 		/// </summary>
 		/// <param name="value">Value to add to both coordinates (x and y)</param>
-		public void addSelf(double value)
+		public void AddSelf(float value)
 		{
 			this.X += value;
 			this.Y += value;
@@ -92,7 +92,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="xi">x value to add</param>
 		/// <param name="yi">y value to add</param>
-		public void addSelf(double xi, double yi)
+		public void AddSelf(float xi, float yi)
 		{
 			this.X += xi;
 			this.Y += yi;
@@ -102,7 +102,7 @@ namespace Nzy3d.Maths
 		/// Add values of another <see cref="Coord2d"/> to all components of the current <see cref="Coord2d"/>.
 		/// </summary>
 		/// <param name="coord">Coordinate with values to add</param>
-		public void addSelf(Coord2d coord)
+		public void AddSelf(Coord2d coord)
 		{
 			this.X += coord.X;
 			this.Y += coord.Y;
@@ -114,7 +114,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="value">Value to substract to both coordinates (x and y)</param>
 		/// <remarks>Current object is not modified</remarks>
-		public Coord2d substract(double value)
+		public Coord2d Substract(float value)
 		{
 			return new Coord2d(this.X - value, this.Y - value);
 		}
@@ -126,7 +126,7 @@ namespace Nzy3d.Maths
 		/// <param name="xi">x value to substract</param>
 		/// <param name="yi">y value to substract</param>
 		/// <remarks>Current object is not modified</remarks>
-		public Coord2d substract(double xi, double yi)
+		public Coord2d Substract(float xi, float yi)
 		{
 			return new Coord2d(this.X - xi, this.Y - yi);
 		}
@@ -137,7 +137,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="coord">Coordinate with values to substract</param>
 		/// <remarks>Current object is not modified</remarks>
-		public Coord2d substract(Coord2d coord)
+		public Coord2d Substract(Coord2d coord)
 		{
 			return new Coord2d(this.X - coord.X, this.Y - coord.Y);
 		}
@@ -146,7 +146,7 @@ namespace Nzy3d.Maths
 		/// Substract a value to all components of the current <see cref="Coord2d"/>.
 		/// </summary>
 		/// <param name="value">Value to substract to both coordinates (x and y)</param>
-		public void substractSelf(double value)
+		public void SubstractSelf(float value)
 		{
 			this.X -= value;
 			this.Y -= value;
@@ -157,7 +157,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="xi">x value to substract</param>
 		/// <param name="yi">y value to substract</param>
-		public void substractSelf(double xi, double yi)
+		public void SubstractSelf(float xi, float yi)
 		{
 			this.X -= xi;
 			this.Y -= yi;
@@ -167,7 +167,7 @@ namespace Nzy3d.Maths
 		/// Substract values of another <see cref="Coord2d"/> to all components of the current <see cref="Coord2d"/>.
 		/// </summary>
 		/// <param name="coord">Coordinate with values to substract</param>
-		public void substractSelf(Coord2d coord)
+		public void SubstractSelf(Coord2d coord)
 		{
 			this.X -= coord.X;
 			this.Y -= coord.Y;
@@ -179,7 +179,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="value">Value to multiply both coordinates with (x and y)</param>
 		/// <remarks>Current object is not modified</remarks>
-		public Coord2d multiply(double value)
+		public Coord2d Multiply(float value)
 		{
 			return new Coord2d(this.X * value, this.Y * value);
 		}
@@ -191,7 +191,7 @@ namespace Nzy3d.Maths
 		/// <param name="xi">x value to multiply with</param>
 		/// <param name="yi">y value to multiply with</param>
 		/// <remarks>Current object is not modified</remarks>
-		public Coord2d multiply(double xi, double yi)
+		public Coord2d Multiply(float xi, float yi)
 		{
 			return new Coord2d(this.X * xi, this.Y * yi);
 		}
@@ -202,7 +202,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="coord">Coordinate with values to multiply with</param>
 		/// <remarks>Current object is not modified</remarks>
-		public Coord2d multiply(Coord2d coord)
+		public Coord2d Multiply(Coord2d coord)
 		{
 			return new Coord2d(this.X * coord.X, this.Y * coord.Y);
 		}
@@ -211,7 +211,7 @@ namespace Nzy3d.Maths
 		/// Multiply components of the current <see cref="Coord2d"/> with a given value.
 		/// </summary>
 		/// <param name="value">Value to multiply both coordinates with (x and y)</param>
-		public void multiplySelf(double value)
+		public void MultiplySelf(float value)
 		{
 			this.X *= value;
 			this.Y *= value;
@@ -222,7 +222,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="xi">x value to multiply with</param>
 		/// <param name="yi">y value to multiply with</param>
-		public void multiplySelf(double xi, double yi)
+		public void MultiplySelf(float xi, float yi)
 		{
 			this.X *= xi;
 			this.Y *= yi;
@@ -232,7 +232,7 @@ namespace Nzy3d.Maths
 		/// Multiply components of the current <see cref="Coord2d"/> with values of another <see cref="Coord2d"/>.
 		/// </summary>
 		/// <param name="coord">Coordinate with values to multiply with</param>
-		public void multiplySelf(Coord2d coord)
+		public void MultiplySelf(Coord2d coord)
 		{
 			this.X *= coord.X;
 			this.Y *= coord.Y;
@@ -244,7 +244,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="value">Value to multiply both coordinates with (x and y)</param>
 		/// <remarks>Current object is not modified</remarks>
-		public Coord2d divide(double value)
+		public Coord2d Divide(float value)
 		{
 			return new Coord2d(this.X / value, this.Y / value);
 		}
@@ -256,7 +256,7 @@ namespace Nzy3d.Maths
 		/// <param name="xi">x value to divide with</param>
 		/// <param name="yi">y value to divide with</param>
 		/// <remarks>Current object is not modified</remarks>
-		public Coord2d divide(double xi, double yi)
+		public Coord2d Divide(float xi, float yi)
 		{
 			return new Coord2d(this.X / xi, this.Y / yi);
 		}
@@ -267,7 +267,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="coord">Coordinate with values to divide with</param>
 		/// <remarks>Current object is not modified</remarks>
-		public Coord2d divide(Coord2d coord)
+		public Coord2d Divide(Coord2d coord)
 		{
 			return new Coord2d(this.X / coord.X, this.Y / coord.Y);
 		}
@@ -276,7 +276,7 @@ namespace Nzy3d.Maths
 		/// Divide components of the current <see cref="Coord2d"/> by a given value.
 		/// </summary>
 		/// <param name="value">Value to divide both coordinates by (x and y)</param>
-		public void divideSelf(double value)
+		public void DivideSelf(float value)
 		{
 			this.X /= value;
 			this.Y /= value;
@@ -287,7 +287,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		/// <param name="xi">x value to divide by</param>
 		/// <param name="yi">y value to divide by</param>
-		public void divideSelf(double xi, double yi)
+		public void DivideSelf(float xi, float yi)
 		{
 			this.X /= xi;
 			this.Y /= yi;
@@ -297,7 +297,7 @@ namespace Nzy3d.Maths
 		/// Divide components of the current <see cref="Coord2d"/> by values of another <see cref="Coord2d"/>.
 		/// </summary>
 		/// <param name="coord">Coordinate with values to divide by</param>
-		public void divideSelf(Coord2d coord)
+		public void DivideSelf(Coord2d coord)
 		{
 			this.X /= coord.X;
 			this.Y /= coord.Y;
@@ -307,18 +307,18 @@ namespace Nzy3d.Maths
 		/// Assuming current coordinate is in polar system, returns a new coordinate in cartesian system
 		/// </summary>
 		/// <remarks>Current object is not modified</remarks>
-		public Coord2d cartesian()
+		public Coord2d Cartesian()
 		{
-			return new Coord2d(Math.Cos(X) * Y, Math.Sin(X) * Y);
+			return new Coord2d(MathF.Cos(X) * Y, MathF.Sin(X) * Y);
 		}
 
 		/// <summary>
 		/// Assuming current coordinate is in cartesian system, returns a new coordinate in polar system
 		/// </summary>
 		/// <remarks>Current object is not modified</remarks>
-		public Coord2d polar()
+		public Coord2d Polar()
 		{
-			return new Coord2d(Math.Atan(Y / X), Math.Sqrt(X * X + Y * Y));
+			return new Coord2d(MathF.Atan(Y / X), MathF.Sqrt(X * X + Y * Y));
 		}
 
 		/// <summary>
@@ -327,22 +327,22 @@ namespace Nzy3d.Maths
 		/// Source : http://fr.wikipedia.org/wiki/Coordonn%C3%A9es_polaires
 		/// </summary>
 		/// <remarks>Current object is not modified</remarks>
-		public Coord2d fullPolar()
+		public Coord2d FullPolar()
 		{
-			double radius = Math.Sqrt(X * X + Y * Y);
+			float radius = MathF.Sqrt(X * X + Y * Y);
 			if (X < 0)
 			{
-				return new Coord2d(Math.Atan(Y / X), radius);
+				return new Coord2d(MathF.Atan(Y / X), radius);
 			}
 			else if (X > 0)
 			{
 				if (Y >= 0)
 				{
-					return new Coord2d(Math.Atan(Y / X), radius);
+					return new Coord2d(MathF.Atan(Y / X), radius);
 				}
 				else
 				{
-					return new Coord2d(Math.Atan(Y / X) + 2 * Math.PI, radius);
+					return new Coord2d(MathF.Atan(Y / X) + 2f * MathF.PI, radius);
 				}
 				//x=0
 			}
@@ -350,11 +350,11 @@ namespace Nzy3d.Maths
 			{
 				if (Y > 0)
 				{
-					return new Coord2d(Math.PI / 2, radius);
+					return new Coord2d(MathF.PI / 2, radius);
 				}
 				else if (Y > 0)
 				{
-					return new Coord2d(3 * Math.PI / 2, radius);
+					return new Coord2d(3f * MathF.PI / 2f, radius);
 					//y=0
 				}
 				else
@@ -367,35 +367,31 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Compute the distance between two coordinates.
 		/// </summary>
-		/// <returns></returns>
-		/// <remarks></remarks>
-		public double distance(Coord2d coord)
+		public float Distance(Coord2d coord)
 		{
-			return Math.Sqrt(Math.Pow((this.X - coord.X), 2) + Math.Pow((this.Y - coord.Y), 2));
+			return MathF.Sqrt(MathF.Pow(this.X - coord.X, 2) + MathF.Pow(this.Y - coord.Y, 2));
 		}
 
+		/// <inheritdoc/>
 		public override string ToString()
 		{
-			return ("x=" + X + " y=" + Y);
+			return "x=" + X + " y=" + Y;
 		}
 
-		public double[] toArray()
+		public float[] ToArray()
 		{
-			return new double[] {
-				X,
-				Y
-			};
+			return new float[] { X, Y };
 		}
 		#endregion
 
 		/// <inheritdoc/>
 		public override int GetHashCode()
-		{
-			return (X, Y).GetHashCode();
-		}
+        {
+            return HashCode.Combine(X, Y);
+        }
 
-		/// <inheritdoc/>
-		public override bool Equals(object? obj)
+        /// <inheritdoc/>
+        public override bool Equals(object? obj)
 		{
 			if (obj is not Coord2d other)
 			{

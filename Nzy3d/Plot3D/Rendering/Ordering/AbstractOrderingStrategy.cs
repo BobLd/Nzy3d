@@ -35,7 +35,7 @@ namespace Nzy3d.Plot3D.Rendering.Ordering
 			}
 		}
 
-		public void setAll(Camera camera, Transform.Transform transform)
+		public void SetAll(Camera camera, Transform.Transform transform)
 		{
 			this.Camera = camera;
 			this.Transform = transform;

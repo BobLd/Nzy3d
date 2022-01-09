@@ -49,12 +49,12 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 				// Rotate
 				if (e.Button == MouseButtons.Left)
 				{
-					Coord2d move = mouse.substract(_prevMouse).divide(100);
+					Coord2d move = mouse.Substract(_prevMouse).Divide(100);
 					Rotate(move);
 				}
 				if (e.Button == MouseButtons.Right)
 				{
-					Coord2d move = mouse.substract(_prevMouse);
+					Coord2d move = mouse.Substract(_prevMouse);
 					if (move.Y != 0)
 					{
 						Shift((float)(move.Y / 250));
@@ -66,10 +66,7 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 
 		public void MouseWheelMoved(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
-			if (((_threadController != null)))
-			{
-				_threadController.StopT();
-			}
+			_threadController?.StopT();
 
 			if (e.Delta > 0)
 			{

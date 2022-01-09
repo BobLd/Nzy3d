@@ -9,14 +9,14 @@ namespace Nzy3d.Maths
 	/// </summary>
 	public struct Vector3d
 	{
-		private readonly double m_x1;
-		private readonly double m_x2;
-		private readonly double m_y1;
-		private readonly double m_y2;
-		private readonly double m_z1;
-		private readonly double m_z2;
+		private readonly float m_x1;
+		private readonly float m_x2;
+		private readonly float m_y1;
+		private readonly float m_y2;
+		private readonly float m_z1;
+		private readonly float m_z2;
 
-		public Vector3d(double x1, double x2, double y1, double y2, double z1, double z2)
+		public Vector3d(float x1, float x2, float y1, float y2, float z1, float z2)
 		{
 			m_x1 = x1;
 			m_x2 = x2;
@@ -43,7 +43,7 @@ namespace Nzy3d.Maths
 		/// Compute the dot product between and current and given vector.
 		/// </summary>
 		/// <remarks>Remind that the dot product is 0 if vectors are perpendicular</remarks>
-		public double Dot(Vector3d v)
+		public float Dot(Vector3d v)
 		{
 			return this.Vector.Dot(v.Vector);
 		}
@@ -68,15 +68,15 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Compute the norm of this vector.
 		/// </summary>
-		public double Norm()
+		public float Norm()
 		{
-			return Math.Sqrt(this.Vector.MagSquared());
+			return MathF.Sqrt(this.Vector.MagSquared());
 		}
 
 		/// <summary>
 		/// Compute the distance between two coordinates.
 		/// </summary>
-		public double Distance(Coord3d c)
+		public float Distance(Coord3d c)
 		{
 			return this.Center.Distance(c);
 		}

@@ -146,7 +146,7 @@ namespace Nzy3d.Plot3D.Builder.Concrete
                                     done[seq[s]] = true;
                                 }
                                 // Select the radius on which the point is supposed to stand
-                                if (Math.Abs(radius[seq[s + 1]] - _ringMin) < Math.Abs(radius[seq[s + 1]] - _ringMax))
+                                if (MathF.Abs(radius[seq[s + 1]] - _ringMin) < MathF.Abs(radius[seq[s + 1]] - _ringMax))
                                 {
                                     ringRadius = _ringMin;
                                 }
@@ -165,7 +165,7 @@ namespace Nzy3d.Plot3D.Builder.Concrete
                             {
                                 //Case of point s "out" and point s+1 "in"
                                 // Select the radius on which the point is supposed to stand
-                                if (Math.Abs(radius[seq[s + 1]] - _ringMin) < Math.Abs(radius[seq[s + 1]] - _ringMax))
+                                if (MathF.Abs(radius[seq[s + 1]] - _ringMin) < MathF.Abs(radius[seq[s + 1]] - _ringMax))
                                 {
                                     ringRadius = _ringMin;
                                 }
@@ -205,16 +205,16 @@ namespace Nzy3d.Plot3D.Builder.Concrete
         internal static bool[] IsInside(Point[] p, float[] radius, float minRadius, float maxRadius)
         {
             bool[] isIn = new bool[4];
-            isIn[0] = (!double.IsNaN(p[0].XYZ.Z)) && radius[0] < maxRadius && radius[0] >= minRadius;
-            isIn[1] = (!double.IsNaN(p[1].XYZ.Z)) && radius[1] < maxRadius && radius[1] >= minRadius;
-            isIn[2] = (!double.IsNaN(p[2].XYZ.Z)) && radius[2] < maxRadius && radius[2] >= minRadius;
-            isIn[3] = (!double.IsNaN(p[3].XYZ.Z)) && radius[3] < maxRadius && radius[3] >= minRadius;
+            isIn[0] = (!float.IsNaN(p[0].XYZ.Z)) && radius[0] < maxRadius && radius[0] >= minRadius;
+            isIn[1] = (!float.IsNaN(p[1].XYZ.Z)) && radius[1] < maxRadius && radius[1] >= minRadius;
+            isIn[2] = (!float.IsNaN(p[2].XYZ.Z)) && radius[2] < maxRadius && radius[2] >= minRadius;
+            isIn[3] = (!float.IsNaN(p[3].XYZ.Z)) && radius[3] < maxRadius && radius[3] >= minRadius;
             return isIn;
         }
 
         internal static float Radius2d(Point p)
         {
-            return (float)Math.Sqrt(p.XYZ.X * p.XYZ.X + p.XYZ.Y * p.XYZ.Y);
+            return MathF.Sqrt(p.XYZ.X * p.XYZ.X + p.XYZ.Y * p.XYZ.Y);
         }
 
         /// <summary>
@@ -223,7 +223,7 @@ namespace Nzy3d.Plot3D.Builder.Concrete
         /// </summary>
         private Point FindPoint(Point p1, Point p2, float ringRadius)
         {
-            double x3, y3, z3, w1, w2, alpha;
+            float x3, y3, z3, w1, w2, alpha;
 
             // We know that the seeked point is on a horizontal or vertial line
 
@@ -231,14 +231,14 @@ namespace Nzy3d.Plot3D.Builder.Concrete
             if (p1.XYZ.X == p2.XYZ.X)
             {
                 x3 = p1.XYZ.X;
-                alpha = Math.Acos(x3 / ringRadius);
+                alpha = MathF.Acos(x3 / ringRadius);
                 if (p1.XYZ.Y < 0 && p2.XYZ.Y < 0)
                 {
-                    y3 = -Math.Sin(alpha) * ringRadius;
+                    y3 = -MathF.Sin(alpha) * ringRadius;
                 }
                 else if (p1.XYZ.Y > 0 && p2.XYZ.Y > 0)
                 {
-                    y3 = Math.Sin(alpha) * ringRadius;
+                    y3 = MathF.Sin(alpha) * ringRadius;
                 }
                 else if (p1.XYZ.Y == -p2.XYZ.Y)
                 {
@@ -251,17 +251,17 @@ namespace Nzy3d.Plot3D.Builder.Concrete
                 }
 
                 // and now get z3
-                if ((!double.IsNaN(p1.XYZ.Z)) && double.IsNaN(p2.XYZ.Z))
+                if ((!float.IsNaN(p1.XYZ.Z)) && float.IsNaN(p2.XYZ.Z))
                 {
                     z3 = p1.XYZ.Z;
                 }
-                else if (double.IsNaN(p1.XYZ.Z) && (!double.IsNaN(p2.XYZ.Z)))
+                else if (float.IsNaN(p1.XYZ.Z) && (!float.IsNaN(p2.XYZ.Z)))
                 {
                     z3 = p2.XYZ.Z;
                 }
-                else if ((!double.IsNaN(p1.XYZ.Z)) && (!double.IsNaN(p2.XYZ.Z)))
+                else if ((!float.IsNaN(p1.XYZ.Z)) && (!float.IsNaN(p2.XYZ.Z)))
                 {
-                    w2 = (Math.Sqrt((x3 - p1.XYZ.X) * (x3 - p1.XYZ.X) + (y3 - p1.XYZ.Y) * (y3 - p1.XYZ.Y)) / Math.Sqrt((p2.XYZ.X - p1.XYZ.X) * (p2.XYZ.X - p1.XYZ.X) + (p2.XYZ.Y - p1.XYZ.Y) * (p2.XYZ.Y - p1.XYZ.Y)));
+                    w2 = MathF.Sqrt((x3 - p1.XYZ.X) * (x3 - p1.XYZ.X) + (y3 - p1.XYZ.Y) * (y3 - p1.XYZ.Y)) / MathF.Sqrt((p2.XYZ.X - p1.XYZ.X) * (p2.XYZ.X - p1.XYZ.X) + (p2.XYZ.Y - p1.XYZ.Y) * (p2.XYZ.Y - p1.XYZ.Y));
                     w1 = 1 - w2;
                     z3 = w1 * p1.XYZ.Z + w2 * p2.XYZ.Z;
                 }
@@ -274,14 +274,14 @@ namespace Nzy3d.Plot3D.Builder.Concrete
             else if (p1.XYZ.Y == p2.XYZ.Y)
             {
                 y3 = p1.XYZ.Y;
-                alpha = Math.Asin(y3 / ringRadius);
+                alpha = MathF.Asin(y3 / ringRadius);
                 if (p1.XYZ.X < 0 && p2.XYZ.X < 0)
                 {
-                    x3 = -Math.Cos(alpha) * ringRadius;
+                    x3 = -MathF.Cos(alpha) * ringRadius;
                 }
                 else if (p1.XYZ.X > 0 && p2.XYZ.X > 0)
                 {
-                    x3 = Math.Cos(alpha) * ringRadius;
+                    x3 = MathF.Cos(alpha) * ringRadius;
                 }
                 else if (p1.XYZ.X == -p2.XYZ.X)
                 {
@@ -294,17 +294,17 @@ namespace Nzy3d.Plot3D.Builder.Concrete
                 }
 
                 // and now get z3
-                if ((!double.IsNaN(p1.XYZ.Z)) && double.IsNaN(p2.XYZ.Z))
+                if ((!float.IsNaN(p1.XYZ.Z)) && float.IsNaN(p2.XYZ.Z))
                 {
                     z3 = p1.XYZ.Z;
                 }
-                else if (double.IsNaN(p1.XYZ.Z) && (!double.IsNaN(p2.XYZ.Z)))
+                else if (float.IsNaN(p1.XYZ.Z) && (!float.IsNaN(p2.XYZ.Z)))
                 {
                     z3 = p2.XYZ.Z;
                 }
-                else if ((!double.IsNaN(p1.XYZ.Z)) && (!double.IsNaN(p2.XYZ.Z)))
+                else if ((!float.IsNaN(p1.XYZ.Z)) && (!float.IsNaN(p2.XYZ.Z)))
                 {
-                    w2 = (Math.Sqrt((x3 - p1.XYZ.X) * (x3 - p1.XYZ.X) + (y3 - p1.XYZ.Y) * (y3 - p1.XYZ.Y)) / Math.Sqrt((p2.XYZ.X - p1.XYZ.X) * (p2.XYZ.X - p1.XYZ.X) + (p2.XYZ.Y - p1.XYZ.Y) * (p2.XYZ.Y - p1.XYZ.Y)));
+                    w2 = MathF.Sqrt((x3 - p1.XYZ.X) * (x3 - p1.XYZ.X) + (y3 - p1.XYZ.Y) * (y3 - p1.XYZ.Y)) / MathF.Sqrt((p2.XYZ.X - p1.XYZ.X) * (p2.XYZ.X - p1.XYZ.X) + (p2.XYZ.Y - p1.XYZ.Y) * (p2.XYZ.Y - p1.XYZ.Y));
                     w1 = 1 - w2;
                     z3 = w1 * p1.XYZ.Z + w2 * p2.XYZ.Z;
                 }

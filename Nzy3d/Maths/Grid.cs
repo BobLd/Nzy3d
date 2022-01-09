@@ -2,16 +2,15 @@ namespace Nzy3d.Maths
 {
 	public class Grid
 	{
-		private double[] m_x;
-		private double[] m_y;
-
-		private double[,] m_z;
+		private float[] m_x;
+		private float[] m_y;
+		private float[,] m_z;
 
 		public Grid()
 		{
 		}
 
-		public Grid(double[] x, double[] y, double[,] z)
+		public Grid(float[] x, float[] y, float[,] z)
 		{
 			this.SetData(x, y, z);
 		}
@@ -21,7 +20,7 @@ namespace Nzy3d.Maths
 			this.SetData(x, y, z);
 		}
 
-		public void SetData(double[] x, double[] y, double[,] z)
+		public void SetData(float[] x, float[] y, float[,] z)
 		{
 			m_x = x;
 			m_y = y;
@@ -30,20 +29,20 @@ namespace Nzy3d.Maths
 
 		public void SetData(int[] x, int[] y, int[,] z)
 		{
-			this.SetData(ToDoubleArray(x), ToDoubleArray(y), ToDoubleArray(z));
+			this.SetData(ToFloatArray(x), ToFloatArray(y), ToFloatArray(z));
 		}
 
-		public double[] X
+		public float[] X
 		{
 			get { return m_x; }
 		}
 
-		public double[] Y
+		public float[] Y
 		{
 			get { return m_y; }
 		}
 
-		public double[,] Z
+		public float[,] Z
 		{
 			get { return m_z; }
 		}
@@ -59,27 +58,27 @@ namespace Nzy3d.Maths
 									 Statistics.Min(Z), Statistics.Max(Z));
 		}
 
-		internal double[] ToDoubleArray(int[] input)
+		internal static float[] ToFloatArray(int[] input)
 		{
-			double[] @out = new double[input.Length];
+			float[] _out = new float[input.Length];
 			for (int i = 0; i <= input.Length - 1; i++)
 			{
-				@out[i] = input[i];
+				_out[i] = input[i];
 			}
-			return @out;
+			return _out;
 		}
 
-		internal double[,] ToDoubleArray(int[,] input)
+		internal static float[,] ToFloatArray(int[,] input)
 		{
-			double[,] @out = new double[input.GetLength(0), input.GetLength(1)];
+			float[,] _out = new float[input.GetLength(0), input.GetLength(1)];
 			for (int i = 0; i <= input.GetLength(0) - 1; i++)
 			{
 				for (int j = 0; j <= input.GetLength(1) - 1; j++)
 				{
-					@out[i, j] = input[i, j];
+					_out[i, j] = input[i, j];
 				}
 			}
-			return @out;
+			return _out;
 		}
 	}
 }

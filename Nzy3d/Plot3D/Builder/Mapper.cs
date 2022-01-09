@@ -5,14 +5,14 @@ namespace Nzy3d.Plot3D.Builder
 		/// <summary>
 		/// Function to map. For a given x/y point, computes z value
 		/// </summary>
-		public abstract double f(double x, double y);
+		public abstract float f(float x, float y);
 
 		/// <summary>
 		/// Default implementation providing iterative calls to f(x,y)
 		/// </summary>
-		public double[] f(double[] x, double[] y)
+		public float[] f(float[] x, float[] y)
 		{
-			double[] z = new double[x.Length];
+			float[] z = new float[x.Length];
 			for (int i = 0; i <= x.Length - 1; i++)
 			{
 				z[i] = f(x[i], y[i]);
@@ -24,29 +24,17 @@ namespace Nzy3d.Plot3D.Builder
 		/// Default implementation providing iterative calls to f(x,y)
 		/// </summary>
 		/// <param name="xy">Array whose second dimension must be equal to two</param>
-		public double[] f(double[,] xy)
+		public float[] f(float[,] xy)
 		{
 			if (xy.GetLength(1) != 2)
 			{
-				throw new ArgumentException("Input xy array must be have a length of 2 in second dimension. Current array second dimension has a lenght of " + xy.GetLength(1), "xy");
+				throw new ArgumentException("Input xy array must be have a length of 2 in second dimension. Current array second dimension has a lenght of " + xy.GetLength(1), nameof(xy));
 			}
-			double[] z = new double[xy.GetLength(0)];
+
+			float[] z = new float[xy.GetLength(0)];
 			for (int i = 0; i <= xy.GetLength(0) - 1; i++)
 			{
 				z[i] = f(xy[i, 0], xy[i, 1]);
-			}
-			return z;
-		}
-
-		/// <summary>
-		/// Default implementation providing iterative calls to f(x,y)
-		/// </summary>
-		public float[] fAsSingle(double[] x, double[] y)
-		{
-			float[] z = new float[x.Length];
-			for (int i = 0; i <= x.Length - 1; i++)
-			{
-				z[i] = Convert.ToSingle(f(x[i], y[i]));
 			}
 			return z;
 		}
@@ -59,25 +47,7 @@ namespace Nzy3d.Plot3D.Builder
 			float[] z = new float[x.Length];
 			for (int i = 0; i <= x.Length - 1; i++)
 			{
-				z[i] = Convert.ToSingle(f(Convert.ToDouble(x[i]), Convert.ToDouble(y[i])));
-			}
-			return z;
-		}
-
-		/// <summary>
-		/// Default implementation providing iterative calls to f(x,y)
-		/// </summary>
-		/// <param name="xy">Array whose second dimension must be equal to two</param>
-		public float[] fAsSingle(double[,] xy)
-		{
-			if (xy.GetLength(1) != 2)
-			{
-				throw new ArgumentException("Input xy array must be have a length of 2 in second dimension. Current array second dimension has a lenght of " + xy.GetLength(1), "xy");
-			}
-			float[] z = new float[xy.GetLength(0)];
-			for (int i = 0; i <= xy.GetLength(0) - 1; i++)
-			{
-				z[i] = Convert.ToSingle(f(xy[i, 0], xy[i, 0]));
+				z[i] = Convert.ToSingle(f(x[i], y[i]));
 			}
 			return z;
 		}
@@ -90,21 +60,14 @@ namespace Nzy3d.Plot3D.Builder
 		{
 			if (xy.GetLength(1) != 2)
 			{
-				throw new ArgumentException("Input xy array must be have a length of 2 in second dimension. Current array second dimension has a lenght of " + xy.GetLength(1), "xy");
+				throw new ArgumentException("Input xy array must be have a length of 2 in second dimension. Current array second dimension has a lenght of " + xy.GetLength(1), nameof(xy));
 			}
 			float[] z = new float[xy.GetLength(0)];
 			for (int i = 0; i <= xy.GetLength(0) - 1; i++)
 			{
-				z[i] = Convert.ToSingle(f(Convert.ToDouble(xy[i, 0]), Convert.ToDouble(xy[i, 1])));
+				z[i] = Convert.ToSingle(f(xy[i, 0], xy[i, 0]));
 			}
 			return z;
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

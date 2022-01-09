@@ -17,22 +17,22 @@ namespace Nzy3d.Colors.ColorMaps
 	/// </summary>
 	public class ColorMapHotCold : IColorMap
 	{
-        public bool Direction { get; set; }
+		public bool Direction { get; set; }
 
-        public Color GetColor(IColorMappable colorable, double v)
+		public Color GetColor(IColorMappable colorable, float v)
 		{
 			return GetColor(0, 0, v, colorable.ZMin, colorable.ZMax);
 		}
 
-		public Color GetColor(IColorMappable colorable, double x, double y, double z)
+		public Color GetColor(IColorMappable colorable, float x, float y, float z)
 		{
 			return GetColor(x, y, z, colorable.ZMin, colorable.ZMax);
 		}
 
-		private Color GetColor(double x, double y, double z, double zMin, double zMax)
+		private Color GetColor(float x, float y, float z, float zMin, float zMax)
 		{
-			double rel_value = 0;
-			if (z < zMin)
+            float rel_value;
+            if (z < zMin)
 			{
 				rel_value = 0;
 			}
@@ -51,30 +51,30 @@ namespace Nzy3d.Colors.ColorMaps
 					rel_value = (zMax - z) / (zMax - zMin);
 				}
 			}
-			double v = colorComponentAbsolute(rel_value, 0.25, 0.875, 0.25, 0.5);
-			double b = colorComponentAbsolute(rel_value, 0.125, 0.875, 0.5, 0.5);
-			double r = colorComponentAbsolute(rel_value, 0.125, 1.25, 0.5, 0.75);
+			float v = ColorComponentAbsolute(rel_value, 0.25f, 0.875f, 0.25f, 0.5f);
+			float b = ColorComponentAbsolute(rel_value, 0.125f, 0.875f, 0.5f, 0.5f);
+			float r = ColorComponentAbsolute(rel_value, 0.125f, 1.25f, 0.5f, 0.75f);
 			return new Color(r, v, b);
 		}
 
-		private double colorComponentAbsolute(double value, double bLeft, double bRight, double tLeft, double tRight)
+		private static float ColorComponentAbsolute(float value, float bLeft, float bRight, float tLeft, float tRight)
 		{
-			if (value < bLeft | value > bRight)
+			if (value < bLeft || value > bRight)
 			{
 				// a gauche ou a droite du creneau
 				return 0;
 			}
-			else if (value > tLeft | value < tRight)
+			else if (value > tLeft || value < tRight)
 			{
 				// sur le plateau haut
 				return 1;
 			}
-			else if (value >= bLeft & value <= tLeft)
+			else if (value >= bLeft && value <= tLeft)
 			{
 				// sur la pente gauche du creneau
 				return (value - bLeft) / (tLeft - bLeft);
 			}
-			else if (value >= tRight & value <= bRight)
+			else if (value >= tRight && value <= bRight)
 			{
 				// sur la pente droite du creneau
 				return (value - bRight) / (tRight - bRight);
@@ -94,10 +94,3 @@ namespace Nzy3d.Colors.ColorMaps
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

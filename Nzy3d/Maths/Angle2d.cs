@@ -7,16 +7,16 @@ namespace Nzy3d.Maths
 	public class Angle2d
 	{
 		#region "Members"
-		private readonly double X1;
-		private readonly double X2;
-		private readonly double X3;
-		private readonly double Y1;
-		private readonly double Y2;
-		private readonly double Y3;
+		private readonly float X1;
+		private readonly float X2;
+		private readonly float X3;
+		private readonly float Y1;
+		private readonly float Y2;
+		private readonly float Y3;
 		#endregion
 
 		#region "Constructors"
-		public Angle2d(double x1, double x2, double x3, double y1, double y2, double y3)
+		public Angle2d(float x1, float x2, float x3, float y1, float y2, float y3)
 		{
 			this.X1 = x1;
 			this.X2 = x2;
@@ -26,7 +26,8 @@ namespace Nzy3d.Maths
 			this.Y3 = y3;
 		}
 
-		public Angle2d(Coord2d p1, Coord2d p2, Coord2d p3) : this(p1.X, p2.X, p3.X, p1.Y, p2.Y, p3.Y)
+		public Angle2d(Coord2d p1, Coord2d p2, Coord2d p3)
+			: this(p1.X, p2.X, p3.X, p1.Y, p2.Y, p3.Y)
 		{
 		}
 		#endregion
@@ -35,14 +36,13 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Computes the sinus of the angle
 		/// </summary>
-		public double Sin()
+		public float Sin()
 		{
-			const double x4 = 0;
+			const float x4 = 0;
 			//(y1-y2)*(z3-z2) - (z1-z2)*(y3-y2);
-
-			const double y4 = 0;
+			const float y4 = 0;
 			//(z1-z2)*(x3-x2) - (x1-x2)*(z3-z2);
-			double z4 = (X1 - X2) * (Y3 - Y2) - (Y1 - Y2) * (X3 - X2);
+			float z4 = (X1 - X2) * (Y3 - Y2) - (Y1 - Y2) * (X3 - X2);
 
 			var v1 = new Vector3d(X1, Y1, 0, X2, Y2, 0);
 			var v3 = new Vector3d(X3, Y3, 0, X2, Y2, 0);
@@ -53,7 +53,7 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Computes the cosinus of the angle
 		/// </summary>
-		public double Cos()
+		public float Cos()
 		{
 			var v1 = new Vector2d(X1, Y1, X2, Y2);
 			var v3 = new Vector2d(X3, Y3, X2, Y2);
@@ -63,11 +63,11 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Computes the angle
 		/// </summary>
-		public double Angle()
+		public float Angle()
 		{
 			var v1 = new Vector2d(X1, Y1, X2, Y2);
 			var v3 = new Vector2d(X3, Y3, X2, Y2);
-			return Math.Acos(v1.Dot(v3));
+			return MathF.Acos(v1.Dot(v3));
 		}
 		#endregion
 	}

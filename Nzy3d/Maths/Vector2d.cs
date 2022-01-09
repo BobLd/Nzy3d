@@ -10,14 +10,14 @@ namespace Nzy3d.Maths
 	public struct Vector2d
 	{
 		#region "Members"
-		private readonly double x1;
-		private readonly double x2;
-		private readonly double y1;
-		private readonly double y2;
+		private readonly float x1;
+		private readonly float x2;
+		private readonly float y1;
+		private readonly float y2;
 		#endregion
 
 		#region "Constructors"
-		public Vector2d(double x1, double x2, double y1, double y2)
+		public Vector2d(float x1, float x2, float y1, float y2)
 		{
 			this.x1 = x1;
 			this.x2 = x2;
@@ -43,16 +43,16 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Compute the dot product between the current and given vector
 		/// </summary>
-		public double Dot(Vector2d v)
+		public float Dot(Vector2d v)
 		{
 			Coord2d v1 = this.Vector();
 			Coord2d v2 = v.Vector();
 			return v1.X * v2.X + v1.Y * v2.Y;
 		}
 
-		public double Norm()
+		public float Norm()
 		{
-			return Math.Sqrt(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2));
+			return MathF.Sqrt(MathF.Pow(x2 - x1, 2) + MathF.Pow(y2 - y1, 2));
 		}
 		#endregion
 	}

@@ -16,19 +16,14 @@ namespace Nzy3d.Colors.ColorMaps
 	/// </summary>
 	public class ColorMapGrayscale : IColorMap
 	{
-		private bool m_direction;
-		public bool Direction
-		{
-			get { return m_direction; }
-			set { m_direction = value; }
-		}
+        public bool Direction { get; set; }
 
-		public Color GetColor(IColorMappable colorable, double v)
+        public Color GetColor(IColorMappable colorable, float v)
 		{
 			return GetColor(0, 0, v, colorable.ZMin, colorable.ZMax);
 		}
 
-		public Color GetColor(IColorMappable colorable, double x, double y, double z)
+		public Color GetColor(IColorMappable colorable, float x, float y, float z)
 		{
 			return GetColor(x, y, z, colorable.ZMin, colorable.ZMax);
 		}
@@ -36,10 +31,10 @@ namespace Nzy3d.Colors.ColorMaps
 		/// <summary>
 		/// Helper function
 		/// </summary>
-		private Color GetColor(double x, double y, double z, double zMin, double zMax)
+		private Color GetColor(float x, float y, float z, float zMin, float zMax)
 		{
-			double rel_value = 0;
-			if (z < zMin)
+            float rel_value;
+            if (z < zMin)
 			{
 				rel_value = 0;
 			}
@@ -49,7 +44,7 @@ namespace Nzy3d.Colors.ColorMaps
 			}
 			else
 			{
-				if (m_direction)
+				if (Direction)
 				{
 					rel_value = (z - zMin) / (zMax - zMin);
 				}
@@ -70,10 +65,3 @@ namespace Nzy3d.Colors.ColorMaps
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

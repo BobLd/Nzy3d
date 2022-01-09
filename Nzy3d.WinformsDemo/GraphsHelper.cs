@@ -18,16 +18,16 @@ namespace Nzy3d.WinformsDemo
         {
             // Create a range for the graph generation
             var range = new Maths.Range(-150, 150);
-            const int steps = 50;
+            const int steps = 100;
 
             // Build a nice surface to display with cool alpha colors 
             // (alpha 0.8 for surface color and 0.5 for wireframe)
             var surface = Plot3D.Builder.Builder.BuildOrthonomal(new OrthonormalGrid(range, steps, range, steps), new MyMapper());
-            surface.ColorMapper = new ColorMapper(new ColorMapRainbow(), surface.Bounds.ZMin, surface.Bounds.ZMax, new Color(1, 1, 1, 0.8));
+            surface.ColorMapper = new ColorMapper(new ColorMapRainbow(), surface.Bounds.ZMin, surface.Bounds.ZMax, new Color(1f, 1f, 1f, 0.8f));
             surface.FaceDisplayed = true;
             surface.WireframeDisplayed = true;
-            surface.WireframeColor = Color.CYAN;
-            surface.WireframeColor.Mul(new Color(1, 1, 1, 0.5));
+            surface.WireframeColor = Color.GRAY;
+            surface.WireframeColor.Mul(new Color(1f, 1f, 1f, 0.5f));
             return surface;
         }
         #endregion
@@ -36,14 +36,14 @@ namespace Nzy3d.WinformsDemo
         public static GroupedLineScatter GetGroupedLineScatter()
         {
             const float a = 0.50f;
-            int size = 4;
+            const int size = 4;
             var points = new List<Coord3d[]>(size);
             var colors = new Color[]
             {
-                new Color(1.0, 0.0, 0.0, a), // RED
-                new Color(0.0, 1.0, 0.0, a), // GREEN
-                new Color(0.0, 0.0, 1.0, a), // BLUE
-                new Color(1.0, 1.0, 0.0, a), // YELLOW
+                new Color(1.0f, 0.0f, 0.0f, a), // RED
+                new Color(0.0f, 1.0f, 0.0f, a), // GREEN
+                new Color(0.0f, 0.0f, 1.0f, a), // BLUE
+                new Color(1.0f, 1.0f, 0.0f, a), // YELLOW
                 //new Color(1.0, 0.0, 1.0), // MAGENTA
                 //new Color(0.0, 1.0, 1.0), // CYAN
             };

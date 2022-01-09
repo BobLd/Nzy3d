@@ -7,17 +7,17 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 	/// </summary>
 	public class BoundingBox
 	{
-		private double m_minx;
-		private double m_maxx;
-		private double m_miny;
+		private float m_minx;
+		private float m_maxx;
+		private float m_miny;
+		private float m_maxy;
 
-		private double m_maxy;
 		/// <summary>
 		/// Creates an empty bounding box
 		/// </summary>
 		public BoundingBox()
 		{
-			setToNull();
+			SetToNull();
 		}
 
 		/// <summary>
@@ -26,13 +26,13 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <param name="other">The other boundingbox</param>
 		public BoundingBox(BoundingBox other)
 		{
-			if (other.isNull)
+			if (other.IsNull)
 			{
-				setToNull();
+				SetToNull();
 			}
 			else
 			{
-				init(other.minX, other.maxX, other.minY, other.maxY);
+				Init(other.MinX, other.MaxX, other.MinY, other.MaxY);
 			}
 		}
 
@@ -43,9 +43,9 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <param name="maxx">maximum x coordinate</param>
 		/// <param name="miny">minimum y coordinate</param>
 		/// <param name="maxy">maximum y coordinate</param>
-		public BoundingBox(double minx, double maxx, double miny, double maxy)
+		public BoundingBox(float minx, float maxx, float miny, float maxy)
 		{
-			init(minx, maxx, miny, maxy);
+			Init(minx, maxx, miny, maxy);
 		}
 
 		/// <summary>
@@ -55,7 +55,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <param name="upperRight">Upper right point of the box</param>
 		public BoundingBox(Point_dt lowerLeft, Point_dt upperRight)
 		{
-			init(lowerLeft.x, upperRight.x, lowerLeft.y, upperRight.y);
+			Init(lowerLeft.X, upperRight.X, lowerLeft.Y, upperRight.Y);
 		}
 
 		/// <summary>
@@ -65,7 +65,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <param name="x2">The second x-value</param>
 		/// <param name="y1">The first y-value</param>
 		/// <param name="y2">The second y-value</param>
-		private void init(double x1, double x2, double y1, double y2)
+		private void Init(float x1, float x2, float y1, float y2)
 		{
 			if (x1 < x2)
 			{
@@ -92,9 +92,9 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 
 		/// <summary>
 		/// Makes this BoundingBox a "null" envelope, that is, the envelope
-		///  of the empty geometry.
+		/// of the empty geometry.
 		/// </summary>
-		private void setToNull()
+		private void SetToNull()
 		{
 			m_minx = 0;
 			m_maxx = -1;
@@ -104,9 +104,9 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 
 		/// <summary>
 		/// true if this BoundingBox is uninitialized
-		///      or is the envelope of the empty geometry.
+		/// or is the envelope of the empty geometry.
 		/// </summary>
-		public bool isNull
+		public bool IsNull
 		{
 			get { return m_maxx < m_minx; }
 		}
@@ -116,9 +116,9 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// </summary>
 		/// <param name="other">The BoundingBox to check</param>
 		/// <returns>True if this BoundingBox contains the other BoundingBox, False otherwise</returns>
-		public bool contains(BoundingBox other)
+		public bool Contains(BoundingBox other)
 		{
-			return (!(this.isNull | other.isNull)) & other.minX >= this.minX & other.maxX <= this.maxX & other.minY >= this.minY & other.maxY <= this.maxY;
+			return (!(this.IsNull || other.IsNull)) && other.MinX >= this.MinX && other.MaxX <= this.MaxX && other.MinY >= this.MinY && other.MaxY <= this.MaxY;
 		}
 
 		/// <summary>
@@ -128,17 +128,20 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <returns>The union of the two BoundingBoxes</returns>
 		public BoundingBox UnionWith(BoundingBox other)
 		{
-			if (other.isNull)
+			if (other.IsNull)
 			{
 				return new BoundingBox(this);
 			}
-			else if (this.isNull)
+			else if (this.IsNull)
 			{
 				return new BoundingBox(other);
 			}
 			else
 			{
-				return new BoundingBox(Math.Min(minX, other.minX), Math.Max(maxX, other.maxX), Math.Min(minY, other.minY), Math.Max(maxY, other.maxY));
+				return new BoundingBox(MathF.Min(MinX, other.MinX),
+									   MathF.Max(MaxX, other.MaxX),
+									   MathF.Min(MinY, other.MinY),
+									   MathF.Max(MaxY, other.MaxY));
 			}
 		}
 
@@ -146,7 +149,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// Minimum x value of bounding box
 		/// </summary>
 		/// <returns>Minimum x value of bounding box</returns>
-		public double minX
+		public float MinX
 		{
 			get { return m_minx; }
 		}
@@ -155,7 +158,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// Maximum xvalue of bounding box
 		/// </summary>
 		/// <returns>Maximum x value of bounding box</returns>
-		public double maxX
+		public float MaxX
 		{
 			get { return m_maxx; }
 		}
@@ -164,7 +167,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// Minimum y value of bounding box
 		/// </summary>
 		/// <returns>Minimum y value of bounding box</returns>
-		public double minY
+		public float MinY
 		{
 			get { return m_miny; }
 		}
@@ -173,7 +176,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// Maximum y value of bounding box
 		/// </summary>
 		/// <returns>Maximum y value of bounding box</returns>
-		public double maxY
+		public float MaxY
 		{
 			get { return m_maxy; }
 		}
@@ -182,18 +185,18 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// Width of bounding box
 		/// </summary>
 		/// <returns>Width of bounding box</returns>
-		public double Width
+		public float Width
 		{
-			get { return maxX - minX; }
+			get { return MaxX - MinX; }
 		}
 
 		/// <summary>
 		/// Height of bounding box
 		/// </summary>
 		/// <returns>Height of bounding box</returns>
-		public double Height
+		public float Height
 		{
-			get { return maxY - minY; }
+			get { return MaxY - MinY; }
 		}
 
 		/// <summary>
@@ -202,7 +205,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <returns>Minimum coordinate of bounding box</returns>
 		public Point_dt MinPoint
 		{
-			get { return new Point_dt(minX, minY); }
+			get { return new Point_dt(MinX, MinY); }
 		}
 
 		/// <summary>
@@ -211,14 +214,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <returns>Maximum coordinate of bounding box</returns>
 		public Point_dt MaxPoint
 		{
-			get { return new Point_dt(maxX, maxY); }
+			get { return new Point_dt(MaxX, MaxY); }
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

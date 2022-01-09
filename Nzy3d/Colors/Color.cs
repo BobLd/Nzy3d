@@ -3,7 +3,7 @@ using OpenTK.Mathematics;
 namespace Nzy3d.Colors
 {
 	/// <summary>
-	/// 
+	///
 	/// </summary>
 	public struct Color
 	{
@@ -11,34 +11,34 @@ namespace Nzy3d.Colors
 		/// <summary>
 		/// Red channel.
 		/// </summary>
-		public double R;
+		public float R;
 
 		/// <summary>
 		/// Green channel.
 		/// </summary>
-		public double G;
+		public float G;
 
 		/// <summary>
 		/// Blue channel.
 		/// </summary>
-		public double B;
+		public float B;
 
 		/// <summary>
 		/// Alpha channel.
 		/// </summary>
-		public double A;
+		public float A;
 		#endregion
 
 		#region "Constants"
-		public static readonly Color BLACK = new Color(0.0, 0.0, 0.0);
-		public static readonly Color WHITE = new Color(1.0, 1.0, 1.0);
-		public static readonly Color GRAY = new Color(0.5, 0.5, 0.5);
-		public static readonly Color RED = new Color(1.0, 0.0, 0.0);
-		public static readonly Color GREEN = new Color(0.0, 1.0, 0.0);
-		public static readonly Color BLUE = new Color(0.0, 0.0, 1.0);
-		public static readonly Color YELLOW = new Color(1.0, 1.0, 0.0);
-		public static readonly Color MAGENTA = new Color(1.0, 0.0, 1.0);
-		public static readonly Color CYAN = new Color(0.0, 1.0, 1.0);
+		public static readonly Color BLACK = new Color(0.0f, 0.0f, 0.0f);
+		public static readonly Color WHITE = new Color(1.0f, 1.0f, 1.0f);
+		public static readonly Color GRAY = new Color(0.5f, 0.5f, 0.5f);
+		public static readonly Color RED = new Color(1.0f, 0.0f, 0.0f);
+		public static readonly Color GREEN = new Color(0.0f, 1.0f, 0.0f);
+		public static readonly Color BLUE = new Color(0.0f, 0.0f, 1.0f);
+		public static readonly Color YELLOW = new Color(1.0f, 1.0f, 0.0f);
+		public static readonly Color MAGENTA = new Color(1.0f, 0.0f, 1.0f);
+		public static readonly Color CYAN = new Color(0.0f, 1.0f, 1.0f);
 		#endregion
 
 		static internal Random randObj = new Random();
@@ -50,7 +50,7 @@ namespace Nzy3d.Colors
 		/// <param name="r">Red value (between 0 and 1)</param>
 		/// <param name="g">Green value (between 0 and 1)</param>
 		/// <param name="b">Blue value (between 0 and 1)</param>
-		public Color(double r, double g, double b)
+		public Color(float r, float g, float b)
 			: this(r, g, b, 1)
 		{
 		}
@@ -73,7 +73,7 @@ namespace Nzy3d.Colors
 		/// <param name="g">Green value (between 0 and 1)</param>
 		/// <param name="b">Blue value (between 0 and 1)</param>
 		/// <param name="a">a value (between 0 and 1)</param>
-		public Color(double r, double g, double b, double a)
+		public Color(float r, float g, float b, float a)
 		{
 			this.R = r;
 			this.G = g;
@@ -89,7 +89,7 @@ namespace Nzy3d.Colors
 		/// <param name="b">Blue value (between 0 and 255)</param>
 		/// <param name="a">a value (between 0 and 255)</param>
 		public Color(int r, int g, int b, int a)
-			: this(r / 255.0, g / 255.0, b / 255.0, a / 255.0)
+			: this(r / 255f, g / 255f, b / 255f, a / 255f)
 		{
 		}
 		#endregion
@@ -126,14 +126,14 @@ namespace Nzy3d.Colors
 			return $"(Color) r={R} g={G} b={B} a={A}";
 		}
 
-		public double[] ToArray()
+		public float[] ToArray()
 		{
-			return new double[] { R, G, B, A };
+			return new float[] { R, G, B, A };
 		}
 
-		public double[] Negative()
+		public float[] Negative()
 		{
-			return new double[] { 1 - R, 1 - G, 1 - B, A };
+			return new float[] { 1 - R, 1 - G, 1 - B, A };
 		}
 
 		public Color NegativeColor()
@@ -145,23 +145,23 @@ namespace Nzy3d.Colors
 		/// Compute the distance between two colors.
 		/// </summary>
 		/// <remarks>See https://en.wikipedia.org/wiki/Color_difference</remarks>
-		public double Distance(Color c)
+		public float Distance(Color c)
 		{
-			return Math.Sqrt(DistanceSq(c));
+			return MathF.Sqrt(DistanceSq(c));
 		}
 
 		/// <summary>
 		/// Compute the square distance between two colors.
 		/// </summary>
 		/// <remarks>See https://en.wikipedia.org/wiki/Color_difference</remarks>
-		public double DistanceSq(Color c)
+		public float DistanceSq(Color c)
 		{
-			return Math.Pow(R - c.R, 2) + Math.Pow(G - c.G, 2) + Math.Pow(B - c.B, 2);
+			return MathF.Pow(R - c.R, 2) + MathF.Pow(G - c.G, 2) + MathF.Pow(B - c.B, 2);
 		}
 
 		public static Color Random()
 		{
-			return new Color(randObj.NextDouble(), randObj.NextDouble(), randObj.NextDouble());
+			return new Color(randObj.NextSingle(), randObj.NextSingle(), randObj.NextSingle());
 		}
 
 		public System.Drawing.Color ToColor()

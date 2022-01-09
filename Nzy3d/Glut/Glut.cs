@@ -146,10 +146,10 @@ namespace Nzy3d.Glut
 			DrawBox(size, PrimitiveType.LineLoop);
 		}
 
-		public static bool UnProject(Vector4d winPos, Matrix4d modelMatrix, Matrix4d projMatrix, double[] viewport, ref Vector4d objPos)
+		public static bool UnProject(Vector4 winPos, Matrix4 modelMatrix, Matrix4 projMatrix, float[] viewport, ref Vector4 objPos)
 		{
-			var p = Matrix4d.Mult(modelMatrix, projMatrix);
-			var finalMatrix = Matrix4d.Invert(p);
+			var p = Matrix4.Mult(modelMatrix, projMatrix);
+			var finalMatrix = Matrix4.Invert(p);
 			var _in = winPos;
 
 			// Map x and y from window coordinates 
@@ -157,12 +157,12 @@ namespace Nzy3d.Glut
 			_in.Y = (_in.Y - viewport[1]) / viewport[3];
 
 			// Map to range -1 to 1 
-			_in.X = _in.X * 2.0 - 1.0;
-			_in.Y = _in.Y * 2.0 - 1.0;
-			_in.Z = _in.Z * 2.0 - 1.0;
-			_in.W = 1.0;
+			_in.X = _in.X * 2.0f - 1.0f;
+			_in.Y = _in.Y * 2.0f - 1.0f;
+			_in.Z = _in.Z * 2.0f - 1.0f;
+			_in.W = 1.0f;
 
-			var @out = Vector4d.TransformRow(_in, finalMatrix);
+			var @out = Vector4.TransformRow(_in, finalMatrix);
 
 			if (@out.W == 0.0)
 			{
@@ -177,27 +177,27 @@ namespace Nzy3d.Glut
 			return true;
 		}
 
-		public static bool Project(Vector4d objPos, Matrix4d modelMatrix, Matrix4d projMatrix, double[] viewport, ref Vector4d winPos)
+		public static bool Project(Vector4 objPos, Matrix4 modelMatrix, Matrix4 projMatrix, float[] viewport, ref Vector4 winPos)
 		{
 			objPos.W = 1;
 
-			var _out = Vector4d.TransformRow(objPos, modelMatrix);
-			_out = Vector4d.TransformRow(_out, projMatrix);
+			var _out = Vector4.TransformRow(objPos, modelMatrix);
+			_out = Vector4.TransformRow(_out, projMatrix);
 
 			if (_out.W == 0)
 			{
 				return false;
 			}
 
-			_out.W = (1 / _out.W) * 0.5;
+			_out.W = (1 / _out.W) * 0.5f;
 
 			// Map X/Y/Z to range 0-1
-			_out.X = _out.X * _out.W + 0.5;
-			_out.Y = _out.Y * _out.W + 0.5;
-			_out.Z = _out.Z * _out.W + 0.5;
+			_out.X = _out.X * _out.W + 0.5f;
+			_out.Y = _out.Y * _out.W + 0.5f;
+			_out.Z = _out.Z * _out.W + 0.5f;
 
             // Map x, y to viewport
-            winPos = new Vector4d
+            winPos = new Vector4
             {
                 X = _out.X * viewport[2] + viewport[0],
                 Y = _out.Y * viewport[3] + viewport[1],
@@ -207,19 +207,19 @@ namespace Nzy3d.Glut
             return true;
 		}
 
-		public static void Perspective(double fovy, double aspect, double zNear, double zFar)
+		public static void Perspective(float fovy, float aspect, float zNear, float zFar)
 		{
-			double radians = fovy / 2 * Math.PI / 180;
+			float radians = fovy / 2 * MathF.PI / 180;
 
-			double deltaZ = zFar - zNear;
-			double sine = Math.Sin(radians);
+			float deltaZ = zFar - zNear;
+			float sine = MathF.Sin(radians);
 
             if ((deltaZ == 0) || (sine == 0) || (aspect == 0))
 			{
 				return;
 			}
 
-			double cotangent = Math.Cos(radians) / sine;
+			float cotangent = MathF.Cos(radians) / sine;
 
 			var matrix = MakeIdentityD();
 			matrix.M11 = cotangent / aspect;
@@ -240,7 +240,9 @@ namespace Nzy3d.Glut
 
 		public static Matrix4d IDENTITY = new Matrix4d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 
-		public static void LookAt(double eyeX, double eyeY, double eyeZ, double centerX, double centerY, double centerZ, double upX, double upY, double upZ)
+		public static void LookAt(float eyeX, float eyeY, float eyeZ,
+								  float centerX, float centerY, float centerZ,
+								  float upX, float upY, float upZ)
 		{
 			var forward = new Vector3d(centerX - eyeX, centerY - eyeY, centerZ - eyeZ);
 

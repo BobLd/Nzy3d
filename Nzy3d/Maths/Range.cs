@@ -2,14 +2,14 @@ namespace Nzy3d.Maths
 {
 	public class Range : Scale
 	{
-		public Range(double min, double max)
+		public Range(float min, float max)
 			: base(min, max)
 		{
 		}
 
-		public void Enlarge(double ratio)
+		public void Enlarge(float ratio)
 		{
-			double offset = (Max - Min) * ratio;
+			float offset = (Max - Min) * ratio;
 			if (offset == 0)
 			{
 				offset = 1;
@@ -18,9 +18,9 @@ namespace Nzy3d.Maths
 			Max += offset;
 		}
 
-		public Range CreateEnlarge(double ratio)
+		public Range CreateEnlarge(float ratio)
 		{
-			double offset = (Max - Min) * ratio;
+			float offset = (Max - Min) * ratio;
 			if (offset == 0)
 			{
 				offset = 1;

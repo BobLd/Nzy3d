@@ -2,7 +2,7 @@ using Nzy3d.Events;
 
 namespace Nzy3d.Chart.Controllers
 {
-    public class AbstractController
+	public class AbstractController
 	{
 		protected List<Chart> _targets = new List<Chart>();
 
@@ -57,10 +57,3 @@ namespace Nzy3d.Chart.Controllers
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

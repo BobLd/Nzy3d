@@ -1,23 +1,23 @@
 namespace Nzy3d.Colors.ColorMaps
 {
 	/// <summary>
-	/// Same as ColorMapRBG with a nicer name
+	/// Same as <see cref="ColorMapRBG"/> with a nicer name.
 	/// </summary>
 	public class ColorMapRainbow : ColorMapRBG
 	{
 		/// <summary>
-		/// Returns the string representation of this colormap
+		/// Same as <see cref="ColorMapRBG"/> with a nicer name.
+		/// </summary>
+		public ColorMapRainbow()
+        {
+        }
+
+		/// <summary>
+		/// Returns the string representation of this colormap.
 		/// </summary>
 		public override string ToString()
 		{
-			return "ColorMapRainbow";
+			return this.GetType().Name; //"ColorMapRainbow";
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

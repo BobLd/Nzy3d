@@ -15,16 +15,16 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 
 		public override List<Coord3d> Apply(Mapper mapper)
 		{
-			double xstep = xrange.Range / (xsteps - 1);
-			double ystep = yrange.Range / (ysteps - 1);
+			float xstep = xrange.Range / (xsteps - 1);
+			float ystep = yrange.Range / (ysteps - 1);
 			var output = new List<Coord3d>();
 
 			for (int xi = 0; xi <= xsteps - 1; xi++)
 			{
 				for (int yi = 0; yi <= ysteps - 1; yi++)
 				{
-                    double x = xrange.Min + xi * xstep;
-                    double y = yrange.Min + yi * ystep;
+					float x = xrange.Min + xi * xstep;
+					float y = yrange.Min + yi * ystep;
                     output.Add(new Coord3d(x, y, mapper.f(x, y)));
 				}
 			}

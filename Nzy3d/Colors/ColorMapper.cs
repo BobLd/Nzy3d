@@ -9,7 +9,7 @@ namespace Nzy3d.Colors
 	{
         private readonly Color? m_factor;
 
-		public ColorMapper(IColorMap colormap, double zmin, double zmax, Color? factor)
+		public ColorMapper(IColorMap colormap, float zmin, float zmax, Color? factor)
 		{
 			ColorMap = colormap;
 			ZMin = zmin;
@@ -17,11 +17,13 @@ namespace Nzy3d.Colors
 			m_factor = factor;
 		}
 
-		public ColorMapper(IColorMap colormap, double zmin, double zmax) : this(colormap, zmin, zmax, null)
+		public ColorMapper(IColorMap colormap, float zmin, float zmax)
+			: this(colormap, zmin, zmax, null)
 		{
 		}
 
-		public ColorMapper(ColorMapper colormapper, Color factor) : this(colormapper.ColorMap, colormapper.ZMin, colormapper.ZMax, factor)
+		public ColorMapper(ColorMapper colormapper, Color factor)
+			: this(colormapper.ColorMap, colormapper.ZMin, colormapper.ZMax, factor)
 		{
 		}
 
@@ -37,7 +39,7 @@ namespace Nzy3d.Colors
 			return @out;
 		}
 
-		public Color Color(double v)
+		public Color Color(float v)
 		{
 			Color @out = ColorMap.GetColor(this, v);
 			if (m_factor.HasValue)
@@ -47,9 +49,9 @@ namespace Nzy3d.Colors
 			return @out;
 		}
 
-        public double ZMax { get; set; }
+        public float ZMax { get; set; }
 
-        public double ZMin { get; set; }
+        public float ZMin { get; set; }
 
         /// <summary>
         /// Range representing zmin/zmax values (same as <see cref="Scale"/> with different object type)

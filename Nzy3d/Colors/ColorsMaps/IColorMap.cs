@@ -23,14 +23,14 @@ namespace Nzy3d.Colors.ColorMaps
 		/// <param name="y"></param>
 		/// <param name="z"></param>
 		/// <returns>Color for the given point</returns>
-		Color GetColor(IColorMappable colorable, double x, double y, double z);
+		Color GetColor(IColorMappable colorable, float x, float y, float z);
 
 		/// <summary>
 		/// Returns color of a <paramref name="colorable"/> object at given point
 		/// </summary>
 		/// <param name="colorable">A <see cref="IColorMappable"/> object.</param>
 		/// <param name="v">The variable that is Color-dependent, and can be independent of the coordinates</param>
-		Color GetColor(IColorMappable colorable, double v);
+		Color GetColor(IColorMappable colorable, float v);
 
 		/// <summary>
 		/// Indicates if the colormap use the standard (True) or reverted (False) color direction
@@ -43,10 +43,3 @@ namespace Nzy3d.Colors.ColorMaps
 		string ToString();
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

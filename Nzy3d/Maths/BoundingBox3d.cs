@@ -46,7 +46,7 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Initialize a BoundingBox with given centre and edgeLength (equals in all directions)
 		/// </summary>
-		public BoundingBox3d(Coord3d center, double edgeLength)
+		public BoundingBox3d(Coord3d center, float edgeLength)
 			: this(center.X - edgeLength / 2, center.X + edgeLength / 2, center.Y - edgeLength / 2, center.Y + edgeLength / 2, center.Z - edgeLength / 2, center.Z + edgeLength / 2)
 		{
 		}
@@ -62,7 +62,7 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Initialize a BoundingBox with raw values.
 		/// </summary>
-		public BoundingBox3d(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax)
+		public BoundingBox3d(float xmin, float xmax, float ymin, float ymax, float zmin, float zmax)
 		{
 			this.XMin = xmin;
 			this.XMax = xmax;
@@ -78,12 +78,12 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public void Reset()
 		{
-			XMin = double.MaxValue;
-			XMax = double.MinValue;
-			YMin = double.MaxValue;
-			YMax = double.MinValue;
-			ZMin = double.MaxValue;
-			ZMax = double.MinValue;
+			XMin = float.MaxValue;
+			XMax = float.MinValue;
+			YMin = float.MaxValue;
+			YMax = float.MinValue;
+			ZMin = float.MaxValue;
+			ZMax = float.MinValue;
 		}
 
 		/// <summary>
@@ -98,7 +98,7 @@ namespace Nzy3d.Maths
 		/// Adds an x,y,z point to the bounding box, and enlarge the bounding
 		/// box if this points lies outside of it.
 		/// </summary>
-		public void Add(double x, double y, double z)
+		public void Add(float x, float y, float z)
 		{
 			if (x > XMax)
 			{
@@ -226,7 +226,7 @@ namespace Nzy3d.Maths
 		/// Return a copy of the current bounding box after adding a margin to all limits (positiv to max limits, negativ to min limits)
 		/// </summary>
 		/// <remarks>Current object is not modified, a new one is created.</remarks>
-		public BoundingBox3d Margin(double marg)
+		public BoundingBox3d Margin(float marg)
 		{
 			return new BoundingBox3d
 			{
@@ -239,14 +239,12 @@ namespace Nzy3d.Maths
 			};
 		}
 
-
-		/**
-         * Add a margin to max values and substract a margin to min values, where the margin is ratio of the current range of each dimension.
-         * 
-         * Adding a margin of 10% for each dimension is done with {@link #marginRatio(0.1)}
-         * 
-         * @return a new bounding box
-         */
+		/// <summary>
+		/// <para>Add a margin to max values and substract a margin to min values, where the margin is ratio of the current range of each dimension.</para>
+		/// <para>Adding a margin of 10% for each dimension is done with <see cref="MarginRatio(0.1)"/></para>
+		/// </summary>
+		/// <param name="marginRatio"></param>
+		/// <returns>a new bounding box</returns>
 		public BoundingBox3d MarginRatio(float marginRatio)
 		{
 			float xMargin = (float)(XMax - XMin) * marginRatio;
@@ -268,7 +266,7 @@ namespace Nzy3d.Maths
 		/// Return a copy of the current bounding box after adding a margin to all limits (positiv to max limits, negativ to min limits)
 		/// </summary>
 		/// <remarks>Modify current object.</remarks>
-		public void SelfMargin(double marg)
+		public void SelfMargin(float marg)
 		{
 			XMax += marg;
 			XMin -= marg;
@@ -326,32 +324,32 @@ namespace Nzy3d.Maths
 		/// <summary>
 		/// Bounding box min x value
 		/// </summary>
-		public double XMin { get; set; }
+		public float XMin { get; set; }
 
 		/// <summary>
 		/// Bounding box max x value
 		/// </summary>
-		public double XMax { get; set; }
+		public float XMax { get; set; }
 
 		/// <summary>
 		/// Bounding box min y value
 		/// </summary>
-		public double YMin { get; set; }
+		public float YMin { get; set; }
 
 		/// <summary>
 		/// Bounding box max y value
 		/// </summary>
-		public double YMax { get; set; }
+		public float YMax { get; set; }
 
 		/// <summary>
 		/// Bounding box min z value
 		/// </summary>
-		public double ZMin { get; set; }
+		public float ZMin { get; set; }
 
 		/// <summary>
 		/// Bounding box max z value
 		/// </summary>
-		public double ZMax { get; set; }
+		public float ZMax { get; set; }
 
 		public List<Coord3d> Vertices
 		{
