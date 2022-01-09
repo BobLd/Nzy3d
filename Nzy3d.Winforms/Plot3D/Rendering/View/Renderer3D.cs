@@ -24,6 +24,11 @@ namespace Nzy3d.Winforms
 
 		internal Bitmap _image;
 
+		public string GetGpuInfo()
+		{
+			return $"{GL.GetString(StringName.Renderer)} - {GL.GetString(StringName.Vendor)}";
+		}
+
 		private void Renderer3D_Paint(object sender, PaintEventArgs e)
 		{
 			if (_view != null)

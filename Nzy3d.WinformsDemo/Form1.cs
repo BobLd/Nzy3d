@@ -58,6 +58,8 @@ namespace Nzy3d.WinformsDemo
             // Associate the chart with current control
             myRenderer3D.SetView(chart.View);
 
+            this.Text = $"Running on {myRenderer3D.GetGpuInfo()}";
+
             this.Refresh();
         }
 
