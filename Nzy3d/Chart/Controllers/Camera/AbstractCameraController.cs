@@ -79,7 +79,35 @@ namespace Nzy3d.Chart.Controllers.Camera
 		{
 			foreach (Chart c in _targets)
 			{
+				c.View.ZoomZ(factor, updateView);
+			}
+			fireControllerEvent(ControllerType.ZOOM, factor);
+		}
+
+		protected void Zoom(float factor)
+		{
+			Zoom(factor, DEFAULT_UPDATE_VIEW);
+		}
+
+		protected void Zoom(float factor, bool updateView)
+		{
+			foreach (Chart c in _targets)
+			{
 				c.View.Zoom(factor, updateView);
+			}
+			fireControllerEvent(ControllerType.ZOOM, factor);
+		}
+
+		protected void ZoomXYZ(float factor)
+		{
+			ZoomXYZ(factor, DEFAULT_UPDATE_VIEW);
+		}
+
+		protected void ZoomXYZ(float factor, bool updateView)
+		{
+			foreach (Chart c in _targets)
+			{
+				c.View.ZoomXYZ(factor, updateView);
 			}
 			fireControllerEvent(ControllerType.ZOOM, factor);
 		}

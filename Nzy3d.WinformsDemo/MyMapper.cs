@@ -37,9 +37,9 @@ namespace Nzy3d.WinformsDemo
         /// <summary>
         /// Function 007
         /// </summary>
-        private static float SquareCubicCurve(float x, float y, float a = 0.0005f, float b = 0.0005f)
+        private static float SquareCubicCurve(float x, float y, float a = 0.0000005f, float b = 0.0000005f)
         {
-            return x * x * y * y * y * b - y * y * x * x * x * a;
+            return (x * x * y * y * y * b) - (y * y * x * x * x * a);
         }
 
         private static float MountHole(float x, float z, float a = 0.0005f, float b = 0.0005f)

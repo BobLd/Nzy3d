@@ -26,7 +26,7 @@ namespace Nzy3d.WinformsDemo
             Chart.Chart chart = new Chart.Chart(myRenderer3D, Quality.Nicest);
             chart.View.BackgroundColor = Colors.Color.GRAY;
 
-            chart.Scene.Graph.Add(GraphsHelper.GetSurfaceGraph()); // .GetScatterGraph()); // .GetSurfaceGraph());
+            chart.Scene.Graph.Add(GraphsHelper.GetScatterGraph(1_000_000)); // .GetScatterGraph()); // .GetSurfaceGraph());
             axeLayout = chart.AxeLayout;
 
             // All activated by default
@@ -49,7 +49,7 @@ namespace Nzy3d.WinformsDemo
             // Create a thread to control the camera based on mouse movements
             t = new CameraThreadController();
             t.addControllerEventListener(myRenderer3D);
-            mouse.addSlaveThreadController(t);
+            mouse.AddSlaveThreadController(t);
             chart.AddController(t);
             t.Start();
 

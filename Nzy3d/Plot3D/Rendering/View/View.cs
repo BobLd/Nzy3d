@@ -16,8 +16,14 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 		// force to have all object maintained in screen, meaning axebox won't always keep the same size.
 		internal bool MAINTAIN_ALL_OBJECTS_IN_VIEW = false;
+
 		// display a magenta parallelepiped (debug)
+#if DEBUG
+		internal bool DISPLAY_AXE_WHOLE_BOUNDS = true;
+#else
 		internal bool DISPLAY_AXE_WHOLE_BOUNDS = false;
+#endif
+
 		internal bool _axeBoxDisplayed = true;
 		internal bool _squared = true;
 		internal Camera _cam;
@@ -302,6 +308,115 @@ namespace Nzy3d.Plot3D.Rendering.View
 					Shoot();
 				}
 				// fireControllerEvent(ControllerType.ZOOM, scale);
+			}
+		}
+
+		public void ZoomXYZ(float factor)
+		{
+			ZoomXYZ(factor, true);
+		}
+
+		public void ZoomXYZ(float factor, bool updateView)
+		{
+			Scale scaleX = null;
+			Scale scaleY = null;
+			Scale scaleZ = null;
+
+			// X
+			float rangeX = this.Bounds.XMax - this.Bounds.XMin;
+			if (rangeX > 0)
+			{
+				float centerX = (this.Bounds.XMax + this.Bounds.XMin) / 2;
+				float minX = centerX + (this.Bounds.XMin - centerX) * factor;
+				float maxX = centerX + (this.Bounds.XMax - centerX) * factor;
+
+				// set min/max according to bounds
+				if (minX < maxX)
+				{
+					scaleX = new Scale(minX, maxX);
+				}
+				else
+				{
+					// forbid to have min = max if we zoom in
+					if (factor < 1)
+					{
+						scaleX = new Scale(centerX, centerX);
+					}
+				}
+			}
+
+			// Y
+			float rangeY = this.Bounds.YMax - this.Bounds.YMin;
+			if (rangeY > 0)
+			{
+				float centerY = (this.Bounds.YMax + this.Bounds.YMin) / 2;
+				float minY = centerY + (this.Bounds.YMin - centerY) * factor;
+				float maxY = centerY + (this.Bounds.YMax - centerY) * factor;
+
+				// set min/max according to bounds
+				if (minY < maxY)
+				{
+					scaleY = new Scale(minY, maxY);
+				}
+				else
+				{
+					// forbid to have min = max if we zoom in
+					if (factor < 1)
+					{
+						scaleY = new Scale(centerY, centerY);
+					}
+				}
+			}
+
+			// Z
+			float rangeZ = this.Bounds.ZMax - this.Bounds.ZMin;
+			if (rangeZ > 0)
+			{
+				float centerZ = (this.Bounds.ZMax + this.Bounds.ZMin) / 2;
+				float minZ = centerZ + (this.Bounds.ZMin - centerZ) * factor;
+				float maxZ = centerZ + (this.Bounds.ZMax - centerZ) * factor;
+
+				// set min/max according to bounds
+				if (minZ < maxZ)
+				{
+					scaleZ = new Scale(minZ, maxZ);
+				}
+				else
+				{
+					// forbid to have min = max if we zoom in
+					if (factor < 1)
+					{
+						scaleZ = new Scale(centerZ, centerZ);
+					}
+				}
+			}
+
+			// Apply
+			if (scaleX == null && scaleY == null && scaleZ == null) return;
+
+			BoundingBox3d bounds = this.Bounds;
+			if (scaleX != null)
+			{
+				bounds.XMin = scaleX.Min;
+				bounds.XMax = scaleX.Max;
+			}
+
+			if (scaleY != null)
+			{
+				bounds.YMin = scaleY.Min;
+				bounds.YMax = scaleY.Max;
+			}
+
+			if (scaleZ != null)
+			{
+				bounds.ZMin = scaleZ.Min;
+				bounds.ZMax = scaleZ.Max;
+			}
+
+			this.BoundManual = bounds;
+			if (updateView)
+			{
+				Shoot();
 			}
 		}
 

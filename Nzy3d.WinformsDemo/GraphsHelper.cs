@@ -18,7 +18,7 @@ namespace Nzy3d.WinformsDemo
         {
             // Create a range for the graph generation
             var range = new Maths.Range(-150, 150);
-            const int steps = 100;
+            const int steps = 50;
 
             // Build a nice surface to display with cool alpha colors 
             // (alpha 0.8 for surface color and 0.5 for wireframe)

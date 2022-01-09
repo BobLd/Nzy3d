@@ -5,12 +5,12 @@ using Nzy3d.Maths;
 
 namespace Nzy3d.Chart.Controllers.Mouse.Camera
 {
-    public class BaseCameraMouseController : AbstractCameraController, IBaseMouseListener, IBaseMouseMotionListener, IBaseMouseWheelListener
+	public class BaseCameraMouseController : AbstractCameraController, IBaseMouseListener, IBaseMouseMotionListener, IBaseMouseWheelListener
 	{
 		protected Coord2d _prevMouse;
 		protected CameraThreadController _threadController;
 
-		protected float _prevZoomZ = 1;
+		protected float _prevZoom = 1;
 		public BaseCameraMouseController()
 		{
 		}
@@ -45,19 +45,16 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 		/// <summary>
 		/// Remove existing threadcontroller (if existing) and add the one passed in parameters as controller.
 		/// </summary>
-		public void addSlaveThreadController(CameraThreadController controller)
+		public void AddSlaveThreadController(CameraThreadController controller)
 		{
-			removeSlaveThreadController();
+			RemoveSlaveThreadController();
 			_threadController = controller;
 		}
 
-		public void removeSlaveThreadController()
+		public void RemoveSlaveThreadController()
 		{
-			if (((_threadController != null)))
-			{
-				_threadController.StopT();
-				_threadController = null;
-			}
+			_threadController?.StopT();
+			_threadController = null;
 		}
 
 		//public void MouseClicked(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -92,20 +89,15 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 		//	_prevMouse.y = e.Y;
 		//}
 
-		public bool handleSlaveThread(bool isDoucleClick)
+		public bool HandleSlaveThread(bool isDoucleClick)
 		{
-			if (isDoucleClick)
-			{
-				if (((_threadController != null)))
-				{
-					_threadController.Start();
-					return true;
-				}
-			}
-			if (((_threadController != null)))
-			{
-				_threadController.StopT();
-			}
+            if (isDoucleClick && _threadController != null)
+            {
+                _threadController.Start();
+                return true;
+            }
+
+            _threadController?.StopT();
 			return false;
 		}
 
@@ -158,10 +150,3 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 		//}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================
