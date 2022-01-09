@@ -2,6 +2,7 @@ using Nzy3d.Chart.Controllers.Mouse.Camera;
 using Nzy3d.Chart.Controllers.Thread.Camera;
 using Nzy3d.Plot3D.Primitives.Axes.Layout;
 using Nzy3d.Plot3D.Rendering.Canvas;
+using Nzy3d.Plot3D.Rendering.View.Modes;
 
 namespace Nzy3d.WinformsDemo
 {
@@ -24,6 +25,8 @@ namespace Nzy3d.WinformsDemo
 
             // Create the chart and embed the surface within
             Chart.Chart chart = new Chart.Chart(myRenderer3D, Quality.Nicest);
+            chart.View.Maximized = false;
+            chart.View.CameraMode = CameraMode.PERSPECTIVE;
 
             chart.Scene.Graph.Add(GraphsHelper.GetSurfaceGraph());// .GetScatterGraph());
             axeLayout = chart.AxeLayout;
