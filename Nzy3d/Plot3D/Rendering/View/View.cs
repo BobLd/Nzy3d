@@ -44,8 +44,8 @@ namespace Nzy3d.Plot3D.Rendering.View
 		internal List<IViewPointChangedListener> _viewPointChangedListeners;
 		internal List<IViewIsVerticalEventListener> _viewOnTopListeners;
 		internal bool _wasOnTopAtLastRendering;
-		static internal float PI_div2 = Convert.ToSingle(System.Math.PI / 2);
-		public static Coord3d DEFAULT_VIEW = new Coord3d(System.Math.PI / 3, System.Math.PI / 3, 2000);
+		static internal float PI_div2 = Convert.ToSingle(Math.PI / 2);
+		public static Coord3d DEFAULT_VIEW = new Coord3d(Math.PI / 3, Math.PI / 3, 2000);
 		internal bool _dimensionDirty = false;
 		internal bool _viewDirty = false;
 
@@ -129,7 +129,8 @@ namespace Nzy3d.Plot3D.Rendering.View
 			//fireControllerEvent(ControllerType.SHIFT, newScale);
 		}
 
-		public void Zoom(float factor)
+        #region Zoom
+        public void Zoom(float factor)
 		{
 			Zoom(factor, true);
 		}
@@ -305,7 +306,117 @@ namespace Nzy3d.Plot3D.Rendering.View
 			}
 		}
 
-		public bool DimensionDirty
+		public void ZoomXYZ(double factor)
+		{
+			ZoomXYZ(factor, true);
+		}
+
+		public void ZoomXYZ(double factor, bool updateView)
+		{
+			Scale scaleX = null;
+			Scale scaleY = null;
+			Scale scaleZ = null;
+
+			// X
+			double rangeX = this.Bounds.XMax - this.Bounds.XMin;
+			if (rangeX > 0)
+			{
+				double centerX = (this.Bounds.XMax + this.Bounds.XMin) / 2;
+				double minX = centerX + (this.Bounds.XMin - centerX) * factor;
+				double maxX = centerX + (this.Bounds.XMax - centerX) * factor;
+
+				// set min/max according to bounds
+				if (minX < maxX)
+				{
+					scaleX = new Scale(minX, maxX);
+				}
+				else
+				{
+					// forbid to have min = max if we zoom in
+					if (factor < 1)
+					{
+						scaleX = new Scale(centerX, centerX);
+					}
+				}
+			}
+
+			// Y
+			double rangeY = this.Bounds.YMax - this.Bounds.YMin;
+			if (rangeY > 0)
+			{
+				double centerY = (this.Bounds.YMax + this.Bounds.YMin) / 2;
+				double minY = centerY + (this.Bounds.YMin - centerY) * factor;
+				double maxY = centerY + (this.Bounds.YMax - centerY) * factor;
+
+				// set min/max according to bounds
+				if (minY < maxY)
+				{
+					scaleY = new Scale(minY, maxY);
+				}
+				else
+				{
+					// forbid to have min = max if we zoom in
+					if (factor < 1)
+					{
+						scaleY = new Scale(centerY, centerY);
+					}
+				}
+			}
+
+			// Z
+			double rangeZ = this.Bounds.ZMax - this.Bounds.ZMin;
+			if (rangeZ > 0)
+			{
+				double centerZ = (this.Bounds.ZMax + this.Bounds.ZMin) / 2;
+				double minZ = centerZ + (this.Bounds.ZMin - centerZ) * factor;
+				double maxZ = centerZ + (this.Bounds.ZMax - centerZ) * factor;
+
+				// set min/max according to bounds
+				if (minZ < maxZ)
+				{
+					scaleZ = new Scale(minZ, maxZ);
+				}
+				else
+				{
+					// forbid to have min = max if we zoom in
+					if (factor < 1)
+					{
+						scaleZ = new Scale(centerZ, centerZ);
+					}
+				}
+			}
+
+			// Apply
+			if (scaleX == null && scaleY == null && scaleZ == null) return;
+
+			BoundingBox3d bounds = this.Bounds;
+			if (scaleX != null)
+			{
+				bounds.XMin = scaleX.Min;
+				bounds.XMax = scaleX.Max;
+			}
+
+			if (scaleY != null)
+			{
+				bounds.YMin = scaleY.Min;
+				bounds.YMax = scaleY.Max;
+			}
+
+			if (scaleZ != null)
+			{
+				bounds.ZMin = scaleZ.Min;
+				bounds.ZMax = scaleZ.Max;
+			}
+
+			this.BoundManual = bounds;
+			if (updateView)
+			{
+				Shoot();
+			}
+		}
+        #endregion
+
+        public bool DimensionDirty
 		{
 			get { return _dimensionDirty; }
 			set { _dimensionDirty = value; }

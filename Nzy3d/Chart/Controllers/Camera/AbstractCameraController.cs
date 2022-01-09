@@ -83,12 +83,19 @@ namespace Nzy3d.Chart.Controllers.Camera
 			}
 			fireControllerEvent(ControllerType.ZOOM, factor);
 		}
+
+		protected void ZoomXYZ(float factor)
+		{
+			ZoomXYZ(factor, DEFAULT_UPDATE_VIEW);
+		}
+
+		protected void ZoomXYZ(float factor, bool updateView)
+		{
+			foreach (Chart c in _targets)
+			{
+				c.View.ZoomXYZ(factor, updateView);
+			}
+			fireControllerEvent(ControllerType.ZOOM, factor);
+		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

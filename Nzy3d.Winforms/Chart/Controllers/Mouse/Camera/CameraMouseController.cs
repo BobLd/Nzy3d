@@ -79,7 +79,7 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 			{
 				_prevZoomZ = 0.8f;
 			}
-			ZoomZ(_prevZoomZ);
+			ZoomXYZ(_prevZoomZ);
 		}
 	}
 }
