@@ -1116,6 +1116,11 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			return _boxBounds;
 		}
 
+		public BoundingBox3d GetWholeBounds()
+		{
+			return _wholeBounds;
+		}
+
 		public Coord3d GetCenter()
 		{
 			return this.Center;
@@ -1130,11 +1135,6 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 		{
 			_boxBounds = box;
 			SetAxeBox((float)box.XMin, (float)box.XMax, (float)box.YMin, (float)box.YMax, (float)box.ZMin, (float)box.ZMax);
-		}
-
-		public BoundingBox3d WholeBounds
-		{
-			get { return _wholeBounds; }
 		}
 
 		public Coord3d Center

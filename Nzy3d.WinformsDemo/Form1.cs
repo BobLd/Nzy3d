@@ -40,6 +40,7 @@ namespace Nzy3d.WinformsDemo
             Chart.Chart chart = new Chart.Chart(myRenderer3D, Quality.Nicest);
             chart.View.Maximized = false;
             chart.View.CameraMode = CameraMode.PERSPECTIVE;
+            chart.View.IncludingTextLabels = true;
 
             chart.Scene.Graph.Add(GraphsHelper.GetSurfaceGraph());// .GetScatterGraph()); // GetSurfaceGraph
             axeLayout = chart.AxeLayout;

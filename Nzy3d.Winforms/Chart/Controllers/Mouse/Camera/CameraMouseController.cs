@@ -72,11 +72,11 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 
 			if (e.Delta > 0)
 			{
-				_prevZoomZ = 1.25f;
+				_prevZoomZ = 0.9f;
 			}
 			else
 			{
-				_prevZoomZ = 0.8f;
+				_prevZoomZ = 1.1f;
 			}
 			ZoomXYZ(_prevZoomZ);
 		}

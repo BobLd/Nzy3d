@@ -239,19 +239,17 @@ namespace Nzy3d.Maths
 			};
 		}
 
-
-		/**
-         * Add a margin to max values and substract a margin to min values, where the margin is ratio of the current range of each dimension.
-         * 
-         * Adding a margin of 10% for each dimension is done with {@link #marginRatio(0.1)}
-         * 
-         * @return a new bounding box
-         */
-		public BoundingBox3d MarginRatio(float marginRatio)
+		/// <summary>
+		/// Add a margin to max values and substract a margin to min values, where the margin is ratio of the current range of each dimension.
+		/// <para>Adding a margin of 10% for each dimension is done with <see cref="MarginRatio(0.1)"/>.</para>
+		/// </summary>
+		/// <param name="marginRatio"></param>
+		/// <returns>A new bounding box</returns>
+		public BoundingBox3d MarginRatio(double marginRatio)
 		{
-			float xMargin = (float)(XMax - XMin) * marginRatio;
-			float yMargin = (float)(YMax - YMin) * marginRatio;
-			float zMargin = (float)(ZMax - ZMin) * marginRatio;
+			double xMargin = (double)(XMax - XMin) * marginRatio;
+			double yMargin = (double)(YMax - YMin) * marginRatio;
+			double zMargin = (double)(ZMax - ZMin) * marginRatio;
 
             return new BoundingBox3d
             {
@@ -278,11 +276,11 @@ namespace Nzy3d.Maths
 			ZMin -= marg;
 		}
 
-		public void SelfMarginRatio(float marginRatio)
+		public void SelfMarginRatio(double marginRatio)
 		{
-			float xMargin = (float)(XMax - XMin) * marginRatio;
-			float yMargin = (float)(YMax - YMin) * marginRatio;
-			float zMargin = (float)(ZMax - ZMin) * marginRatio;
+			double xMargin = (double)(XMax - XMin) * marginRatio;
+			double yMargin = (double)(YMax - YMin) * marginRatio;
+			double zMargin = (double)(ZMax - ZMin) * marginRatio;
 
 			XMax += xMargin;
 			XMin -= xMargin;

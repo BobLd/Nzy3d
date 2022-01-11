@@ -16,6 +16,8 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 
 		BoundingBox3d GetBoxBounds();
 
+		BoundingBox3d GetWholeBounds();
+
 		Coord3d GetCenter();
 
 		IAxeLayout GetLayout();

@@ -13,7 +13,7 @@ namespace Nzy3d.WinformsDemo
 
 #pragma warning disable IDE0051 // Remove unused private members
 #pragma warning disable RCS1213 // Remove unused member declaration.
-        private static double Original(double x, double y)
+        private static double Default(double x, double y)
         {
             return 10 * Sin(x / 10) * Cos(y / 20) * x;
         }

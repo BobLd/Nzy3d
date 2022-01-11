@@ -13,6 +13,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 	public class View
 	{
 		public static float STRETCH_RATIO = 0.25f;
+
 		// force to have all object maintained in screen, meaning axebox won't always keep the same size.
 		internal bool MAINTAIN_ALL_OBJECTS_IN_VIEW = false;
 
@@ -455,6 +456,12 @@ namespace Nzy3d.Plot3D.Rendering.View
 			_axe.SetAxe(box);
 			_targetBox = box;
 		}
+
+		/// <summary>
+		/// True to always include text labels. False for default.
+		/// </summary>
+		/// <remarks>Quite experimental!</remarks>
+		public bool IncludingTextLabels { get; set; }
 
 		/// <summary>
 		/// Get the <see cref="AxeBox"/>'s bounds
@@ -1014,12 +1021,25 @@ namespace Nzy3d.Plot3D.Rendering.View
 			// Set rendering volume
 			if (_viewmode == ViewPositionMode.TOP)
 			{
-				_cam.RenderingSphereRadius = (float)(Math.Max(boundsScaled.XMax - boundsScaled.XMin, boundsScaled.YMax - boundsScaled.YMin) / 2);
-				// correctCameraPositionForIncludingTextLabels(viewport) ' quite experimental !
+				if (IncludingTextLabels)
+				{
+					CorrectCameraPositionForIncludingTextLabels(viewport); // ' quite experimental !
+				}
+				else
+				{
+					_cam.RenderingSphereRadius = (float)(Math.Max(boundsScaled.XMax - boundsScaled.XMin, boundsScaled.YMax - boundsScaled.YMin) / 2);
+				}
 			}
 			else
 			{
-				_cam.RenderingSphereRadius = sceneRadiusScaled;
+				if (IncludingTextLabels)
+				{
+					CorrectCameraPositionForIncludingTextLabels(viewport); // ' quite experimental !
+				}
+				else
+				{
+					_cam.RenderingSphereRadius = sceneRadiusScaled;
+				}
 			}
 
 			// Setup camera (i.e. projection matrix)
@@ -1041,15 +1061,15 @@ namespace Nzy3d.Plot3D.Rendering.View
 				// for debug
 				if (DISPLAY_AXE_WHOLE_BOUNDS)
 				{
-					var abox = (AxeBox)_axe;
-					BoundingBox3d box = abox.WholeBounds;
-                    var p = new Parallelepiped(box)
-                    {
-                        FaceDisplayed = false,
-                        WireframeColor = Color.MAGENTA,
-                        WireframeDisplayed = true
-                    };
-                    p.Draw(_cam);
+					//var abox = (AxeBox)_axe;
+					BoundingBox3d box = _axe.GetWholeBounds();
+					var p = new Parallelepiped(box)
+					{
+						FaceDisplayed = false,
+						WireframeColor = Color.MAGENTA,
+						WireframeDisplayed = true
+					};
+					p.Draw(_cam);
 				}
 				_scene.LightSet.Enable();
 			}
@@ -1120,8 +1140,8 @@ namespace Nzy3d.Plot3D.Rendering.View
 			_cam.Shoot(_cameraMode);
 			_axe.Draw(_cam);
 			Clear();
-			AxeBox abox = (AxeBox)_axe;
-			BoundingBox3d newBounds = abox.WholeBounds.Scale(_scaling);
+
+			BoundingBox3d newBounds = _axe.GetWholeBounds().Scale(_scaling);
 
 			if (_viewmode == ViewPositionMode.TOP)
 			{
@@ -1133,9 +1153,8 @@ namespace Nzy3d.Plot3D.Rendering.View
 			{
 				_cam.RenderingSphereRadius = (float)newBounds.GetRadius();
 				Coord3d target = newBounds.GetCenter();
-				Coord3d eye = _viewpoint.Cartesian().Add(target);
 				_cam.Target = target;
-				_cam.Eye = eye;
+				_cam.Eye = _viewpoint.Cartesian().Add(target);
 			}
 		}
 #endregion
