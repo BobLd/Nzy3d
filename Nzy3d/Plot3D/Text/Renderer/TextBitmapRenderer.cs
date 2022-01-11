@@ -6,7 +6,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Nzy3d.Plot3D.Text.Renderers
 {
-	public class TextBitmapRenderer : AbstractTextRenderer, ITextRenderer
+	public class TextBitmapRenderer : AbstractTextRenderer
 	{
 		internal int _fontHeight;
 

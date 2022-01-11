@@ -5,12 +5,12 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Nzy3d.Plot3D.Primitives.Axes
 {
-    /// <summary>
-    /// An AxeBase provide a simple 3-segment object which is configured by
-    /// a BoundingBox.
-    /// @author Martin Pernollet
-    /// </summary>
-    public class AxeBase : IAxe
+	/// <summary>
+	/// An AxeBase provide a simple 3-segment object which is configured by
+	/// a BoundingBox.
+	/// @author Martin Pernollet
+	/// </summary>
+	public class AxeBase : IAxe
 	{
 		internal Coord3d _scale;
 		internal BoundingBox3d _bbox;
@@ -84,10 +84,3 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

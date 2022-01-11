@@ -9,10 +9,10 @@ using BaseView = Nzy3d.Plot3D.Rendering.View.View;
 
 namespace Nzy3d.Winforms
 {
-    /// <summary>
-    ///
-    /// </summary>
-    public class Renderer3D : GLControl, ICanvas, IControllerEventListener
+	/// <summary>
+	///
+	/// </summary>
+	public class Renderer3D : GLControl, ICanvas, IControllerEventListener
 	{
 		// TODO  : add trace add debug capabilities
 		internal BaseView _view;
@@ -24,17 +24,23 @@ namespace Nzy3d.Winforms
 
 		internal Bitmap _image;
 
+		public bool ForceUpdate { get; set; }
+
 		public string GetGpuInfo()
 		{
 			return $"{GL.GetString(StringName.Renderer)} - {GL.GetString(StringName.Vendor)}";
 		}
 
-		private void Renderer3D_Paint(object sender, PaintEventArgs e)
+		private void Renderer3D_Paint(object? sender, PaintEventArgs e)
 		{
 			if (_view != null)
 			{
+				System.Diagnostics.Debug.WriteLine($"Renderer3D.Renderer3D_Paint: {this.Name}");
+				this.MakeCurrent();
+
 				_view.Clear();
 				_view.Render();
+
 				this.SwapBuffers();
 				if (_doScreenshotAtNextDisplay)
 				{
@@ -44,8 +50,11 @@ namespace Nzy3d.Winforms
 			}
 		}
 
-		private void Renderer3D_Resize(object sender, EventArgs e)
+		private void Renderer3D_Resize(object? sender, EventArgs e)
 		{
+			System.Diagnostics.Debug.WriteLine($"Renderer3D.Renderer3D_Resize: {this.Name}");
+			this.MakeCurrent();
+
 			_width = this.ClientSize.Width;
 			_height = this.ClientSize.Height;
 
@@ -143,13 +152,30 @@ namespace Nzy3d.Winforms
 
 		public new void Dispose()
 		{
+			_image.Dispose();
+			_view.Dispose();
 			base.Dispose();
 		}
 
-		public void ForceRepaint()
+		public async void ForceRepaint()
 		{
+			System.Diagnostics.Debug.WriteLine($"Renderer3D.ForceRepaint: {this.Name}");
+
 			this.Invalidate();
-		}
+
+			if (ForceUpdate)
+			{
+				if (this.InvokeRequired)
+				{
+					// https://docs.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/calling-synchronous-methods-asynchronously
+					this.Invoke(new MethodInvoker(Update));
+				}
+				else
+				{
+					this.Update();
+				}
+			}
+        }
 
 		public void RemoveKeyListener(IBaseKeyListener baseListener)
 		{
@@ -234,6 +260,7 @@ namespace Nzy3d.Winforms
 		{
 			this.ForceRepaint();
 		}
+
 		public Renderer3D()
 		{
 			Resize += Renderer3D_Resize;

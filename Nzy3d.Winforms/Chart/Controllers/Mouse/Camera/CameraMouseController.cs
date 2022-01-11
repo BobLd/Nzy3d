@@ -15,7 +15,7 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 		/// </summary>
 		public void MousePressed(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
-			if (handleSlaveThread(false))
+			if (HandleSlaveThread(false))
 			{
 				return;
 			}
@@ -29,7 +29,7 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 		/// </summary>
 		public void MouseDoubleClicked(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
-			if (handleSlaveThread(true))
+			if (HandleSlaveThread(true))
 			{
 				return;
 			}
@@ -46,12 +46,14 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 			if (e.Button != MouseButtons.None)
 			{
 				Coord2d mouse = new Coord2d(e.X, e.Y);
+
 				// Rotate
 				if (e.Button == MouseButtons.Left)
 				{
 					Coord2d move = mouse.substract(_prevMouse).divide(100);
 					Rotate(move);
 				}
+
 				if (e.Button == MouseButtons.Right)
 				{
 					Coord2d move = mouse.substract(_prevMouse);
@@ -66,10 +68,7 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 
 		public void MouseWheelMoved(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
-			if (((_threadController != null)))
-			{
-				_threadController.StopT();
-			}
+			_threadController?.Stop();
 
 			if (e.Delta > 0)
 			{

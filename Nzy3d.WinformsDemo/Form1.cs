@@ -3,32 +3,45 @@ using Nzy3d.Chart.Controllers.Thread.Camera;
 using Nzy3d.Plot3D.Primitives.Axes.Layout;
 using Nzy3d.Plot3D.Rendering.Canvas;
 using Nzy3d.Plot3D.Rendering.View.Modes;
+using OpenTK.Windowing.Common;
 
 namespace Nzy3d.WinformsDemo
 {
     public partial class Form1 : Form
     {
-        private CameraThreadController t;
+        //https://gamedev.stackexchange.com/questions/172170/multiple-glcontrol-on-same-winform-is-not-working-opentk-c
+        //https://stackoverflow.com/questions/40578910/opentk-multiple-glcontrol-with-a-single-context
+
+        private CameraThreadController _cameraController;
         private IAxeLayout axeLayout;
+
+        private CameraThreadController _cameraController1;
+        private IAxeLayout axeLayout1;
+
         public Form1()
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            myRenderer3D.Profile = ContextProfile.Compatability;
+            myRenderer3D_1.Profile = ContextProfile.Compatability;
+            InitRenderer();
+        }
+
         private void InitRenderer()
         {
-            // Create the Renderer 3D control.
-            //Renderer3D myRenderer3D = new Renderer3D();
+            // ############ 1st Renderer ############
 
-            // Add the Renderer control to the panel
-            // mainPanel.Controls.Clear();
-            //mainPanel.Controls.Add(myRenderer3D);
-
+            myRenderer3D.Name = "Renderer 0";
+            //myRenderer3D.ForceUpdate = true;
             // Create the chart and embed the surface within
             Chart.Chart chart = new Chart.Chart(myRenderer3D, Quality.Nicest);
             chart.View.Maximized = false;
             chart.View.CameraMode = CameraMode.PERSPECTIVE;
 
-            chart.Scene.Graph.Add(GraphsHelper.GetSurfaceGraph());// .GetScatterGraph());
+            chart.Scene.Graph.Add(GraphsHelper.GetSurfaceGraph());// .GetScatterGraph()); // GetSurfaceGraph
             axeLayout = chart.AxeLayout;
 
             // All activated by default
@@ -42,21 +55,60 @@ namespace Nzy3d.WinformsDemo
 
             // Create a mouse control
             CameraMouseController mouse = new CameraMouseController();
-            mouse.addControllerEventListener(myRenderer3D);
+            mouse.AddControllerEventListener(myRenderer3D);
             chart.AddController(mouse);
 
             // This is just to ensure code is reentrant (used when code is not called in Form_Load but another reentrant event)
             DisposeBackgroundThread();
 
-            // Create a thread to control the camera based on mouse movements
-            t = new CameraThreadController();
-            t.addControllerEventListener(myRenderer3D);
-            mouse.addSlaveThreadController(t);
-            chart.AddController(t);
-            t.Start();
-
             // Associate the chart with current control
             myRenderer3D.SetView(chart.View);
+
+            // Create a thread to control the camera based on mouse movements
+            _cameraController = new CameraThreadController();
+            _cameraController.AddControllerEventListener(myRenderer3D);
+            mouse.AddSlaveThreadController(_cameraController);
+            chart.AddController(_cameraController);
+            _cameraController.Start();
+
+            // ############ 2nd Renderer ############
+
+            //myRenderer3D_1.Name = "Renderer 1";
+
+            //// Create the chart and embed the surface within
+            //Chart.Chart chart1 = new Chart.Chart(myRenderer3D_1, Quality.Nicest);
+            //chart1.View.Maximized = false;
+            //chart1.View.CameraMode = CameraMode.PERSPECTIVE;
+
+            //chart1.Scene.Graph.Add(GraphsHelper.GetScatterGraph(1_000_000));// .GetScatterGraph()); // GetSurfaceGraph
+            //axeLayout1 = chart1.AxeLayout;
+
+            //// All activated by default
+            //DisplayXTicks = true;
+            //DisplayXAxisLabel = true;
+            //DisplayYTicks = true;
+            //DisplayYAxisLabel = true;
+            //DisplayZTicks = true;
+            //DisplayZAxisLabel = true;
+            //DisplayTickLines = true;
+
+            //// Create a mouse control
+            //CameraMouseController mouse1 = new CameraMouseController();
+            //mouse1.AddControllerEventListener(myRenderer3D_1);
+            //chart1.AddController(mouse1);
+
+            //// This is just to ensure code is reentrant (used when code is not called in Form_Load but another reentrant event)
+            //DisposeBackgroundThread1();
+
+            //// Associate the chart with current control
+            //myRenderer3D_1.SetView(chart1.View);
+
+            //// Create a thread to control the camera based on mouse movements
+            //_cameraController1 = new CameraThreadController();
+            //_cameraController1.AddControllerEventListener(myRenderer3D_1);
+            //mouse1.AddSlaveThreadController(_cameraController1);
+            //chart1.AddController(_cameraController1);
+            //_cameraController1.Start();
 
             this.Text = $"Running on {myRenderer3D.GetGpuInfo()}";
 
@@ -65,14 +117,21 @@ namespace Nzy3d.WinformsDemo
 
         private void DisposeBackgroundThread()
         {
-            t?.Dispose();
+            _cameraController?.Dispose();
+        }
+
+        private void DisposeBackgroundThread1()
+        {
+            _cameraController1?.Dispose();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DisposeBackgroundThread();
+            DisposeBackgroundThread1();
         }
 
+        #region AxeLayout changes
         private bool _DisplayTickLines;
         public bool DisplayTickLines
         {
@@ -225,11 +284,6 @@ namespace Nzy3d.WinformsDemo
             }
             */
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            myRenderer3D.Profile = OpenTK.Windowing.Common.ContextProfile.Compatability;
-            InitRenderer();
-        }
+#endregion
     }
 }

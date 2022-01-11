@@ -2,11 +2,12 @@ using Nzy3d.Events;
 
 namespace Nzy3d.Chart.Controllers
 {
-    public class AbstractController
+	public class AbstractController
 	{
-		protected List<Chart> _targets = new List<Chart>();
+		protected readonly List<Chart> _targets = new List<Chart>();
 
-		protected List<IControllerEventListener> _controllerListeners = new List<IControllerEventListener>();
+		protected readonly List<IControllerEventListener> _controllerListeners = new List<IControllerEventListener>();
+
 		public AbstractController()
 		{
 		}
@@ -37,30 +38,26 @@ namespace Nzy3d.Chart.Controllers
 			_controllerListeners.Clear();
 		}
 
-		public void addControllerEventListener(IControllerEventListener listener)
+		public void AddControllerEventListener(IControllerEventListener listener)
 		{
 			_controllerListeners.Add(listener);
 		}
 
-		public void removeControllerEventListener(IControllerEventListener listener)
+		public void RemoveControllerEventListener(IControllerEventListener listener)
 		{
 			_controllerListeners.Remove(listener);
 		}
 
-		protected void fireControllerEvent(ControllerType type, object value)
+		protected Task FireControllerEvent(ControllerType type, object value)
 		{
-			ControllerEventArgs e = new ControllerEventArgs(this, type, value);
-			foreach (IControllerEventListener aListener in _controllerListeners)
+			return Task.Run(() =>
 			{
-				aListener.ControllerEventFired(e);
-			}
+				var e = new ControllerEventArgs(this, type, value);
+				foreach (IControllerEventListener aListener in _controllerListeners)
+				{
+					aListener.ControllerEventFired(e);
+				}
+			});
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

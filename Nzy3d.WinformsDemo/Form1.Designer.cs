@@ -29,27 +29,41 @@
         private void InitializeComponent()
         {
             this.myRenderer3D = new Nzy3d.Winforms.Renderer3D();
+            this.myRenderer3D_1 = new Nzy3d.Winforms.Renderer3D();
             this.SuspendLayout();
             // 
             // myRenderer3D
             // 
             this.myRenderer3D.API = OpenTK.Windowing.Common.ContextAPI.OpenGL;
             this.myRenderer3D.APIVersion = new System.Version(3, 3, 0, 0);
-            this.myRenderer3D.Dock = System.Windows.Forms.DockStyle.Fill;
             this.myRenderer3D.Flags = OpenTK.Windowing.Common.ContextFlags.Default;
             this.myRenderer3D.IsEventDriven = true;
-            this.myRenderer3D.Location = new System.Drawing.Point(0, 0);
+            this.myRenderer3D.Location = new System.Drawing.Point(12, 12);
             this.myRenderer3D.Name = "myRenderer3D";
             this.myRenderer3D.Profile = OpenTK.Windowing.Common.ContextProfile.Core;
-            this.myRenderer3D.Size = new System.Drawing.Size(800, 450);
+            this.myRenderer3D.Size = new System.Drawing.Size(384, 426);
             this.myRenderer3D.TabIndex = 0;
             this.myRenderer3D.Text = "renderer3d1";
+            // 
+            // myRenderer3D_1
+            // 
+            this.myRenderer3D_1.API = OpenTK.Windowing.Common.ContextAPI.OpenGL;
+            this.myRenderer3D_1.APIVersion = new System.Version(3, 3, 0, 0);
+            this.myRenderer3D_1.Flags = OpenTK.Windowing.Common.ContextFlags.Default;
+            this.myRenderer3D_1.IsEventDriven = true;
+            this.myRenderer3D_1.Location = new System.Drawing.Point(402, 12);
+            this.myRenderer3D_1.Name = "myRenderer3D_1";
+            this.myRenderer3D_1.Profile = OpenTK.Windowing.Common.ContextProfile.Core;
+            this.myRenderer3D_1.Size = new System.Drawing.Size(386, 426);
+            this.myRenderer3D_1.TabIndex = 1;
+            this.myRenderer3D_1.Text = "renderer3d1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.myRenderer3D_1);
             this.Controls.Add(this.myRenderer3D);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -62,5 +76,6 @@
         #endregion
 
         private Winforms.Renderer3D myRenderer3D;
+        private Winforms.Renderer3D myRenderer3D_1;
     }
 }

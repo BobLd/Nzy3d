@@ -5,17 +5,17 @@ using Nzy3d.Maths;
 
 namespace Nzy3d.Chart.Controllers.Mouse.Camera
 {
-    public class BaseCameraMouseController : AbstractCameraController, IBaseMouseListener, IBaseMouseMotionListener, IBaseMouseWheelListener
+	public class BaseCameraMouseController : AbstractCameraController, IBaseMouseListener, IBaseMouseMotionListener, IBaseMouseWheelListener
 	{
 		protected Coord2d _prevMouse;
 		protected CameraThreadController _threadController;
-
 		protected float _prevZoomZ = 1;
+
 		public BaseCameraMouseController()
 		{
 		}
 
-		public BaseCameraMouseController(Chart chart)
+		public BaseCameraMouseController(Chart chart) : this()
 		{
 			Register(chart);
 		}
@@ -45,17 +45,17 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 		/// <summary>
 		/// Remove existing threadcontroller (if existing) and add the one passed in parameters as controller.
 		/// </summary>
-		public void addSlaveThreadController(CameraThreadController controller)
+		public void AddSlaveThreadController(CameraThreadController controller)
 		{
-			removeSlaveThreadController();
+			RemoveSlaveThreadController();
 			_threadController = controller;
 		}
 
-		public void removeSlaveThreadController()
+		public void RemoveSlaveThreadController()
 		{
-			if (((_threadController != null)))
+			if (_threadController != null)
 			{
-				_threadController.StopT();
+				_threadController.Stop();
 				_threadController = null;
 			}
 		}
@@ -92,20 +92,15 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 		//	_prevMouse.y = e.Y;
 		//}
 
-		public bool handleSlaveThread(bool isDoucleClick)
+		public bool HandleSlaveThread(bool isDoucleClick)
 		{
-			if (isDoucleClick)
+			if (isDoucleClick && _threadController != null)
 			{
-				if (((_threadController != null)))
-				{
-					_threadController.Start();
-					return true;
-				}
+				_threadController.Start();
+				return true;
 			}
-			if (((_threadController != null)))
-			{
-				_threadController.StopT();
-			}
+
+			_threadController?.Stop();
 			return false;
 		}
 
@@ -158,10 +153,3 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 		//}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

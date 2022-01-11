@@ -15,8 +15,14 @@ namespace Nzy3d.Plot3D.Rendering.View
 		public static float STRETCH_RATIO = 0.25f;
 		// force to have all object maintained in screen, meaning axebox won't always keep the same size.
 		internal bool MAINTAIN_ALL_OBJECTS_IN_VIEW = false;
+
 		// display a magenta parallelepiped (debug)
+#if DEBUG
+		internal bool DISPLAY_AXE_WHOLE_BOUNDS = true;
+#else
 		internal bool DISPLAY_AXE_WHOLE_BOUNDS = false;
+#endif
+
 		internal bool _axeBoxDisplayed = true;
 		internal bool _squared = true;
 		internal Camera _cam;
@@ -100,20 +106,19 @@ namespace Nzy3d.Plot3D.Rendering.View
 			return _cam.ScreenToModel(new Coord3d(x, y, 0));
 		}
 
-		#region "GENERAL DISPLAY CONTROLS"
+#region "GENERAL DISPLAY CONTROLS"
 
-		public void Rotate(Coord2d move)
+		public async Task Rotate(Coord2d move)
 		{
-			Rotate(move, true);
+			await Rotate(move, true).ConfigureAwait(false);
 		}
 
-		public void Rotate(Coord2d move, bool updateView)
+		public async Task Rotate(Coord2d move, bool updateView)
 		{
 			Coord3d eye = this.ViewPoint;
 			eye.X -= move.X;
 			eye.Y += move.Y;
-			SetViewPoint(eye, updateView);
-			//fireControllerEvent(ControllerType.ROTATE, eye);
+			await SetViewPoint(eye, updateView).ConfigureAwait(false);
 		}
 
 		public void Shift(float factor)
@@ -129,7 +134,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			//fireControllerEvent(ControllerType.SHIFT, newScale);
 		}
 
-        #region Zoom
+#region Zoom
         public void Zoom(float factor)
 		{
 			Zoom(factor, true);
@@ -414,7 +419,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 				Shoot();
 			}
 		}
-        #endregion
+#endregion
 
         public bool DimensionDirty
 		{
@@ -479,16 +484,19 @@ namespace Nzy3d.Plot3D.Rendering.View
 			set { SetViewPoint(value, true); }
 		}
 
-		public void SetViewPoint(Coord3d polar, bool updateView)
+		public Task SetViewPoint(Coord3d polar, bool updateView)
 		{
-			_viewpoint = polar;
-			_viewpoint.Y = (_viewpoint.Y < -PI_div2 ? -PI_div2 : _viewpoint.Y);
-			_viewpoint.Y = (_viewpoint.Y > PI_div2 ? PI_div2 : _viewpoint.Y);
-			if (updateView)
+			return Task.Run(() =>
 			{
-				Shoot();
-			}
-			FireViewPointChangedEvent(new ViewPointChangedEventArgs(this, polar));
+				_viewpoint = polar;
+				_viewpoint.Y = (_viewpoint.Y < -PI_div2 ? -PI_div2 : _viewpoint.Y);
+				_viewpoint.Y = (_viewpoint.Y > PI_div2 ? PI_div2 : _viewpoint.Y);
+				if (updateView)
+				{
+					Shoot();
+				}
+				FireViewPointChangedEvent(new ViewPointChangedEventArgs(this, polar));
+			});
 		}
 
 		public Coord3d GetLastViewScaling()
@@ -744,9 +752,9 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 			return new Coord3d(lmax / xLen, lmax / yLen, lmax / zLen);
 		}
-		#endregion
+#endregion
 
-		#region "GL2"
+#region "GL2"
 		/// <summary>
 		/// The init function specifies general GL settings that impact the rendering
 		/// quality and performance (computation speed).
@@ -1130,6 +1138,6 @@ namespace Nzy3d.Plot3D.Rendering.View
 				_cam.Eye = eye;
 			}
 		}
-		#endregion
+#endregion
 	}
 }
