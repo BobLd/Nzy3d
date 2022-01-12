@@ -59,7 +59,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		private int nPoints;
 
 		// additional data 4/8/05 used by the iterators
-		private List<Point_dt> _vertices;
+		private readonly List<Point_dt> _vertices;
 		private List<Triangle_dt> _triangles;
 
 		// The triangles that were deleted in the last deletePoint iteration.
@@ -77,7 +77,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 
 		private GridIndex gridIndex = null;
 
-		public Delaunay_Triangulation() : this(new Point_dt[0])
+		public Delaunay_Triangulation() : this(Array.Empty<Point_dt>())
 		{
 		}
 
@@ -95,7 +95,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 
 			for (int i = 0; i <= ps.Length - 1; i++)
 			{
-				insertPoint(ps[i]);
+				InsertPoint(ps[i]);
 			}
 		}
 
@@ -117,7 +117,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 			return _triangles.Count;
 		}
 
-		int ITriangulation.trianglesSize()
+		int ITriangulation.TrianglesSize()
 		{
 			return TrianglesSize();
 		}
@@ -130,14 +130,14 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 			get { return _modCount; }
 		}
 
-		public void insertPoint(Point_dt p)
+		public void InsertPoint(Point_dt p)
 		{
 			if (_vertices.Contains(p)) return;
 
 			_modCount++;
 			updateBoundingBox(p);
 			_vertices.Add(p);
-			Triangle_dt t = insertPointSimple(p);
+			Triangle_dt t = InsertPointSimple(p);
 
 			if (t == null) return;
 
@@ -148,13 +148,13 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 			do
 			{
 				Flip(tt, _modCount);
-				tt = tt.canext;
+				tt = tt.CANext;
 			} while (tt.Equals(t) & !tt.IsHalfplane);
 
-			gridIndex?.updateIndex(getLastUpdatedTriangles());
+			gridIndex?.updateIndex(GetLastUpdatedTriangles());
 		}
 
-		public IEnumerator<Triangle_dt> getLastUpdatedTriangles()
+		public IEnumerator<Triangle_dt> GetLastUpdatedTriangles()
 		{
 			var tmp = new List<Triangle_dt>();
 			if (this.TrianglesSize() > 1)
@@ -167,16 +167,16 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 
 		private void allTriangles(Triangle_dt curr, List<Triangle_dt> front, int mc)
 		{
-			if ((curr != null) && curr.mc == mc && (!front.Contains(curr)))
+			if ((curr != null) && curr.Mc == mc && (!front.Contains(curr)))
 			{
 				front.Add(curr);
-				allTriangles(curr.abnext, front, mc);
-				allTriangles(curr.bcnext, front, mc);
-				allTriangles(curr.canext, front, mc);
+				allTriangles(curr.ABNext, front, mc);
+				allTriangles(curr.BCNext, front, mc);
+				allTriangles(curr.CANext, front, mc);
 			}
 		}
 
-		private Triangle_dt insertPointSimple(Point_dt p)
+		private Triangle_dt InsertPointSimple(Point_dt p)
 		{
 			nPoints++;
 			if (!allColinear)
@@ -184,11 +184,11 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 				Triangle_dt t = Find(startTriangle, p);
 				if (t.IsHalfplane)
 				{
-					startTriangle = extendOutside(t, p);
+					startTriangle = ExtendOutside(t, p);
 				}
 				else
 				{
-					startTriangle = extendInside(t, p);
+					startTriangle = ExtendInside(t, p);
 				}
 				return startTriangle;
 			}
@@ -201,38 +201,38 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 
 			if (nPoints == 2)
 			{
-				startTriangulation(firstP, p);
+				StartTriangulation(firstP, p);
 				return null;
 			}
 
 			switch (p.pointLineTest(firstP, lastP))
 			{
 				case Point_dt.LEFT:
-					startTriangle = extendOutside(firstT.abnext, p);
+					startTriangle = ExtendOutside(firstT.ABNext, p);
 					allColinear = false;
 					break; // TODO: might not be correct. Was : Exit Select
 
 				case Point_dt.RIGHT:
-					startTriangle = extendOutside(firstT, p);
+					startTriangle = ExtendOutside(firstT, p);
 					allColinear = false;
 					break; // TODO: might not be correct. Was : Exit Select
 
 				case Point_dt.ONSEGMENT:
-					insertCollinear(p, Point_dt.ONSEGMENT);
+					InsertCollinear(p, Point_dt.ONSEGMENT);
 					break; // TODO: might not be correct. Was : Exit Select
 
 				case Point_dt.INFRONTOFA:
-					insertCollinear(p, Point_dt.INFRONTOFA);
+					InsertCollinear(p, Point_dt.INFRONTOFA);
 					break; // TODO: might not be correct. Was : Exit Select
 
 				case Point_dt.BEHINDB:
-					insertCollinear(p, Point_dt.BEHINDB);
+					InsertCollinear(p, Point_dt.BEHINDB);
 					break; // TODO: might not be correct. Was : Exit Select
 			}
 			return null;
 		}
 
-		private void insertCollinear(Point_dt p, int res)
+		private void InsertCollinear(Point_dt p, int res)
 		{
 			Triangle_dt t;
 			Triangle_dt tp;
@@ -242,14 +242,14 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 				case Point_dt.INFRONTOFA:
 					t = new Triangle_dt(firstP, p);
 					tp = new Triangle_dt(p, firstP);
-					t.abnext = tp;
-					tp.abnext = t;
-					t.bcnext = tp;
-					tp.canext = t;
-					t.canext = firstT;
-					firstT.bcnext = t;
-					tp.bcnext = firstT.abnext;
-					firstT.abnext.canext = tp;
+					t.ABNext = tp;
+					tp.ABNext = t;
+					t.BCNext = tp;
+					tp.CANext = t;
+					t.CANext = firstT;
+					firstT.BCNext = t;
+					tp.BCNext = firstT.ABNext;
+					firstT.ABNext.CANext = tp;
 					firstT = t;
 					firstP = p;
 					break; // TODO: might not be correct. Was : Exit Select
@@ -257,45 +257,45 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 				case Point_dt.BEHINDB:
 					t = new Triangle_dt(p, lastP);
 					tp = new Triangle_dt(lastP, p);
-					t.abnext = tp;
-					tp.abnext = t;
-					t.bcnext = lastT;
-					lastT.canext = t;
-					t.canext = tp;
-					tp.bcnext = t;
-					tp.canext = lastT.abnext;
-					lastT.abnext.bcnext = tp;
+					t.ABNext = tp;
+					tp.ABNext = t;
+					t.BCNext = lastT;
+					lastT.CANext = t;
+					t.CANext = tp;
+					tp.BCNext = t;
+					tp.CANext = lastT.ABNext;
+					lastT.ABNext.BCNext = tp;
 					lastT = t;
 					lastP = p;
 					break; // TODO: might not be correct. Was : Exit Select
 
 				case Point_dt.ONSEGMENT:
 					Triangle_dt u = firstT;
-					while (p.isGreater(u.a))
+					while (p.isGreater(u.A))
 					{
-						u = u.canext;
+						u = u.CANext;
 					}
-					t = new Triangle_dt(p, u.b);
-					tp = new Triangle_dt(u.b, p);
-					u.b = p;
-					u.abnext.a = p;
-					t.abnext = tp;
-					tp.abnext = t;
-					t.bcnext = u.bcnext;
-					u.bcnext.canext = t;
-					t.canext = u;
-					u.bcnext = t;
-					tp.canext = u.abnext.canext;
-					u.abnext.canext.bcnext = tp;
-					tp.bcnext = u.abnext;
-					u.abnext.canext = tp;
+					t = new Triangle_dt(p, u.B);
+					tp = new Triangle_dt(u.B, p);
+					u.B = p;
+					u.ABNext.A = p;
+					t.ABNext = tp;
+					tp.ABNext = t;
+					t.BCNext = u.BCNext;
+					u.BCNext.CANext = t;
+					t.CANext = u;
+					u.BCNext = t;
+					tp.CANext = u.ABNext.CANext;
+					u.ABNext.CANext.BCNext = tp;
+					tp.BCNext = u.ABNext;
+					u.ABNext.CANext = tp;
 					if ((firstT.Equals(u)))
 						firstT = t;
 					break; // TODO: might not be correct. Was : Exit Select
 			}
 		}
 
-		private void startTriangulation(Point_dt p1, Point_dt p2)
+		private void StartTriangulation(Point_dt p1, Point_dt p2)
 		{
 			Point_dt pb;
 			Point_dt ps;
@@ -314,171 +314,179 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 			firstT = new Triangle_dt(pb, ps);
 			lastT = firstT;
 			Triangle_dt t = new Triangle_dt(ps, pb);
-			firstT.abnext = t;
-			t.abnext = firstT;
-			firstT.bcnext = t;
-			t.canext = firstT;
-			firstT.canext = t;
-			t.bcnext = firstT;
-			firstP = firstT.b;
-			lastP = lastT.a;
+			firstT.ABNext = t;
+			t.ABNext = firstT;
+			firstT.BCNext = t;
+			t.CANext = firstT;
+			firstT.CANext = t;
+			t.BCNext = firstT;
+			firstP = firstT.B;
+			lastP = lastT.A;
 			startTriangleHull = firstT;
 		}
 
-		private Triangle_dt extendInside(Triangle_dt t, Point_dt p)
+		private Triangle_dt ExtendInside(Triangle_dt t, Point_dt p)
 		{
 			Triangle_dt h1;
 			Triangle_dt h2;
 
-			h1 = treatDegeneracyInside(t, p);
+			h1 = TreatDegeneracyInside(t, p);
 
 			if (h1 != null) return h1;
 
-			h1 = new Triangle_dt(t.c, t.a, p);
-			h2 = new Triangle_dt(t.b, t.c, p);
-			t.c = p;
-			t.circumcircle();
-			h1.abnext = t.canext;
-			h1.bcnext = t;
-			h1.canext = h2;
-			h2.abnext = t.bcnext;
-			h2.bcnext = h1;
-			h2.canext = t;
-			h1.abnext.SwitchNeighbors(t, h1);
-			h2.abnext.SwitchNeighbors(t, h2);
-			t.bcnext = h2;
-			t.canext = h1;
+			h1 = new Triangle_dt(t.C, t.A, p);
+			h2 = new Triangle_dt(t.B, t.C, p);
+			t.C = p;
+			t.Circumcircle();
+			h1.ABNext = t.CANext;
+			h1.BCNext = t;
+			h1.CANext = h2;
+			h2.ABNext = t.BCNext;
+			h2.BCNext = h1;
+			h2.CANext = t;
+			h1.ABNext.SwitchNeighbors(t, h1);
+			h2.ABNext.SwitchNeighbors(t, h2);
+			t.BCNext = h2;
+			t.CANext = h1;
 			return t;
 		}
 
-		private Triangle_dt treatDegeneracyInside(Triangle_dt t, Point_dt p)
+		private Triangle_dt TreatDegeneracyInside(Triangle_dt t, Point_dt p)
 		{
-			if (t.abnext.IsHalfplane & p.pointLineTest(t.b, t.a) == Point_dt.ONSEGMENT)
+			if (t.ABNext.IsHalfplane & p.pointLineTest(t.B, t.A) == Point_dt.ONSEGMENT)
 			{
-				return extendOutside(t.abnext, p);
+				return ExtendOutside(t.ABNext, p);
 			}
 
-			if (t.bcnext.IsHalfplane & p.pointLineTest(t.c, t.b) == Point_dt.ONSEGMENT)
+			if (t.BCNext.IsHalfplane & p.pointLineTest(t.C, t.B) == Point_dt.ONSEGMENT)
 			{
-				return extendOutside(t.bcnext, p);
+				return ExtendOutside(t.BCNext, p);
 			}
 
-			if (t.canext.IsHalfplane & p.pointLineTest(t.a, t.c) == Point_dt.ONSEGMENT)
+			if (t.CANext.IsHalfplane & p.pointLineTest(t.A, t.C) == Point_dt.ONSEGMENT)
 			{
-				return extendOutside(t.canext, p);
+				return ExtendOutside(t.CANext, p);
 			}
 
 			return null;
 		}
 
-		private Triangle_dt extendOutside(Triangle_dt t, Point_dt p)
+		private Triangle_dt ExtendOutside(Triangle_dt t, Point_dt p)
 		{
-			if (p.pointLineTest(t.a, t.b) == Point_dt.ONSEGMENT)
+			if (p.pointLineTest(t.A, t.B) == Point_dt.ONSEGMENT)
 			{
-				Triangle_dt dg = new Triangle_dt(t.a, t.b, p);
-				Triangle_dt hp = new Triangle_dt(p, t.b);
-				t.b = p;
-				dg.abnext = t.abnext;
-				dg.abnext.SwitchNeighbors(t, dg);
-				dg.bcnext = hp;
-				hp.abnext = dg;
-				dg.canext = t;
-				t.abnext = dg;
-				hp.bcnext = t.bcnext;
-				hp.bcnext.canext = hp;
-				hp.canext = t;
-				t.bcnext = hp;
+				Triangle_dt dg = new Triangle_dt(t.A, t.B, p);
+				Triangle_dt hp = new Triangle_dt(p, t.B);
+				t.B = p;
+				dg.ABNext = t.ABNext;
+				dg.ABNext.SwitchNeighbors(t, dg);
+				dg.BCNext = hp;
+				hp.ABNext = dg;
+				dg.CANext = t;
+				t.ABNext = dg;
+				hp.BCNext = t.BCNext;
+				hp.BCNext.CANext = hp;
+				hp.CANext = t;
+				t.BCNext = hp;
 				return dg;
 			}
 
-			Triangle_dt ccT = extendcounterclock(t, p);
-			Triangle_dt cT = extendclock(t, p);
-			ccT.bcnext = cT;
-			cT.canext = ccT;
+			Triangle_dt ccT = Extendcounterclock(t, p);
+			Triangle_dt cT = ExtendClock(t, p);
+			ccT.BCNext = cT;
+			cT.CANext = ccT;
 			startTriangleHull = cT;
-			return cT.abnext;
+			return cT.ABNext;
 		}
 
-		private Triangle_dt extendcounterclock(Triangle_dt t, Point_dt p)
+		private Triangle_dt Extendcounterclock(Triangle_dt t, Point_dt p)
 		{
 			t.IsHalfplane = false;
-			t.c = p;
-			t.circumcircle();
-			Triangle_dt tca = t.canext;
+			t.C = p;
+			t.Circumcircle();
+			Triangle_dt tca = t.CANext;
 
-			if (p.pointLineTest(tca.a, tca.b) >= Point_dt.RIGHT)
+			if (p.pointLineTest(tca.A, tca.B) >= Point_dt.RIGHT)
 			{
-				Triangle_dt nT = new Triangle_dt(t.a, p);
-				nT.abnext = t;
-				t.canext = nT;
-				nT.canext = tca;
-				tca.bcnext = nT;
+                Triangle_dt nT = new Triangle_dt(t.A, p)
+                {
+                    ABNext = t
+                };
+                t.CANext = nT;
+				nT.CANext = tca;
+				tca.BCNext = nT;
 				return nT;
 			}
 
-			return extendcounterclock(tca, p);
+			return Extendcounterclock(tca, p);
 		}
 
-		private Triangle_dt extendclock(Triangle_dt t, Point_dt p)
+		private Triangle_dt ExtendClock(Triangle_dt t, Point_dt p)
 		{
 			t.IsHalfplane = false;
-			t.c = p;
-			t.circumcircle();
-			Triangle_dt tbc = t.bcnext;
+			t.C = p;
+			t.Circumcircle();
+			Triangle_dt tbc = t.BCNext;
 
-			if (p.pointLineTest(tbc.a, tbc.b) >= Point_dt.RIGHT)
+			if (p.pointLineTest(tbc.A, tbc.B) >= Point_dt.RIGHT)
 			{
-				Triangle_dt nT = new Triangle_dt(p, t.b);
-				nT.abnext = t;
-				t.bcnext = nT;
-				nT.bcnext = tbc;
-				tbc.canext = nT;
+				Triangle_dt nT = new Triangle_dt(p, t.B);
+				nT.ABNext = t;
+				t.BCNext = nT;
+				nT.BCNext = tbc;
+				tbc.CANext = nT;
 				return nT;
 			}
 
-			return extendclock(tbc, p);
+			return ExtendClock(tbc, p);
 		}
 
 		private void Flip(Triangle_dt t, int mc)
 		{
-			Triangle_dt u = t.abnext;
-			Triangle_dt v = default(Triangle_dt);
-			t.mc = mc;
+			Triangle_dt u = t.ABNext;
+            t.Mc = mc;
 
-			if (u.IsHalfplane | (!u.circumcircle_contains(t.c))) return;
+            if (u.IsHalfplane || (!u.CircumcircleContains(t.C))) return;
 
-			if (t.a.Equals(u.a))
-			{
-				v = new Triangle_dt(u.b, t.b, t.c);
-				v.abnext = u.bcnext;
-				t.abnext = u.abnext;
-			}
-			else if (t.a.Equals(u.b))
-			{
-				v = new Triangle_dt(u.c, t.b, t.c);
-				v.abnext = u.canext;
-				t.abnext = u.bcnext;
-			}
-			else if ((t.a.Equals(u.c)))
-			{
-				v = new Triangle_dt(u.a, t.b, t.c);
-				v.abnext = u.abnext;
-				t.abnext = u.canext;
-			}
-			else
-			{
-				throw new Exception("Error in flip.");
-			}
+            Triangle_dt v;
+            if (t.A.Equals(u.A))
+            {
+                v = new Triangle_dt(u.B, t.B, t.C)
+                {
+                    ABNext = u.BCNext
+                };
+                t.ABNext = u.ABNext;
+            }
+            else if (t.A.Equals(u.B))
+            {
+                v = new Triangle_dt(u.C, t.B, t.C)
+                {
+                    ABNext = u.CANext
+                };
+                t.ABNext = u.BCNext;
+            }
+            else if (t.A.Equals(u.C))
+            {
+                v = new Triangle_dt(u.A, t.B, t.C)
+                {
+                    ABNext = u.ABNext
+                };
+                t.ABNext = u.CANext;
+            }
+            else
+            {
+                throw new Exception("Error in flip.");
+            }
 
-			v.mc = mc;
-			v.bcnext = t.bcnext;
-			v.abnext.SwitchNeighbors(u, v);
-			v.bcnext.SwitchNeighbors(t, v);
-			t.bcnext = v;
-			v.canext = t;
-			t.b = v.a;
-			t.abnext.SwitchNeighbors(u, t);
-			t.circumcircle();
+            v.Mc = mc;
+			v.BCNext = t.BCNext;
+			v.ABNext.SwitchNeighbors(u, v);
+			v.BCNext.SwitchNeighbors(t, v);
+			t.BCNext = v;
+			v.CANext = t;
+			t.B = v.A;
+			t.ABNext.SwitchNeighbors(u, t);
+			t.Circumcircle();
 			currT = v;
 			Flip(t, mc);
 			Flip(v, mc);
@@ -512,7 +520,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <summary>
 		/// finds the triangle the query point falls in, note if out-side of this
 		/// triangulation a half plane triangle will be returned (see contains). the
-		/// search starts from the the start triangle
+		/// search starts from the start triangle
 		/// </summary>
 		/// <param name="p">Query point</param>
 		/// <param name="start">The triangle the search starts at.</param>
@@ -551,34 +559,34 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// </summary>
 		private static Triangle_dt findnext1(Point_dt p, Triangle_dt v)
 		{
-			if (p.pointLineTest(v.a, v.b) == Point_dt.RIGHT & (!v.abnext.IsHalfplane))
+			if (p.pointLineTest(v.A, v.B) == Point_dt.RIGHT & (!v.ABNext.IsHalfplane))
 			{
-				return v.abnext;
+				return v.ABNext;
 			}
 
-			if (p.pointLineTest(v.b, v.c) == Point_dt.RIGHT & (!v.bcnext.IsHalfplane))
+			if (p.pointLineTest(v.B, v.C) == Point_dt.RIGHT & (!v.BCNext.IsHalfplane))
 			{
-				return v.bcnext;
+				return v.BCNext;
 			}
 
-			if (p.pointLineTest(v.c, v.a) == Point_dt.RIGHT & (!v.canext.IsHalfplane))
+			if (p.pointLineTest(v.C, v.A) == Point_dt.RIGHT & (!v.CANext.IsHalfplane))
 			{
-				return v.canext;
+				return v.CANext;
 			}
 
-			if (p.pointLineTest(v.a, v.b) == Point_dt.RIGHT)
+			if (p.pointLineTest(v.A, v.B) == Point_dt.RIGHT)
 			{
-				return v.abnext;
+				return v.ABNext;
 			}
 
-			if (p.pointLineTest(v.b, v.c) == Point_dt.RIGHT)
+			if (p.pointLineTest(v.B, v.C) == Point_dt.RIGHT)
 			{
-				return v.bcnext;
+				return v.BCNext;
 			}
 
-			if (p.pointLineTest(v.c, v.a) == Point_dt.RIGHT)
+			if (p.pointLineTest(v.C, v.A) == Point_dt.RIGHT)
 			{
-				return v.canext;
+				return v.CANext;
 			}
 
 			return null;
@@ -589,19 +597,19 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// </summary>
 		private static Triangle_dt findnext2(Point_dt p, Triangle_dt v)
 		{
-			if ((v.abnext != null) & (!v.abnext.IsHalfplane))
+			if ((v.ABNext != null) & (!v.ABNext.IsHalfplane))
 			{
-				return v.abnext;
+				return v.ABNext;
 			}
 
-			if ((v.bcnext != null) && (!v.bcnext.IsHalfplane))
+			if ((v.BCNext != null) && (!v.BCNext.IsHalfplane))
 			{
-				return v.bcnext;
+				return v.BCNext;
 			}
 
-			if ((v.canext != null) & (!v.canext.IsHalfplane))
+			if ((v.CANext != null) & (!v.CANext.IsHalfplane))
 			{
-				return v.canext;
+				return v.CANext;
 			}
 
 			return null;
@@ -639,7 +647,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		public Point_dt z(Point_dt p)
 		{
 			Triangle_dt t = Find(p);
-			return t.z(p);
+			return t.Z(p);
 		}
 
 		/// <summary>
@@ -725,7 +733,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// computes the current set of all triangles and return an iterator to them.
 		/// </summary>
 		/// <returns>An iterator to the current set of all triangles</returns>
-		public IEnumerator<Triangle_dt> trianglesIterator()
+		public IEnumerator<Triangle_dt> TrianglesIterator()
 		{
 			if (this.Size() <= 2)
 			{
@@ -739,7 +747,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// Returns an iterator to the set of points composing this triangulation
 		/// </summary>
 		/// <returns>An iterator to the set of points composing this triangulation</returns>
-		public IEnumerator<Point_dt> verticesIterator()
+		public IEnumerator<Point_dt> VerticesIterator()
 		{
 			return _vertices.GetEnumerator();
 		}
@@ -763,19 +771,19 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 						t.Mark = true;
 						_triangles.Add(t);
 
-						if (t.abnext?.Mark == false)
+						if (t.ABNext?.Mark == false)
 						{
-							front.Add(t.abnext);
+							front.Add(t.ABNext);
 						}
 
-						if (t.bcnext?.Mark == false)
+						if (t.BCNext?.Mark == false)
 						{
-							front.Add(t.bcnext);
+							front.Add(t.BCNext);
 						}
 
-						if (t.canext?.Mark == false)
+						if (t.CANext?.Mark == false)
 						{
-							front.Add(t.bcnext);
+							front.Add(t.BCNext);
 						}
 					}
 				}

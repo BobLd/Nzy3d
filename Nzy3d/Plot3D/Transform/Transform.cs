@@ -56,6 +56,7 @@ namespace Nzy3d.Plot3D.Transform
 			{
 				GL.LoadIdentity();
 			}
+
 			foreach (ITransformer nextT in _sequence)
 			{
 				nextT.Execute();

@@ -45,7 +45,7 @@ namespace Nzy3d.Maths
 		/// Same as other <see cref="Utils.Num2str"/> but without parseMode (g by default) nor precision.
 		/// </summary>
 		/// <param name="num"></param>
-		public static string num2str(double num)
+		public static string Num2str(double num)
 		{
 			return Num2str(Convert.ToChar("g"), num);
 		}
@@ -60,12 +60,32 @@ namespace Nzy3d.Maths
 			return Dat2str(m_date, "dd/MM/yyyy HH:mm:ss");
 		}
 
-		public static long Dat2num(DateTime m_date)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="m_date"></param>
+		/// <returns>OLE Automation date.</returns>
+		public static double Dat2Num(DateTime m_date)
+		{
+			return m_date.ToOADate();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="oleDate">OLE Automation date.</param>
+		/// <returns>DateTime</returns>
+		public static DateTime Num2date(double oleDate)
+		{
+			return DateTime.FromOADate(oleDate);
+		}
+
+		public static long Dat2Long(DateTime m_date)
 		{
 			return m_date.Ticks;
 		}
 
-		public static DateTime Num2date(long m_ticks)
+		public static DateTime Long2date(long m_ticks)
 		{
 			return new DateTime(m_ticks);
 		}

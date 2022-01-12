@@ -3,7 +3,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Nzy3d.Plot3D.Rendering.Lights
 {
-    public class LightSet
+	public class LightSet
 	{
 		internal List<Light> _lights;
 
@@ -23,17 +23,18 @@ namespace Nzy3d.Plot3D.Rendering.Lights
 			GL.Enable(EnableCap.ColorMaterial);
 		}
 
-		public void apply(Coord3d scale)
+		public void Apply(Coord3d scale)
 		{
 			if (_lazyLightInit)
 			{
-				initLight();
+				InitLight();
 				foreach (Light alight in _lights)
 				{
 					LightSwitch.Enable(alight.Id);
 					_lazyLightInit = false;
 				}
 			}
+
 			foreach (Light alight in _lights)
 			{
 				alight.Apply(scale);
@@ -75,7 +76,7 @@ namespace Nzy3d.Plot3D.Rendering.Lights
 		{
 			if (_lights.Count == 0)
 			{
-				queryLazyLightInit();
+				QueryLazyLightInit();
 			}
 			_lights.Add(alight);
 		}
@@ -85,7 +86,7 @@ namespace Nzy3d.Plot3D.Rendering.Lights
 			_lights.Remove(alight);
 		}
 
-		internal void queryLazyLightInit()
+		internal void QueryLazyLightInit()
 		{
 			_lazyLightInit = true;
 		}
@@ -94,21 +95,15 @@ namespace Nzy3d.Plot3D.Rendering.Lights
 		/// Initialize the lightset
 		/// </summary>
 		/// <remarks>Original source : http://www.sjbaker.org/steve/omniv/opengl_lighting.html</remarks>
-		internal void initLight()
+		internal void InitLight()
 		{
 			GL.Enable(EnableCap.ColorMaterial);
 			GL.Enable(EnableCap.Lighting);
+
 			// Ligth model 
 			GL.LightModel(LightModelParameter.LightModelTwoSide, 1);
-			//GL.LightModel(LightModelParameter.LightModelLocalViewer, 1)
-			//GL.LightModel(LightModelParameter.LightModelLocalViewer, 0)
-		}
+			//GL.LightModel(LightModelParameter.LightModelLocalViewer, 1);
+			//GL.LightModel(LightModelParameter.LightModelLocalViewer, 0);
+        }
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

@@ -17,16 +17,9 @@ namespace Nzy3d.Plot3D.Primitives.Axes.Layout.Renderers
 			_precision = precision;
 		}
 
-		public string Format(float value)
+		public string Format(double value)
 		{
 			return Utils.Num2str('e', value, _precision);
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

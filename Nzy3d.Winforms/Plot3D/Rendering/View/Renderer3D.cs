@@ -35,7 +35,7 @@ namespace Nzy3d.Winforms
 		{
 			if (_view != null)
 			{
-				System.Diagnostics.Debug.WriteLine($"Renderer3D.Renderer3D_Paint: {this.Name}");
+				//System.Diagnostics.Debug.WriteLine($"Renderer3D.Renderer3D_Paint: {this.Name}");
 				this.MakeCurrent();
 
 				_view.Clear();
@@ -72,9 +72,9 @@ namespace Nzy3d.Winforms
 			}
 
 			BitmapData data = _image.LockBits(this.ClientRectangle, ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-			//OpenTK.Graphics.OpenGL.GL.ReadPixels(0, 0, ClientSize.Width, ClientSize.Height, OpenTK.Graphics.PixelFormat.Bgr, OpenTK.Graphics.PixelType.UnsignedByte, data.Scan0)
-			var pxFormat = OpenTK.Graphics.OpenGL.PixelFormat.Bgr;
-			var pxType = PixelType.UnsignedByte;
+            //OpenTK.Graphics.OpenGL.GL.ReadPixels(0, 0, ClientSize.Width, ClientSize.Height, OpenTK.Graphics.PixelFormat.Bgr, OpenTK.Graphics.PixelType.UnsignedByte, data.Scan0)
+            const OpenTK.Graphics.OpenGL.PixelFormat pxFormat = OpenTK.Graphics.OpenGL.PixelFormat.Bgr;
+            const PixelType pxType = PixelType.UnsignedByte;
 
 			GL.ReadPixels(0, 0, ClientSize.Width, ClientSize.Height, pxFormat, pxType, data.Scan0);
 			_image.UnlockBits(data);
@@ -137,7 +137,6 @@ namespace Nzy3d.Winforms
 			}
 
 			MouseMove += listener.MouseMoved;
-			// NOT AVAILABLE IN WinForms : AddHandler ???, AddressOf listener.MouseDragged
 		}
 
 		public void AddMouseWheelListener(IBaseMouseWheelListener baseListener)
@@ -159,7 +158,7 @@ namespace Nzy3d.Winforms
 
 		public async void ForceRepaint()
 		{
-			System.Diagnostics.Debug.WriteLine($"Renderer3D.ForceRepaint: {this.Name}");
+			//System.Diagnostics.Debug.WriteLine($"Renderer3D.ForceRepaint: {this.Name}");
 
 			this.Invalidate();
 
@@ -266,5 +265,18 @@ namespace Nzy3d.Winforms
 			Resize += Renderer3D_Resize;
 			Paint += Renderer3D_Paint;
 		}
-	}
+
+        protected override void OnMouseMove(System.Windows.Forms.MouseEventArgs e)
+		{
+			var proj = View?.ProjectMouseInAxes(e.X, Height - e.Y);
+			if (proj != null)
+			{
+				System.Diagnostics.Debug.WriteLine($"Renderer3D.OnMouseMove: {this.Name} - Location={e.Location}, Projection={proj}");
+				this.View.MouseCoord3d = proj;
+				this.ForceRepaint();
+			}
+
+			base.OnMouseMove(e);
+        }
+    }
 }

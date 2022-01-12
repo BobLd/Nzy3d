@@ -106,7 +106,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public double getRadius()
 		{
-			return getCenter().distance(new Coord2d(m_xmin, m_ymin));
+			return getCenter().Distance(new Coord2d(m_xmin, m_ymin));
 		}
 
 		/// <summary>

@@ -89,24 +89,38 @@ namespace Nzy3d.Tests.Maths
         {
             Assert.True(new Coord3d(1, 2, 3).Equals(new Coord3d(1, 2, 3)));
             Assert.True(new Coord3d(1, 2, 3).GetHashCode().Equals(new Coord3d(1, 2, 3).GetHashCode()));
+            Assert.True(new Coord3d(1, 2, 3) == new Coord3d(1, 2, 3));
+            Assert.False(new Coord3d(1, 2, 3) != new Coord3d(1, 2, 3));
 
             Assert.False(new Coord3d(1, 2, 3).Equals(new Coord3d(2, 1, 3)));
             Assert.False(new Coord3d(1, 2, 3).GetHashCode().Equals(new Coord3d(2, 1, 3).GetHashCode()));
+            Assert.False(new Coord3d(1, 2, 3) == new Coord3d(2, 1, 3));
+            Assert.True(new Coord3d(1, 2, 3) != new Coord3d(2, 1, 3));
 
             Assert.True(new Coord3d(-0, 2, 3).Equals(new Coord3d(0, 2, 3)));
             Assert.True(new Coord3d(-0, 2, 3).GetHashCode().Equals(new Coord3d(0, 2, 3).GetHashCode()));
+            Assert.True(new Coord3d(-0, 2, 3) == new Coord3d(0, 2, 3));
+            Assert.False(new Coord3d(-0, 2, 3) != new Coord3d(0, 2, 3));
 
             Assert.True(new Coord3d(float.NaN, 2, 3).Equals(new Coord3d(float.NaN, 2, 3)));
             Assert.True(new Coord3d(float.NaN, 2, 3).GetHashCode().Equals(new Coord3d(float.NaN, 2, 3).GetHashCode()));
+            Assert.True(new Coord3d(float.NaN, 2, 3) == new Coord3d(float.NaN, 2, 3));
+            Assert.False(new Coord3d(float.NaN, 2, 3) != new Coord3d(float.NaN, 2, 3));
 
             Assert.True(new Coord3d(float.PositiveInfinity, 2, 3).Equals(new Coord3d(float.PositiveInfinity, 2, 3)));
             Assert.True(new Coord3d(float.PositiveInfinity, 2, 3).GetHashCode().Equals(new Coord3d(float.PositiveInfinity, 2, 3).GetHashCode()));
+            Assert.True(new Coord3d(float.PositiveInfinity, 2, 3) == new Coord3d(float.PositiveInfinity, 2, 3));
+            Assert.False(new Coord3d(float.PositiveInfinity, 2, 3) != new Coord3d(float.PositiveInfinity, 2, 3));
 
             Assert.True(new Coord3d(float.NegativeInfinity, 2, 3).Equals(new Coord3d(float.NegativeInfinity, 2, 3)));
             Assert.True(new Coord3d(float.NegativeInfinity, 2, 3).GetHashCode().Equals(new Coord3d(float.NegativeInfinity, 2, 3).GetHashCode()));
+            Assert.True(new Coord3d(float.NegativeInfinity, 2, 3) == new Coord3d(float.NegativeInfinity, 2, 3));
+            Assert.False(new Coord3d(float.NegativeInfinity, 2, 3) != new Coord3d(float.NegativeInfinity, 2, 3));
 
             Assert.False(new Coord3d(float.PositiveInfinity, 2, 3).Equals(new Coord3d(float.NegativeInfinity, 2, 3)));
             Assert.False(new Coord3d(float.PositiveInfinity, 2, 3).GetHashCode().Equals(new Coord3d(float.NegativeInfinity, 2, 3).GetHashCode()));
+            Assert.False(new Coord3d(float.PositiveInfinity, 2, 3) == new Coord3d(float.NegativeInfinity, 2, 3));
+            Assert.True(new Coord3d(float.PositiveInfinity, 2, 3) != new Coord3d(float.NegativeInfinity, 2, 3));
         }
     }
 }

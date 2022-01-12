@@ -1,8 +1,6 @@
 using Nzy3d.Chart.Controllers.Mouse.Camera;
 using Nzy3d.Chart.Controllers.Thread.Camera;
 using Nzy3d.Plot3D.Primitives.Axes.Layout;
-using Nzy3d.Plot3D.Rendering.Canvas;
-using Nzy3d.Plot3D.Rendering.View.Modes;
 using OpenTK.Windowing.Common;
 
 namespace Nzy3d.WinformsDemo
@@ -35,14 +33,8 @@ namespace Nzy3d.WinformsDemo
             // ############ 1st Renderer ############
 
             myRenderer3D.Name = "Renderer 0";
-            //myRenderer3D.ForceUpdate = true;
-            // Create the chart and embed the surface within
-            Chart.Chart chart = new Chart.Chart(myRenderer3D, Quality.Nicest);
-            chart.View.Maximized = false;
-            chart.View.CameraMode = CameraMode.PERSPECTIVE;
-            chart.View.IncludingTextLabels = true;
-
-            chart.Scene.Graph.Add(GraphsHelper.GetSurfaceGraph());// .GetScatterGraph()); // GetSurfaceGraph
+            // Create the chart
+            Chart.Chart chart = ChartsHelper.GetMapperSurface(myRenderer3D);
             axeLayout = chart.AxeLayout;
 
             // All activated by default
@@ -62,15 +54,15 @@ namespace Nzy3d.WinformsDemo
             // This is just to ensure code is reentrant (used when code is not called in Form_Load but another reentrant event)
             DisposeBackgroundThread();
 
-            // Associate the chart with current control
-            myRenderer3D.SetView(chart.View);
-
             // Create a thread to control the camera based on mouse movements
             _cameraController = new CameraThreadController();
             _cameraController.AddControllerEventListener(myRenderer3D);
             mouse.AddSlaveThreadController(_cameraController);
             chart.AddController(_cameraController);
             _cameraController.Start();
+
+            // Associate the chart with current control
+            myRenderer3D.SetView(chart.View);
 
             // ############ 2nd Renderer ############
 

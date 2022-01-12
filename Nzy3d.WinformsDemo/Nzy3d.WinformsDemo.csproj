@@ -13,4 +13,10 @@
     <ProjectReference Include="..\Nzy3d\Nzy3d.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="FRB_H15_dec_2021.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

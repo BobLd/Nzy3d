@@ -1,69 +1,69 @@
 namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 {
-    /// <summary>
-    /// This class represents a 3D triangle in a Triangulation
-    /// </summary>
-    public class Triangle_dt
+	/// <summary>
+	/// This class represents a 3D triangle in a Triangulation
+	/// </summary>
+	public class Triangle_dt
 	{
-        private Circle_dt _circum;
+		private Circle_dt _circum;
 
-        //private int _counter = 0;
+		//private int _counter = 0;
 
-        //private int _c2 = 0;
+		//private int _c2 = 0;
 
-        /// <summary>
-        /// Constructs a triangle form 3 point - store it in counterclockwised order.
-        /// A should be before B and B before C in counterclockwise order.
-        /// </summary>
-        /// <param name="A"></param>
-        /// <param name="B"></param>
-        /// <param name="C"></param>
-        public Triangle_dt(Point_dt A, Point_dt B, Point_dt C)
+		/// <summary>
+		/// Constructs a triangle form 3 point - store it in counterclockwised order.
+		/// A should be before B and B before C in counterclockwise order.
+		/// </summary>
+		/// <param name="a"></param>
+		/// <param name="b"></param>
+		/// <param name="c"></param>
+		public Triangle_dt(Point_dt a, Point_dt b, Point_dt c)
 		{
-			a = A;
-			int res = C.pointLineTest(A, B);
-			if (res <= Point_dt.LEFT | res == Point_dt.INFRONTOFA | res == Point_dt.BEHINDB)
+			this.A = a;
+			int res = c.pointLineTest(a, b);
+			if (res <= Point_dt.LEFT || res == Point_dt.INFRONTOFA || res == Point_dt.BEHINDB)
 			{
-				b = B;
-				c = C;
+				this.B = b;
+				this.C = c;
 				//RIGHT
 			}
 			else
 			{
 				System.Diagnostics.Debug.WriteLine("Warning, Triangle_dt(A,B,C) expects points in counterclockwise order.");
-				System.Diagnostics.Debug.WriteLine(A.ToString() + B.ToString() + C.ToString());
-				b = C;
-				c = B;
+				System.Diagnostics.Debug.WriteLine(a.ToString() + b.ToString() + c.ToString());
+				this.B = c;
+				this.C = b;
 			}
-			circumcircle();
+			Circumcircle();
 		}
 
 		/// <summary>
 		/// Creates a half plane using the segment (A,B).
 		/// </summary>
-		public Triangle_dt(Point_dt A, Point_dt B)
+		public Triangle_dt(Point_dt a, Point_dt b)
 		{
-			a = A;
-			b = B;
+			this.A = a;
+			this.B = b;
 			IsHalfplane = true;
 		}
 
-        /// <summary>
-        /// Returns true if this triangle is actually a half plane
-        /// </summary>
-        public bool IsHalfplane { get; set; }
+		/// <summary>
+		/// Returns true if this triangle is actually a half plane
+		/// </summary>
+		public bool IsHalfplane { get; set; }
 
-        /// <summary>
-        /// tag - for bfs algorithms
-        /// </summary>
-        public bool Mark { get; set; } = false;
+		/// <summary>
+		/// tag - for bfs algorithms
+		/// </summary>
+		public bool Mark { get; set; }
 
-        /// <summary>
-        /// Returns the first vertex of this triangle.
-        /// </summary>
-        public Point_dt P1
+		/// <summary>
+		/// Returns the first vertex of this triangle.
+		/// </summary>
+		public Point_dt P1
 		{
-			get { return a; }
+			get { return A; }
 		}
 
 		/// <summary>
@@ -71,7 +71,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// </summary>
 		public Point_dt P2
 		{
-			get { return b; }
+			get { return B; }
 		}
 
 		/// <summary>
@@ -79,31 +79,31 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// </summary>
 		public Point_dt P3
 		{
-			get { return c; }
+			get { return C; }
 		}
 
 		/// <summary>
 		/// Returns the consecutive triangle which shares this triangle p1,p2 edge.
 		/// </summary>
-		public Triangle_dt Next_12
+		public Triangle_dt Next12
 		{
-			get { return abnext; }
+			get { return ABNext; }
 		}
 
 		/// <summary>
 		/// Returns the consecutive triangle which shares this triangle p2,p3 edge.
 		/// </summary>
-		public Triangle_dt Next_23
+		public Triangle_dt Next23
 		{
-			get { return bcnext; }
+			get { return BCNext; }
 		}
 
 		/// <summary>
 		/// Returns the consecutive triangle which shares this triangle p3,p1 edge.
 		/// </summary>
-		public Triangle_dt Next_31
+		public Triangle_dt Next31
 		{
-			get { return canext; }
+			get { return CANext; }
 		}
 
 		/// <summary>
@@ -113,25 +113,25 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		{
 			get
 			{
-				var lowerLeft = new Point_dt(Math.Min(a.x, Math.Min(b.x, c.x)), Math.Min(a.y, Math.Min(b.y, c.y)));
-				var upperRight = new Point_dt(Math.Max(a.x, Math.Max(b.x, c.x)), Math.Max(a.y, Math.Max(b.y, c.y)));
+				var lowerLeft = new Point_dt(Math.Min(A.x, Math.Min(B.x, C.x)), Math.Min(A.y, Math.Min(B.y, C.y)));
+				var upperRight = new Point_dt(Math.Max(A.x, Math.Max(B.x, C.x)), Math.Max(A.y, Math.Max(B.y, C.y)));
 				return new BoundingBox(lowerLeft, upperRight);
 			}
 		}
 
 		public void SwitchNeighbors(Triangle_dt old_t, Triangle_dt new_t)
 		{
-			if (abnext.Equals(old_t))
+			if (ABNext.Equals(old_t))
 			{
-				abnext = new_t;
+				ABNext = new_t;
 			}
-			else if (bcnext.Equals(old_t))
+			else if (BCNext.Equals(old_t))
 			{
-				bcnext = new_t;
+				BCNext = new_t;
 			}
-			else if (canext.Equals(old_t))
+			else if (CANext.Equals(old_t))
 			{
-				canext = new_t;
+				CANext = new_t;
 			}
 			else
 			{
@@ -141,17 +141,17 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 
 		public Triangle_dt Neighbor(Point_dt p)
 		{
-			if (a.Equals(p))
+			if (A.Equals(p))
 			{
-				return canext;
+				return CANext;
 			}
-			else if (b.Equals(p))
+			else if (B.Equals(p))
 			{
-				return abnext;
+				return ABNext;
 			}
-			else if (c.Equals(p))
+			else if (C.Equals(p))
 			{
-				return bcnext;
+				return BCNext;
 			}
 			else
 			{
@@ -170,57 +170,57 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		{
 			Triangle_dt neighbor = null;
 
-			if (a.Equals(p))
+			if (A.Equals(p))
 			{
-				neighbor = canext;
+				neighbor = CANext;
 			}
-			else if (b.Equals(p))
+			else if (B.Equals(p))
 			{
-				neighbor = abnext;
+				neighbor = ABNext;
 			}
-			else if (c.Equals(p))
+			else if (C.Equals(p))
 			{
-				neighbor = bcnext;
+				neighbor = BCNext;
 			}
 
 			if (neighbor.Equals(prevTriangle) || neighbor.IsHalfplane)
 			{
-				if (a.Equals(p))
+				if (A.Equals(p))
 				{
-					neighbor = abnext;
+					neighbor = ABNext;
 				}
-				else if (b.Equals(p))
+				else if (B.Equals(p))
 				{
-					neighbor = bcnext;
+					neighbor = BCNext;
 				}
-				else if (c.Equals(p))
+				else if (C.Equals(p))
 				{
-					neighbor = canext;
+					neighbor = CANext;
 				}
 			}
 
 			return neighbor;
 		}
 
-		public Circle_dt circumcircle()
+		public Circle_dt Circumcircle()
 		{
-			double u = ((a.x - b.x) * (a.x + b.x) + (a.y - b.y) * (a.y + b.y)) / 2.0;
-			double v = ((b.x - c.x) * (b.x + c.x) + (b.y - c.y) * (b.y + c.y)) / 2.0;
-			double den = (a.x - b.x) * (b.y - c.y) - (b.x - c.x) * (a.y - b.y);
+			double u = ((A.x - B.x) * (A.x + B.x) + (A.y - B.y) * (A.y + B.y)) / 2.0;
+			double v = ((B.x - C.x) * (B.x + C.x) + (B.y - C.y) * (B.y + C.y)) / 2.0;
+			double den = (A.x - B.x) * (B.y - C.y) - (B.x - C.x) * (A.y - B.y);
 			// oops, degenerate case
-			if ((den == 0))
+			if (den == 0)
 			{
-				_circum = new Circle_dt(a, double.PositiveInfinity);
+				_circum = new Circle_dt(A, double.PositiveInfinity);
 			}
 			else
 			{
-				Point_dt cen = new Point_dt((u * (b.y - c.y) - v * (a.y - b.y)) / den, (v * (a.x - b.x) - u * (b.x - c.x)) / den);
-				_circum = new Circle_dt(cen, cen.distance2(a));
+				Point_dt cen = new Point_dt((u * (B.y - C.y) - v * (A.y - B.y)) / den, (v * (A.x - B.x) - u * (B.x - C.x)) / den);
+				_circum = new Circle_dt(cen, cen.distance2(A));
 			}
 			return _circum;
 		}
 
-		public bool circumcircle_contains(Point_dt p)
+		public bool CircumcircleContains(Point_dt p)
 		{
 			// Fix from https://github.com/rtrusso/nzy3d-api/commit/b39a673c522ac49a6727f9b7890a154824581d42
 			if (IsHalfplane)
@@ -232,13 +232,14 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 			return _circum.Radius > _circum.Center.distance2(p);
 		}
 
+		/// <inheritdoc/>
 		public override string ToString()
 		{
 			string res = "";
-			res += "A: " + a.ToString() + " B: " + b.ToString();
+			res += "A: " + A.ToString() + " B: " + B.ToString();
 			if ((!IsHalfplane))
 			{
-				res += " C: " + c.ToString();
+				res += " C: " + C.ToString();
 			}
 			return res;
 		}
@@ -249,23 +250,25 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <param name="p">The query point</param>
 		/// <returns>True if p is not null and is inside this triangle</returns>
 		/// <remarks>Note: on boundary is considered inside</remarks>
-		public bool contains(Point_dt p)
+		public bool Contains(Point_dt p)
 		{
-			if (IsHalfplane | p == null)
+			if (IsHalfplane || p == null)
 			{
 				return false;
 			}
-			if (isCorner(p))
+
+			if (IsCorner(p))
 			{
 				return true;
 			}
-			int a12 = p.pointLineTest(a, b);
-			int a23 = p.pointLineTest(b, c);
-			int a31 = p.pointLineTest(c, a);
-            return (a12 == Point_dt.LEFT && a23 == Point_dt.LEFT && a31 == Point_dt.LEFT)
-                || (a12 == Point_dt.RIGHT && a23 == Point_dt.RIGHT && a31 == Point_dt.RIGHT)
-                || (a12 == Point_dt.ONSEGMENT || a23 == Point_dt.ONSEGMENT || a31 == Point_dt.ONSEGMENT);
-        }
+
+			int a12 = p.pointLineTest(A, B);
+			int a23 = p.pointLineTest(B, C);
+			int a31 = p.pointLineTest(C, A);
+			return (a12 == Point_dt.LEFT && a23 == Point_dt.LEFT && a31 == Point_dt.LEFT)
+				|| (a12 == Point_dt.RIGHT && a23 == Point_dt.RIGHT && a31 == Point_dt.RIGHT)
+				|| (a12 == Point_dt.ONSEGMENT || a23 == Point_dt.ONSEGMENT || a31 == Point_dt.ONSEGMENT);
+		}
 
 		/// <summary>
 		/// Determines if this triangle contains the point p.
@@ -273,31 +276,33 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <param name="p">The query point</param>
 		/// <returns>True if p is not null and is inside this triangle</returns>
 		/// <remarks>Note: on boundary is considered outside</remarks>
-		public bool contains_BoundaryIsOutside(Point_dt p)
+		public bool ContainsBoundaryIsOutside(Point_dt p)
 		{
-			if (IsHalfplane | p == null)
+			if (IsHalfplane || p == null)
 			{
 				return false;
 			}
-			if (isCorner(p))
+
+			if (IsCorner(p))
 			{
 				return false;
 			}
-			int a12 = p.pointLineTest(a, b);
-			int a23 = p.pointLineTest(b, c);
-			int a31 = p.pointLineTest(c, a);
-            return (a12 == Point_dt.LEFT && a23 == Point_dt.LEFT && a31 == Point_dt.LEFT)
-                || (a12 == Point_dt.RIGHT && a23 == Point_dt.RIGHT && a31 == Point_dt.RIGHT);
-        }
+
+			int a12 = p.pointLineTest(A, B);
+			int a23 = p.pointLineTest(B, C);
+			int a31 = p.pointLineTest(C, A);
+			return (a12 == Point_dt.LEFT && a23 == Point_dt.LEFT && a31 == Point_dt.LEFT)
+				|| (a12 == Point_dt.RIGHT && a23 == Point_dt.RIGHT && a31 == Point_dt.RIGHT);
+		}
 
 		/// <summary>
 		/// Checks if the given point is a corner of this triangle.
 		/// </summary>
 		/// <param name="p">The given point.</param>
 		/// <returns>True if the given point is a corner of this triangle.</returns>
-		public bool isCorner(Point_dt p)
+		public bool IsCorner(Point_dt p)
 		{
-			return (p.x == a.x & p.y == a.y) | (p.x == b.x & p.y == b.y) | (p.x == c.x & p.y == c.y);
+			return (p.x == A.x && p.y == A.y) || (p.x == B.x && p.y == B.y) || (p.x == C.x && p.y == C.y);
 		}
 
 		/// <summary>
@@ -305,34 +310,44 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// Assume current triangle represent a plane --> q does NOT need to be contained in this triangle.
 		/// </summary>
 		/// <param name="q">A x/y point.</param>
-		/// <returns></returns>
 		/// <remarks>Current triangle must not be a halfplane.</remarks>
-		public double z_value(Point_dt q)
+		public double ZValue(Point_dt q)
 		{
 			if (q == null)
 			{
 				throw new ArgumentException("Input point cannot be Nothing", "q");
 			}
+
 			if (IsHalfplane)
 			{
 				throw new Exception("Cannot approximate the z value from a halfplane triangle");
 			}
-			if (q.x == a.x & q.y == a.y)
-				return a.z;
-			if (q.x == b.x & q.y == b.y)
-				return b.z;
-			if (q.x == c.x & q.y == c.y)
-				return c.z;
+
+			if (q.x == A.x && q.y == A.y)
+			{
+				return A.z;
+			}
+
+			if (q.x == B.x && q.y == B.y)
+			{
+				return B.z;
+			}
+
+			if (q.x == C.x && q.y == C.y)
+			{
+				return C.z;
+			}
+
 			double X = 0;
 			double x0 = q.x;
-			double x1 = a.x;
-			double x2 = b.x;
-			double x3 = c.x;
+			double x1 = A.x;
+			double x2 = B.x;
+			double x3 = C.x;
 			double Y = 0;
 			double y0 = q.y;
-			double y1 = a.y;
-			double y2 = b.y;
-			double y3 = c.y;
+			double y1 = A.y;
+			double y2 = B.y;
+			double y3 = C.y;
 			double Z = 0;
 			double m01 = 0;
 			double k01 = 0;
@@ -346,7 +361,9 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 				m01 = (y0 - y1) / (x0 - x1);
 				k01 = y0 - m01 * x0;
 				if (m01 == 0)
+				{
 					flag01 = 1;
+				}
 				//2-vertical
 			}
 			else
@@ -361,7 +378,9 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 				m23 = (y2 - y3) / (x2 - x3);
 				k23 = y2 - m23 * x2;
 				if (m23 == 0)
+				{
 					flag23 = 1;
+				}
 				//2-vertical
 			}
 			else
@@ -396,7 +415,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 				r = (x2 - X) / (x2 - x3);
 			}
 
-			Z = b.z + (c.z - b.z) * r;
+			Z = B.z + (C.z - B.z) * r;
 			if (flag01 == 2)
 			{
 				r = (y1 - y0) / (y1 - Y);
@@ -406,7 +425,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 				r = (x1 - x0) / (x1 - X);
 			}
 
-			double qZ = a.z + (Z - a.z) * r;
+			double qZ = A.z + (Z - A.z) * r;
 			return qZ;
 		}
 
@@ -416,9 +435,9 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// </summary>
 		/// <returns></returns>
 		/// <remarks>Current triangle must not be a halfplane.</remarks>
-		public double z(double x, double y)
+		public double Z(double x, double y)
 		{
-			return z_value(new Point_dt(x, y));
+			return ZValue(new Point_dt(x, y));
 		}
 
 		/// <summary>
@@ -428,36 +447,29 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <param name="q">A x/y point.</param>
 		/// <returns>A new <see cref="Point_dt"/> with same x/y than <paramref name="q"/> and computed z value</returns>
 		/// <remarks>Current triangle must not be a halfplane.</remarks>
-		public Point_dt z(Point_dt q)
+		public Point_dt Z(Point_dt q)
 		{
-			double newz = z_value(q);
+			double newz = ZValue(q);
 			return new Point_dt(q.x, q.y, newz);
 		}
 
-        public Point_dt a { get; set; }
+		public Point_dt A { get; set; }
 
-        public Point_dt b { get; set; }
+		public Point_dt B { get; set; }
 
-        public Point_dt c { get; set; }
+		public Point_dt C { get; set; }
 
-        public Triangle_dt abnext { get; set; }
+		public Triangle_dt ABNext { get; set; }
 
-        public Triangle_dt bcnext { get; set; }
+		public Triangle_dt BCNext { get; set; }
 
-        public Triangle_dt canext { get; set; }
+		public Triangle_dt CANext { get; set; }
 
-        public int mc { get; set; }
+		public int Mc { get; set; }
 
-        public Circle_dt circum
+		public Circle_dt Circum
 		{
 			get { return _circum; }
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

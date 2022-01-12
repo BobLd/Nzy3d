@@ -49,12 +49,12 @@ namespace Nzy3d.Tests.Plot3D.Builder.Delaunay.Jdt
             var triangle = new Triangle_dt(new Point_dt(0.0, 0.0),
                                            new Point_dt(1.0, 0.0),
                                            new Point_dt(0.0, 1.0));
-            Assert.Equal(p0, triangle.a.x);
-            Assert.Equal(p1, triangle.a.y);
-            Assert.Equal(p2, triangle.b.x);
-            Assert.Equal(p3, triangle.b.y);
-            Assert.Equal(p4, triangle.c.x);
-            Assert.Equal(p5, triangle.c.y);
+            Assert.Equal(p0, triangle.A.x);
+            Assert.Equal(p1, triangle.A.y);
+            Assert.Equal(p2, triangle.B.x);
+            Assert.Equal(p3, triangle.B.y);
+            Assert.Equal(p4, triangle.C.x);
+            Assert.Equal(p5, triangle.C.y);
         }
 
         [Fact]
@@ -71,12 +71,12 @@ namespace Nzy3d.Tests.Plot3D.Builder.Delaunay.Jdt
             var triangle = new Triangle_dt(new Point_dt(0.0, 0.0),
                                            new Point_dt(0.0, 1.0),
                                            new Point_dt(1.0, 0.0));
-            Assert.Equal(p0, triangle.a.x);
-            Assert.Equal(p1, triangle.a.y);
-            Assert.Equal(p2, triangle.b.x);
-            Assert.Equal(p3, triangle.b.y);
-            Assert.Equal(p4, triangle.c.x);
-            Assert.Equal(p5, triangle.c.y);
+            Assert.Equal(p0, triangle.A.x);
+            Assert.Equal(p1, triangle.A.y);
+            Assert.Equal(p2, triangle.B.x);
+            Assert.Equal(p3, triangle.B.y);
+            Assert.Equal(p4, triangle.C.x);
+            Assert.Equal(p5, triangle.C.y);
         }
 
         [Fact]
@@ -85,7 +85,7 @@ namespace Nzy3d.Tests.Plot3D.Builder.Delaunay.Jdt
             var triangle = new Triangle_dt(new Point_dt(0.0, 0.0),
                                            new Point_dt(0.0, 1.0),
                                            new Point_dt(1.0, 0.0));
-            Assert.True(triangle.contains(new Point_dt(0.25, 0.25)));
+            Assert.True(triangle.Contains(new Point_dt(0.25, 0.25)));
         }
 
         [Fact]
@@ -94,7 +94,7 @@ namespace Nzy3d.Tests.Plot3D.Builder.Delaunay.Jdt
             var triangle = new Triangle_dt(new Point_dt(0.0, 0.0),
                                            new Point_dt(0.0, 1.0),
                                            new Point_dt(1.0, 0.0));
-            Assert.False(triangle.contains(new Point_dt(0.75, 0.75)));
+            Assert.False(triangle.Contains(new Point_dt(0.75, 0.75)));
         }
 
         [Fact]
@@ -105,8 +105,8 @@ namespace Nzy3d.Tests.Plot3D.Builder.Delaunay.Jdt
                                            new Point_dt(1.0, 0.0));
 
             var point = new Point_dt(0.5, 0.5);
-            Assert.True(triangle.contains(point));
-            Assert.False(triangle.contains_BoundaryIsOutside(point), "Point is inside the triangle, boundary excluded");
+            Assert.True(triangle.Contains(point));
+            Assert.False(triangle.ContainsBoundaryIsOutside(point), "Point is inside the triangle, boundary excluded");
         }
     }
 }

@@ -107,7 +107,35 @@ namespace Nzy3d.Plot3D.Rendering.View
 			return _cam.ScreenToModel(new Coord3d(x, y, 0));
 		}
 
-#region "GENERAL DISPLAY CONTROLS"
+		public Coord3d ProjectMouseInAxes(int x, int y)
+		{
+			if (Camera == null || Camera.Eye == null)
+			{
+				return Coord3d.INVALID;
+			}
+
+			var proj = _cam.ScreenToModel(new Coord3d(x, y, Camera.Near / 2));
+
+			//var axes = (AxeBox)Axe;
+			var x_b = proj.X; /// axes.Scale.X; // Scale.Range;
+			var y_b = proj.Y; // / axes.Scale.Y; // Scale.Range;
+			var z_b = proj.Z; // / axes.Scale.Z; // Scale.Range;
+
+			//var bbox = this.Axe.GetBoxBounds();
+
+			//var x_b = Math.Min(proj.X, bbox.XMax);
+			//x_b = Math.Max(x_b, bbox.XMin);
+
+			//var y_b = Math.Min(proj.Y, bbox.YMax);
+			//y_b = Math.Max(y_b, bbox.YMin);
+
+			//var z_b = Math.Min(proj.Z, bbox.ZMax);
+			//z_b = Math.Max(z_b, bbox.ZMin);
+
+			return new Coord3d(x_b, y_b, z_b);
+		}
+
+		#region "GENERAL DISPLAY CONTROLS"
 
 		public async Task Rotate(Coord2d move)
 		{
@@ -721,9 +749,11 @@ namespace Nzy3d.Plot3D.Rendering.View
 				case ViewBoundMode.AUTO_FIT:
 					bounds = Scene.Graph.Bounds;
 					break;
+
 				case ViewBoundMode.MANUAL:
 					bounds = _viewbounds;
 					break;
+
 				default:
 					throw new Exception("Unsupported bound mode : " + _boundmode);
 			}
@@ -904,6 +934,12 @@ namespace Nzy3d.Plot3D.Rendering.View
 			UpdateCamera(viewport, ComputeScaling());
 			RenderAxeBox();
 			RenderSceneGraph();
+
+			if (DISPLAY_AXE_WHOLE_BOUNDS)
+            {
+				// Render last
+				RenderMousePointer();
+			}
 		}
 
 		public void UpdateQuality()
@@ -983,7 +1019,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			if (Math.Abs(_viewpoint.Y) == PI_div2)
 			{
 				// handle up vector
-				Coord2d direction = new Coord2d(_viewpoint.X, _viewpoint.Y).cartesian();
+				Coord2d direction = new Coord2d(_viewpoint.X, _viewpoint.Y).Cartesian();
 				if (_viewpoint.Y > 0)
 				{
 					// on top
@@ -1084,7 +1120,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 		{
 			if (light)
 			{
-				Scene.LightSet.apply(_scaling);
+				Scene.LightSet.Apply(_scaling);
 				// gl.glEnable(GL2.GL_LIGHTING);
 				// gl.glEnable(GL2.GL_LIGHT0);
 				// gl.glDisable(GL2.GL_LIGHTING);
@@ -1093,6 +1129,65 @@ namespace Nzy3d.Plot3D.Rendering.View
 			Scene.Graph.Transform = new Transform.Transform(new Transform.Scale(_scaling));
 			Scene.Graph.Draw(_cam);
 		}
+
+		private void RenderMousePointer()
+		{
+			if (MouseCoord3d != null)
+			{
+				var magenta = Color.MAGENTA;
+				GL.Color4(magenta.R, magenta.G, magenta.B, magenta.A);
+
+				// Mouse pointer
+				GL.PointSize(10);
+				GL.Begin(PrimitiveType.Points);
+				GL.Vertex3(MouseCoord3d.X, MouseCoord3d.Y, MouseCoord3d.Z);
+				GL.End();
+
+				// Bounds
+				var bbox = Axe.GetBoxBounds();
+
+				// X
+				// Point
+				GL.PointSize(5);
+				GL.Begin(PrimitiveType.Points);
+				GL.Vertex3(bbox.XMin, MouseCoord3d.Y, MouseCoord3d.Z);
+				GL.End();
+
+				// Line
+				GL.Begin(PrimitiveType.Lines);
+				GL.Vertex3(bbox.XMin, MouseCoord3d.Y, MouseCoord3d.Z);
+				GL.Vertex3(MouseCoord3d.X, MouseCoord3d.Y, MouseCoord3d.Z);
+				GL.End();
+
+				// Y
+				// Point
+				GL.PointSize(5);
+				GL.Begin(PrimitiveType.Points);
+				GL.Vertex3(MouseCoord3d.X, bbox.YMin, MouseCoord3d.Z);
+				GL.End();
+
+				// Line
+				GL.Begin(PrimitiveType.Lines);
+				GL.Vertex3(MouseCoord3d.X, bbox.YMin, MouseCoord3d.Z);
+				GL.Vertex3(MouseCoord3d.X, MouseCoord3d.Y, MouseCoord3d.Z);
+				GL.End();
+
+				// Z
+				// Point
+				GL.PointSize(5);
+				GL.Begin(PrimitiveType.Points);
+				GL.Vertex3(MouseCoord3d.X, MouseCoord3d.Y, bbox.ZMax);
+				GL.End();
+
+				// Line
+				GL.Begin(PrimitiveType.Lines);
+				GL.Vertex3(MouseCoord3d.X, MouseCoord3d.Y, bbox.ZMax);
+				GL.Vertex3(MouseCoord3d.X, MouseCoord3d.Y, MouseCoord3d.Z);
+				GL.End();
+			}
+		}
+
+		public Coord3d MouseCoord3d { get; set; }
 
 		public void RenderOverlay()
 		{

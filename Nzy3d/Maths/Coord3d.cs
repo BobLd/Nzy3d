@@ -484,7 +484,7 @@ namespace Nzy3d.Maths
 		/// <inheritdoc/>
 		public override string ToString()
 		{
-			return "x=" + X + " y=" + Y + " z=" + Z;
+			return $"x={X:0.00000} y={Y:0.00000} z={Z:0.00000}"; // return "x=" + X + " y=" + Y + " z=" + Z;
 		}
 
 		public double[] ToArray()
@@ -495,51 +495,46 @@ namespace Nzy3d.Maths
 		/// <inheritdoc/>
 		public static bool operator ==(Coord3d coord1, Coord3d coord2)
 		{
-			if (coord1 == null && coord2 == null)
+			if (coord1 is null && coord2 is null)
 			{
 				return true;
 			}
 
-			if (coord1 == null || coord2 == null)
+			if (coord1 is null || coord2 is null)
 			{
 				return false;
 			}
 			else
 			{
-				if (coord1.Equals(coord2))
-				{
-					return true;
-				}
-
-				return (coord1.X == coord2.X) && (coord1.Y == coord2.Y) && (coord1.Z == coord2.Z);
+				return coord1.Equals(coord2);
 			}
 		}
 
 		/// <inheritdoc/>
 		public static bool operator !=(Coord3d coord1, Coord3d coord2)
 		{
-			if (coord1 == null && coord2 == null)
+			if (coord1 is null && coord2 is null)
 			{
 				return false;
 			}
 
-			if (coord1 == null || coord2 == null)
+			if (coord1 is null || coord2 is null)
 			{
 				return true;
 			}
 
-			return !(coord1 == coord2);
+			return !coord1.Equals(coord2);
 		}
 		#endregion
 
 		/// <inheritdoc/>
 		public override int GetHashCode()
-		{
-			return (X, Y, Z).GetHashCode();
-		}
+        {
+            return HashCode.Combine(X, Y, Z);
+        }
 
-		/// <inheritdoc/>
-		public override bool Equals(object? obj)
+        /// <inheritdoc/>
+        public override bool Equals(object? obj)
 		{
 			if (obj is not Coord3d other)
 			{

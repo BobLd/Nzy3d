@@ -3,7 +3,7 @@ using Nzy3d.Maths;
 
 namespace Nzy3d.Chart.Controllers.Mouse.Camera
 {
-	public class CameraMouseController : BaseCameraMouseController, IMouseListener, IMouseMotionListener, IMouseWheelListener
+    public class CameraMouseController : BaseCameraMouseController, IMouseListener, IMouseMotionListener, IMouseWheelListener
 	{
 		public void MouseClicked(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
@@ -43,20 +43,19 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 
 		public void MouseMoved(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
+			Coord2d mouse = new Coord2d(e.X, e.Y);
+
 			if (e.Button != MouseButtons.None)
 			{
-				Coord2d mouse = new Coord2d(e.X, e.Y);
-
 				// Rotate
 				if (e.Button == MouseButtons.Left)
 				{
-					Coord2d move = mouse.substract(_prevMouse).divide(100);
+					Coord2d move = mouse.Substract(_prevMouse).Divide(100);
 					Rotate(move);
 				}
-
-				if (e.Button == MouseButtons.Right)
+				else if (e.Button == MouseButtons.Right)
 				{
-					Coord2d move = mouse.substract(_prevMouse);
+					Coord2d move = mouse.Substract(_prevMouse);
 					if (move.Y != 0)
 					{
 						Shift((float)(move.Y / 250));
@@ -64,7 +63,14 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 				}
 				_prevMouse = mouse;
 			}
-		}
+			else
+			{
+#if DEBUG
+				var mouseProj = base.Chart.View.ProjectMouse(e.X, e.Y);
+				//System.Diagnostics.Debug.WriteLine($"CameraMouseController.MouseMoved: Position={mouse}, Projected={mouseProj}");
+#endif
+            }
+        }
 
 		public void MouseWheelMoved(object sender, System.Windows.Forms.MouseEventArgs e)
 		{

@@ -6,13 +6,13 @@ namespace Nzy3d.Plot3D.Primitives.Axes.Layout.Renderers
 	/// <author>Martin Pernollet</author>
 	public class TickLabelMap : ITickRenderer
 	{
-		internal Dictionary<float, string> _tickvalues = new Dictionary<float, string>();
-		public void Register(float value, string label)
+		internal Dictionary<double, string> _tickvalues = new Dictionary<double, string>();
+		public void Register(double value, string label)
 		{
 			_tickvalues.Add(value, label);
 		}
 
-		public bool Contains(float value)
+		public bool Contains(double value)
 		{
 			return _tickvalues.ContainsKey(value);
 		}
@@ -22,7 +22,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes.Layout.Renderers
 			return _tickvalues.ContainsValue(label);
 		}
 
-		public string Format(float value)
+		public string Format(double value)
 		{
 			if (Contains(value))
 			{
@@ -35,10 +35,3 @@ namespace Nzy3d.Plot3D.Primitives.Axes.Layout.Renderers
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

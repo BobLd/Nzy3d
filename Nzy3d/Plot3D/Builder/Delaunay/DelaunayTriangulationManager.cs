@@ -34,11 +34,11 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 			for (int i = 0; i <= xlen - 1; i++)
 			{
 				Point_dt point_dt = new Point_dt(X[i], Y[i], Z_as_fxy[i, i]);
-				_triangulator.insertPoint(point_dt);
+				_triangulator.InsertPoint(point_dt);
 			}
 
 			var polygons = new List<Polygon>();
-			IEnumerator<Triangle_dt> trianglesIter = _triangulator.trianglesIterator();
+			IEnumerator<Triangle_dt> trianglesIter = _triangulator.TrianglesIterator();
 
 			while (trianglesIter.MoveNext())
 			{
