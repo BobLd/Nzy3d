@@ -237,7 +237,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		{
 			string res = "";
 			res += "A: " + A.ToString() + " B: " + B.ToString();
-			if ((!IsHalfplane))
+			if (!IsHalfplane)
 			{
 				res += " C: " + C.ToString();
 			}
@@ -315,7 +315,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		{
 			if (q == null)
 			{
-				throw new ArgumentException("Input point cannot be Nothing", "q");
+				throw new ArgumentException("Input point cannot be Nothing", nameof(q));
 			}
 
 			if (IsHalfplane)
@@ -430,10 +430,9 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		}
 
 		/// <summary>
-		/// Compute the Z value for the X, Y values 
+		/// Compute the Z value for the X, Y values
 		/// Assume current triangle represent a plane --> q does NOT need to be contained in this triangle.
 		/// </summary>
-		/// <returns></returns>
 		/// <remarks>Current triangle must not be a halfplane.</remarks>
 		public double Z(double x, double y)
 		{

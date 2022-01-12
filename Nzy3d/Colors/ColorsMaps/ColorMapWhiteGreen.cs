@@ -32,7 +32,7 @@ namespace Nzy3d.Colors.ColorMaps
 		}
 
 		/// <summary>
-		/// Helper function 
+		/// Helper function
 		/// </summary>
 		private Color GetColor(double x, double y, double z, double zMin, double zMax)
 		{

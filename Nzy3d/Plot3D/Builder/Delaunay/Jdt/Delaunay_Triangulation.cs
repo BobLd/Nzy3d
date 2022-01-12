@@ -29,7 +29,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 	/// please send me an email to: benmo@ariel.ac.il
 	/// </para>
 	/// <para>
-	/// @author Boaz Ben Moshe 5/11/05 
+	/// @author Boaz Ben Moshe 5/11/05
 	///         The project uses some ideas presented in the VoroGuide project,
 	///         written by Klasse f?r Kreise (1996-1997), For the original applet
 	///         see: http://www.pi6.fernuni-hagen.de/GeomLab/VoroGlide/.
@@ -113,7 +113,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// </summary>
 		public int TrianglesSize()
 		{
-			initTriangles();
+			InitTriangles();
 			return _triangles.Count;
 		}
 
@@ -135,7 +135,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 			if (_vertices.Contains(p)) return;
 
 			_modCount++;
-			updateBoundingBox(p);
+			UpdateBoundingBox(p);
 			_vertices.Add(p);
 			Triangle_dt t = InsertPointSimple(p);
 
@@ -149,7 +149,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 			{
 				Flip(tt, _modCount);
 				tt = tt.CANext;
-			} while (tt.Equals(t) & !tt.IsHalfplane);
+			} while (tt.Equals(t) && !tt.IsHalfplane);
 
 			gridIndex?.updateIndex(GetLastUpdatedTriangles());
 		}
@@ -160,19 +160,19 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 			if (this.TrianglesSize() > 1)
 			{
 				Triangle_dt t = currT;
-				allTriangles(t, tmp, this._modCount);
+				AllTriangles(t, tmp, this._modCount);
 			}
 			return tmp.GetEnumerator();
 		}
 
-		private void allTriangles(Triangle_dt curr, List<Triangle_dt> front, int mc)
+		private void AllTriangles(Triangle_dt curr, List<Triangle_dt> front, int mc)
 		{
 			if ((curr != null) && curr.Mc == mc && (!front.Contains(curr)))
 			{
 				front.Add(curr);
-				allTriangles(curr.ABNext, front, mc);
-				allTriangles(curr.BCNext, front, mc);
-				allTriangles(curr.CANext, front, mc);
+				AllTriangles(curr.ABNext, front, mc);
+				AllTriangles(curr.BCNext, front, mc);
+				AllTriangles(curr.CANext, front, mc);
 			}
 		}
 
@@ -289,9 +289,13 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 					u.ABNext.CANext.BCNext = tp;
 					tp.BCNext = u.ABNext;
 					u.ABNext.CANext = tp;
-					if ((firstT.Equals(u)))
-						firstT = t;
-					break; // TODO: might not be correct. Was : Exit Select
+
+					if (firstT.Equals(u))
+                    {
+                        firstT = t;
+                    }
+
+                    break; // TODO: might not be correct. Was : Exit Select
 			}
 		}
 
@@ -353,17 +357,17 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 
 		private Triangle_dt TreatDegeneracyInside(Triangle_dt t, Point_dt p)
 		{
-			if (t.ABNext.IsHalfplane & p.pointLineTest(t.B, t.A) == Point_dt.ONSEGMENT)
+			if (t.ABNext.IsHalfplane && p.pointLineTest(t.B, t.A) == Point_dt.ONSEGMENT)
 			{
 				return ExtendOutside(t.ABNext, p);
 			}
 
-			if (t.BCNext.IsHalfplane & p.pointLineTest(t.C, t.B) == Point_dt.ONSEGMENT)
+			if (t.BCNext.IsHalfplane && p.pointLineTest(t.C, t.B) == Point_dt.ONSEGMENT)
 			{
 				return ExtendOutside(t.BCNext, p);
 			}
 
-			if (t.CANext.IsHalfplane & p.pointLineTest(t.A, t.C) == Point_dt.ONSEGMENT)
+			if (t.CANext.IsHalfplane && p.pointLineTest(t.A, t.C) == Point_dt.ONSEGMENT)
 			{
 				return ExtendOutside(t.CANext, p);
 			}
@@ -430,9 +434,11 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 
 			if (p.pointLineTest(tbc.A, tbc.B) >= Point_dt.RIGHT)
 			{
-				Triangle_dt nT = new Triangle_dt(p, t.B);
-				nT.ABNext = t;
-				t.BCNext = nT;
+                Triangle_dt nT = new Triangle_dt(p, t.B)
+                {
+                    ABNext = t
+                };
+                t.BCNext = nT;
 				nT.BCNext = tbc;
 				tbc.CANext = nT;
 				return nT;
@@ -528,8 +534,11 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		public Triangle_dt Find(Point_dt p, Triangle_dt start)
 		{
 			if (start == null)
-				start = startTriangle;
-			return Find(start, p);
+            {
+                start = startTriangle;
+            }
+
+            return Find(start, p);
 		}
 
 		private static Triangle_dt Find(Triangle_dt curr, Point_dt p)
@@ -539,13 +548,13 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 			Triangle_dt next_t;
 			if (curr.IsHalfplane)
 			{
-				next_t = findnext2(p, curr);
-				if (next_t == null | next_t.IsHalfplane) return curr;
+				next_t = FindNext2(p, curr);
+				if (next_t?.IsHalfplane != false) return curr;
 				curr = next_t;
 			}
 			while (true)
 			{
-				next_t = findnext1(p, curr);
+				next_t = FindNext1(p, curr);
 				if (next_t == null) return curr;
 				if (next_t.IsHalfplane) return next_t;
 				curr = next_t;
@@ -557,19 +566,19 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <summary>
 		/// assumes v is NOT an halfplane! returns the next triangle for find.
 		/// </summary>
-		private static Triangle_dt findnext1(Point_dt p, Triangle_dt v)
+		private static Triangle_dt FindNext1(Point_dt p, Triangle_dt v)
 		{
-			if (p.pointLineTest(v.A, v.B) == Point_dt.RIGHT & (!v.ABNext.IsHalfplane))
+			if (p.pointLineTest(v.A, v.B) == Point_dt.RIGHT && (!v.ABNext.IsHalfplane))
 			{
 				return v.ABNext;
 			}
 
-			if (p.pointLineTest(v.B, v.C) == Point_dt.RIGHT & (!v.BCNext.IsHalfplane))
+			if (p.pointLineTest(v.B, v.C) == Point_dt.RIGHT && (!v.BCNext.IsHalfplane))
 			{
 				return v.BCNext;
 			}
 
-			if (p.pointLineTest(v.C, v.A) == Point_dt.RIGHT & (!v.CANext.IsHalfplane))
+			if (p.pointLineTest(v.C, v.A) == Point_dt.RIGHT && (!v.CANext.IsHalfplane))
 			{
 				return v.CANext;
 			}
@@ -593,21 +602,21 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		}
 
 		/// <summary>
-		/// assumes v is an halfplane! - returns another (none halfplane) triangle 
+		/// assumes v is an halfplane! - returns another (none halfplane) triangle
 		/// </summary>
-		private static Triangle_dt findnext2(Point_dt p, Triangle_dt v)
+		private static Triangle_dt FindNext2(Point_dt p, Triangle_dt v)
 		{
-			if ((v.ABNext != null) & (!v.ABNext.IsHalfplane))
+			if (v.ABNext?.IsHalfplane == false)
 			{
 				return v.ABNext;
 			}
 
-			if ((v.BCNext != null) && (!v.BCNext.IsHalfplane))
+			if (v.BCNext?.IsHalfplane == false)
 			{
 				return v.BCNext;
 			}
 
-			if ((v.CANext != null) & (!v.CANext.IsHalfplane))
+			if (v.CANext?.IsHalfplane == false)
 			{
 				return v.CANext;
 			}
@@ -620,7 +629,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// </summary>
 		/// <param name="p">Query point</param>
 		/// <returns>Return true if p is within current triangulation (in its 2D convex hull).</returns>
-		public bool contains(Point_dt p)
+		public bool Contains(Point_dt p)
 		{
 			Triangle_dt tt = Find(p);
 			return !tt.IsHalfplane;
@@ -632,7 +641,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <param name="x">Query point x coordinate</param>
 		/// <param name="y">Query point y coordinate</param>
 		/// <returns>Return true if x/y is within current triangulation (in its 2D convex hull).</returns>
-		public bool contains(double x, double y)
+		public bool Contains(double x, double y)
 		{
 			Triangle_dt tt = Find(new Point_dt(x, y));
 			return !tt.IsHalfplane;
@@ -642,9 +651,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// Return point with x/y and updated Z value (z value is as given by the triangulation)
 		/// </summary>
 		/// <param name="p">Query point (x/y=</param>
-		/// <returns></returns>
-		/// <remarks></remarks>
-		public Point_dt z(Point_dt p)
+		public Point_dt Z(Point_dt p)
 		{
 			Triangle_dt t = Find(p);
 			return t.Z(p);
@@ -655,14 +662,12 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// </summary>
 		/// <param name="x">Query point x coordinate</param>
 		/// <param name="y">Query point y coordinate</param>
-		/// <returns></returns>
-		/// <remarks></remarks>
-		public Point_dt z(double x, double y)
+		public Point_dt Z(double x, double y)
 		{
-			return this.z(new Point_dt(x, y));
+			return this.Z(new Point_dt(x, y));
 		}
 
-		private void updateBoundingBox(Point_dt p)
+		private void UpdateBoundingBox(Point_dt p)
 		{
 			double x = p.x;
 			double y = p.y;
@@ -739,7 +744,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 			{
 				_triangles = new List<Triangle_dt>();
 			}
-			initTriangles();
+			InitTriangles();
 			return _triangles.GetEnumerator();
 		}
 
@@ -752,7 +757,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 			return _vertices.GetEnumerator();
 		}
 
-		private void initTriangles()
+		private void InitTriangles()
 		{
 			if (_modCount == _modCount2) return;
 
@@ -762,7 +767,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 				List<Triangle_dt> front = new List<Triangle_dt>();
 				_triangles = new List<Triangle_dt>();
 				front.Add(this.startTriangle);
-				while ((front.Count > 0))
+				while (front.Count > 0)
 				{
 					Triangle_dt t = front[0];
 					front.RemoveAt(0);

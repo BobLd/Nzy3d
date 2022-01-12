@@ -34,7 +34,7 @@ namespace Nzy3d.WinformsDemo
 
             myRenderer3D.Name = "Renderer 0";
             // Create the chart
-            Chart.Chart chart = ChartsHelper.GetFRB_H15_dec_2021(myRenderer3D);
+            Chart.Chart chart = ChartsHelper.GetFRB_H15_dec_2021(myRenderer3D); //GetFRB_H15_dec_2021(myRenderer3D);
             axeLayout = chart.AxeLayout;
 
             // All activated by default

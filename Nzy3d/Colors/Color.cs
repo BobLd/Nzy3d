@@ -3,7 +3,7 @@ using OpenTK.Mathematics;
 namespace Nzy3d.Colors
 {
 	/// <summary>
-	/// 
+	/// Color
 	/// </summary>
 	public struct Color
 	{

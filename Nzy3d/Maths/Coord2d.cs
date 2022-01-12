@@ -381,7 +381,7 @@ namespace Nzy3d.Maths
 		/// </summary>
 		public double Distance(Coord2d coord)
 		{
-			return Math.Sqrt(Math.Pow((this.X - coord.X), 2) + Math.Pow((this.Y - coord.Y), 2));
+			return Math.Sqrt(Math.Pow(this.X - coord.X, 2) + Math.Pow(this.Y - coord.Y, 2));
 		}
 
 		/// <inheritdoc/>

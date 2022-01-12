@@ -56,7 +56,7 @@ namespace Nzy3d.Plot3D.Rendering.Lights
 		/// <remarks></remarks>
 		public void Enable(bool onlyIfAtLeastOneLight)
 		{
-			if ((!onlyIfAtLeastOneLight) | _lights.Count > 0)
+			if ((!onlyIfAtLeastOneLight) || _lights.Count > 0)
 			{
 				GL.Enable(EnableCap.Lighting);
 			}

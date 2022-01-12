@@ -61,7 +61,7 @@ namespace Nzy3d.Maths
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <param name="m_date"></param>
 		/// <returns>OLE Automation date.</returns>
@@ -71,7 +71,7 @@ namespace Nzy3d.Maths
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <param name="oleDate">OLE Automation date.</param>
 		/// <returns>DateTime</returns>
