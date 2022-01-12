@@ -86,7 +86,7 @@ namespace Nzy3d.WinformsDemo
 
             // Create surface
             var surface = Plot3D.Builder.Builder.BuildDelaunay(coords);
-            surface.ColorMapper = new ColorMapper(new ColorMapRainbow(), surface.Bounds.ZMin, surface.Bounds.ZMax, new Color(1, 1, 1, 0.9));
+            surface.ColorMapper = new ColorMapper(new ColorMapRainbow(), surface.Bounds.ZMin * 1.05, surface.Bounds.ZMax * 0.95, new Color(1, 1, 1, 0.9));
             surface.FaceDisplayed = true;
             surface.WireframeDisplayed = false;
 

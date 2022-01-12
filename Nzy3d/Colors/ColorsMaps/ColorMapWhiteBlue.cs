@@ -16,31 +16,34 @@ namespace Nzy3d.Colors.ColorMaps
 	/// </summary>
 	public class ColorMapWhiteBlue : IColorMap
 	{
+		/// <inheritdoc/>
 		public bool Direction { get; set; }
 
+		/// <inheritdoc/>
 		public Color GetColor(IColorMappable colorable, double v)
 		{
 			return GetColor(0, 0, v, colorable.ZMin, colorable.ZMax);
 		}
 
+		/// <inheritdoc/>
 		public Color GetColor(IColorMappable colorable, double x, double y, double z)
 		{
 			return GetColor(x, y, z, colorable.ZMin, colorable.ZMax);
 		}
 
 		/// <summary>
-		/// Helper function 
+		/// Helper function
 		/// </summary>
 		private Color GetColor(double x, double y, double z, double zMin, double zMax)
 		{
-			double rel_value = 0;
+			double rel_value;
 			if (z < zMin)
 			{
-				rel_value = 0;
+				rel_value = Direction ? 0 : 1;
 			}
 			else if (z > zMax)
 			{
-				rel_value = 1;
+				rel_value = Direction ? 1 : 0;
 			}
 			else
 			{
@@ -65,10 +68,3 @@ namespace Nzy3d.Colors.ColorMaps
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

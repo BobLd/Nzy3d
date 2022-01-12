@@ -2,18 +2,16 @@ namespace Nzy3d.Colors.ColorMaps
 {
 	public class ColorMapRBG : IColorMap
 	{
-		private bool m_direction;
-		public bool Direction
-		{
-			get { return m_direction; }
-			set { m_direction = value; }
-		}
+		/// <inheritdoc/>
+		public bool Direction { get; set; } = true;
 
+		/// <inheritdoc/>
 		public Color GetColor(IColorMappable colorable, double v)
 		{
 			return GetColor(0, 0, v, colorable.ZMin, colorable.ZMax);
 		}
 
+		/// <inheritdoc/>
 		public Color GetColor(IColorMappable colorable, double x, double y, double z)
 		{
 			return GetColor(x, y, z, colorable.ZMin, colorable.ZMax);
@@ -61,18 +59,18 @@ namespace Nzy3d.Colors.ColorMaps
 		/// </summary>
 		private Color GetColor(double x, double y, double z, double zMin, double zMax)
 		{
-			double rel_value = 0;
+			double rel_value;
 			if (z < zMin)
 			{
-				rel_value = 0;
+				rel_value = Direction ? 0 : 1;
 			}
 			else if (z > zMax)
 			{
-				rel_value = 1;
+				rel_value = Direction ? 1 : 0;
 			}
 			else
 			{
-				if (m_direction)
+				if (Direction)
 				{
 					rel_value = (z - zMin) / (zMax - zMin);
 				}
@@ -81,35 +79,36 @@ namespace Nzy3d.Colors.ColorMaps
 					rel_value = (zMax - z) / (zMax - zMin);
 				}
 			}
-			double b = colorComponentRelative(rel_value, 0.25, 0.25, 0.75);
-			double g = colorComponentRelative(rel_value, 0.5, 0.25, 0.75);
-			double r = colorComponentRelative(rel_value, 0.75, 0.25, 0.75);
+
+			double b = ColorComponentRelative(rel_value, 0.25, 0.25, 0.75);
+			double g = ColorComponentRelative(rel_value, 0.5, 0.25, 0.75);
+			double r = ColorComponentRelative(rel_value, 0.75, 0.25, 0.75);
 			return new Color(r, g, b);
 		}
 
-		private double colorComponentRelative(double value, double center, double topWidth, double bottomWidth)
+		private static double ColorComponentRelative(double value, double center, double topWidth, double bottomWidth)
 		{
-			return colorComponentAbsolute(value, center - (bottomWidth / 2), center + (bottomWidth / 2), center - (topWidth / 2), center + (topWidth / 2));
+			return ColorComponentAbsolute(value, center - (bottomWidth / 2), center + (bottomWidth / 2), center - (topWidth / 2), center + (topWidth / 2));
 		}
 
-		private double colorComponentAbsolute(double value, double bLeft, double bRight, double tLeft, double tRight)
+		private static double ColorComponentAbsolute(double value, double bLeft, double bRight, double tLeft, double tRight)
 		{
-			if (value < bLeft | value >= bRight)
+			if (value < bLeft || value >= bRight)
 			{
 				// a gauche ou a droite du creneau
 				return 0;
 			}
-			else if (value >= tLeft & value < tRight)
+			else if (value >= tLeft && value < tRight)
 			{
 				// sur le plateau haut
 				return 1;
 			}
-			else if (value >= bLeft & value < tLeft)
+			else if (value >= bLeft && value < tLeft)
 			{
 				// sur la pente gauche du creneau
 				return (value - bLeft) / (tLeft - bLeft);
 			}
-			else if (value >= tRight & value < bRight)
+			else if (value >= tRight && value < bRight)
 			{
 				// sur la pente droite du creneau
 				return (value - bRight) / (tRight - bRight);
@@ -130,10 +129,3 @@ namespace Nzy3d.Colors.ColorMaps
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================
