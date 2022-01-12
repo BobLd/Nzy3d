@@ -82,13 +82,18 @@ namespace Nzy3d.WinformsDemo
             chart.View.CameraMode = CameraMode.PERSPECTIVE;
             chart.View.IncludingTextLabels = true;
             chart.AxeLayout.YTickRenderer = new DateTickRenderer("dd/MM/yyyy");
+            chart.AxeLayout.YAxeLabel = "Date";
             chart.AxeLayout.XTickRenderer = labels;
+            chart.AxeLayout.XAxeLabel = "Maturity";
+            chart.AxeLayout.ZAxeLabel = "Rate (%)";
 
             // Create surface
             var surface = Plot3D.Builder.Builder.BuildDelaunay(coords);
             surface.ColorMapper = new ColorMapper(new ColorMapRainbow(), surface.Bounds.ZMin * 1.05, surface.Bounds.ZMax * 0.95, new Color(1, 1, 1, 0.9));
             surface.FaceDisplayed = true;
-            surface.WireframeDisplayed = false;
+            surface.WireframeDisplayed = true;
+            surface.WireframeColor = Color.GREEN;
+            surface.WireframeColor.Mul(new Color(1, 1, 1, 0.2));
 
             // Add surface to chart
             chart.Scene.Graph.Add(surface);

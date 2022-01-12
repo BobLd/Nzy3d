@@ -271,7 +271,6 @@ namespace Nzy3d.Winforms
 			var proj = View?.ProjectMouseInAxes(e.X, Height - e.Y);
 			if (proj != null)
 			{
-				System.Diagnostics.Debug.WriteLine($"Renderer3D.OnMouseMove: {this.Name} - Location={e.Location}, Projection={proj}");
 				this.View.MouseCoord3d = proj;
 				this.ForceRepaint();
 			}

@@ -24,7 +24,7 @@ namespace Nzy3d.WinformsDemo
         private void Form1_Load(object sender, EventArgs e)
         {
             myRenderer3D.Profile = ContextProfile.Compatability;
-            myRenderer3D_1.Profile = ContextProfile.Compatability;
+            //myRenderer3D_1.Profile = ContextProfile.Compatability;
             InitRenderer();
         }
 

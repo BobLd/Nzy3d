@@ -102,11 +102,22 @@ namespace Nzy3d.Plot3D.Rendering.View
 			_scene.Graph.Project(_cam);
 		}
 
+		/// <summary>
+		/// Projects the 2D mouse coordinates into the 3D chart, using the 0 as Z value.
+		/// </summary>
+		/// <param name="x">The mouse X coordinate.</param>
+		/// <param name="y">The mouse Y coordinate.</param>
 		public Coord3d ProjectMouse(int x, int y)
 		{
 			return _cam.ScreenToModel(new Coord3d(x, y, 0));
 		}
 
+		/// <summary>
+		/// Projects the 2D mouse coordinates into the 3D chart, using the center as Z value.
+		/// <para>This gives better results than <see cref="ProjectMouse(int, int)"/>.</para>
+		/// </summary>
+		/// <param name="x">The mouse X coordinate.</param>
+		/// <param name="y">The mouse Y coordinate.</param>
 		public Coord3d ProjectMouseInAxes(int x, int y)
 		{
 			if (Camera == null || Camera.Eye == null)
@@ -114,25 +125,12 @@ namespace Nzy3d.Plot3D.Rendering.View
 				return Coord3d.INVALID;
 			}
 
-			var proj = _cam.ScreenToModel(new Coord3d(x, y, Camera.Near / 2));
+			var c = Camera.ModelToScreen(Axe.GetBoxBounds().GetCenter());
+			var proj = _cam.ScreenToModel(new Coord3d(x, y, c.Z));
 
-			//var axes = (AxeBox)Axe;
-			var x_b = proj.X; /// axes.Scale.X; // Scale.Range;
-			var y_b = proj.Y; // / axes.Scale.Y; // Scale.Range;
-			var z_b = proj.Z; // / axes.Scale.Z; // Scale.Range;
+			System.Diagnostics.Debug.WriteLine($"Renderer3D.OnMouseMove: Location (X={x}, Y={y}, Z={c.Z:0.000000}) - Projection=({proj})");
 
-			//var bbox = this.Axe.GetBoxBounds();
-
-			//var x_b = Math.Min(proj.X, bbox.XMax);
-			//x_b = Math.Max(x_b, bbox.XMin);
-
-			//var y_b = Math.Min(proj.Y, bbox.YMax);
-			//y_b = Math.Max(y_b, bbox.YMin);
-
-			//var z_b = Math.Min(proj.Z, bbox.ZMax);
-			//z_b = Math.Max(z_b, bbox.ZMin);
-
-			return new Coord3d(x_b, y_b, z_b);
+			return proj;
 		}
 
 		#region "GENERAL DISPLAY CONTROLS"

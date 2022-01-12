@@ -484,7 +484,7 @@ namespace Nzy3d.Maths
 		/// <inheritdoc/>
 		public override string ToString()
 		{
-			return $"x={X:0.00000} y={Y:0.00000} z={Z:0.00000}"; // return "x=" + X + " y=" + Y + " z=" + Z;
+			return $"X={X:0.00000} Y={Y:0.00000} Z={Z:0.00000}"; // return "x=" + X + " y=" + Y + " z=" + Z;
 		}
 
 		public double[] ToArray()
