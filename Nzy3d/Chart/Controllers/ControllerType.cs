@@ -5,13 +5,7 @@ namespace Nzy3d.Chart.Controllers
 		ZOOM,
 		SHIFT,
 		ROTATE,
-		PAN
+		PAN,
+		MOUSE
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

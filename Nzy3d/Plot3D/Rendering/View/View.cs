@@ -135,17 +135,17 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 		#region "GENERAL DISPLAY CONTROLS"
 
-		public async Task Rotate(Coord2d move)
+		public void Rotate(Coord2d move)
 		{
-			await Rotate(move, true).ConfigureAwait(false);
+			Rotate(move, true);
 		}
 
-		public async Task Rotate(Coord2d move, bool updateView)
+		public void Rotate(Coord2d move, bool updateView)
 		{
 			Coord3d eye = this.ViewPoint;
 			eye.X -= move.X;
 			eye.Y += move.Y;
-			await SetViewPoint(eye, updateView).ConfigureAwait(false);
+			SetViewPoint(eye, updateView);
 		}
 
 		public void Shift(float factor)
@@ -161,8 +161,13 @@ namespace Nzy3d.Plot3D.Rendering.View
 			//fireControllerEvent(ControllerType.SHIFT, newScale);
 		}
 
+		public void SetMousePosition(int x, int y)
+        {
+			this.MousePosition = ProjectMouseInAxes(x, y);
+        }
+
 #region Zoom
-        public void Zoom(float factor)
+		public void Zoom(float factor)
 		{
 			Zoom(factor, true);
 		}
@@ -446,9 +451,11 @@ namespace Nzy3d.Plot3D.Rendering.View
 				Shoot();
 			}
 		}
-#endregion
+		#endregion
 
-        public bool DimensionDirty
+		public Coord3d MousePosition { get; private set; }
+
+		public bool DimensionDirty
 		{
 			get { return _dimensionDirty; }
 			set { _dimensionDirty = value; }
@@ -517,19 +524,16 @@ namespace Nzy3d.Plot3D.Rendering.View
 			set { SetViewPoint(value, true); }
 		}
 
-		public Task SetViewPoint(Coord3d polar, bool updateView)
+		public void SetViewPoint(Coord3d polar, bool updateView)
 		{
-			return Task.Run(() =>
+			_viewpoint = polar;
+			_viewpoint.Y = (_viewpoint.Y < -PI_div2 ? -PI_div2 : _viewpoint.Y);
+			_viewpoint.Y = (_viewpoint.Y > PI_div2 ? PI_div2 : _viewpoint.Y);
+			if (updateView)
 			{
-				_viewpoint = polar;
-				_viewpoint.Y = (_viewpoint.Y < -PI_div2 ? -PI_div2 : _viewpoint.Y);
-				_viewpoint.Y = (_viewpoint.Y > PI_div2 ? PI_div2 : _viewpoint.Y);
-				if (updateView)
-				{
-					Shoot();
-				}
-				FireViewPointChangedEvent(new ViewPointChangedEventArgs(this, polar));
-			});
+				Shoot();
+			}
+			FireViewPointChangedEvent(new ViewPointChangedEventArgs(this, polar));
 		}
 
 		public Coord3d GetLastViewScaling()
@@ -717,7 +721,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 		/// ViewBoundMode.MANUAL, meaning that any call to updateBounds()
 		/// will update view bounds to the current bounds.
 		/// </summary>
-		/// <remarks>The camero.shoot is not called in this case</remarks>
+		/// <remarks>The camera.shoot is not called in this case</remarks>
 		public BoundingBox3d BoundManual
 		{
 			set
@@ -817,7 +821,6 @@ namespace Nzy3d.Plot3D.Rendering.View
 			}
 
 			// Blending
-			//GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 			GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 			// on/off is handled by each viewport (camera or image)
 
@@ -1130,7 +1133,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 		private void RenderMousePointer()
 		{
-			if (MouseCoord3d != null)
+			if (MousePosition != null)
 			{
 				var magenta = Color.MAGENTA;
 				GL.Color4(magenta.R, magenta.G, magenta.B, magenta.A);
@@ -1138,7 +1141,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 				// Mouse pointer
 				GL.PointSize(10);
 				GL.Begin(PrimitiveType.Points);
-				GL.Vertex3(MouseCoord3d.X, MouseCoord3d.Y, MouseCoord3d.Z);
+				GL.Vertex3(MousePosition.X, MousePosition.Y, MousePosition.Z);
 				GL.End();
 
 				// Bounds
@@ -1148,44 +1151,42 @@ namespace Nzy3d.Plot3D.Rendering.View
 				// Point
 				GL.PointSize(5);
 				GL.Begin(PrimitiveType.Points);
-				GL.Vertex3(bbox.XMin, MouseCoord3d.Y, MouseCoord3d.Z);
+				GL.Vertex3(bbox.XMin, MousePosition.Y, MousePosition.Z);
 				GL.End();
 
 				// Line
 				GL.Begin(PrimitiveType.Lines);
-				GL.Vertex3(bbox.XMin, MouseCoord3d.Y, MouseCoord3d.Z);
-				GL.Vertex3(MouseCoord3d.X, MouseCoord3d.Y, MouseCoord3d.Z);
+				GL.Vertex3(bbox.XMin, MousePosition.Y, MousePosition.Z);
+				GL.Vertex3(MousePosition.X, MousePosition.Y, MousePosition.Z);
 				GL.End();
 
 				// Y
 				// Point
 				GL.PointSize(5);
 				GL.Begin(PrimitiveType.Points);
-				GL.Vertex3(MouseCoord3d.X, bbox.YMin, MouseCoord3d.Z);
+				GL.Vertex3(MousePosition.X, bbox.YMin, MousePosition.Z);
 				GL.End();
 
 				// Line
 				GL.Begin(PrimitiveType.Lines);
-				GL.Vertex3(MouseCoord3d.X, bbox.YMin, MouseCoord3d.Z);
-				GL.Vertex3(MouseCoord3d.X, MouseCoord3d.Y, MouseCoord3d.Z);
+				GL.Vertex3(MousePosition.X, bbox.YMin, MousePosition.Z);
+				GL.Vertex3(MousePosition.X, MousePosition.Y, MousePosition.Z);
 				GL.End();
 
 				// Z
 				// Point
 				GL.PointSize(5);
 				GL.Begin(PrimitiveType.Points);
-				GL.Vertex3(MouseCoord3d.X, MouseCoord3d.Y, bbox.ZMax);
+				GL.Vertex3(MousePosition.X, MousePosition.Y, bbox.ZMax);
 				GL.End();
 
 				// Line
 				GL.Begin(PrimitiveType.Lines);
-				GL.Vertex3(MouseCoord3d.X, MouseCoord3d.Y, bbox.ZMax);
-				GL.Vertex3(MouseCoord3d.X, MouseCoord3d.Y, MouseCoord3d.Z);
+				GL.Vertex3(MousePosition.X, MousePosition.Y, bbox.ZMax);
+				GL.Vertex3(MousePosition.X, MousePosition.Y, MousePosition.Z);
 				GL.End();
 			}
 		}
-
-		public Coord3d MouseCoord3d { get; set; }
 
 		public void RenderOverlay()
 		{

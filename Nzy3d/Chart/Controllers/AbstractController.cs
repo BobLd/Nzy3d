@@ -48,16 +48,13 @@ namespace Nzy3d.Chart.Controllers
 			_controllerListeners.Remove(listener);
 		}
 
-		protected Task FireControllerEvent(ControllerType type, object value)
+		protected void FireControllerEvent(ControllerType type, object value)
 		{
-			return Task.Run(() =>
+			var e = new ControllerEventArgs(this, type, value);
+			foreach (IControllerEventListener aListener in _controllerListeners)
 			{
-				var e = new ControllerEventArgs(this, type, value);
-				foreach (IControllerEventListener aListener in _controllerListeners)
-				{
-					aListener.ControllerEventFired(e);
-				}
-			});
+				aListener.ControllerEventFired(e);
+			}
 		}
 	}
 }

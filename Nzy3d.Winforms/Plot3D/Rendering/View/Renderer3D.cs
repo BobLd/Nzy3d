@@ -136,7 +136,7 @@ namespace Nzy3d.Winforms
 				throw new ArgumentException("", nameof(baseListener));
 			}
 
-			MouseMove += listener.MouseMoved;
+			MouseMove += (s, e) => listener.MouseMoved(s, e);
 		}
 
 		public void AddMouseWheelListener(IBaseMouseWheelListener baseListener)
@@ -156,7 +156,7 @@ namespace Nzy3d.Winforms
 			base.Dispose();
 		}
 
-		public async void ForceRepaint()
+		public void ForceRepaint()
 		{
 			//System.Diagnostics.Debug.WriteLine($"Renderer3D.ForceRepaint: {this.Name}");
 
@@ -210,7 +210,7 @@ namespace Nzy3d.Winforms
 				throw new ArgumentException("", nameof(baseListener));
 			}
 
-			MouseMove -= listener.MouseMoved;
+			MouseMove -= (s, e) => listener.MouseMoved(s, e);
 			// NOT AVAILABLE IN WinForms : RemoveHandler ???, AddressOf listener.MouseDragged
 		}
 
@@ -265,17 +265,5 @@ namespace Nzy3d.Winforms
 			Resize += Renderer3D_Resize;
 			Paint += Renderer3D_Paint;
 		}
-
-        protected override void OnMouseMove(System.Windows.Forms.MouseEventArgs e)
-		{
-			var proj = View?.ProjectMouseInAxes(e.X, Height - e.Y);
-			if (proj != null)
-			{
-				this.View.MouseCoord3d = proj;
-				this.ForceRepaint();
-			}
-
-			base.OnMouseMove(e);
-        }
     }
 }

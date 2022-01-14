@@ -85,7 +85,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes.Layout
 		{
 			_lastXmin = min;
 			_lastXmax = max;
-			_xTicks = _xTickProvider.generateTicks(min, max);
+			_xTicks = _xTickProvider.GenerateTicks(min, max);
 			return _xTicks;
 		}
 
@@ -93,7 +93,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes.Layout
 		{
 			_lastYmin = min;
 			_lastYmax = max;
-			_yTicks = _yTickProvider.generateTicks(min, max);
+			_yTicks = _yTickProvider.GenerateTicks(min, max);
 			return _yTicks;
 		}
 
@@ -101,7 +101,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes.Layout
 		{
 			_lastZmin = min;
 			_lastZmax = max;
-			_zTicks = _zTickProvider.generateTicks(min, max);
+			_zTicks = _zTickProvider.GenerateTicks(min, max);
 			return _zTicks;
 		}
 

@@ -1,17 +1,12 @@
 ﻿using Nzy3d.Plot3D.Builder;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Nzy3d.Winforms.Plot3D.Builder.Concrete
 {
-	/// <summary>
-	/// Mapper which reads height information from the grayscale
-	/// values of a BufferedImage, normalized to range [0..1].
-	/// </summary>
-	public class BufferedImageMapper : Mapper
+    /// <summary>
+    /// Mapper which reads height information from the grayscale
+    /// values of a BufferedImage, normalized to range [0..1].
+    /// </summary>
+    public class BufferedImageMapper : Mapper
 	{
 		private Bitmap image;
 		private int maxRow;

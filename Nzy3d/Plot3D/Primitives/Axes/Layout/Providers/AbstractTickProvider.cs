@@ -2,7 +2,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes.Layout.Providers
 {
     public abstract class AbstractTickProvider : ITickProvider
 	{
-		public float[] generateTicks(float min, float max)
+		public float[] GenerateTicks(float min, float max)
 		{
 			return generateTicks(min, max, DefaultSteps);
 		}

@@ -14,18 +14,27 @@ namespace Nzy3d.Chart.Controllers.Camera
 		{
 		}
 
-		protected Task Rotate(Coord2d move)
-		{
-			return Rotate(move, DEFAULT_UPDATE_VIEW);
-		}
-
-		protected async Task Rotate(Coord2d move, bool updateView)
+		protected void SetMousePosition(int x, int y)
 		{
 			foreach (Chart c in _targets)
 			{
-				await c.View.Rotate(move, updateView).ConfigureAwait(false);
+				c.View.SetMousePosition(x, y);
 			}
-			await FireControllerEvent(ControllerType.ROTATE, move).ConfigureAwait(false);
+			FireControllerEvent(ControllerType.MOUSE, new Coord2d(x, y));
+		}
+
+		protected void Rotate(Coord2d move)
+		{
+			Rotate(move, DEFAULT_UPDATE_VIEW);
+		}
+
+		protected void Rotate(Coord2d move, bool updateView)
+		{
+			foreach (Chart c in _targets)
+			{
+				c.View.Rotate(move, updateView);
+			}
+			FireControllerEvent(ControllerType.ROTATE, move);
 		}
 
 		protected void Shift(float factor)

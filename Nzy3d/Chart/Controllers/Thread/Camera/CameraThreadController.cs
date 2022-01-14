@@ -60,7 +60,7 @@ namespace Nzy3d.Chart.Controllers.Thread.Camera
 				try
 				{
 					_cts.Token.ThrowIfCancellationRequested();
-					await Rotate(_move).ConfigureAwait(false);
+					Rotate(_move);
 					await Task.Delay(_sleep).ConfigureAwait(false);
 				}
 				catch (OperationCanceledException)

@@ -1,11 +1,12 @@
 ﻿using Nzy3d.Events.Mouse;
 using Nzy3d.Maths;
+using Nzy3d.Plot3D.Rendering.Canvas;
 
 namespace Nzy3d.Chart.Controllers.Mouse.Camera
 {
     public class CameraMouseController : BaseCameraMouseController, IMouseListener, IMouseMotionListener, IMouseWheelListener
 	{
-		public void MouseClicked(object sender, System.Windows.Forms.MouseEventArgs e)
+		public void MouseClicked(object? sender, System.Windows.Forms.MouseEventArgs e)
 		{
 		}
 
@@ -13,7 +14,7 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 		/// Handles toggle between mouse rotation/auto rotation: double-click starts the animated
 		/// rotation, while simple click stops it.
 		/// </summary>
-		public void MousePressed(object sender, System.Windows.Forms.MouseEventArgs e)
+		public void MousePressed(object? sender, System.Windows.Forms.MouseEventArgs e)
 		{
 			if (HandleSlaveThread(false))
 			{
@@ -27,7 +28,7 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 		/// Handles toggle between mouse rotation/auto rotation: double-click starts the animated
 		/// rotation, while simple click stops it.
 		/// </summary>
-		public void MouseDoubleClicked(object sender, System.Windows.Forms.MouseEventArgs e)
+		public void MouseDoubleClicked(object? sender, System.Windows.Forms.MouseEventArgs e)
 		{
 			if (HandleSlaveThread(true))
 			{
@@ -37,13 +38,20 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 			_prevMouse.Y = e.Y;
 		}
 
-		public void MouseReleased(object sender, System.Windows.Forms.MouseEventArgs e)
+		public void MouseReleased(object? sender, System.Windows.Forms.MouseEventArgs e)
 		{
 		}
 
-		public void MouseMoved(object sender, System.Windows.Forms.MouseEventArgs e)
+		public void MouseMoved(object? sender, System.Windows.Forms.MouseEventArgs e)
 		{
+			if (sender is not ICanvas canvas)
+			{
+				return;
+			}
+
 			Coord2d mouse = new Coord2d(e.X, e.Y);
+
+			SetMousePosition(e.X, canvas.RendererHeight - e.Y);
 
 			if (e.Button != MouseButtons.None)
 			{
@@ -63,16 +71,9 @@ namespace Nzy3d.Chart.Controllers.Mouse.Camera
 				}
 				_prevMouse = mouse;
 			}
-			else
-			{
-#if DEBUG
-				var mouseProj = base.Chart.View.ProjectMouse(e.X, e.Y);
-				//System.Diagnostics.Debug.WriteLine($"CameraMouseController.MouseMoved: Position={mouse}, Projected={mouseProj}");
-#endif
-            }
-        }
+		}
 
-		public void MouseWheelMoved(object sender, System.Windows.Forms.MouseEventArgs e)
+		public void MouseWheelMoved(object? sender, System.Windows.Forms.MouseEventArgs e)
 		{
 			_threadController?.Stop();
 
