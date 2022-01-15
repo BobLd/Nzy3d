@@ -1126,11 +1126,6 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			return this.Center;
 		}
 
-		public IAxeLayout GetLayout()
-		{
-			return _layout;
-		}
-
 		public void SetAxe(BoundingBox3d box)
 		{
 			_boxBounds = box;

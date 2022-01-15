@@ -75,9 +75,9 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 			return new Coord3d(_bbox.XMin, _bbox.YMin, _bbox.ZMin);
 		}
 
-		public IAxeLayout GetLayout()
+		public IAxeLayout Layout
 		{
-			return _layout;
+			get { return _layout; }
 		}
 
 		public void SetAxe(BoundingBox3d box)

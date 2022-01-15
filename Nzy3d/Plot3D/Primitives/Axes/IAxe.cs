@@ -20,6 +20,6 @@ namespace Nzy3d.Plot3D.Primitives.Axes
 
 		Coord3d GetCenter();
 
-		IAxeLayout GetLayout();
+		IAxeLayout Layout { get; }
 	}
 }

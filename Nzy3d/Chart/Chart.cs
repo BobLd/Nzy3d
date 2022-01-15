@@ -172,7 +172,7 @@ namespace Nzy3d.Chart
 
 		public IAxeLayout AxeLayout
 		{
-			get { return _view.Axe.GetLayout(); }
+			get { return _view.Axe.Layout; }
 		}
 
 		public bool AxeDisplayed

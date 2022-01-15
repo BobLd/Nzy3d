@@ -156,7 +156,12 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 			var proj = _cam.ScreenToModel(new Coord3d(x, y, depth));
 
-			System.Diagnostics.Debug.WriteLine($"Renderer3D.OnMouseMove: Location (X={x}, Y={y}, Z={depth:0.000000}) - Projection=({proj})");
+			var layout = this.Axe.Layout;
+			var X = layout.XTickRenderer.Format(proj.X);
+			var Y = layout.YTickRenderer.Format(proj.Y);
+			var Z = layout.ZTickRenderer.Format(proj.Z);
+
+			System.Diagnostics.Trace.WriteLine($"Renderer3D.OnMouseMove: Location=(X={x}, Y={y}, Z={depth:0.000000}) - Projection=(X={X}, Y={Y}, Z={Z})");
 
 			return proj;
 		}
@@ -841,6 +846,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			{
 				GL.Enable(EnableCap.DepthTest);
 				GL.DepthFunc(DepthFunction.Lequal);
+				GL.DepthMask(true);
 			}
 			else
 			{
@@ -963,7 +969,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			RenderAxeBox();
 			RenderSceneGraph();
 
-			if (DISPLAY_AXE_WHOLE_BOUNDS)
+			//if (DISPLAY_AXE_WHOLE_BOUNDS)
 			{
 				// Render last
 				RenderMousePointer();
