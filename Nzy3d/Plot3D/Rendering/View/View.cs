@@ -118,11 +118,11 @@ namespace Nzy3d.Plot3D.Rendering.View
 		/// </summary>
 		/// <param name="x">The mouse X coordinate.</param>
 		/// <param name="y">The mouse Y coordinate.</param>
-		public Coord3d ProjectMouseInAxes(int x, int y)
+		public Coord3d ProjectMouseCenter(int x, int y)
 		{
 			if (Camera == null || Camera.Eye == null)
 			{
-				return Coord3d.INVALID;
+				return null;
 			}
 
 			var c = Camera.ModelToScreen(Axe.GetBoxBounds().GetCenter());
@@ -133,8 +133,35 @@ namespace Nzy3d.Plot3D.Rendering.View
 			return proj;
 		}
 
-		#region "GENERAL DISPLAY CONTROLS"
+		/// <summary>
+		/// Projects the 2D mouse coordinates into the 3D chart, using the depth component as Z value.
+		/// <para>This gives better results than <see cref="ProjectMouse(int, int)"/>.</para>
+		/// </summary>
+		/// <param name="x">The mouse X coordinate.</param>
+		/// <param name="y">The mouse Y coordinate.</param>
+		public Coord3d ProjectMouseDepth(int x, int y)
+		{
+			if (Camera == null || Camera.Eye == null)
+			{
+				return null;
+			}
 
+			if (!GL.GetBoolean(GetPName.DepthTest))
+			{
+				throw new ArgumentException("Quality should allow for DepthTest in order to get ProjectMouseDepth().", nameof(_quality));
+			}
+
+			float depth = 0;
+			GL.ReadPixels(x, y, 1, 1, PixelFormat.DepthComponent, PixelType.Float, ref depth);
+
+			var proj = _cam.ScreenToModel(new Coord3d(x, y, depth));
+
+			System.Diagnostics.Debug.WriteLine($"Renderer3D.OnMouseMove: Location (X={x}, Y={y}, Z={depth:0.000000}) - Projection=({proj})");
+
+			return proj;
+		}
+
+		#region "GENERAL DISPLAY CONTROLS"
 		public void Rotate(Coord2d move)
 		{
 			Rotate(move, true);
@@ -162,11 +189,11 @@ namespace Nzy3d.Plot3D.Rendering.View
 		}
 
 		public void SetMousePosition(int x, int y)
-        {
-			this.MousePosition = ProjectMouseInAxes(x, y);
-        }
+		{
+			this.MousePosition = ProjectMouseDepth(x, y);
+		}
 
-#region Zoom
+		#region Zoom
 		public void Zoom(float factor)
 		{
 			Zoom(factor, true);
@@ -791,9 +818,9 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 			return new Coord3d(lmax / xLen, lmax / yLen, lmax / zLen);
 		}
-#endregion
+		#endregion
 
-#region "GL2"
+		#region "GL2"
 		/// <summary>
 		/// The init function specifies general GL settings that impact the rendering
 		/// quality and performance (computation speed).
@@ -937,7 +964,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			RenderSceneGraph();
 
 			if (DISPLAY_AXE_WHOLE_BOUNDS)
-            {
+			{
 				// Render last
 				RenderMousePointer();
 			}
@@ -1251,6 +1278,6 @@ namespace Nzy3d.Plot3D.Rendering.View
 				_cam.Eye = _viewpoint.Cartesian().Add(target);
 			}
 		}
-#endregion
+		#endregion
 	}
 }
