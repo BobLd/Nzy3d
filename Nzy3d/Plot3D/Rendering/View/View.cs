@@ -162,11 +162,11 @@ namespace Nzy3d.Plot3D.Rendering.View
 		}
 
 		public void SetMousePosition(int x, int y)
-        {
+		{
 			this.MousePosition = ProjectMouseInAxes(x, y);
-        }
+		}
 
-#region Zoom
+		#region Zoom
 		public void Zoom(float factor)
 		{
 			Zoom(factor, true);
@@ -791,9 +791,9 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 			return new Coord3d(lmax / xLen, lmax / yLen, lmax / zLen);
 		}
-#endregion
+		#endregion
 
-#region "GL2"
+		#region "GL2"
 		/// <summary>
 		/// The init function specifies general GL settings that impact the rendering
 		/// quality and performance (computation speed).
@@ -937,7 +937,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			RenderSceneGraph();
 
 			if (DISPLAY_AXE_WHOLE_BOUNDS)
-            {
+			{
 				// Render last
 				RenderMousePointer();
 			}
@@ -1251,6 +1251,6 @@ namespace Nzy3d.Plot3D.Rendering.View
 				_cam.Eye = _viewpoint.Cartesian().Add(target);
 			}
 		}
-#endregion
+		#endregion
 	}
 }
