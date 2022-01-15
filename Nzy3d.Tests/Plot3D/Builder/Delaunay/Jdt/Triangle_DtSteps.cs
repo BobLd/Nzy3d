@@ -1,4 +1,6 @@
-﻿using Nzy3d.Plot3D.Builder.Delaunay.Jdt;
+﻿using Nzy3d.Maths;
+using Nzy3d.Plot3D.Builder.Delaunay.Jdt;
+using System.Collections.Generic;
 using Xunit;
 
 /*
@@ -107,6 +109,31 @@ namespace Nzy3d.Tests.Plot3D.Builder.Delaunay.Jdt
             var point = new Point_dt(0.5, 0.5);
             Assert.True(triangle.Contains(point));
             Assert.False(triangle.ContainsBoundaryIsOutside(point), "Point is inside the triangle, boundary excluded");
+        }
+
+        [Fact]
+        public void Issue16()
+        {
+            var data = new List<Coord3d>();
+            data.Add(new Coord3d(-4.000000, -4.000000, -0.586176));
+            data.Add(new Coord3d(-2.000000, -4.000000, -0.971278));
+            data.Add(new Coord3d(0.000000, -4.000000, -0.756803));
+            data.Add(new Coord3d(2.000000, -4.000000, -0.971278));
+            data.Add(new Coord3d(-4.000000, -2.000000, -0.971278));
+            data.Add(new Coord3d(-2.000000, -2.000000, 0.308072));
+            data.Add(new Coord3d(0.000000, -2.000000, 0.909297));
+            data.Add(new Coord3d(2.000000, -2.000000, 0.308072));
+            data.Add(new Coord3d(-4.000000, 0.000000, -0.756803));
+            data.Add(new Coord3d(-2.000000, 0.000000, 0.909297));
+            data.Add(new Coord3d(0.000000, 0.000000, 0.000000));
+            data.Add(new Coord3d(2.000000, 0.000000, 0.909297));
+            data.Add(new Coord3d(-4.000000, 2.000000, -0.971278));
+            data.Add(new Coord3d(-2.000000, 2.000000, 0.308072));
+            data.Add(new Coord3d(0.000000, 2.000000, 0.909297));
+            data.Add(new Coord3d(2.000000, 2.000000, 0.308072));
+            var surface = Nzy3d.Plot3D.Builder.Builder.BuildDelaunay(data);
+
+            Assert.NotNull(surface); // Basically testing it does not throws
         }
     }
 }

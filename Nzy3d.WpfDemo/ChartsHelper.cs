@@ -19,6 +19,48 @@ namespace Nzy3d.WpfDemo
     internal static class ChartsHelper
     {
         #region Surface
+        public static Chart.Chart GetIssue16(Renderer3D renderer3D)
+        {
+            // Create the chart
+            Chart.Chart chart = new Chart.Chart(renderer3D, Quality.Nicest);
+            chart.View.Maximized = false;
+            chart.View.CameraMode = CameraMode.PERSPECTIVE;
+            chart.View.IncludingTextLabels = true;
+
+            // Create a range for the graph generation
+            var range = new Maths.Range(-150, 150);
+            const int steps = 50;
+
+            var data = new List<Coord3d>();
+            data.Add(new Coord3d(-4.000000, -4.000000, -0.586176));
+            data.Add(new Coord3d(-2.000000, -4.000000, -0.971278));
+            data.Add(new Coord3d(0.000000, -4.000000, -0.756803));
+            data.Add(new Coord3d(2.000000, -4.000000, -0.971278));
+            data.Add(new Coord3d(-4.000000, -2.000000, -0.971278));
+            data.Add(new Coord3d(-2.000000, -2.000000, 0.308072));
+            data.Add(new Coord3d(0.000000, -2.000000, 0.909297));
+            data.Add(new Coord3d(2.000000, -2.000000, 0.308072));
+            data.Add(new Coord3d(-4.000000, 0.000000, -0.756803));
+            data.Add(new Coord3d(-2.000000, 0.000000, 0.909297));
+            data.Add(new Coord3d(0.000000, 0.000000, 0.000000));
+            data.Add(new Coord3d(2.000000, 0.000000, 0.909297));
+            data.Add(new Coord3d(-4.000000, 2.000000, -0.971278));
+            data.Add(new Coord3d(-2.000000, 2.000000, 0.308072));
+            data.Add(new Coord3d(0.000000, 2.000000, 0.909297));
+            data.Add(new Coord3d(2.000000, 2.000000, 0.308072));
+            var surface = Plot3D.Builder.Builder.BuildDelaunay(data);
+            surface.ColorMapper = new ColorMapper(new ColorMapRainbow(), surface.Bounds.ZMin, surface.Bounds.ZMax, new Color(1, 1, 1, 0.8));
+            surface.FaceDisplayed = true;
+            surface.WireframeDisplayed = true;
+            surface.WireframeColor = Color.CYAN;
+            surface.WireframeColor.Mul(new Color(1, 1, 1, 0.5));
+
+            // Add surface to chart
+            chart.Scene.Graph.Add(surface);
+
+            return chart;
+        }
+
         /// <summary>
         /// Build a nice surface to display with cool alpha colors
         /// (alpha 0.8 for surface color and 0.5 for wireframe).

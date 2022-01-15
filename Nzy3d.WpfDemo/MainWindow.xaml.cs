@@ -54,7 +54,7 @@ namespace Nzy3d.WpfDemo
 
             //myRenderer3D.Name = "Renderer 0";
             // Create the chart
-            Chart.Chart chart = ChartsHelper.GetDelaunaySurface(myRenderer3D); //GetFRB_H15_dec_2021(myRenderer3D);
+            Chart.Chart chart = ChartsHelper.GetIssue16(myRenderer3D); //GetFRB_H15_dec_2021(myRenderer3D);
             axeLayout = chart.AxeLayout;
 
             // All activated by default

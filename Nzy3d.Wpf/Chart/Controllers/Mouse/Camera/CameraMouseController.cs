@@ -3,15 +3,11 @@ using Nzy3d.Maths;
 using Nzy3d.Plot3D.Rendering.Canvas;
 using Nzy3d.Wpf.Events.Mouse;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Nzy3d.Wpf.Chart.Controllers.Mouse.Camera
 {
-	public class CameraMouseController : BaseCameraMouseController, IMouseListener, IMouseMotionListener, IMouseWheelListener
+    public class CameraMouseController : BaseCameraMouseController, IMouseListener, IMouseMotionListener, IMouseWheelListener
 	{
 		/// <summary>
 		/// Handles toggle between mouse rotation/auto rotation: double-click starts the animated
