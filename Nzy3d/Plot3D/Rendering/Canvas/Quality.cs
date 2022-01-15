@@ -105,21 +105,21 @@ namespace Nzy3d.Plot3D.Rendering.Canvas
 		/// <summary>
 		/// Enables alpha, color interpolation and antialiasing on lines, points, and polygons.
 		/// </summary>
-		public static readonly Quality Nicest = new Quality(true, true, true, true, true, true, true);
+		public static readonly Quality Nicest = new Quality(true, true, true, true, true, true, false);
 
 		/// <summary>
 		/// Enables alpha and color interpolation.
 		/// </summary>
-		public static readonly Quality Advanced = new Quality(true, true, true, false, false, false, true);
+		public static readonly Quality Advanced = new Quality(true, true, true, false, false, false, false);
 
 		/// <summary>
 		/// Enables color interpolation.
 		/// </summary>
-		public static readonly Quality Intermediate = new Quality(true, false, true, false, false, false, true);
+		public static readonly Quality Intermediate = new Quality(true, false, true, false, false, false, false);
 
 		/// <summary>
 		/// Minimal quality to allow fastest rendering (no alpha, interpolation or antialiasing).
 		/// </summary>
-		public static readonly Quality Fastest = new Quality(true, false, false, false, false, false, true);
+		public static readonly Quality Fastest = new Quality(true, false, false, false, false, false, false);
 	}
 }
