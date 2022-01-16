@@ -37,9 +37,3 @@ namespace Nzy3d.Plot3D.Text
 	}
 }
 
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

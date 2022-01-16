@@ -60,7 +60,7 @@ namespace Nzy3d.Plot3D.Builder
 		public static CompileableComposite BuildComposite(Shape s)
 		{
 			var sls = new CompileableComposite();
-			sls.Add(s.GetDrawables);
+			sls.Add(s.Drawables);
 			sls.ColorMapper = new ColorMapper(_colorMap, sls.Bounds.ZMin, sls.Bounds.ZMax, _colorFactor);
 			sls.FaceDisplayed = s.FaceDisplayed;
 			sls.WireframeDisplayed = s.WireframeDisplayed;

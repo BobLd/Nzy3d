@@ -2,29 +2,29 @@ namespace Nzy3d.Maths.Algorithms
 {
 	public class OutlierRemover
 	{
-		public static int[] getOutlierIndices(double[] values, int nVariance)
+		public static int[] GetOutlierIndices(double[] values, int nVariance)
 		{
 			throw new NotImplementedException();
 		}
 
-		public static int[] getInlierIndices(double[] values, int nVariance)
+		public static int[] GetInlierIndices(double[] values, int nVariance)
 		{
 			throw new NotImplementedException();
 		}
 
-		public static double[] getOutlierValues(double[] values, int nVariance)
+		public static double[] GetOutlierValues(double[] values, int nVariance)
 		{
-			Scale bounds = getInlierBounds(values, nVariance);
+			Scale bounds = GetInlierBounds(values, nVariance);
 			return System.Array.FindAll(values, x => !bounds.Contains(x));
 		}
 
-		public static double[] getInlierValues(double[] values, int nVariance)
+		public static double[] GetInlierValues(double[] values, int nVariance)
 		{
-			Scale bounds = getInlierBounds(values, nVariance);
+			Scale bounds = GetInlierBounds(values, nVariance);
 			return System.Array.FindAll(values, x => bounds.Contains(x));
 		}
 
-		public static Scale getInlierBounds(double[] values, int nVariance)
+		public static Scale GetInlierBounds(double[] values, int nVariance)
 		{
 			if (values.Length == 0)
 			{
@@ -46,10 +46,3 @@ namespace Nzy3d.Maths.Algorithms
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

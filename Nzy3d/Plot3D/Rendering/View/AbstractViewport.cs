@@ -2,17 +2,19 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Nzy3d.Plot3D.Rendering.View
 {
-    /// <summary>
-    /// A <see cref="AbstractViewport"/> describes an element that occupies the whole
-    /// rendering <see cref="ICanvas"/> or only a vertical slice of it.
-    ///
-    /// The {@link AbstractViewport} also provides a utility function for debugging the slices, that is
-    /// the ability to display a 10*10 grid for checking the space occupied by the actual
-    /// viewport definition.
-    ///
-    /// @author Martin Pernollet
-    /// </summary>
-    public abstract class AbstractViewport
+	/// <summary>
+	/// <para>
+	/// A <see cref="AbstractViewport"/> describes an element that occupies the whole
+	/// rendering <see cref="Canvas.ICanvas"/> or only a vertical slice of it.
+	/// </para>
+	/// <para>
+	/// The <see cref="AbstractViewport"/> also provides a utility function for debugging the slices, that is
+	/// the ability to display a 10*10 grid for checking the space occupied by the actual
+	/// viewport definition.
+	/// </para>
+	/// <para>@author Martin Pernollet</para>
+	/// </summary>
+	public abstract class AbstractViewport
 	{
 		private static float AREA_LEFT = -100;
 		private static float AREA_RIGHT = +100;
@@ -112,7 +114,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			}
 			if (_screenGridDisplayed)
 			{
-				renderSubScreenGrid();
+				RenderSubScreenGrid();
 			}
 		}
 
@@ -136,15 +138,16 @@ namespace Nzy3d.Plot3D.Rendering.View
 			set { _screenGridDisplayed = value; }
 		}
 
-		private void renderSubScreenGrid()
+		private void RenderSubScreenGrid()
 		{
 			float sstep = 0;
-			if (_screenWidth <= 0)
-				return;
+			if (_screenWidth <= 0) return;
+
 			// Set a 2d projection
 			GL.MatrixMode(MatrixMode.Projection);
 			GL.PushMatrix();
 			GL.LoadIdentity();
+
 			if (_stretchToFill)
 			{
 				GL.Viewport(_screenLeft, 0, _screenWidth, _screenHeight);
@@ -157,13 +160,16 @@ namespace Nzy3d.Plot3D.Rendering.View
 				int screenYoffset = _screenHeight / 2 - dimension / 2;
 				GL.Viewport(screenXoffset, screenYoffset, dimension, dimension);
 			}
+
 			GL.Ortho(AREA_LEFT, AREA_RIGHT, AREA_DOWN, AREA_TOP, -1, 1);
+
 			// Set a grid
 			GL.MatrixMode(MatrixMode.Modelview);
 			GL.PushMatrix();
 			GL.LoadIdentity();
 			GL.Color3(1, 0.5, 0.5);
 			GL.LineWidth(1);
+
 			sstep = (AREA_RIGHT - AREA_LEFT) / (GRID_STEPS + 0);
 			for (float i = AREA_LEFT; i <= AREA_RIGHT; i += sstep)
 			{
@@ -177,6 +183,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 				GL.Vertex3(x, AREA_TOP, 1);
 				GL.End();
 			}
+
 			sstep = (AREA_TOP - AREA_DOWN) / (GRID_STEPS + 0);
 			for (float j = AREA_DOWN; j <= AREA_TOP; j += sstep)
 			{
@@ -190,6 +197,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 				GL.Vertex3(AREA_RIGHT, y, 1);
 				GL.End();
 			}
+
 			// Restore matrices
 			GL.PopMatrix();
 			GL.MatrixMode(MatrixMode.Projection);
@@ -197,10 +205,3 @@ namespace Nzy3d.Plot3D.Rendering.View
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

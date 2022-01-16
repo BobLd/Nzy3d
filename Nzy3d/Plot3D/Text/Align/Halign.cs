@@ -2,7 +2,7 @@ namespace Nzy3d.Plot3D.Text.Align
 {
 	/// <summary>
 	/// Provides constants for defining the horizontal alignment of a
-	/// <see cref="TextBillboardRenderer"/>, w.r.t. its position.
+	/// <see cref="Renderers.TextBillboardRenderer"/>, w.r.t. its position.
 	/// </summary>
 	/// <remarks></remarks>
 	public enum Halign
@@ -29,10 +29,3 @@ namespace Nzy3d.Plot3D.Text.Align
 		DEFAULT
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

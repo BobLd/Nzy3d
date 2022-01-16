@@ -3,12 +3,12 @@ namespace Nzy3d.Maths.Algorithms
 	public class ScaleFinder
 	{
 		/// <summary>
-		/// Apply an outlier remover on input data (<see cref="OutlierRemover.getInlierValues"/>)
+		/// Apply an outlier remover on input data (<see cref="OutlierRemover.GetInlierValues"/>)
 		/// and retrieve the min and max values of the non-rejected values.
 		/// </summary>
 		public static Scale getFilteredScale(double[] values, int nvariance)
 		{
-			return getMinMaxScale(OutlierRemover.getInlierValues(values, nvariance));
+			return getMinMaxScale(OutlierRemover.GetInlierValues(values, nvariance));
 		}
 
 		/// <summary>

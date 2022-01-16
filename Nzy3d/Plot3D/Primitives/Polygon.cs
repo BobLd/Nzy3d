@@ -239,7 +239,7 @@ namespace Nzy3d.Plot3D.Primitives
 		/// <param name="polygonOffsetFillEnable">status to apply to all polygons contained in composite (and recursively to child composites)</param>
 		public static void SetPolygonOffsetFillEnable(AbstractComposite composite, bool polygonOffsetFillEnable)
 		{
-			foreach (AbstractDrawable d in composite.GetDrawables)
+			foreach (AbstractDrawable d in composite.Drawables)
 			{
 				if (d is Polygon dP)
 				{

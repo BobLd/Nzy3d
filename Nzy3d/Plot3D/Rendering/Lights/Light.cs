@@ -4,7 +4,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Nzy3d.Plot3D.Rendering.Lights
 {
-    public class Light
+	public class Light
 	{
 		internal int _lightId;
 		internal bool _enabled;
@@ -12,14 +12,9 @@ namespace Nzy3d.Plot3D.Rendering.Lights
 		internal Color _diffuseColor;
 		internal Color _specularColor;
 		internal Coord3d _position;
-		internal float[] _positionZero = {
-			0.0f,
-			0.0f,
-			0.0f,
-			1.0f
-		};
-
+		internal float[] _positionZero = { 0.0f, 0.0f, 0.0f, 1.0f };
 		internal bool _representationDisplayed;
+
 		/// <summary>
 		/// Initialise a new light
 		/// </summary>
@@ -132,10 +127,3 @@ namespace Nzy3d.Plot3D.Rendering.Lights
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

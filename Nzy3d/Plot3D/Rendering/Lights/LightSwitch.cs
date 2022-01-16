@@ -33,7 +33,7 @@ namespace Nzy3d.Plot3D.Rendering.Lights
 					GL.Enable(EnableCap.Light7);
 					break;
 				default:
-					throw new ArgumentException("Light id must belong to [0;7]", "lightId");
+					throw new ArgumentException("Light id must belong to [0;7]", nameof(lightId));
 			}
 		}
 		public static void Disable(int lightId)
@@ -65,15 +65,8 @@ namespace Nzy3d.Plot3D.Rendering.Lights
 					GL.Disable(EnableCap.Light7);
 					break;
 				default:
-					throw new ArgumentException("Light id must belong to [0;7]", "lightId");
+					throw new ArgumentException("Light id must belong to [0;7]", nameof(lightId));
 			}
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

@@ -20,7 +20,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes.Layout.Providers
 		/// <summary>
 		/// Compute the ticks placements automatically between values min and max.
 		/// </summary>
-		public override float[] generateTicks(float min, float max, int steps)
+		public override float[] GenerateTicks(float min, float max, int steps)
 		{
 			if (min == max)
 			{

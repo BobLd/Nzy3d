@@ -4,7 +4,7 @@ using Nzy3d.Plot3D.Rendering.View;
 
 namespace Nzy3d.Chart
 {
-    public class ChartScene : Scene
+	public class ChartScene : Scene
 	{
 		internal int _nview;
 
@@ -25,7 +25,7 @@ namespace Nzy3d.Chart
 			{
 				throw new Exception("A view has already been defined for this scene. Can not use several views.");
 			}
-            _nview++;
+			_nview++;
 			_view = base.NewView(canvas, quality);
 			return _view;
 		}
@@ -37,10 +37,3 @@ namespace Nzy3d.Chart
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

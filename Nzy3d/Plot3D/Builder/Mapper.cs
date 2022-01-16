@@ -28,8 +28,9 @@ namespace Nzy3d.Plot3D.Builder
 		{
 			if (xy.GetLength(1) != 2)
 			{
-				throw new ArgumentException("Input xy array must be have a length of 2 in second dimension. Current array second dimension has a lenght of " + xy.GetLength(1), "xy");
+				throw new ArgumentException("Input xy array must be have a length of 2 in second dimension. Current array second dimension has a lenght of " + xy.GetLength(1), nameof(xy));
 			}
+
 			double[] z = new double[xy.GetLength(0)];
 			for (int i = 0; i <= xy.GetLength(0) - 1; i++)
 			{
@@ -72,8 +73,9 @@ namespace Nzy3d.Plot3D.Builder
 		{
 			if (xy.GetLength(1) != 2)
 			{
-				throw new ArgumentException("Input xy array must be have a length of 2 in second dimension. Current array second dimension has a lenght of " + xy.GetLength(1), "xy");
+				throw new ArgumentException("Input xy array must be have a length of 2 in second dimension. Current array second dimension has a lenght of " + xy.GetLength(1), nameof(xy));
 			}
+
 			float[] z = new float[xy.GetLength(0)];
 			for (int i = 0; i <= xy.GetLength(0) - 1; i++)
 			{
@@ -90,8 +92,9 @@ namespace Nzy3d.Plot3D.Builder
 		{
 			if (xy.GetLength(1) != 2)
 			{
-				throw new ArgumentException("Input xy array must be have a length of 2 in second dimension. Current array second dimension has a lenght of " + xy.GetLength(1), "xy");
+				throw new ArgumentException("Input xy array must be have a length of 2 in second dimension. Current array second dimension has a lenght of " + xy.GetLength(1), nameof(xy));
 			}
+
 			float[] z = new float[xy.GetLength(0)];
 			for (int i = 0; i <= xy.GetLength(0) - 1; i++)
 			{
@@ -101,10 +104,3 @@ namespace Nzy3d.Plot3D.Builder
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

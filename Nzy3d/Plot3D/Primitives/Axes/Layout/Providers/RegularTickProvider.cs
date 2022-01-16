@@ -17,7 +17,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes.Layout.Providers
 			get { return _steps; }
 		}
 
-		public override float[] generateTicks(float min, float max, int steps)
+		public override float[] GenerateTicks(float min, float max, int steps)
 		{
 			float[] ticks = new float[steps];
 			float lstep = (max - min) / (steps - 1);

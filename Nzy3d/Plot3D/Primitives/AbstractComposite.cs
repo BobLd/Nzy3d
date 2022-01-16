@@ -86,7 +86,7 @@ namespace Nzy3d.Plot3D.Primitives
 		/// <summary>
 		/// Get an enumerator through the list of drawabless stored by this composite.
 		/// </summary>
-		public IEnumerable<AbstractDrawable> GetDrawables
+		public IEnumerable<AbstractDrawable> Drawables
 		{
 			get { return _components; }
 		}
@@ -304,6 +304,7 @@ namespace Nzy3d.Plot3D.Primitives
 			return ToString(0);
 		}
 
+		/// <inheritdoc/>
 		public override string ToString(int depth)
 		{
 			string output = Utils.Blanks(depth) + "(Composite3d) #elements:" + _components.Count + " | isDisplayed=" + this.Displayed;
@@ -345,10 +346,3 @@ namespace Nzy3d.Plot3D.Primitives
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

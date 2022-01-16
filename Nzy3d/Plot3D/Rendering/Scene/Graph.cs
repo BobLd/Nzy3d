@@ -7,28 +7,28 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Nzy3d.Plot3D.Rendering.Scene
 {
-    /// <summary>
-    /// <para>The scene's <see cref="Graph"/> basically stores the scene content and facilitate objects control</para>
-    /// <para>
-    /// The graph may decompose all <see cref="AbstractComposite"/> into a list of their <see cref="AbstractDrawable"/>s primitives
-    /// if constructor is called with parameters enabling sorting.
-    /// </para>
-    /// <para>
-    /// The list of primitives is ordered using either the provided <see cref="DefaultOrderingStrategy"/>
-    /// or an other specified <see cref="AbstractOrderingStrategy"/>. Sorting is usefull for handling transparency
-    /// properly.
-    /// </para>
-    /// <para>
-    /// The <see cref="Graph"/> maintains a reference to its mother <see cref="Scene"/> in order to
-    /// inform the <see cref="View"/>s when its content has change and that repainting is required.
-    /// </para>
-    /// <para>
-    /// The add() method allows adding a <see cref="AbstractDrawable"/> to the scene Graph and updates
-    /// all views' viewpoint in order to target the center of the scene.
-    /// </para>
-    /// <para>@author Martin Pernollet</para>
-    /// </summary>
-    public class Graph
+	/// <summary>
+	/// <para>The scene's <see cref="Graph"/> basically stores the scene content and facilitate objects control</para>
+	/// <para>
+	/// The graph may decompose all <see cref="AbstractComposite"/> into a list of their <see cref="AbstractDrawable"/>s primitives
+	/// if constructor is called with parameters enabling sorting.
+	/// </para>
+	/// <para>
+	/// The list of primitives is ordered using either the provided <see cref="DefaultOrderingStrategy"/>
+	/// or an other specified <see cref="AbstractOrderingStrategy"/>. Sorting is usefull for handling transparency
+	/// properly.
+	/// </para>
+	/// <para>
+	/// The <see cref="Graph"/> maintains a reference to its mother <see cref="Scene"/> in order to
+	/// inform the <see cref="View"/>s when its content has change and that repainting is required.
+	/// </para>
+	/// <para>
+	/// The add() method allows adding a <see cref="AbstractDrawable"/> to the scene Graph and updates
+	/// all views' viewpoint in order to target the center of the scene.
+	/// </para>
+	/// <para>@author Martin Pernollet</para>
+	/// </summary>
+	public class Graph
 	{
 		internal List<AbstractDrawable> _components;
 		internal View.Scene _scene;
@@ -111,10 +111,10 @@ namespace Nzy3d.Plot3D.Rendering.Scene
 
 		public void Remove(AbstractDrawable drawable, bool updateViews)
 		{
-            lock (_components)
+			lock (_components)
 			{
-                bool output = _components.Remove(drawable);
-            }
+				bool output = _components.Remove(drawable);
+			}
 
 			BoundingBox3d bbox = this.Bounds;
 			foreach (View.View view in _scene.Views)
@@ -146,11 +146,11 @@ namespace Nzy3d.Plot3D.Rendering.Scene
 				{
 					foreach (AbstractDrawable c in _components)
 					{
-                        if (c is IGLBindedResource cIGL)
-                        {
-                            @out.Add(cIGL);
-                        }
-                    }
+						if (c is IGLBindedResource cIGL)
+						{
+							@out.Add(cIGL);
+						}
+					}
 				}
 				return @out;
 			}
@@ -215,11 +215,11 @@ namespace Nzy3d.Plot3D.Rendering.Scene
 			{
 				foreach (AbstractDrawable d in _components)
 				{
-                    if (d is ISelectable dS)
-                    {
-                        dS.Project(camera);
-                    }
-                }
+					if (d is ISelectable dS)
+					{
+						dS.Project(camera);
+					}
+				}
 			}
 		}
 
@@ -312,7 +312,7 @@ namespace Nzy3d.Plot3D.Rendering.Scene
 				{
 					if (a?.HasLegend == true && a.LegendDisplayed)
 					{
-                        k++;
+						k++;
 					}
 				}
 			}
@@ -338,17 +338,10 @@ namespace Nzy3d.Plot3D.Rendering.Scene
 					{
 						output += " Graph element [" + k + "]:(null)\r\n";
 					}
-                    k++;
+					k++;
 				}
 			}
 			return output;
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

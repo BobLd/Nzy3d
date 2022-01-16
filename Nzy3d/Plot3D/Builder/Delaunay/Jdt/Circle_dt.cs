@@ -37,10 +37,3 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
         public double Radius { get; }
     }
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

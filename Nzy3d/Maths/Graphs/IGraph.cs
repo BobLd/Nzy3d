@@ -2,27 +2,20 @@ namespace Nzy3d.Maths.Graphs
 {
 	public interface IGraph<V, E>
 	{
-		void addVertex(V vertex);
+		void AddVertex(V vertex);
 
-		void addEdge(E edge, V v1, V v2);
+		void AddEdge(E edge, V v1, V v2);
 
-		V getVertex(int i);
+		V GetVertex(int i);
 
-		V getRandomVertex();
+		V GetRandomVertex();
 
-		List<V> getVertices();
+		List<V> GetVertices();
 
-		List<E> getEdges();
+		List<E> GetEdges();
 
-		V getEdgeStartVertex(E e);
+		V GetEdgeStartVertex(E e);
 
-		V getEdgeStopVertex(E e);
+		V GetEdgeStopVertex(E e);
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

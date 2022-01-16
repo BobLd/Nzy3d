@@ -3,7 +3,7 @@ using Nzy3d.Plot3D.Rendering.View;
 
 namespace Nzy3d.Plot3D.Rendering.Ordering
 {
-    public abstract class AbstractOrderingStrategy : IComparer<AbstractDrawable>
+	public abstract class AbstractOrderingStrategy : IComparer<AbstractDrawable>
 	{
 		internal Camera _camera;
 
@@ -35,7 +35,7 @@ namespace Nzy3d.Plot3D.Rendering.Ordering
 			}
 		}
 
-		public void setAll(Camera camera, Transform.Transform transform)
+		public void SetAll(Camera camera, Transform.Transform transform)
 		{
 			this.Camera = camera;
 			this.Transform = transform;
@@ -54,10 +54,3 @@ namespace Nzy3d.Plot3D.Rendering.Ordering
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

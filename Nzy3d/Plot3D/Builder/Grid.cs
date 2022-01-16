@@ -5,17 +5,17 @@ namespace Nzy3d.Plot3D.Builder
 {
 	public abstract class Grid
 	{
-		protected internal Range xrange;
-		protected internal Range yrange;
-		protected internal int xsteps;
+		protected internal Range XRange;
+		protected internal Range YRange;
+		protected internal int XSteps;
+		protected internal int YSteps;
 
-		protected internal int ysteps;
 		public Grid(Range xrange, int xsteps, Range yrange, int ysteps)
 		{
-			this.xrange = xrange;
-			this.yrange = yrange;
-			this.xsteps = xsteps;
-			this.ysteps = ysteps;
+			this.XRange = xrange;
+			this.YRange = yrange;
+			this.XSteps = xsteps;
+			this.YSteps = ysteps;
 		}
 
 		public Grid(Range xyrange, int xysteps) : this(xyrange, xysteps, xyrange, xysteps)
@@ -25,10 +25,3 @@ namespace Nzy3d.Plot3D.Builder
 		public abstract List<Coord3d> Apply(Mapper mapper);
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

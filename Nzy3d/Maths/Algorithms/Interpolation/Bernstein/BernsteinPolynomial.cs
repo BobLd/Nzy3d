@@ -12,6 +12,7 @@ namespace Nzy3d.Maths.Algorithms.Interpolation.Bernstein
 		public double[] b3;
 
 		public int resolution;
+
 		/// <summary>
 		/// Constructor
 		/// </summary>
@@ -20,8 +21,9 @@ namespace Nzy3d.Maths.Algorithms.Interpolation.Bernstein
 		{
 			if (res < 2)
 			{
-				throw new ArgumentException("Resolution must be at least 2", "res");
+				throw new ArgumentException("Resolution must be at least 2.", nameof(res));
 			}
+
 			resolution = res;
 			b0 = new double[res];
 			b1 = new double[res];
@@ -43,10 +45,3 @@ namespace Nzy3d.Maths.Algorithms.Interpolation.Bernstein
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

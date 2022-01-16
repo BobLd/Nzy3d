@@ -31,7 +31,6 @@ namespace Nzy3d.Glut
 			0xb0,
 			0x80,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch254 = new BitmapCharRec(5, 10, 0, 2, 6, ch254data);
@@ -49,7 +48,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x20,
 			0x10
-
 		};
 
 		static readonly BitmapCharRec ch253 = new BitmapCharRec(4, 11, 0, 2, 5, ch253data);
@@ -64,7 +62,6 @@ namespace Nzy3d.Glut
 			0x90,
 			0x0,
 			0x50
-
 		};
 
 		static readonly BitmapCharRec ch252 = new BitmapCharRec(4, 8, 0, 0, 5, ch252data);
@@ -80,7 +77,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x50,
 			0x20
-
 		};
 
 		static readonly BitmapCharRec ch251 = new BitmapCharRec(4, 9, 0, 0, 5, ch251data);
@@ -96,7 +92,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x40,
 			0x20
-
 		};
 
 		static readonly BitmapCharRec ch250 = new BitmapCharRec(4, 9, 0, 0, 5, ch250data);
@@ -112,7 +107,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x20,
 			0x40
-
 		};
 
 		static readonly BitmapCharRec ch249 = new BitmapCharRec(4, 9, 0, 0, 5, ch249data);
@@ -125,7 +119,6 @@ namespace Nzy3d.Glut
 			0xa8,
 			0x98,
 			0x74
-
 		};
 
 		static readonly BitmapCharRec ch248 = new BitmapCharRec(6, 6, 0, 0, 6, ch248data);
@@ -137,7 +130,6 @@ namespace Nzy3d.Glut
 			0xf8,
 			0x0,
 			0x20
-
 		};
 
 		static readonly BitmapCharRec ch247 = new BitmapCharRec(5, 5, 0, -1, 6, ch247data);
@@ -152,7 +144,6 @@ namespace Nzy3d.Glut
 			0x70,
 			0x0,
 			0x50
-
 		};
 
 		static readonly BitmapCharRec ch246 = new BitmapCharRec(5, 8, 0, 0, 6, ch246data);
@@ -168,7 +159,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x50,
 			0x28
-
 		};
 
 		static readonly BitmapCharRec ch245 = new BitmapCharRec(5, 9, 0, 0, 6, ch245data);
@@ -229,7 +219,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0xa0,
 			0x50
-
 		};
 
 		static readonly BitmapCharRec ch241 = new BitmapCharRec(4, 9, 0, 0, 5, ch241data);
@@ -245,7 +234,6 @@ namespace Nzy3d.Glut
 			0x90,
 			0x60,
 			0x50
-
 		};
 
 		static readonly BitmapCharRec ch240 = new BitmapCharRec(5, 9, 0, 0, 6, ch240data);
@@ -260,7 +248,6 @@ namespace Nzy3d.Glut
 			0x40,
 			0x0,
 			0xa0
-
 		};
 
 		static readonly BitmapCharRec ch239 = new BitmapCharRec(3, 8, 0, 0, 2, ch239data);
@@ -276,7 +263,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0xa0,
 			0x40
-
 		};
 
 		static readonly BitmapCharRec ch238 = new BitmapCharRec(3, 9, 1, 0, 2, ch238data);
@@ -292,7 +278,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x80,
 			0x40
-
 		};
 
 		static readonly BitmapCharRec ch237 = new BitmapCharRec(2, 9, 0, 0, 2, ch237data);
@@ -308,7 +293,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x40,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch236 = new BitmapCharRec(2, 9, 1, 0, 2, ch236data);
@@ -323,7 +307,6 @@ namespace Nzy3d.Glut
 			0x60,
 			0x0,
 			0x50
-
 		};
 
 		static readonly BitmapCharRec ch235 = new BitmapCharRec(4, 8, 0, 0, 5, ch235data);
@@ -339,7 +322,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x50,
 			0x20
-
 		};
 
 		static readonly BitmapCharRec ch234 = new BitmapCharRec(4, 9, 0, 0, 5, ch234data);
@@ -355,7 +337,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x40,
 			0x20
-
 		};
 
 		static readonly BitmapCharRec ch233 = new BitmapCharRec(4, 9, 0, 0, 5, ch233data);
@@ -371,7 +352,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x20,
 			0x40
-
 		};
 
 		static readonly BitmapCharRec ch232 = new BitmapCharRec(4, 9, 0, 0, 5, ch232data);
@@ -386,7 +366,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x90,
 			0x60
-
 		};
 
 		static readonly BitmapCharRec ch231 = new BitmapCharRec(4, 8, 0, 2, 5, ch231data);
@@ -399,7 +378,6 @@ namespace Nzy3d.Glut
 			0x7e,
 			0x12,
 			0xec
-
 		};
 
 		static readonly BitmapCharRec ch230 = new BitmapCharRec(7, 6, 0, 0, 8, ch230data);
@@ -415,7 +393,6 @@ namespace Nzy3d.Glut
 			0x20,
 			0x50,
 			0x20
-
 		};
 
 		static readonly BitmapCharRec ch229 = new BitmapCharRec(5, 9, 0, 0, 5, ch229data);
@@ -430,7 +407,6 @@ namespace Nzy3d.Glut
 			0xe0,
 			0x0,
 			0x50
-
 		};
 
 		static readonly BitmapCharRec ch228 = new BitmapCharRec(5, 8, 0, 0, 5, ch228data);
@@ -446,7 +422,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0xa0,
 			0x50
-
 		};
 
 		static readonly BitmapCharRec ch227 = new BitmapCharRec(5, 9, 0, 0, 5, ch227data);
@@ -462,7 +437,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x50,
 			0x20
-
 		};
 
 		static readonly BitmapCharRec ch226 = new BitmapCharRec(5, 9, 0, 0, 5, ch226data);
@@ -478,7 +452,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x20,
 			0x10
-
 		};
 
 		static readonly BitmapCharRec ch225 = new BitmapCharRec(5, 9, 0, 0, 5, ch225data);
@@ -494,7 +467,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x20,
 			0x40
-
 		};
 
 		static readonly BitmapCharRec ch224 = new BitmapCharRec(5, 9, 0, 0, 5, ch224data);
@@ -509,7 +481,6 @@ namespace Nzy3d.Glut
 			0x90,
 			0x90,
 			0x60
-
 		};
 
 		static readonly BitmapCharRec ch223 = new BitmapCharRec(4, 8, 0, 0, 5, ch223data);
@@ -524,7 +495,6 @@ namespace Nzy3d.Glut
 			0xf0,
 			0x80,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch222 = new BitmapCharRec(5, 8, -1, 0, 7, ch222data);
@@ -542,7 +512,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x10,
 			0x8
-
 		};
 
 		static readonly BitmapCharRec ch221 = new BitmapCharRec(7, 11, 0, 0, 7, ch221data);
@@ -559,7 +528,6 @@ namespace Nzy3d.Glut
 			0x84,
 			0x0,
 			0x48
-
 		};
 
 		static readonly BitmapCharRec ch220 = new BitmapCharRec(6, 10, -1, 0, 8, ch220data);
@@ -577,7 +545,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x28,
 			0x10
-
 		};
 
 		static readonly BitmapCharRec ch219 = new BitmapCharRec(6, 11, -1, 0, 8, ch219data);
@@ -595,7 +562,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x20,
 			0x10
-
 		};
 
 		static readonly BitmapCharRec ch218 = new BitmapCharRec(6, 11, -1, 0, 8, ch218data);
@@ -613,7 +579,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x10,
 			0x20
-
 		};
 
 		static readonly BitmapCharRec ch217 = new BitmapCharRec(6, 11, -1, 0, 8, ch217data);
@@ -630,7 +595,6 @@ namespace Nzy3d.Glut
 			0x8c,
 			0x78,
 			0x4
-
 		};
 
 		static readonly BitmapCharRec ch216 = new BitmapCharRec(6, 10, -1, 1, 8, ch216data);
@@ -642,7 +606,6 @@ namespace Nzy3d.Glut
 			0x20,
 			0x50,
 			0x88
-
 		};
 
 		static readonly BitmapCharRec ch215 = new BitmapCharRec(5, 5, 0, -1, 6, ch215data);
@@ -659,7 +622,6 @@ namespace Nzy3d.Glut
 			0x78,
 			0x0,
 			0x48
-
 		};
 
 		static readonly BitmapCharRec ch214 = new BitmapCharRec(6, 10, -1, 0, 8, ch214data);
@@ -677,7 +639,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x50,
 			0x28
-
 		};
 
 		static readonly BitmapCharRec ch213 = new BitmapCharRec(6, 11, -1, 0, 8, ch213data);
@@ -695,7 +656,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x28,
 			0x10
-
 		};
 
 		static readonly BitmapCharRec ch212 = new BitmapCharRec(6, 11, -1, 0, 8, ch212data);
@@ -713,7 +673,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x10,
 			0x8
-
 		};
 
 		static readonly BitmapCharRec ch211 = new BitmapCharRec(6, 11, -1, 0, 8, ch211data);
@@ -731,7 +690,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x10,
 			0x20
-
 		};
 
 		static readonly BitmapCharRec ch210 = new BitmapCharRec(6, 11, -1, 0, 8, ch210data);
@@ -749,7 +707,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x50,
 			0x28
-
 		};
 
 		static readonly BitmapCharRec ch209 = new BitmapCharRec(6, 11, -1, 0, 8, ch209data);
@@ -764,7 +721,6 @@ namespace Nzy3d.Glut
 			0x42,
 			0x44,
 			0x78
-
 		};
 
 		static readonly BitmapCharRec ch208 = new BitmapCharRec(7, 8, 0, 0, 8, ch208data);
@@ -781,7 +737,6 @@ namespace Nzy3d.Glut
 			0x40,
 			0x0,
 			0xa0
-
 		};
 
 		static readonly BitmapCharRec ch207 = new BitmapCharRec(3, 10, 0, 0, 3, ch207data);
@@ -799,7 +754,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0xa0,
 			0x40
-
 		};
 
 		static readonly BitmapCharRec ch206 = new BitmapCharRec(3, 11, 0, 0, 3, ch206data);
@@ -817,7 +771,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x80,
 			0x40
-
 		};
 
 		static readonly BitmapCharRec ch205 = new BitmapCharRec(2, 11, -1, 0, 3, ch205data);
@@ -835,7 +788,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x40,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch204 = new BitmapCharRec(2, 11, 0, 0, 3, ch204data);
@@ -852,7 +804,6 @@ namespace Nzy3d.Glut
 			0xf8,
 			0x0,
 			0x50
-
 		};
 
 		static readonly BitmapCharRec ch203 = new BitmapCharRec(5, 10, -1, 0, 7, ch203data);
@@ -870,7 +821,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x50,
 			0x20
-
 		};
 
 		static readonly BitmapCharRec ch202 = new BitmapCharRec(5, 11, -1, 0, 7, ch202data);
@@ -888,7 +838,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x20,
 			0x10
-
 		};
 
 		static readonly BitmapCharRec ch201 = new BitmapCharRec(5, 11, -1, 0, 7, ch201data);
@@ -906,7 +855,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x20,
 			0x40
-
 		};
 
 		static readonly BitmapCharRec ch200 = new BitmapCharRec(5, 11, -1, 0, 7, ch200data);
@@ -923,7 +871,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x84,
 			0x78
-
 		};
 
 		static readonly BitmapCharRec ch199 = new BitmapCharRec(6, 10, -1, 2, 8, ch199data);
@@ -946,7 +893,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x1f,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch198 = new BitmapCharRec(9, 8, 0, 0, 10, ch198data);
@@ -964,7 +910,6 @@ namespace Nzy3d.Glut
 			0x10,
 			0x28,
 			0x10
-
 		};
 
 		static readonly BitmapCharRec ch197 = new BitmapCharRec(7, 11, 0, 0, 7, ch197data);
@@ -981,7 +926,6 @@ namespace Nzy3d.Glut
 			0x10,
 			0x0,
 			0x28
-
 		};
 
 		static readonly BitmapCharRec ch196 = new BitmapCharRec(7, 10, 0, 0, 7, ch196data);
@@ -999,7 +943,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x28,
 			0x14
-
 		};
 
 		static readonly BitmapCharRec ch195 = new BitmapCharRec(7, 11, 0, 0, 7, ch195data);
@@ -1017,7 +960,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x28,
 			0x10
-
 		};
 
 		static readonly BitmapCharRec ch194 = new BitmapCharRec(7, 11, 0, 0, 7, ch194data);
@@ -1035,7 +977,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x10,
 			0x8
-
 		};
 
 		static readonly BitmapCharRec ch193 = new BitmapCharRec(7, 11, 0, 0, 7, ch193data);
@@ -1053,7 +994,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x10,
 			0x20
-
 		};
 
 		static readonly BitmapCharRec ch192 = new BitmapCharRec(7, 11, 0, 0, 7, ch192data);
@@ -1068,7 +1008,6 @@ namespace Nzy3d.Glut
 			0x20,
 			0x0,
 			0x20
-
 		};
 
 		static readonly BitmapCharRec ch191 = new BitmapCharRec(4, 8, -1, 2, 6, ch191data);
@@ -1091,7 +1030,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0xe2,
 			0x0
-
 		};
 
 		static readonly BitmapCharRec ch190 = new BitmapCharRec(9, 8, 0, 0, 9, ch190data);
@@ -1106,7 +1044,6 @@ namespace Nzy3d.Glut
 			0x44,
 			0xc4,
 			0x42
-
 		};
 
 		static readonly BitmapCharRec ch189 = new BitmapCharRec(8, 8, 0, 0, 9, ch189data);
@@ -1129,7 +1066,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x42,
 			0x0
-
 		};
 
 		static readonly BitmapCharRec ch188 = new BitmapCharRec(9, 8, 0, 0, 9, ch188data);
@@ -1141,7 +1077,6 @@ namespace Nzy3d.Glut
 			0x28,
 			0x50,
 			0xa0
-
 		};
 
 		static readonly BitmapCharRec ch187 = new BitmapCharRec(5, 5, 0, 0, 6, ch187data);
@@ -1153,7 +1088,6 @@ namespace Nzy3d.Glut
 			0xe0,
 			0xa0,
 			0xe0
-
 		};
 
 		static readonly BitmapCharRec ch186 = new BitmapCharRec(3, 5, 0, -3, 4, ch186data);
@@ -1164,7 +1098,6 @@ namespace Nzy3d.Glut
 			0x40,
 			0xc0,
 			0x40
-
 		};
 
 		static readonly BitmapCharRec ch185 = new BitmapCharRec(2, 4, 0, -3, 3, ch185data);
@@ -1173,12 +1106,10 @@ namespace Nzy3d.Glut
 		static readonly byte[] ch184data = {
 			0xc0,
 			0x40
-
 		};
 
 		static readonly BitmapCharRec ch184 = new BitmapCharRec(2, 2, 0, 2, 3, ch184data);
 		// char: 0xb7 */
-
 
 		static readonly byte[] ch183data = { 0xc0 };
 
@@ -1196,7 +1127,6 @@ namespace Nzy3d.Glut
 			0xe8,
 			0xe8,
 			0x7c
-
 		};
 
 		static readonly BitmapCharRec ch182 = new BitmapCharRec(6, 10, 0, 2, 6, ch182data);
@@ -1211,7 +1141,6 @@ namespace Nzy3d.Glut
 			0x90,
 			0x90,
 			0x90
-
 		};
 
 		static readonly BitmapCharRec ch181 = new BitmapCharRec(4, 8, 0, 2, 5, ch181data);
@@ -1220,7 +1149,6 @@ namespace Nzy3d.Glut
 		static readonly byte[] ch180data = {
 			0x80,
 			0x40
-
 		};
 
 		static readonly BitmapCharRec ch180 = new BitmapCharRec(2, 2, 0, -6, 3, ch180data);
@@ -1231,7 +1159,6 @@ namespace Nzy3d.Glut
 			0x20,
 			0x40,
 			0xe0
-
 		};
 
 		static readonly BitmapCharRec ch179 = new BitmapCharRec(3, 4, 0, -3, 3, ch179data);
@@ -1242,7 +1169,6 @@ namespace Nzy3d.Glut
 			0x40,
 			0xa0,
 			0x60
-
 		};
 
 		static readonly BitmapCharRec ch178 = new BitmapCharRec(3, 4, 0, -3, 3, ch178data);
@@ -1256,7 +1182,6 @@ namespace Nzy3d.Glut
 			0xf8,
 			0x20,
 			0x20
-
 		};
 
 		static readonly BitmapCharRec ch177 = new BitmapCharRec(5, 7, 0, 0, 6, ch177data);
@@ -1267,12 +1192,10 @@ namespace Nzy3d.Glut
 			0x90,
 			0x90,
 			0x60
-
 		};
 
 		static readonly BitmapCharRec ch176 = new BitmapCharRec(4, 4, 0, -3, 4, ch176data);
 		// char: 0xaf */
-
 
 		static readonly byte[] ch175data = { 0xe0 };
 
@@ -1287,12 +1210,10 @@ namespace Nzy3d.Glut
 			0xba,
 			0x44,
 			0x38
-
 		};
 
 		static readonly BitmapCharRec ch174 = new BitmapCharRec(7, 7, -1, 0, 9, ch174data);
 		// char: 0xad */
-
 
 		static readonly byte[] ch173data = { 0xe0 };
 
@@ -1303,7 +1224,6 @@ namespace Nzy3d.Glut
 			0x8,
 			0x8,
 			0xf8
-
 		};
 
 		static readonly BitmapCharRec ch172 = new BitmapCharRec(5, 3, -1, -2, 7, ch172data);
@@ -1315,7 +1235,6 @@ namespace Nzy3d.Glut
 			0xa0,
 			0x50,
 			0x28
-
 		};
 
 		static readonly BitmapCharRec ch171 = new BitmapCharRec(5, 5, 0, 0, 6, ch171data);
@@ -1327,7 +1246,6 @@ namespace Nzy3d.Glut
 			0xa0,
 			0x20,
 			0xe0
-
 		};
 
 		static readonly BitmapCharRec ch170 = new BitmapCharRec(3, 5, 0, -3, 4, ch170data);
@@ -1341,12 +1259,10 @@ namespace Nzy3d.Glut
 			0x9a,
 			0x44,
 			0x38
-
 		};
 
 		static readonly BitmapCharRec ch169 = new BitmapCharRec(7, 7, -1, 0, 9, ch169data);
 		// char: 0xa8 */
-
 
 		static readonly byte[] ch168data = { 0xa0 };
 
@@ -1364,7 +1280,6 @@ namespace Nzy3d.Glut
 			0xc0,
 			0x88,
 			0x70
-
 		};
 
 		static readonly BitmapCharRec ch167 = new BitmapCharRec(5, 10, 0, 2, 6, ch167data);
@@ -1381,7 +1296,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x80,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch166 = new BitmapCharRec(1, 10, -1, 2, 3, ch166data);
@@ -1396,7 +1310,6 @@ namespace Nzy3d.Glut
 			0x50,
 			0x88,
 			0x88
-
 		};
 
 		static readonly BitmapCharRec ch165 = new BitmapCharRec(5, 8, 0, 0, 6, ch165data);
@@ -1409,7 +1322,6 @@ namespace Nzy3d.Glut
 			0x90,
 			0x60,
 			0x90
-
 		};
 
 		static readonly BitmapCharRec ch164 = new BitmapCharRec(4, 6, 0, -1, 5, ch164data);
@@ -1424,7 +1336,6 @@ namespace Nzy3d.Glut
 			0x40,
 			0x48,
 			0x30
-
 		};
 
 		static readonly BitmapCharRec ch163 = new BitmapCharRec(5, 8, 0, 0, 6, ch163data);
@@ -1439,7 +1350,6 @@ namespace Nzy3d.Glut
 			0xa8,
 			0x70,
 			0x10
-
 		};
 
 		static readonly BitmapCharRec ch162 = new BitmapCharRec(5, 8, 0, 1, 6, ch162data);
@@ -1454,12 +1364,10 @@ namespace Nzy3d.Glut
 			0x80,
 			0x0,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch161 = new BitmapCharRec(1, 8, -1, 2, 3, ch161data);
 		// char: 0xa0 */
-
 
 		static readonly BitmapCharRec ch160 = new BitmapCharRec(0, 0, 0, 0, 3, null);
 		// char: 0x7e '~' */
@@ -1467,7 +1375,6 @@ namespace Nzy3d.Glut
 		static readonly byte[] ch126data = {
 			0x98,
 			0x64
-
 		};
 
 		static readonly BitmapCharRec ch126 = new BitmapCharRec(6, 2, 0, -3, 7, ch126data);
@@ -1484,7 +1391,6 @@ namespace Nzy3d.Glut
 			0x40,
 			0x40,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch125 = new BitmapCharRec(3, 10, 0, 2, 3, ch125data);
@@ -1501,7 +1407,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x80,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch124 = new BitmapCharRec(1, 10, -1, 2, 3, ch124data);
@@ -1518,7 +1423,6 @@ namespace Nzy3d.Glut
 			0x40,
 			0x40,
 			0x20
-
 		};
 
 		static readonly BitmapCharRec ch123 = new BitmapCharRec(3, 10, 0, 2, 3, ch123data);
@@ -1531,7 +1435,6 @@ namespace Nzy3d.Glut
 			0x20,
 			0x10,
 			0xf0
-
 		};
 
 		static readonly BitmapCharRec ch122 = new BitmapCharRec(4, 6, 0, 0, 5, ch122data);
@@ -1546,7 +1449,6 @@ namespace Nzy3d.Glut
 			0xa0,
 			0x90,
 			0x90
-
 		};
 
 		static readonly BitmapCharRec ch121 = new BitmapCharRec(4, 8, 0, 2, 5, ch121data);
@@ -1559,7 +1461,6 @@ namespace Nzy3d.Glut
 			0x20,
 			0x50,
 			0x88
-
 		};
 
 		static readonly BitmapCharRec ch120 = new BitmapCharRec(5, 6, 0, 0, 6, ch120data);
@@ -1572,7 +1473,6 @@ namespace Nzy3d.Glut
 			0x54,
 			0x92,
 			0x92
-
 		};
 
 		static readonly BitmapCharRec ch119 = new BitmapCharRec(7, 6, 0, 0, 8, ch119data);
@@ -1585,7 +1485,6 @@ namespace Nzy3d.Glut
 			0x50,
 			0x88,
 			0x88
-
 		};
 
 		static readonly BitmapCharRec ch118 = new BitmapCharRec(5, 6, 0, 0, 6, ch118data);
@@ -1598,7 +1497,6 @@ namespace Nzy3d.Glut
 			0x90,
 			0x90,
 			0x90
-
 		};
 
 		static readonly BitmapCharRec ch117 = new BitmapCharRec(4, 6, 0, 0, 5, ch117data);
@@ -1613,7 +1511,6 @@ namespace Nzy3d.Glut
 			0xe0,
 			0x40,
 			0x40
-
 		};
 
 		static readonly BitmapCharRec ch116 = new BitmapCharRec(3, 8, 0, 0, 4, ch116data);
@@ -1626,7 +1523,6 @@ namespace Nzy3d.Glut
 			0x60,
 			0x90,
 			0x60
-
 		};
 
 		static readonly BitmapCharRec ch115 = new BitmapCharRec(4, 6, 0, 0, 5, ch115data);
@@ -1639,7 +1535,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0xc0,
 			0xa0
-
 		};
 
 		static readonly BitmapCharRec ch114 = new BitmapCharRec(3, 6, 0, 0, 4, ch114data);
@@ -1654,7 +1549,6 @@ namespace Nzy3d.Glut
 			0x88,
 			0x98,
 			0x68
-
 		};
 
 		static readonly BitmapCharRec ch113 = new BitmapCharRec(5, 8, 0, 2, 6, ch113data);
@@ -1669,7 +1563,6 @@ namespace Nzy3d.Glut
 			0x88,
 			0xc8,
 			0xb0
-
 		};
 
 		static readonly BitmapCharRec ch112 = new BitmapCharRec(5, 8, 0, 2, 6, ch112data);
@@ -1682,7 +1575,6 @@ namespace Nzy3d.Glut
 			0x88,
 			0x88,
 			0x70
-
 		};
 
 		static readonly BitmapCharRec ch111 = new BitmapCharRec(5, 6, 0, 0, 6, ch111data);
@@ -1695,7 +1587,6 @@ namespace Nzy3d.Glut
 			0x88,
 			0xc8,
 			0xb0
-
 		};
 
 		static readonly BitmapCharRec ch110 = new BitmapCharRec(5, 6, 0, 0, 6, ch110data);
@@ -1708,7 +1599,6 @@ namespace Nzy3d.Glut
 			0x92,
 			0x92,
 			0xec
-
 		};
 
 		static readonly BitmapCharRec ch109 = new BitmapCharRec(7, 6, 0, 0, 8, ch109data);
@@ -1723,7 +1613,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x80,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch108 = new BitmapCharRec(1, 8, 0, 0, 2, ch108data);
@@ -1738,7 +1627,6 @@ namespace Nzy3d.Glut
 			0x90,
 			0x80,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch107 = new BitmapCharRec(4, 8, 0, 0, 5, ch107data);
@@ -1754,7 +1642,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x0,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch106 = new BitmapCharRec(1, 9, 0, 1, 2, ch106data);
@@ -1769,7 +1656,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x0,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch105 = new BitmapCharRec(1, 8, 0, 0, 2, ch105data);
@@ -1784,7 +1670,6 @@ namespace Nzy3d.Glut
 			0xb0,
 			0x80,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch104 = new BitmapCharRec(5, 8, 0, 0, 6, ch104data);
@@ -1799,7 +1684,6 @@ namespace Nzy3d.Glut
 			0x88,
 			0x98,
 			0x68
-
 		};
 
 		static readonly BitmapCharRec ch103 = new BitmapCharRec(5, 8, 0, 2, 6, ch103data);
@@ -1814,7 +1698,6 @@ namespace Nzy3d.Glut
 			0xe0,
 			0x40,
 			0x30
-
 		};
 
 		static readonly BitmapCharRec ch102 = new BitmapCharRec(4, 8, 0, 0, 4, ch102data);
@@ -1827,7 +1710,6 @@ namespace Nzy3d.Glut
 			0xf0,
 			0x90,
 			0x60
-
 		};
 
 		static readonly BitmapCharRec ch101 = new BitmapCharRec(4, 6, 0, 0, 5, ch101data);
@@ -1842,7 +1724,6 @@ namespace Nzy3d.Glut
 			0x68,
 			0x8,
 			0x8
-
 		};
 
 		static readonly BitmapCharRec ch100 = new BitmapCharRec(5, 8, 0, 0, 6, ch100data);
@@ -1855,7 +1736,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x90,
 			0x60
-
 		};
 
 		static readonly BitmapCharRec ch99 = new BitmapCharRec(4, 6, 0, 0, 5, ch99data);
@@ -1870,7 +1750,6 @@ namespace Nzy3d.Glut
 			0xb0,
 			0x80,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch98 = new BitmapCharRec(5, 8, 0, 0, 6, ch98data);
@@ -1883,7 +1762,6 @@ namespace Nzy3d.Glut
 			0x70,
 			0x10,
 			0xe0
-
 		};
 
 		static readonly BitmapCharRec ch97 = new BitmapCharRec(5, 6, 0, 0, 5, ch97data);
@@ -1893,12 +1771,10 @@ namespace Nzy3d.Glut
 			0x80,
 			0x80,
 			0x40
-
 		};
 
 		static readonly BitmapCharRec ch96 = new BitmapCharRec(2, 3, 0, -5, 3, ch96data);
 		// char: 0x5f '_' */
-
 
 		static readonly byte[] ch95data = { 0xfc };
 
@@ -1911,7 +1787,6 @@ namespace Nzy3d.Glut
 			0x50,
 			0x20,
 			0x20
-
 		};
 
 		static readonly BitmapCharRec ch94 = new BitmapCharRec(5, 5, 0, -3, 6, ch94data);
@@ -1928,7 +1803,6 @@ namespace Nzy3d.Glut
 			0x40,
 			0x40,
 			0xc0
-
 		};
 
 		static readonly BitmapCharRec ch93 = new BitmapCharRec(2, 10, 0, 2, 3, ch93data);
@@ -1943,7 +1817,6 @@ namespace Nzy3d.Glut
 			0x40,
 			0x80,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch92 = new BitmapCharRec(3, 8, 0, 0, 3, ch92data);
@@ -1960,7 +1833,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x80,
 			0xc0
-
 		};
 
 		static readonly BitmapCharRec ch91 = new BitmapCharRec(2, 10, -1, 2, 3, ch91data);
@@ -1975,7 +1847,6 @@ namespace Nzy3d.Glut
 			0x10,
 			0x8,
 			0xf8
-
 		};
 
 		static readonly BitmapCharRec ch90 = new BitmapCharRec(5, 8, -1, 0, 7, ch90data);
@@ -1990,7 +1861,6 @@ namespace Nzy3d.Glut
 			0x44,
 			0x44,
 			0x82
-
 		};
 
 		static readonly BitmapCharRec ch89 = new BitmapCharRec(7, 8, 0, 0, 7, ch89data);
@@ -2005,7 +1875,6 @@ namespace Nzy3d.Glut
 			0x50,
 			0x88,
 			0x88
-
 		};
 
 		static readonly BitmapCharRec ch88 = new BitmapCharRec(5, 8, -1, 0, 7, ch88data);
@@ -2028,7 +1897,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x88,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch87 = new BitmapCharRec(9, 8, 0, 0, 9, ch87data);
@@ -2043,7 +1911,6 @@ namespace Nzy3d.Glut
 			0x44,
 			0x82,
 			0x82
-
 		};
 
 		static readonly BitmapCharRec ch86 = new BitmapCharRec(7, 8, 0, 0, 7, ch86data);
@@ -2058,7 +1925,6 @@ namespace Nzy3d.Glut
 			0x84,
 			0x84,
 			0x84
-
 		};
 
 		static readonly BitmapCharRec ch85 = new BitmapCharRec(6, 8, -1, 0, 8, ch85data);
@@ -2073,7 +1939,6 @@ namespace Nzy3d.Glut
 			0x20,
 			0x20,
 			0xf8
-
 		};
 
 		static readonly BitmapCharRec ch84 = new BitmapCharRec(5, 8, 0, 0, 5, ch84data);
@@ -2088,7 +1953,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x88,
 			0x70
-
 		};
 
 		static readonly BitmapCharRec ch83 = new BitmapCharRec(5, 8, -1, 0, 7, ch83data);
@@ -2103,7 +1967,6 @@ namespace Nzy3d.Glut
 			0x88,
 			0x88,
 			0xf0
-
 		};
 
 		static readonly BitmapCharRec ch82 = new BitmapCharRec(5, 8, -1, 0, 7, ch82data);
@@ -2119,7 +1982,6 @@ namespace Nzy3d.Glut
 			0x84,
 			0x84,
 			0x78
-
 		};
 
 		static readonly BitmapCharRec ch81 = new BitmapCharRec(7, 9, -1, 1, 8, ch81data);
@@ -2134,7 +1996,6 @@ namespace Nzy3d.Glut
 			0x88,
 			0x88,
 			0xf0
-
 		};
 
 		static readonly BitmapCharRec ch80 = new BitmapCharRec(5, 8, -1, 0, 7, ch80data);
@@ -2149,7 +2010,6 @@ namespace Nzy3d.Glut
 			0x84,
 			0x84,
 			0x78
-
 		};
 
 		static readonly BitmapCharRec ch79 = new BitmapCharRec(6, 8, -1, 0, 8, ch79data);
@@ -2164,7 +2024,6 @@ namespace Nzy3d.Glut
 			0xa4,
 			0xc4,
 			0xc4
-
 		};
 
 		static readonly BitmapCharRec ch78 = new BitmapCharRec(6, 8, -1, 0, 8, ch78data);
@@ -2179,7 +2038,6 @@ namespace Nzy3d.Glut
 			0xc6,
 			0xc6,
 			0x82
-
 		};
 
 		static readonly BitmapCharRec ch77 = new BitmapCharRec(7, 8, -1, 0, 9, ch77data);
@@ -2194,7 +2052,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x80,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch76 = new BitmapCharRec(4, 8, -1, 0, 6, ch76data);
@@ -2209,7 +2066,6 @@ namespace Nzy3d.Glut
 			0xa0,
 			0x90,
 			0x88
-
 		};
 
 		static readonly BitmapCharRec ch75 = new BitmapCharRec(5, 8, -1, 0, 7, ch75data);
@@ -2224,7 +2080,6 @@ namespace Nzy3d.Glut
 			0x10,
 			0x10,
 			0x10
-
 		};
 
 		static readonly BitmapCharRec ch74 = new BitmapCharRec(4, 8, 0, 0, 5, ch74data);
@@ -2239,7 +2094,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x80,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch73 = new BitmapCharRec(1, 8, -1, 0, 3, ch73data);
@@ -2254,7 +2108,6 @@ namespace Nzy3d.Glut
 			0x84,
 			0x84,
 			0x84
-
 		};
 
 		static readonly BitmapCharRec ch72 = new BitmapCharRec(6, 8, -1, 0, 8, ch72data);
@@ -2269,7 +2122,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x84,
 			0x78
-
 		};
 
 		static readonly BitmapCharRec ch71 = new BitmapCharRec(6, 8, -1, 0, 8, ch71data);
@@ -2284,7 +2136,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x80,
 			0xf8
-
 		};
 
 		static readonly BitmapCharRec ch70 = new BitmapCharRec(5, 8, -1, 0, 6, ch70data);
@@ -2299,7 +2150,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x80,
 			0xf8
-
 		};
 
 		static readonly BitmapCharRec ch69 = new BitmapCharRec(5, 8, -1, 0, 7, ch69data);
@@ -2314,7 +2164,6 @@ namespace Nzy3d.Glut
 			0x84,
 			0x88,
 			0xf0
-
 		};
 
 		static readonly BitmapCharRec ch68 = new BitmapCharRec(6, 8, -1, 0, 8, ch68data);
@@ -2329,7 +2178,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x84,
 			0x78
-
 		};
 
 		static readonly BitmapCharRec ch67 = new BitmapCharRec(6, 8, -1, 0, 8, ch67data);
@@ -2344,7 +2192,6 @@ namespace Nzy3d.Glut
 			0x88,
 			0x88,
 			0xf0
-
 		};
 
 		static readonly BitmapCharRec ch66 = new BitmapCharRec(5, 8, -1, 0, 7, ch66data);
@@ -2359,7 +2206,6 @@ namespace Nzy3d.Glut
 			0x28,
 			0x10,
 			0x10
-
 		};
 
 		static readonly BitmapCharRec ch65 = new BitmapCharRec(7, 8, 0, 0, 7, ch65data);
@@ -2386,7 +2232,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x1f,
 			0x0
-
 		};
 
 		static readonly BitmapCharRec ch64 = new BitmapCharRec(10, 10, 0, 2, 11, ch64data);
@@ -2401,7 +2246,6 @@ namespace Nzy3d.Glut
 			0x10,
 			0x90,
 			0x60
-
 		};
 
 		static readonly BitmapCharRec ch63 = new BitmapCharRec(4, 8, -1, 0, 6, ch63data);
@@ -2413,7 +2257,6 @@ namespace Nzy3d.Glut
 			0x20,
 			0x40,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch62 = new BitmapCharRec(3, 5, -1, -1, 6, ch62data);
@@ -2423,7 +2266,6 @@ namespace Nzy3d.Glut
 			0xf0,
 			0x0,
 			0xf0
-
 		};
 
 		static readonly BitmapCharRec ch61 = new BitmapCharRec(4, 3, 0, -2, 5, ch61data);
@@ -2435,7 +2277,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x40,
 			0x20
-
 		};
 
 		static readonly BitmapCharRec ch60 = new BitmapCharRec(3, 5, -1, -1, 6, ch60data);
@@ -2450,7 +2291,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x0,
 			0x40
-
 		};
 
 		static readonly BitmapCharRec ch59 = new BitmapCharRec(2, 8, 0, 2, 3, ch59data);
@@ -2463,7 +2303,6 @@ namespace Nzy3d.Glut
 			0x0,
 			0x0,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch58 = new BitmapCharRec(1, 6, -1, 0, 3, ch58data);
@@ -2478,7 +2317,6 @@ namespace Nzy3d.Glut
 			0x88,
 			0x88,
 			0x70
-
 		};
 
 		static readonly BitmapCharRec ch57 = new BitmapCharRec(5, 8, 0, 0, 6, ch57data);
@@ -2493,7 +2331,6 @@ namespace Nzy3d.Glut
 			0x88,
 			0x88,
 			0x70
-
 		};
 
 		static readonly BitmapCharRec ch56 = new BitmapCharRec(5, 8, 0, 0, 6, ch56data);
@@ -2508,7 +2345,6 @@ namespace Nzy3d.Glut
 			0x10,
 			0x8,
 			0xf8
-
 		};
 
 		static readonly BitmapCharRec ch55 = new BitmapCharRec(5, 8, 0, 0, 6, ch55data);
@@ -2523,7 +2359,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x88,
 			0x70
-
 		};
 
 		static readonly BitmapCharRec ch54 = new BitmapCharRec(5, 8, 0, 0, 6, ch54data);
@@ -2538,7 +2373,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x80,
 			0xf8
-
 		};
 
 		static readonly BitmapCharRec ch53 = new BitmapCharRec(5, 8, 0, 0, 6, ch53data);
@@ -2553,7 +2387,6 @@ namespace Nzy3d.Glut
 			0x50,
 			0x30,
 			0x10
-
 		};
 
 		static readonly BitmapCharRec ch52 = new BitmapCharRec(5, 8, 0, 0, 6, ch52data);
@@ -2568,7 +2401,6 @@ namespace Nzy3d.Glut
 			0x8,
 			0x88,
 			0x70
-
 		};
 
 		static readonly BitmapCharRec ch51 = new BitmapCharRec(5, 8, 0, 0, 6, ch51data);
@@ -2583,7 +2415,6 @@ namespace Nzy3d.Glut
 			0x8,
 			0x88,
 			0x70
-
 		};
 
 		static readonly BitmapCharRec ch50 = new BitmapCharRec(5, 8, 0, 0, 6, ch50data);
@@ -2598,7 +2429,6 @@ namespace Nzy3d.Glut
 			0x40,
 			0xc0,
 			0x40
-
 		};
 
 		static readonly BitmapCharRec ch49 = new BitmapCharRec(2, 8, -1, 0, 6, ch49data);
@@ -2613,7 +2443,6 @@ namespace Nzy3d.Glut
 			0x88,
 			0x88,
 			0x70
-
 		};
 
 		static readonly BitmapCharRec ch48 = new BitmapCharRec(5, 8, 0, 0, 6, ch48data);
@@ -2628,18 +2457,15 @@ namespace Nzy3d.Glut
 			0x40,
 			0x20,
 			0x20
-
 		};
 
 		static readonly BitmapCharRec ch47 = new BitmapCharRec(3, 8, 0, 0, 3, ch47data);
 		// char: 0x2e '.' */
 
-
 		static readonly byte[] ch46data = { 0x80 };
 
 		static readonly BitmapCharRec ch46 = new BitmapCharRec(1, 1, -1, 0, 3, ch46data);
 		// char: 0x2d '-' */
-
 
 		static readonly byte[] ch45data = { 0xf8 };
 
@@ -2650,7 +2476,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x40,
 			0x40
-
 		};
 
 		static readonly BitmapCharRec ch44 = new BitmapCharRec(2, 3, 0, 2, 3, ch44data);
@@ -2662,7 +2487,6 @@ namespace Nzy3d.Glut
 			0xf8,
 			0x20,
 			0x20
-
 		};
 
 		static readonly BitmapCharRec ch43 = new BitmapCharRec(5, 5, 0, -1, 6, ch43data);
@@ -2672,7 +2496,6 @@ namespace Nzy3d.Glut
 			0xa0,
 			0x40,
 			0xa0
-
 		};
 
 		static readonly BitmapCharRec ch42 = new BitmapCharRec(3, 3, 0, -5, 4, ch42data);
@@ -2689,7 +2512,6 @@ namespace Nzy3d.Glut
 			0x40,
 			0x40,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch41 = new BitmapCharRec(3, 10, -1, 2, 4, ch41data);
@@ -2706,7 +2528,6 @@ namespace Nzy3d.Glut
 			0x40,
 			0x40,
 			0x20
-
 		};
 
 		static readonly BitmapCharRec ch40 = new BitmapCharRec(3, 10, 0, 2, 4, ch40data);
@@ -2716,7 +2537,6 @@ namespace Nzy3d.Glut
 			0x80,
 			0x40,
 			0x40
-
 		};
 
 		static readonly BitmapCharRec ch39 = new BitmapCharRec(2, 3, -1, -5, 3, ch39data);
@@ -2731,7 +2551,6 @@ namespace Nzy3d.Glut
 			0x50,
 			0x50,
 			0x20
-
 		};
 
 		static readonly BitmapCharRec ch38 = new BitmapCharRec(6, 8, -1, 0, 8, ch38data);
@@ -2746,7 +2565,6 @@ namespace Nzy3d.Glut
 			0x68,
 			0x94,
 			0x64
-
 		};
 
 		static readonly BitmapCharRec ch37 = new BitmapCharRec(8, 8, 0, 0, 9, ch37data);
@@ -2762,7 +2580,6 @@ namespace Nzy3d.Glut
 			0xa8,
 			0x70,
 			0x20
-
 		};
 
 		static readonly BitmapCharRec ch36 = new BitmapCharRec(5, 9, 0, 1, 6, ch36data);
@@ -2776,7 +2593,6 @@ namespace Nzy3d.Glut
 			0x7c,
 			0x28,
 			0x28
-
 		};
 
 		static readonly BitmapCharRec ch35 = new BitmapCharRec(6, 7, 0, 0, 6, ch35data);
@@ -2785,7 +2601,6 @@ namespace Nzy3d.Glut
 		static readonly byte[] ch34data = {
 			0xa0,
 			0xa0
-
 		};
 
 		static readonly BitmapCharRec ch34 = new BitmapCharRec(3, 2, -1, -6, 4, ch34data);
@@ -2800,12 +2615,10 @@ namespace Nzy3d.Glut
 			0x80,
 			0x80,
 			0x80
-
 		};
 
 		static readonly BitmapCharRec ch33 = new BitmapCharRec(1, 8, -1, 0, 3, ch33data);
 		// char: 0x20 ' ' */
-
 
 		static readonly BitmapCharRec ch32 = new BitmapCharRec(0, 0, 0, 0, 3, null);
 		static readonly BitmapCharRec[] chars = {
@@ -3037,10 +2850,3 @@ namespace Nzy3d.Glut
 		public static readonly BitmapFontRec glutBitmapHelvetica10 = new BitmapFontRec("-adobe-helvetica-medium-r-normal--10-100-75-75-p-56-iso8859-1", 224, 32, chars);
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

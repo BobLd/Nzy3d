@@ -9,19 +9,17 @@ namespace Nzy3d.Plot3D.Rendering.Scene
 			List<AbstractDrawable> monotypes = new List<AbstractDrawable>();
 			foreach (AbstractDrawable c in drawables)
 			{
-				if ((c != null) && c.Displayed)
+				if (c?.Displayed == true)
 				{
-					AbstractComposite cAC = c as AbstractComposite;
-					AbstractDrawable cAD = c as AbstractDrawable;
-					if (cAC != null)
-					{
-						monotypes.AddRange(GetDecomposition(cAC));
-					}
-					else if (cAD != null)
-					{
-						monotypes.Add(cAD);
-					}
-				}
+                    if (c is AbstractComposite cAC)
+                    {
+                        monotypes.AddRange(GetDecomposition(cAC));
+                    }
+                    else if (c is AbstractDrawable cAD)
+                    {
+                        monotypes.Add(cAD);
+                    }
+                }
 			}
 			return monotypes;
 		}
@@ -32,30 +30,21 @@ namespace Nzy3d.Plot3D.Rendering.Scene
 		public static List<AbstractDrawable> GetDecomposition(AbstractComposite input)
 		{
 			List<AbstractDrawable> selection = new List<AbstractDrawable>();
-			foreach (AbstractDrawable c in input.GetDrawables)
+			foreach (AbstractDrawable c in input.Drawables)
 			{
-				if ((c != null) && c.Displayed)
+				if (c?.Displayed == true)
 				{
-					AbstractComposite cAC = c as AbstractComposite;
-					AbstractDrawable cAD = c as AbstractDrawable;
-					if (cAC != null)
-					{
-						selection.AddRange(GetDecomposition(cAC));
-					}
-					else if (cAD != null)
-					{
-						selection.Add(cAD);
-					}
-				}
+                    if (c is AbstractComposite cAC)
+                    {
+                        selection.AddRange(GetDecomposition(cAC));
+                    }
+                    else if (c is AbstractDrawable cAD)
+                    {
+                        selection.Add(cAD);
+                    }
+                }
 			}
 			return selection;
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

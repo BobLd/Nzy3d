@@ -2,16 +2,18 @@ using Nzy3d.Plot3D.Primitives;
 
 namespace Nzy3d.Plot3D.Rendering.Ordering
 {
-    /// <summary>
-    /// <para>
-    /// The <see cref="BarycentreOrderingStrategy"/> compare two <see cref="AbstractDrawable"/>s by computing
-    /// their respective distances to the <see cref="Camera"/>, which must be referenced prior to any
-    /// comparison.
-    /// </para>
-    /// <para>@author Martin Pernollet</para>
-    /// </summary>
-    public class BarycentreOrderingStrategy : AbstractOrderingStrategy
+	/// <summary>
+	/// <para>
+	/// The <see cref="BarycentreOrderingStrategy"/> compare two <see cref="AbstractDrawable"/>s by computing
+	/// their respective distances to the <see cref="Camera"/>, which must be referenced prior to any
+	/// comparison.
+	/// </para>
+	/// <para>@author Martin Pernollet</para>
+	/// </summary>
+	public class BarycentreOrderingStrategy : AbstractOrderingStrategy
 	{
+		/// <inheritdoc/>
+		/// <exception cref="Exception"></exception>
 		public override int Compare(AbstractDrawable d1, AbstractDrawable d2)
 		{
 			if (_camera == null)
@@ -38,10 +40,3 @@ namespace Nzy3d.Plot3D.Rendering.Ordering
 		//
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

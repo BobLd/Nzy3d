@@ -7,16 +7,9 @@ namespace Nzy3d.Colors
 		/// </summary>
 		double ZMin { get; set; }
 
-        /// <summary>
-        /// Get/Set the upper value boundary for a <see cref="ColorMaps.IColorMap"/>.
-        /// </summary>
-        double ZMax { get; set; }
+		/// <summary>
+		/// Get/Set the upper value boundary for a <see cref="ColorMaps.IColorMap"/>.
+		/// </summary>
+		double ZMax { get; set; }
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

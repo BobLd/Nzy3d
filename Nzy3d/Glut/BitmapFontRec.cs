@@ -7,6 +7,7 @@ namespace Nzy3d.Glut
 		public int first;
 
 		public BitmapCharRec[] ch;
+
 		public BitmapFontRec(string name, int num_chars, int first, BitmapCharRec[] ch)
 		{
 			this.name = name;
@@ -16,10 +17,3 @@ namespace Nzy3d.Glut
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

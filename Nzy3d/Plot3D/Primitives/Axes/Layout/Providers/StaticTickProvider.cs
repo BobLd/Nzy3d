@@ -13,7 +13,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes.Layout.Providers
 			get { return 0; }
 		}
 
-		public override float[] generateTicks(float min, float max, int steps)
+		public override float[] GenerateTicks(float min, float max, int steps)
 		{
 			return _values;
 		}

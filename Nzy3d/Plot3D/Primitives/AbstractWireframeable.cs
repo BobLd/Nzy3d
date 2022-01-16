@@ -2,19 +2,19 @@ using Nzy3d.Colors;
 
 namespace Nzy3d.Plot3D.Primitives
 {
-    /// <summary>
-    /// <para>
-    /// An <see cref="AbstractWireframeable"/> {@link AbstractWireframeable} is an <see cref=" AbstractDrawable"/>
-    /// that has a wireframe mode for display.
-    /// </para>
-    /// <para>
-    /// Defining an object as Wireframeable means this object may have a wireframe
-    /// mode status (on/off), a wireframe color, and a wireframe width.
-    /// As a consequence of being wireframeable, a 3d object may have his faces
-    /// displayed or not by setFaceDisplayed().
-    /// </para>
-    /// </summary>
-    public abstract class AbstractWireframeable : AbstractDrawable
+	/// <summary>
+	/// <para>
+	/// An <see cref="AbstractWireframeable"/> {@link AbstractWireframeable} is an <see cref=" AbstractDrawable"/>
+	/// that has a wireframe mode for display.
+	/// </para>
+	/// <para>
+	/// Defining an object as Wireframeable means this object may have a wireframe
+	/// mode status (on/off), a wireframe color, and a wireframe width.
+	/// As a consequence of being wireframeable, a 3d object may have his faces
+	/// displayed or not by setFaceDisplayed().
+	/// </para>
+	/// </summary>
+	public abstract class AbstractWireframeable : AbstractDrawable
 	{
 		internal Color _wfcolor;
 		internal float _wfwidth;
@@ -69,10 +69,3 @@ namespace Nzy3d.Plot3D.Primitives
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

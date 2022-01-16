@@ -371,6 +371,9 @@ namespace Nzy3d.Plot3D.Primitives
 			return base.ToString(0);
 		}
 
+		/// <summary>
+		/// Returns the string representation of this composite
+		/// </summary>
 		public override string ToString(int depth)
 		{
 			string output = Utils.Blanks(depth) + "(Composite3d) #elements:" + _components.Count + " | isDisplayed=" + this.Displayed;
@@ -412,10 +415,3 @@ namespace Nzy3d.Plot3D.Primitives
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

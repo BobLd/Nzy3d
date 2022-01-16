@@ -2,20 +2,14 @@ namespace Nzy3d.Glut
 {
     public class CoordRec
     {
-        public float x;
+        public float X;
 
-        public float y;
+        public float Y;
+
         public CoordRec(float x, float y)
         {
-            this.x = x;
-            this.y = y;
+            this.X = x;
+            this.Y = y;
         }
     }
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

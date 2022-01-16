@@ -21,7 +21,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		public Triangle_dt(Point_dt a, Point_dt b, Point_dt c)
 		{
 			this.A = a;
-			int res = c.pointLineTest(a, b);
+			int res = c.PointLineTest(a, b);
 			if (res <= Point_dt.LEFT || res == Point_dt.INFRONTOFA || res == Point_dt.BEHINDB)
 			{
 				this.B = b;
@@ -113,8 +113,8 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		{
 			get
 			{
-				var lowerLeft = new Point_dt(Math.Min(A.x, Math.Min(B.x, C.x)), Math.Min(A.y, Math.Min(B.y, C.y)));
-				var upperRight = new Point_dt(Math.Max(A.x, Math.Max(B.x, C.x)), Math.Max(A.y, Math.Max(B.y, C.y)));
+				var lowerLeft = new Point_dt(Math.Min(A.X, Math.Min(B.X, C.X)), Math.Min(A.Y, Math.Min(B.Y, C.Y)));
+				var upperRight = new Point_dt(Math.Max(A.X, Math.Max(B.X, C.X)), Math.Max(A.Y, Math.Max(B.Y, C.Y)));
 				return new BoundingBox(lowerLeft, upperRight);
 			}
 		}
@@ -204,9 +204,9 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 
 		public Circle_dt Circumcircle()
 		{
-			double u = ((A.x - B.x) * (A.x + B.x) + (A.y - B.y) * (A.y + B.y)) / 2.0;
-			double v = ((B.x - C.x) * (B.x + C.x) + (B.y - C.y) * (B.y + C.y)) / 2.0;
-			double den = (A.x - B.x) * (B.y - C.y) - (B.x - C.x) * (A.y - B.y);
+			double u = ((A.X - B.X) * (A.X + B.X) + (A.Y - B.Y) * (A.Y + B.Y)) / 2.0;
+			double v = ((B.X - C.X) * (B.X + C.X) + (B.Y - C.Y) * (B.Y + C.Y)) / 2.0;
+			double den = (A.X - B.X) * (B.Y - C.Y) - (B.X - C.X) * (A.Y - B.Y);
 			// oops, degenerate case
 			if (den == 0)
 			{
@@ -214,8 +214,8 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 			}
 			else
 			{
-				Point_dt cen = new Point_dt((u * (B.y - C.y) - v * (A.y - B.y)) / den, (v * (A.x - B.x) - u * (B.x - C.x)) / den);
-				_circum = new Circle_dt(cen, cen.distance2(A));
+				Point_dt cen = new Point_dt((u * (B.Y - C.Y) - v * (A.Y - B.Y)) / den, (v * (A.X - B.X) - u * (B.X - C.X)) / den);
+				_circum = new Circle_dt(cen, cen.Distance2(A));
 			}
 			return _circum;
 		}
@@ -229,7 +229,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 			}
 			// End
 
-			return _circum.Radius > _circum.Center.distance2(p);
+			return _circum.Radius > _circum.Center.Distance2(p);
 		}
 
 		/// <inheritdoc/>
@@ -262,9 +262,9 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 				return true;
 			}
 
-			int a12 = p.pointLineTest(A, B);
-			int a23 = p.pointLineTest(B, C);
-			int a31 = p.pointLineTest(C, A);
+			int a12 = p.PointLineTest(A, B);
+			int a23 = p.PointLineTest(B, C);
+			int a31 = p.PointLineTest(C, A);
 			return (a12 == Point_dt.LEFT && a23 == Point_dt.LEFT && a31 == Point_dt.LEFT)
 				|| (a12 == Point_dt.RIGHT && a23 == Point_dt.RIGHT && a31 == Point_dt.RIGHT)
 				|| (a12 == Point_dt.ONSEGMENT || a23 == Point_dt.ONSEGMENT || a31 == Point_dt.ONSEGMENT);
@@ -288,9 +288,9 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 				return false;
 			}
 
-			int a12 = p.pointLineTest(A, B);
-			int a23 = p.pointLineTest(B, C);
-			int a31 = p.pointLineTest(C, A);
+			int a12 = p.PointLineTest(A, B);
+			int a23 = p.PointLineTest(B, C);
+			int a31 = p.PointLineTest(C, A);
 			return (a12 == Point_dt.LEFT && a23 == Point_dt.LEFT && a31 == Point_dt.LEFT)
 				|| (a12 == Point_dt.RIGHT && a23 == Point_dt.RIGHT && a31 == Point_dt.RIGHT);
 		}
@@ -302,7 +302,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		/// <returns>True if the given point is a corner of this triangle.</returns>
 		public bool IsCorner(Point_dt p)
 		{
-			return (p.x == A.x && p.y == A.y) || (p.x == B.x && p.y == B.y) || (p.x == C.x && p.y == C.y);
+			return (p.X == A.X && p.Y == A.Y) || (p.X == B.X && p.Y == B.Y) || (p.X == C.X && p.Y == C.Y);
 		}
 
 		/// <summary>
@@ -323,31 +323,31 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 				throw new Exception("Cannot approximate the z value from a halfplane triangle");
 			}
 
-			if (q.x == A.x && q.y == A.y)
+			if (q.X == A.X && q.Y == A.Y)
 			{
-				return A.z;
+				return A.Z;
 			}
 
-			if (q.x == B.x && q.y == B.y)
+			if (q.X == B.X && q.Y == B.Y)
 			{
-				return B.z;
+				return B.Z;
 			}
 
-			if (q.x == C.x && q.y == C.y)
+			if (q.X == C.X && q.Y == C.Y)
 			{
-				return C.z;
+				return C.Z;
 			}
 
 			double X = 0;
-			double x0 = q.x;
-			double x1 = A.x;
-			double x2 = B.x;
-			double x3 = C.x;
+			double x0 = q.X;
+			double x1 = A.X;
+			double x2 = B.X;
+			double x3 = C.X;
 			double Y = 0;
-			double y0 = q.y;
-			double y1 = A.y;
-			double y2 = B.y;
-			double y3 = C.y;
+			double y0 = q.Y;
+			double y1 = A.Y;
+			double y2 = B.Y;
+			double y3 = C.Y;
 			double Z = 0;
 			double m01 = 0;
 			double k01 = 0;
@@ -415,7 +415,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 				r = (x2 - X) / (x2 - x3);
 			}
 
-			Z = B.z + (C.z - B.z) * r;
+			Z = B.Z + (C.Z - B.Z) * r;
 			if (flag01 == 2)
 			{
 				r = (y1 - y0) / (y1 - Y);
@@ -425,7 +425,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 				r = (x1 - x0) / (x1 - X);
 			}
 
-			double qZ = A.z + (Z - A.z) * r;
+			double qZ = A.Z + (Z - A.Z) * r;
 			return qZ;
 		}
 
@@ -449,7 +449,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		public Point_dt Z(Point_dt q)
 		{
 			double newz = ZValue(q);
-			return new Point_dt(q.x, q.y, newz);
+			return new Point_dt(q.X, q.Y, newz);
 		}
 
 		public Point_dt A { get; set; }

@@ -6,6 +6,7 @@ namespace Nzy3d.Plot3D.Rendering.Ordering
 	/// </summary>
 	public class DefaultOrderingStrategy : AbstractOrderingStrategy
 	{
+		/// <inheritdoc/>
 		public override int Compare(Primitives.AbstractDrawable d1, Primitives.AbstractDrawable d2)
 		{
 			return 0;
@@ -19,10 +20,3 @@ namespace Nzy3d.Plot3D.Rendering.Ordering
 		//
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

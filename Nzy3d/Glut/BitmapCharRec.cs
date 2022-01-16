@@ -9,6 +9,7 @@ namespace Nzy3d.Glut
 		public float advance;
 
 		public byte[] bitmap;
+
 		public BitmapCharRec(int width, int height, float xorig, float yorig, float advance, byte[] bitmap)
 		{
 			this.width = width;
@@ -20,10 +21,3 @@ namespace Nzy3d.Glut
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

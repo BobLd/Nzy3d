@@ -5,14 +5,9 @@ namespace Nzy3d.Plot3D.Primitives.Graphs.Layout
 	public interface IGraphLayout2d<V>
 	{
 		Coord2d VertexPosition { get; set; }
-		Coord2d getV(V v);
-		List<Coord2d> values();
+
+		Coord2d GetV(V v);
+
+		List<Coord2d> Values();
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

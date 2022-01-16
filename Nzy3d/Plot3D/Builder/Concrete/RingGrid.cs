@@ -17,13 +17,13 @@ namespace Nzy3d.Plot3D.Builder.Concrete
 
 		public override List<Coord3d> Apply(Mapper mapper)
 		{
-			double xstep = xrange.Range / xsteps;
-			double ystep = yrange.Range / ysteps;
+			double xstep = XRange.Range / XSteps;
+			double ystep = YRange.Range / YSteps;
 			var output = new List<Coord3d>();
 
-			for (int xi = -(xsteps - 1) / 2; xi <= (xsteps - 1) / 2; xi++)
+			for (int xi = -(XSteps - 1) / 2; xi <= (XSteps - 1) / 2; xi++)
 			{
-				for (int yi = -(ysteps - 1) / 2; yi <= (ysteps - 1) / 2; yi++)
+				for (int yi = -(YSteps - 1) / 2; yi <= (YSteps - 1) / 2; yi++)
 				{
 					double x = xi * xstep;
 					double y = yi * ystep;

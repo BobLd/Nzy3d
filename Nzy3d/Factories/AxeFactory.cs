@@ -8,9 +8,10 @@ namespace Nzy3d.Factories
 	{
 		public static object GetInstance(BoundingBox3d box, View view)
 		{
-			var axe = new AxeBox(box);
-			axe.View = view;
-			return axe;
+            return new AxeBox(box)
+            {
+                View = view
+            };
 		}
 	}
 }

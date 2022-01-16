@@ -49,12 +49,12 @@ namespace Nzy3d.Tests.Plot3D.Builder.Delaunay.Jdt
             var triangle = new Triangle_dt(new Point_dt(0.0, 0.0),
                                            new Point_dt(1.0, 0.0),
                                            new Point_dt(0.0, 1.0));
-            Assert.Equal(p0, triangle.A.x);
-            Assert.Equal(p1, triangle.A.y);
-            Assert.Equal(p2, triangle.B.x);
-            Assert.Equal(p3, triangle.B.y);
-            Assert.Equal(p4, triangle.C.x);
-            Assert.Equal(p5, triangle.C.y);
+            Assert.Equal(p0, triangle.A.X);
+            Assert.Equal(p1, triangle.A.Y);
+            Assert.Equal(p2, triangle.B.X);
+            Assert.Equal(p3, triangle.B.Y);
+            Assert.Equal(p4, triangle.C.X);
+            Assert.Equal(p5, triangle.C.Y);
         }
 
         [Fact]
@@ -71,12 +71,12 @@ namespace Nzy3d.Tests.Plot3D.Builder.Delaunay.Jdt
             var triangle = new Triangle_dt(new Point_dt(0.0, 0.0),
                                            new Point_dt(0.0, 1.0),
                                            new Point_dt(1.0, 0.0));
-            Assert.Equal(p0, triangle.A.x);
-            Assert.Equal(p1, triangle.A.y);
-            Assert.Equal(p2, triangle.B.x);
-            Assert.Equal(p3, triangle.B.y);
-            Assert.Equal(p4, triangle.C.x);
-            Assert.Equal(p5, triangle.C.y);
+            Assert.Equal(p0, triangle.A.X);
+            Assert.Equal(p1, triangle.A.Y);
+            Assert.Equal(p2, triangle.B.X);
+            Assert.Equal(p3, triangle.B.Y);
+            Assert.Equal(p4, triangle.C.X);
+            Assert.Equal(p5, triangle.C.Y);
         }
 
         [Fact]

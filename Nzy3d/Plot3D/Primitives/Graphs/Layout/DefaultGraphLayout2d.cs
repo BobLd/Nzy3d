@@ -3,8 +3,8 @@ using Nzy3d.Maths;
 namespace Nzy3d.Plot3D.Primitives.Graphs.Layout
 {
     public class DefaultGraphLayout2d<V> : IGraphLayout2d<V>
-	{
-        private readonly List<Tuple<V, Coord2d>> _values = new List<Tuple<V,Coord2d>>();
+    {
+        private readonly List<Tuple<V, Coord2d>> _values = new List<Tuple<V, Coord2d>>();
 
         /*
 		public Maths.Coord2d getV(V v)
@@ -30,21 +30,14 @@ namespace Nzy3d.Plot3D.Primitives.Graphs.Layout
             }
         }
 
-        public Coord2d getV(V v)
+        public Coord2d GetV(V v)
         {
             throw new NotImplementedException();
         }
 
-        public List<Coord2d> values()
+        public List<Coord2d> Values()
         {
             throw new NotImplementedException();
         }
     }
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

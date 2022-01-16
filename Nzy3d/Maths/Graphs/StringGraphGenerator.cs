@@ -8,14 +8,14 @@ namespace Nzy3d.Maths.Graphs
 
 			for (int i = 0; i <= nodes - 1; i++)
 			{
-				graph.addVertex("vertex " + i);
+				graph.AddVertex("vertex " + i);
 			}
 
 			for (int i = 0; i <= edges - 1; i++)
 			{
-				string v1 = graph.getRandomVertex();
-				string v2 = graph.getRandomVertex();
-				graph.addEdge("edge " + v1 + v2, v1, v2);
+				string v1 = graph.GetRandomVertex();
+				string v2 = graph.GetRandomVertex();
+				graph.AddEdge("edge " + v1 + v2, v1, v2);
 			}
 			return graph;
 		}

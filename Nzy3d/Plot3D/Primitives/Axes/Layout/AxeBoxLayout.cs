@@ -4,7 +4,7 @@ using Nzy3d.Plot3D.Primitives.Axes.Layout.Renderers;
 
 namespace Nzy3d.Plot3D.Primitives.Axes.Layout
 {
-    public class AxeBoxLayout : IAxeLayout
+	public class AxeBoxLayout : IAxeLayout
 	{
 		internal string _xAxeLabel;
 		internal string _yAxeLabel;
@@ -39,6 +39,7 @@ namespace Nzy3d.Plot3D.Primitives.Axes.Layout
 		internal float _lastZmax = float.NaN;
 
 		internal Color _mainColor;
+
 		public AxeBoxLayout()
 		{
 			XAxeLabel = "X";
@@ -277,10 +278,3 @@ namespace Nzy3d.Plot3D.Primitives.Axes.Layout
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================
