@@ -17,7 +17,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 			_triangulator = triangulator;
 			this.X = cv.GetX();
 			this.Y = cv.GetY();
-			this.Z_as_fxy = cv.Get_Z_as_fxy();
+			this.Z_as_fxy = cv.GetZAsFxy();
 		}
 
 		public AbstractDrawable BuildDrawable()

@@ -6,7 +6,7 @@ namespace Nzy3d.Maths
 	/// multiply and divises coordinate values, as well as computing the distance between
 	/// two points, and converting polar and cartesian coordinates.
 	/// </summary>
-	public class Coord3d
+	public sealed class Coord3d
 	{
 		#region "Members"
 		public double X;

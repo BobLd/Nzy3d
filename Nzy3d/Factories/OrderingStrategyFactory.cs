@@ -9,6 +9,6 @@ namespace Nzy3d.Factories
 			return DEFAULTORDERING;
 		}
 
-		public static BarycentreOrderingStrategy DEFAULTORDERING = new BarycentreOrderingStrategy();
+		public static readonly BarycentreOrderingStrategy DEFAULTORDERING = new BarycentreOrderingStrategy();
 	}
 }

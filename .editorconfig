@@ -2,3 +2,6 @@
 
 # IDE0090: Use 'new(...)'
 csharp_style_implicit_object_creation_when_type_is_apparent = false
+
+# RCS1123: Add parentheses when necessary.
+dotnet_diagnostic.RCS1123.severity = none

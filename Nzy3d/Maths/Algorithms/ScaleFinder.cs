@@ -6,16 +6,16 @@ namespace Nzy3d.Maths.Algorithms
 		/// Apply an outlier remover on input data (<see cref="OutlierRemover.GetInlierValues"/>)
 		/// and retrieve the min and max values of the non-rejected values.
 		/// </summary>
-		public static Scale getFilteredScale(double[] values, int nvariance)
+		public static Scale GetFilteredScale(double[] values, int nvariance)
 		{
-			return getMinMaxScale(OutlierRemover.GetInlierValues(values, nvariance));
+			return GetMinMaxScale(OutlierRemover.GetInlierValues(values, nvariance));
 		}
 
 		/// <summary>
 		/// Simply returns the min and max values of the input array into
 		/// a Scale object.
 		/// </summary>
-		public static Scale getMinMaxScale(double[] values)
+		public static Scale GetMinMaxScale(double[] values)
 		{
 			if (values.Length == 0)
 			{
@@ -26,10 +26,3 @@ namespace Nzy3d.Maths.Algorithms
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

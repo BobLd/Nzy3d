@@ -1,8 +1,9 @@
 namespace Nzy3d.Glut
 {
-	public class GLUTStrokeRoman
+#pragma warning disable RCS1018 // Add accessibility modifiers (or vice versa).
+	internal sealed class GLUTStrokeRoman
 	{
-		static readonly CoordRec[] char33_stroke0 = {
+        static readonly CoordRec[] char33_stroke0 = {
 			new CoordRec(13.3819F, 100F),
 			new CoordRec(13.3819F, 33.3333F)
 		};
@@ -2143,4 +2144,5 @@ namespace Nzy3d.Glut
 
 		public static readonly StrokeFontRec glutStrokeRoman = new StrokeFontRec("Roman", 128, chars, 119.048f, -33.3333f);
 	}
+#pragma warning restore RCS1018 // Add accessibility modifiers (or vice versa).
 }

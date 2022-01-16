@@ -4,7 +4,7 @@ namespace Nzy3d.Maths
 	/// An Angle3d stores three 3d points, considering the angle is on the second one.
 	/// An instance may return angle(), cos() and sin().
 	/// </summary>
-	public class Angle3d
+	public sealed class Angle3d
 	{
 		#region "Members"
 		private readonly double X1;

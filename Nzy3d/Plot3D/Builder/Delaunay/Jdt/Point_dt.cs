@@ -5,15 +5,15 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 	/// <summary>
 	/// This class represents a 3D point, with some simple geometric methods (pointLineTest).
 	/// </summary>
-	public class Point_dt
+	public sealed class Point_dt
 	{
 		public const int ONSEGMENT = 0;
 		public const int LEFT = 1;
 		public const int RIGHT = 2;
 		public const int INFRONTOFA = 3;
 		public const int BEHINDB = 4;
-
 		public const int ISERROR = 5;
+
 		/// <summary>
 		/// Default Constructor. Constructs a 3D point at (0,0,0).
 		/// </summary>
@@ -51,12 +51,24 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		{
 		}
 
+		/// <summary>
+		/// X coordinate.
+		/// </summary>
 		public double X { get; set; }
 
+		/// <summary>
+		/// Y coordinate.
+		/// </summary>
 		public double Y { get; set; }
 
+		/// <summary>
+		/// Z coordinate.
+		/// </summary>
 		public double Z { get; set; }
 
+		/// <summary>
+		/// (X, Y, Z) point.
+		/// </summary>
 		public Coord3d Coord3d
 		{
 			get { return new Coord3d(X, Y, Z); }
@@ -82,6 +94,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 			return X > p.X || (X == p.X && Y > p.Y);
 		}
 
+		/// <inheritdoc/>
 		public override string ToString()
 		{
 			return "(Point_dt) [" + X + "," + Y + "," + Z + "]";
@@ -203,9 +216,10 @@ namespace Nzy3d.Plot3D.Builder.Delaunay.Jdt
 		}
 	}
 
-	public class Point_dt_Compare
+	internal class Point_dt_Compare
 	{
-		private int m_flag;
+		private readonly int m_flag;
+
 		public Point_dt_Compare(int flag)
 		{
 			m_flag = flag;

@@ -1,8 +1,8 @@
 namespace Nzy3d.Plot3D.Primitives
 {
 	/// <summary>
-	/// Allows building custom shapes defined by an {@link ArrayList} of {@link Polygon}s.
-	/// Such {@link ArrayList} must be defined by the user.
+	/// Allows building custom shapes defined by an <see cref="System.Collections.IEnumerable"/> of <see cref="Polygon"/>s.
+	/// Such <see cref="System.Collections.IEnumerable"/> must be defined by the user.
 	/// </summary>
 	public class Shape : AbstractComposite
 	{
@@ -10,7 +10,7 @@ namespace Nzy3d.Plot3D.Primitives
 		{
 		}
 
-		public Shape(List<Polygon> polygons) : base()
+		public Shape(IEnumerable<Polygon> polygons) : base()
 		{
 			this.Add(polygons);
 		}

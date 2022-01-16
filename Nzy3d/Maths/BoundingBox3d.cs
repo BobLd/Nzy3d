@@ -9,7 +9,7 @@ namespace Nzy3d.Maths
 	/// BoundingBox3d (that is equivalent to computing the union of the
 	/// current BoundingBox and another one).
 	/// </summary>
-	public class BoundingBox3d
+	public sealed class BoundingBox3d
 	{
 		/// <summary>
 		/// Initialize a BoundingBox by calling its reset method.

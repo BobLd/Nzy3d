@@ -4,7 +4,7 @@ namespace Nzy3d.Maths
 	/// A simple utility class for storing a list of x, y, and z coordinates as
 	/// arrays of float values.
 	/// </summary>
-	public class Coordinates
+	public sealed class Coordinates
 	{
         public Coordinates(float[] xi, float[] yi, float[] zi)
 		{

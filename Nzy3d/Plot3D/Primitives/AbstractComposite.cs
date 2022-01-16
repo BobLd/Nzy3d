@@ -24,7 +24,7 @@ namespace Nzy3d.Plot3D.Primitives
 		}
 
 		/// <summary>
-		/// Remove all drawables stored by this composite.
+		/// Add drawables stored by this composite.
 		/// </summary>
 		public void Add(List<AbstractDrawable> drawables)
 		{
@@ -32,7 +32,7 @@ namespace Nzy3d.Plot3D.Primitives
 		}
 
 		/// <summary>
-		/// Remove all drawables stored by this composite.
+		/// Add drawables stored by this composite.
 		/// </summary>
 		public void Add(IEnumerable<AbstractDrawable> drawables)
 		{

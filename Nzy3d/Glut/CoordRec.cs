@@ -1,6 +1,6 @@
 namespace Nzy3d.Glut
 {
-    public class CoordRec
+    internal sealed class CoordRec
     {
         public float X;
 

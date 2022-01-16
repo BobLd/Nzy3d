@@ -1,6 +1,6 @@
 namespace Nzy3d.Maths
 {
-	public class TicToc
+	public sealed class TicToc
 	{
 		internal DateTime tstart;
 		internal DateTime tstop;

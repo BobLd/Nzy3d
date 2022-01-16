@@ -1,10 +1,10 @@
 namespace Nzy3d.Glut
 {
-	public class GLUTBitmapTimesRoman24
+#pragma warning disable RCS1018 // Add accessibility modifiers (or vice versa).
+	internal sealed class GLUTBitmapTimesRoman24
 	{
-		// char: 0xff */
-
-		static readonly byte[] ch255data = {
+        // char: 0xff */
+        static readonly byte[] ch255data = {
 			0xe0,
 			0x0,
 			0xf0,
@@ -6987,4 +6987,5 @@ namespace Nzy3d.Glut
 
 		public static readonly BitmapFontRec glutBitmapTimesRoman24 = new BitmapFontRec("-adobe-times-medium-r-normal--24-240-75-75-p-124-iso8859-1", 224, 32, chars);
 	}
+#pragma warning restore RCS1018 // Add accessibility modifiers (or vice versa).
 }

@@ -1,6 +1,6 @@
 namespace Nzy3d.Glut
 {
-    public class StrokeCharRec
+	internal sealed class StrokeCharRec
 	{
 		public int num_strokes;
 		public StrokeRec[] stroke;
@@ -17,10 +17,3 @@ namespace Nzy3d.Glut
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

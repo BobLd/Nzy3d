@@ -97,7 +97,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 		/// </summary>
 		/// <param name="data">Input array</param>
 		/// <returns>A sorted array containing only one occurrence of each input value, without NaN</returns>
-		internal float[] MakeCoordinatesUnique(float[] data)
+		internal static float[] MakeCoordinatesUnique(float[] data)
 		{
 			float[] copy = (float[])data.Clone();
 			System.Array.Sort(copy);
@@ -137,21 +137,25 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 			return result;
 		}
 
-		public float[,] Get_Z_as_fxy()
+		/// <inheritdoc/>
+		public float[,] GetZAsFxy()
 		{
 			return this._z_as_fxy;
 		}
 
+		/// <inheritdoc/>
 		public float[] GetX()
 		{
 			return this._y;
 		}
 
+		/// <inheritdoc/>
 		public float[] GetY()
 		{
 			return this._y;
 		}
 
+		/// <inheritdoc/>
 		public float[] GetZ()
 		{
 			return this._z;

@@ -1,6 +1,6 @@
 namespace Nzy3d.Maths
 {
-	public class Pair<X, Y>
+	public sealed class Pair<X, Y>
 	{
 		public X A;
 

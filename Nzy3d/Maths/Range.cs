@@ -1,6 +1,6 @@
 namespace Nzy3d.Maths
 {
-	public class Range : Scale
+	public sealed class Range : Scale
 	{
 		public Range(double min, double max)
 			: base(min, max)

@@ -1,6 +1,6 @@
 namespace Nzy3d.Glut
 {
-	public class BitmapFontRec
+	internal sealed class BitmapFontRec
 	{
 		public string name;
 		public int num_chars;

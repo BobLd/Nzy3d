@@ -1,10 +1,11 @@
 namespace Nzy3d.Glut
 {
-	public class GLUTBitmap8x13
+#pragma warning disable RCS1018 // Add accessibility modifiers (or vice versa).
+	internal sealed class GLUTBitmap8x13
 	{
-		static readonly BitmapCharRec ch0 = new BitmapCharRec(0, 0, 0, 0, 8, null);
+        static readonly BitmapCharRec ch0 = new BitmapCharRec(0, 0, 0, 0, 8, null);
 
-		static readonly BitmapCharRec ch32 = new BitmapCharRec(0, 0, 0, 0, 8, null);
+        static readonly BitmapCharRec ch32 = new BitmapCharRec(0, 0, 0, 0, 8, null);
 
 		static readonly BitmapCharRec ch127 = new BitmapCharRec(0, 0, 0, 0, 8, null);
 
@@ -3340,4 +3341,5 @@ namespace Nzy3d.Glut
 
 		public static readonly BitmapFontRec glutBitmap8By13 = new BitmapFontRec("-misc-fixed-medium-r-normal--13-120-75-75-C-80-iso8859-1", 256, 0, chars);
 	}
+#pragma warning restore RCS1018 // Add accessibility modifiers (or vice versa).
 }

@@ -1,6 +1,6 @@
 namespace Nzy3d.Glut
 {
-	public class BitmapCharRec
+	internal sealed class BitmapCharRec
 	{
 		public int width;
 		public int height;

@@ -1,6 +1,6 @@
 namespace Nzy3d.Maths
 {
-	public class Normal
+	public sealed class Normal
 	{
 		public static Coord3d Compute(Coord3d p0, Coord3d p1, Coord3d p2)
 		{

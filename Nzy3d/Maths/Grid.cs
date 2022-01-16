@@ -1,6 +1,6 @@
 namespace Nzy3d.Maths
 {
-	public class Grid
+	public sealed class Grid
 	{
 		private double[] m_x;
 		private double[] m_y;

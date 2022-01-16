@@ -1,10 +1,10 @@
 namespace Nzy3d.Glut
 {
-	public class GLUTBitmapHelvetica12
+#pragma warning disable RCS1018 // Add accessibility modifiers (or vice versa).
+	internal sealed class GLUTBitmapHelvetica12
 	{
-		// char: 0xff */
-
-		static readonly byte[] ch255data = {
+        // char: 0xff */
+        static readonly byte[] ch255data = {
 			0xc0,
 			0x20,
 			0x20,
@@ -3104,4 +3104,5 @@ namespace Nzy3d.Glut
 		};
 		public static readonly BitmapFontRec glutBitmapHelvetica12 = new BitmapFontRec("-adobe-helvetica-medium-r-normal--12-120-75-75-p-67-iso8859-1", 224, 32, chars);
 	}
+#pragma warning restore RCS1018 // Add accessibility modifiers (or vice versa).
 }

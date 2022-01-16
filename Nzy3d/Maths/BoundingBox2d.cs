@@ -7,7 +7,7 @@ namespace Nzy3d.Maths
 	/// BoundingBox2d (that is equivalent to computing the union of the
 	/// current BoundingBox and another one).
 	/// </summary>
-	public class BoundingBox2d
+	public sealed class BoundingBox2d
 	{
 		private double m_minx;
 		private double m_maxx;

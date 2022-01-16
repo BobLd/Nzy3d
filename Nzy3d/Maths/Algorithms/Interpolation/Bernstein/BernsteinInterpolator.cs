@@ -1,6 +1,6 @@
 namespace Nzy3d.Maths.Algorithms.Interpolation.Bernstein
 {
-	public class BernsteinInterpolator : IInterpolator
+	public sealed class BernsteinInterpolator : IInterpolator
 	{
 		public List<Coord3d> Interpolate(List<Coord3d> controlpoints, int resolution)
 		{

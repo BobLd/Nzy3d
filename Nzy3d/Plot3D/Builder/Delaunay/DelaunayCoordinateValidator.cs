@@ -56,7 +56,7 @@ namespace Nzy3d.Plot3D.Builder.Delaunay
 			return z_as_fxy;
 		}
 
-		public float[,] Get_Z_as_fxy()
+		public float[,] GetZAsFxy()
 		{
 			return _z_as_fxy;
 		}

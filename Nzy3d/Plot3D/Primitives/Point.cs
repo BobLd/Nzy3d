@@ -24,7 +24,7 @@ namespace Nzy3d.Plot3D.Primitives
 	/// </ul>
 	/// @author Martin Pernollet
 	/// </summary>
-	public class Point : AbstractDrawable, ISingleColorable, ISortableDraw
+	public sealed class Point : AbstractDrawable, ISingleColorable, ISortableDraw
 	{
 		internal Coord3d _xyz;
 		internal Color _rgb;

@@ -4,7 +4,7 @@ namespace Nzy3d.Maths.Algorithms.Interpolation.Bernstein
 	/// Helper class for the spline3d classes in this namespace. Used to compute
 	/// subdivision points of the curve.
 	/// </summary>
-	public class BernsteinPolynomial
+	public sealed class BernsteinPolynomial
 	{
 		public double[] b0;
 		public double[] b1;

@@ -21,7 +21,7 @@ namespace Nzy3d.Maths.Algorithms.Interpolation.Bernstein
 	/// Version 0014 Added user adjustable curve tightness control
 	/// Version 0015 Added JAXB annotations and List support for dynamic building of spline
 	/// </remarks>
-	public class Spline3D
+	public sealed class Spline3D
 	{
 		public const double DEFAULT_TIGHTNESS = 0.25;
 		public List<Coord3d> MPointList;

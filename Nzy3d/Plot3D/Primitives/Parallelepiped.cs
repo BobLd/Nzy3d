@@ -16,7 +16,7 @@ namespace Nzy3d.Plot3D.Primitives
     /// </para>
     /// <para>@author Martin Pernollet</para>
     /// </summary>
-    public class Parallelepiped : AbstractWireframeable, ISingleColorable, IMultiColorable
+    public sealed class Parallelepiped : AbstractWireframeable, ISingleColorable, IMultiColorable
 	{
 		private ColorMapper _mapper;
 		private List<Polygon> _quads;

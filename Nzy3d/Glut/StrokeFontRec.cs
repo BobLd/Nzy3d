@@ -1,6 +1,6 @@
 namespace Nzy3d.Glut
 {
-	public class StrokeFontRec
+	internal sealed class StrokeFontRec
 	{
 		public string name;
 		public int num_chars;
@@ -18,10 +18,3 @@ namespace Nzy3d.Glut
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

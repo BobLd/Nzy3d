@@ -1,6 +1,6 @@
 namespace Nzy3d.Glut
 {
-	public class StrokeRec
+	internal sealed class StrokeRec
 	{
 		public int num_coords;
 
@@ -13,10 +13,3 @@ namespace Nzy3d.Glut
 		}
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================

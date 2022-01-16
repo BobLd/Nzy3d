@@ -5,7 +5,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Nzy3d.Plot3D.Primitives
 {
-	public class Polygon : AbstractWireframeable, ISingleColorable, IMultiColorable
+	public sealed class Polygon : AbstractWireframeable, ISingleColorable, IMultiColorable
 	{
 		public enum PolygonMode
 		{

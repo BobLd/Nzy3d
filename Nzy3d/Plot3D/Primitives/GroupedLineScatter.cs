@@ -169,9 +169,9 @@ namespace Nzy3d.Plot3D.Primitives
             }
         }
 
-        private float PointWidth { get; set; }
+        private float PointWidth { get; }
 
-        private float LineWidth { get; set; }
+        private float LineWidth { get; }
 
         public Color Color { get; set; }
     }

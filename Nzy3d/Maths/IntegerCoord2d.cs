@@ -1,6 +1,6 @@
 namespace Nzy3d.Maths
 {
-	public class IntegerCoord2d
+	public sealed class IntegerCoord2d
 	{
 		public int X;
 
@@ -12,10 +12,10 @@ namespace Nzy3d.Maths
 			Y = 0;
 		}
 
-		public IntegerCoord2d(int xx, int yy)
+		public IntegerCoord2d(int x, int y)
 		{
-			X = xx;
-			Y = yy;
+			X = x;
+			Y = y;
 		}
 
 		/// <inheritdoc/>
