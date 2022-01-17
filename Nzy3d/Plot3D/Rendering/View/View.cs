@@ -12,7 +12,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 {
 	public class View
 	{
-		public static float STRETCH_RATIO = 0.25f;
+		public static double STRETCH_RATIO = 0.25;
 
 		// force to have all object maintained in screen, meaning axebox won't always keep the same size.
 		internal bool MAINTAIN_ALL_OBJECTS_IN_VIEW = false;
@@ -51,8 +51,8 @@ namespace Nzy3d.Plot3D.Rendering.View
 		internal List<IViewPointChangedListener> _viewPointChangedListeners;
 		internal List<IViewIsVerticalEventListener> _viewOnTopListeners;
 		internal bool _wasOnTopAtLastRendering;
-		static internal float PI_div2 = Convert.ToSingle(Math.PI / 2);
-		public static Coord3d DEFAULT_VIEW = new Coord3d(Math.PI / 3, Math.PI / 3, 2000);
+		internal const double PI_div2 = Math.PI / 2;
+		public static readonly Coord3d DEFAULT_VIEW = new Coord3d(Math.PI / 3, Math.PI / 3, 2000);
 		internal bool _dimensionDirty = false;
 		internal bool _viewDirty = false;
 
@@ -103,7 +103,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 		}
 
 		/// <summary>
-		/// Projects the 2D mouse coordinates into the 3D chart, using the 0 as Z value.
+		/// Projects the 2D mouse coordinates into the 3D chart, using 0 as Z value.
 		/// </summary>
 		/// <param name="x">The mouse X coordinate.</param>
 		/// <param name="y">The mouse Y coordinate.</param>
@@ -148,22 +148,15 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 			if (!GL.GetBoolean(GetPName.DepthTest))
 			{
-				throw new ArgumentException("Quality should allow for DepthTest in order to get ProjectMouseDepth().", nameof(_quality));
+				throw new InvalidOperationException("Quality should allow for DepthTest (i.e. depth buffer should be activated) in order to get ProjectMouseDepth(). COnsider using GL.Enable(EnableCap.DepthTest).");
 			}
 
 			float depth = 0;
 			GL.ReadPixels(x, y, 1, 1, PixelFormat.DepthComponent, PixelType.Float, ref depth);
 
-			var proj = _cam.ScreenToModel(new Coord3d(x, y, depth));
+			//if (depth >= 1) return null;
 
-			var layout = this.Axe.Layout;
-			var X = layout.XTickRenderer.Format(proj.X);
-			var Y = layout.YTickRenderer.Format(proj.Y);
-			var Z = layout.ZTickRenderer.Format(proj.Z);
-
-			System.Diagnostics.Trace.WriteLine($"Renderer3D.OnMouseMove: Location=(X={x}, Y={y}, Z={depth:0.000000}) - Projection=(X={X}, Y={Y}, Z={Z})");
-
-			return proj;
+			return _cam.ScreenToModel(new Coord3d(x, y, depth));
 		}
 
 		#region "GENERAL DISPLAY CONTROLS"
@@ -793,29 +786,29 @@ namespace Nzy3d.Plot3D.Rendering.View
 			}
 
 			// Compute factors
-			float xLen = (float)(bounds.XMax - bounds.XMin);
-			float yLen = (float)(bounds.YMax - bounds.YMin);
-			float zLen = (float)(bounds.ZMax - bounds.ZMin);
-			float lmax = Math.Max(Math.Max(xLen, yLen), zLen);
-			if (float.IsInfinity(xLen) || float.IsNaN(xLen) || xLen == 0)
+			double xLen = (bounds.XMax - bounds.XMin);
+			double yLen = (bounds.YMax - bounds.YMin);
+			double zLen = (bounds.ZMax - bounds.ZMin);
+			double lmax = Math.Max(Math.Max(xLen, yLen), zLen);
+			if (double.IsInfinity(xLen) || double.IsNaN(xLen) || xLen == 0)
 			{
 				xLen = 1;
 				// throw new ArithmeticException("x scale is infinite, nan or 0");
 			}
 
-			if (float.IsInfinity(yLen) || float.IsNaN(yLen) || yLen == 0)
+			if (double.IsInfinity(yLen) || double.IsNaN(yLen) || yLen == 0)
 			{
 				yLen = 1;
 				// throw new ArithmeticException("y scale is infinite, nan or 0");
 			}
 
-			if (float.IsInfinity(zLen) || float.IsNaN(zLen) || zLen == 0)
+			if (double.IsInfinity(zLen) || double.IsNaN(zLen) || zLen == 0)
 			{
 				zLen = 1;
 				// throw new ArithmeticException("z scale is infinite, nan or 0");
 			}
 
-			if (float.IsInfinity(lmax) || float.IsNaN(lmax) || lmax == 0)
+			if (double.IsInfinity(lmax) || double.IsNaN(lmax) || lmax == 0)
 			{
 				lmax = 1;
 				// throw new ArithmeticException("lmax is infinite, nan or 0");
@@ -846,7 +839,6 @@ namespace Nzy3d.Plot3D.Rendering.View
 			{
 				GL.Enable(EnableCap.DepthTest);
 				GL.DepthFunc(DepthFunction.Lequal);
-				GL.DepthMask(true);
 			}
 			else
 			{
@@ -910,13 +902,17 @@ namespace Nzy3d.Plot3D.Rendering.View
 			Scene.LightSet.Enable();
 		}
 
-		// Clear color and depth buffer (same as ClearColorAndDepth)
+		/// <summary>
+		/// Clear color and depth buffer (same as <see cref="ClearColorAndDepth"/>).
+		/// </summary>
 		public void Clear()
 		{
 			ClearColorAndDepth();
 		}
 
-		// Clear color and depth buffer (same as Clear)
+		/// <summary>
+		/// Clear color and depth buffer (same as Clear).
+		/// </summary>
 		public void ClearColorAndDepth()
 		{
 			GL.ClearColor((float)_bgColor.R, (float)_bgColor.G, (float)_bgColor.B, (float)_bgColor.A);
@@ -968,12 +964,8 @@ namespace Nzy3d.Plot3D.Rendering.View
 			UpdateCamera(viewport, ComputeScaling());
 			RenderAxeBox();
 			RenderSceneGraph();
-
-			//if (DISPLAY_AXE_WHOLE_BOUNDS)
-			{
-				// Render last
-				RenderMousePointer();
-			}
+			// Render last
+			RenderMousePointer();
 		}
 
 		public void UpdateQuality()
@@ -997,7 +989,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 			}
 			else
 			{
-				_scaling = (Coord3d)Coord3d.IDENTITY.Clone();
+				_scaling = Coord3d.IDENTITY.Clone();
 			}
 
 			// Compute the bounds for computing cam distance, clipping planes, etc ...
@@ -1017,10 +1009,10 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 		public void UpdateCamera(ViewPort viewport, BoundingBox3d boundsScaled)
 		{
-			UpdateCamera(viewport, boundsScaled, (float)boundsScaled.GetRadius());
+			UpdateCamera(viewport, boundsScaled, boundsScaled.GetRadius());
 		}
 
-		public void UpdateCamera(ViewPort viewport, BoundingBox3d boundsScaled, float sceneRadiusScaled)
+		public void UpdateCamera(ViewPort viewport, BoundingBox3d boundsScaled, double sceneRadiusScaled)
 		{
 			Coord3d target = _center.Multiply(_scaling);
 			_viewpoint.Z = sceneRadiusScaled * 2;
@@ -1032,6 +1024,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 				case ViewPositionMode.FREE:
 					eye = _viewpoint.Cartesian().Add(target);
 					break;
+
 				case ViewPositionMode.TOP:
 					eye = _viewpoint;
 					eye.X = -PI_div2;
@@ -1040,11 +1033,13 @@ namespace Nzy3d.Plot3D.Rendering.View
 					// on top
 					eye = eye.Cartesian().Add(target);
 					break;
+
 				case ViewPositionMode.PROFILE:
 					eye = _viewpoint;
 					eye.Y = 0;
 					eye = eye.Cartesian().Add(target);
 					break;
+
 				default:
 					throw new Exception("Unsupported viewmode : " + _viewmode);
 			}
@@ -1097,7 +1092,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 				}
 				else
 				{
-					_cam.RenderingSphereRadius = (float)(Math.Max(boundsScaled.XMax - boundsScaled.XMin, boundsScaled.YMax - boundsScaled.YMin) / 2);
+					_cam.RenderingSphereRadius = Math.Max(boundsScaled.XMax - boundsScaled.XMin, boundsScaled.YMax - boundsScaled.YMin) / 2;
 				}
 			}
 			else
@@ -1131,8 +1126,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 				// for debug
 				if (DISPLAY_AXE_WHOLE_BOUNDS)
 				{
-					//var abox = (AxeBox)_axe;
-					BoundingBox3d box = _axe.GetWholeBounds();
+					var box = _axe.GetWholeBounds();
 					var p = new Parallelepiped(box)
 					{
 						FaceDisplayed = false,
@@ -1272,16 +1266,16 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 			if (_viewmode == ViewPositionMode.TOP)
 			{
-				float radius = (float)Math.Max(newBounds.XMax - newBounds.XMin, newBounds.YMax - newBounds.YMin);
+				double radius = Math.Max(newBounds.XMax - newBounds.XMin, newBounds.YMax - newBounds.YMin);
 				radius += radius * STRETCH_RATIO;
 				_cam.RenderingSphereRadius = radius;
 			}
 			else
 			{
-				_cam.RenderingSphereRadius = (float)newBounds.GetRadius();
 				Coord3d target = newBounds.GetCenter();
 				_cam.Target = target;
 				_cam.Eye = _viewpoint.Cartesian().Add(target);
+				_cam.RenderingSphereRadius = newBounds.GetRadius();
 			}
 		}
 		#endregion

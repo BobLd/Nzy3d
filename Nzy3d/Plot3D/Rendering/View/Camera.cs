@@ -26,9 +26,9 @@ namespace Nzy3d.Plot3D.Rendering.View
 		internal Coord3d _eye;
 		internal Coord3d _target;
 		internal Coord3d _up;
-		internal float _radius;
-		internal float _near;
-		internal float _far;
+		internal double _radius;
+		internal double _near;
+		internal double _far;
 
 		internal bool _failOnException;
 
@@ -75,19 +75,19 @@ namespace Nzy3d.Plot3D.Rendering.View
 		/// When the radius is set, as a side effect, the "far" clipping plane is modified according to the eye-target distance, as well as
 		/// the position of the "near" clipping plane.
 		/// </summary>
-		public float RenderingSphereRadius
+		public double RenderingSphereRadius
 		{
 			get { return _radius; }
 			set
 			{
 				_radius = value;
-				// Set the 'Near' lower bound to 0.01 to avoid issue in perspective mode
-				_near = Math.Max((float)_eye.Distance(_target) - _radius * 2, 0.1f);
-				_far = (float)_eye.Distance(_target) + _radius * 2;
+				// Set the 'Near' lower bound to 0.1 to avoid issue in perspective mode
+				_near = Math.Max(_eye.Distance(_target) - _radius * 2, 0.1);
+				_far = _eye.Distance(_target) + _radius * 2;
 			}
 		}
 
-		public void SetRenderingDepth(float near, float far)
+		public void SetRenderingDepth(double near, double far)
 		{
 			_near = near;
 			_far = far;
@@ -96,7 +96,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 		/// <summary>
 		/// Return the position of the "near" clipping plane
 		/// </summary>
-		public float Near
+		public double Near
 		{
 			get { return _near; }
 		}
@@ -104,7 +104,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 		/// <summary>
 		/// Return the position of the "far" clipping plane
 		/// </summary>
-		public float Far
+		public double Far
 		{
 			get { return _far; }
 		}
