@@ -3,7 +3,7 @@
 - Updated net6.0 version of [nzy3d-api](https://github.com/benoit74/nzy3d-api)
 - Uses OpenTK 4.6.7 and the more recent [WinForms GLControl](https://github.com/opentk/GLControl)
 - Perspective mode bug fixed
-- Available in Winforms and *native* WPF (WFP available in the [wpf branch](https://github.com/BobLd/Nzy3d/tree/wpf) due to version issue with the [OpenTK control](https://github.com/opentk/GLWpfControl), see [issue 61](https://github.com/opentk/GLWpfControl/issues/61))
+- Available in Winforms and *native* WPF
 
 # How to
 
