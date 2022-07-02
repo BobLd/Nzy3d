@@ -11,6 +11,12 @@ namespace Nzy3d.Plot3D.Rendering.Canvas
 		View.View View { get; }
 
 		/// <summary>
+		/// Set the held view.
+		/// </summary>
+		/// <param name="value"></param>
+		void SetView(View.View value);
+
+		/// <summary>
 		/// Returns the renderer's width, i.e. the display width.
 		/// </summary>
 		int RendererWidth { get; }

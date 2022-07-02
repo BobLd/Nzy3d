@@ -48,7 +48,7 @@ namespace Nzy3d.Chart
 				{
 					minwidth += data.MinimumSize.Width;
 				}
-				screenSeparator = (_canvas.RendererWidth - minwidth) / _canvas.RendererWidth;
+				screenSeparator = (float)((_canvas.RendererWidth - minwidth) / _canvas.RendererWidth);
 				// 0.7f
 			}
 

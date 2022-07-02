@@ -188,7 +188,9 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 		public void SetMousePosition(int x, int y)
 		{
+			// TODO
 			this.MousePosition = ProjectMouseDepth(x, y);
+			this.MousePosition = ProjectMouseInAxes(x, y);
 		}
 
 		#region Zoom
@@ -964,8 +966,13 @@ namespace Nzy3d.Plot3D.Rendering.View
 			UpdateCamera(viewport, ComputeScaling());
 			RenderAxeBox();
 			RenderSceneGraph();
-			// Render last
-			RenderMousePointer();
+
+			// TODO
+			if (DISPLAY_AXE_WHOLE_BOUNDS)
+			{
+				// Render last
+				RenderMousePointer();
+			}
 		}
 
 		public void UpdateQuality()

@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Nzy3d.Wpf\Nzy3d.Wpf.csproj" />
+    <ProjectReference Include="..\Nzy3d\Nzy3d.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="FRB_H15_dec_2021.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
