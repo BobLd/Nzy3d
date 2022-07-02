@@ -188,9 +188,7 @@ namespace Nzy3d.Plot3D.Rendering.View
 
 		public void SetMousePosition(int x, int y)
 		{
-			// TODO
 			this.MousePosition = ProjectMouseDepth(x, y);
-			this.MousePosition = ProjectMouseInAxes(x, y);
 		}
 
 		#region Zoom
