@@ -5,7 +5,7 @@ using Nzy3d.Plot3D.Rendering.Canvas;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.WinForms;
 using System.Drawing.Imaging;
-using BaseView = Nzy3d.Plot3D.Rendering.View.View;
+using View = Nzy3d.Plot3D.Rendering.View.View;
 
 namespace Nzy3d.Winforms
 {
@@ -14,8 +14,7 @@ namespace Nzy3d.Winforms
 	/// </summary>
 	public class Renderer3D : GLControl, ICanvas, IControllerEventListener
 	{
-		// TODO  : add trace add debug capabilities
-		internal BaseView _view;
+		internal View _view;
 		internal int _width;
 		internal int _height;
 		internal bool _doScreenshotAtNextDisplay = false;
@@ -86,21 +85,7 @@ namespace Nzy3d.Winforms
 			_doScreenshotAtNextDisplay = true;
 		}
 
-		public Bitmap LastScreenshot
-		{
-			get { return _image; }
-		}
-
-		public new int Width
-		{
-			get { return _width; }
-		}
-
-		public new int Height
-		{
-			get { return _height; }
-		}
-
+		#region ICanvas
 		public void AddKeyListener(IBaseKeyListener baseListener)
 		{
 			if (baseListener is not IKeyListener listener)
@@ -224,6 +209,21 @@ namespace Nzy3d.Winforms
 			MouseWheel -= listener.MouseWheelMoved;
 		}
 
+		public object Screenshot() // Bitmap
+		{
+			//Throw New NotImplementedException()
+			this.GrabScreenshot2();
+			return _image;
+		}
+
+		public void SetView(View value)
+		{
+			_view = value;
+			_view.Init();
+			_view.Scene.Graph.MountAllGLBindedResources();
+			_view.BoundManual = _view.Scene.Graph.Bounds;
+		}
+
 		public int RendererHeight
 		{
 			get { return _height; }
@@ -234,33 +234,25 @@ namespace Nzy3d.Winforms
 			get { return _width; }
 		}
 
-		public object Screenshot() // Bitmap
+		public Bitmap LastScreenshot
 		{
-			//Throw New NotImplementedException()
-			this.GrabScreenshot2();
-			return _image;
+			get { return _image; }
 		}
 
-		public BaseView View
+		public View View
 		{
-			//Throw New NotImplementedException("Property View is not implemented in nzy3D renderer, should not be necessary")
 			get { return _view; }
 		}
+        #endregion
 
-		public void SetView(BaseView value)
-		{
-			_view = value;
-			_view.Init();
-			_view.Scene.Graph.MountAllGLBindedResources();
-			_view.BoundManual = _view.Scene.Graph.Bounds;
-		}
-
-		public void ControllerEventFired(ControllerEventArgs e)
+        #region IControllerEventListener
+        public void ControllerEventFired(ControllerEventArgs e)
 		{
 			this.ForceRepaint();
 		}
+        #endregion
 
-		public Renderer3D()
+        public Renderer3D()
 		{
 			Resize += Renderer3D_Resize;
 			Paint += Renderer3D_Paint;

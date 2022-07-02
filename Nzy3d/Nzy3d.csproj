@@ -5,10 +5,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <Version>0.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenTK" Version="4.6.7" />
+    <PackageReference Include="OpenTK" Version="4.7.4" />
   </ItemGroup>
 
   <ItemGroup>

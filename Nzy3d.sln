@@ -15,7 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		LICENSE nzy3d-api.txt = LICENSE nzy3d-api.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nzy3d.Tests", "Nzy3d.Tests\Nzy3d.Tests.csproj", "{1DF7624B-417F-4E27-9663-B99FEB9AA27A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nzy3d.Tests", "Nzy3d.Tests\Nzy3d.Tests.csproj", "{1DF7624B-417F-4E27-9663-B99FEB9AA27A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nzy3d.Wpf", "Nzy3d.Wpf\Nzy3d.Wpf.csproj", "{7D2A6768-104A-4D86-ABD6-9B795E2EA3C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nzy3d.WpfDemo", "Nzy3d.WpfDemo\Nzy3d.WpfDemo.csproj", "{ABCD1A0A-B5B5-4F07-AF85-013767ACD1D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{1DF7624B-417F-4E27-9663-B99FEB9AA27A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DF7624B-417F-4E27-9663-B99FEB9AA27A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DF7624B-417F-4E27-9663-B99FEB9AA27A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D2A6768-104A-4D86-ABD6-9B795E2EA3C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D2A6768-104A-4D86-ABD6-9B795E2EA3C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D2A6768-104A-4D86-ABD6-9B795E2EA3C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D2A6768-104A-4D86-ABD6-9B795E2EA3C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABCD1A0A-B5B5-4F07-AF85-013767ACD1D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABCD1A0A-B5B5-4F07-AF85-013767ACD1D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABCD1A0A-B5B5-4F07-AF85-013767ACD1D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABCD1A0A-B5B5-4F07-AF85-013767ACD1D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
