@@ -7,7 +7,20 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <Version>0.1.0</Version>
+    <Description>A .Net API for 3d charts (based on nzy3d-api)</Description>
+    <PackageProjectUrl>https://github.com/BobLd/Nzy3d</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/BobLd/Nzy3d</RepositoryUrl>
+    <PackageTags>chart, charts, wpf, winforms, plotting, plot-library, 3d, 3d-graphics, jzy3d, nzy3d, jzy3d-api, nzy3d-api</PackageTags>
+    <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Nzy3d.Winforms\Nzy3d.Winforms.csproj" />
